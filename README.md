@@ -1,11 +1,12 @@
 # explain-then-translate
 Official repo for EMNLP 2023 paper "Explain-then-Translate: An Analysis on Improving Program Translation with Self-generated Explanations"
-Open Review [link](https://openreview.net/forum?id=uyUO80sbm0)
+
+- Open Review [link](https://openreview.net/forum?id=uyUO80sbm0)
 
 ## What is the take-away?
 We propose 2-stage Chain-of-Thought (CoT) like prompting technique for program translation: we ask models to explain the source programs first before translating.
 
-![prompt example](https://github.com/PootieT/explain-then-translate/blob/main/docs/prompt_main.jpg?raw=true)
+![prompt example](https://github.com/PootieT/explain-then-translate/blob/main/docs/prompt_main.png?raw=true)
 
 We tested across 3 type of explanations of different level of abstraction, across 18 Python-to-X directions, and 18 X-to-X directions. 
 This simple technique improves translation performance across 4 models of different sizes we tested (GPT-3.5, Llama2CodeInstruct-34B, CodeGen2-16B, and CodeGen2-1B).
