@@ -105,7 +105,7 @@ python analysis/collect_completion_results.py --dir <OUTPUT_DIR>
 
 However, installing all 19 languages can be a little annoying, so we are working on building a container for execution just the same way as MultiPL-E [tutorial]. This is coming soon.
 
-# To cite our work:
+## To cite our work:
 
 ```
 @inproceedings{tang2023explain,
