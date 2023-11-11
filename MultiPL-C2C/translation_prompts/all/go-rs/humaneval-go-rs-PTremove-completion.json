@@ -1,0 +1,1532 @@
+[
+  {
+    "name": "HumanEval_61_correct_bracketing",
+    "language": "rs",
+    "prompt": "fn correct_bracketing(brackets: String) -> bool {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_61_correct_bracketing.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = correct_bracketing;\n    assert_eq!(candidate(String::from(\"()\")), true);\n    assert_eq!(candidate(String::from(\"(()())\")), true);\n    assert_eq!(candidate(String::from(\"()()(()())()\")), true);\n    assert_eq!(candidate(String::from(\"()()((()()())())(()()(()))\")), true);\n    assert_eq!(candidate(String::from(\"((()())))\")), false);\n    assert_eq!(candidate(String::from(\")(()\")), false);\n    assert_eq!(candidate(String::from(\"(\")), false);\n    assert_eq!(candidate(String::from(\"((((\")), false);\n    assert_eq!(candidate(String::from(\")\")), false);\n    assert_eq!(candidate(String::from(\"(()\")), false);\n    assert_eq!(candidate(String::from(\"()()(()())())(()\")), false);\n    assert_eq!(candidate(String::from(\"()()(()())()))()\")), false);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage correct_bracketing_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc correct_bracketing(brackets string) bool {\n\tdepth := 0\n\tfor _, b := range brackets {\n\t\tif b == '(' {\n\t\t\tdepth += 1\n\t\t} else {\n\t\t\tdepth -= 1\n\t\t}\n\t\tif depth < 0 {\n\t\t\treturn false\n\t\t}\n\t}\n\treturn depth == 0\n}\n\n### Rust version\n\nfn correct_bracketing(brackets: String) -> bool {\n"
+  },
+  {
+    "name": "HumanEval_45_triangle_area",
+    "language": "rs",
+    "prompt": "fn triangle_area(a: isize, h: isize) -> f64 {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_45_triangle_area.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = triangle_area;\n    assert_eq!(candidate(5, 3), 7.5);\n    assert_eq!(candidate(2, 2), 2.0);\n    assert_eq!(candidate(10, 8), 40.0);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage triangle_area_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc triangle_area(a int, h int) float64 {\n    return float64(a*h)/2.0\n}\n\n### Rust version\n\nfn triangle_area(a: isize, h: isize) -> f64 {\n"
+  },
+  {
+    "name": "HumanEval_139_special_factorial",
+    "language": "rs",
+    "prompt": "fn special_factorial(n: isize) -> isize {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_139_special_factorial.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = special_factorial;\n    assert_eq!(candidate(4), 288);\n    assert_eq!(candidate(5), 34560);\n    assert_eq!(candidate(7), 125411328000);\n    assert_eq!(candidate(1), 1);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage special_factorial_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc special_factorial(n int) int {\n    fact_i := 1\n    special_fact := 1\n    for i := 1; i <= n; i++ {\n        fact_i *= i\n        special_fact *= fact_i\n    }\n    return special_fact\n}\n\n### Rust version\n\nfn special_factorial(n: isize) -> isize {\n"
+  },
+  {
+    "name": "HumanEval_136_largest_smallest_integers",
+    "language": "rs",
+    "prompt": "fn largest_smallest_integers(lst: Vec<isize>) -> (Option<isize>, Option<isize>) {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_136_largest_smallest_integers.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = largest_smallest_integers;\n    assert_eq!(candidate(vec![2, 4, 1, 3, 5, 7]), (None, Some(1)));\n    assert_eq!(candidate(vec![2, 4, 1, 3, 5, 7, 0]), (None, Some(1)));\n    assert_eq!(candidate(vec![1, 3, 2, 4, 5, 6, -2]), (Some(-2), Some(1)));\n    assert_eq!(candidate(vec![4, 5, 3, 6, 2, 7, -7]), (Some(-7), Some(2)));\n    assert_eq!(candidate(vec![7, 3, 8, 4, 9, 2, 5, -9]), (Some(-9), Some(2)));\n    assert_eq!(candidate(Vec::<isize>::new()), (None, None));\n    assert_eq!(candidate(vec![0]), (None, None));\n    assert_eq!(candidate(vec![-1, -3, -5, -6]), (Some(-1), None));\n    assert_eq!(candidate(vec![-1, -3, -5, -6, 0]), (Some(-1), None));\n    assert_eq!(candidate(vec![-6, -4, -4, -3, 1]), (Some(-3), Some(1)));\n    assert_eq!(candidate(vec![-6, -4, -4, -3, -100, 1]), (Some(-3), Some(1)));\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage largest_smallest_integers_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc largest_smallest_integers(lst []int) []interface{} {\n\tsmallest := make([]int, 0)\n\tlargest := make([]int, 0)\n\n\tfor _, i := range lst {\n\t\tif i < 0 {\n\t\t\tsmallest = append(smallest, i)\n\t\t} else if i > 0 {\n\t\t\tlargest = append(largest, i)\n\t\t}\n\t}\n\n\tvar smallestVal interface{}\n\tif len(smallest) > 0 {\n\t\tsmallestVal = smallest[0]\n\t\tfor _, i := range smallest {\n\t\t\tif i > smallestVal.(int) {\n\t\t\t\tsmallestVal = i\n\t\t\t}\n\t\t}\n\t} else {\n\t\tsmallestVal = nil\n\t}\n\n\tvar largestVal interface{}\n\tif len(largest) > 0 {\n\t\tlargestVal = largest[0]\n\t\tfor _, i := range largest {\n\t\t\tif i < largestVal.(int) {\n\t\t\t\tlargestVal = i\n\t\t\t}\n\t\t}\n\t} else {\n\t\tlargestVal = nil\n\t}\n\n\treturn []interface{}{smallestVal, largestVal}\n}\n\n### Rust version\n\nfn largest_smallest_integers(lst: Vec<isize>) -> (Option<isize>, Option<isize>) {\n"
+  },
+  {
+    "name": "HumanEval_131_digits",
+    "language": "rs",
+    "prompt": "fn digits(n: isize) -> isize {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_131_digits.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = digits;\n    assert_eq!(candidate(5), 5);\n    assert_eq!(candidate(54), 5);\n    assert_eq!(candidate(120), 1);\n    assert_eq!(candidate(5014), 5);\n    assert_eq!(candidate(98765), 315);\n    assert_eq!(candidate(5576543), 2625);\n    assert_eq!(candidate(2468), 0);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage digits_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc digits(n int) int {\n\tproduct := 1\n\toddCount := 0\n\n\tfor _, digit := range fmt.Sprintf(\"%d\", n) {\n\t\tintDigit := int(digit - '0')\n\t\tif intDigit%2 == 1 {\n\t\t\tproduct *= intDigit\n\t\t\toddCount += 1\n\t\t}\n\t}\n\n\tif oddCount == 0 {\n\t\treturn 0\n\t} else {\n\t\treturn product\n\t}\n}\n\n### Rust version\n\nfn digits(n: isize) -> isize {\n"
+  },
+  {
+    "name": "HumanEval_46_fib4",
+    "language": "rs",
+    "prompt": "fn fib4(n: isize) -> isize {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_46_fib4.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = fib4;\n    assert_eq!(candidate(5), 4);\n    assert_eq!(candidate(8), 28);\n    assert_eq!(candidate(10), 104);\n    assert_eq!(candidate(12), 386);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage fib4_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc fib4(n int) int {\n    results := []int{0, 0, 2, 0}\n    if n < 4 {\n        return results[n]\n    }\n\n    for i := 4; i <= n; i++ {\n        sum := results[0] + results[1] + results[2] + results[3]\n        results = append(results, sum)\n        results = results[1:]\n    }\n\n    return results[3]\n}\n\n### Rust version\n\nfn fib4(n: isize) -> isize {\n"
+  },
+  {
+    "name": "HumanEval_80_is_happy",
+    "language": "rs",
+    "prompt": "fn is_happy(s: String) -> bool {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_80_is_happy.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = is_happy;\n    assert_eq!(candidate(String::from(\"a\")), false);\n    assert_eq!(candidate(String::from(\"aa\")), false);\n    assert_eq!(candidate(String::from(\"abcd\")), true);\n    assert_eq!(candidate(String::from(\"aabb\")), false);\n    assert_eq!(candidate(String::from(\"adb\")), true);\n    assert_eq!(candidate(String::from(\"xyy\")), false);\n    assert_eq!(candidate(String::from(\"iopaxpoi\")), true);\n    assert_eq!(candidate(String::from(\"iopaxioi\")), false);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage is_happy_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc is_happy(s string) bool {\n    if len(s) < 3 {\n        return false\n    }\n\n    for i := 0; i < len(s)-2; i++ {\n        if s[i] == s[i+1] || s[i+1] == s[i+2] || s[i] == s[i+2] {\n            return false\n        }\n    }\n    return true\n}\n\n### Rust version\n\nfn is_happy(s: String) -> bool {\n"
+  },
+  {
+    "name": "HumanEval_115_max_fill",
+    "language": "rs",
+    "prompt": "fn max_fill(grid: Vec<Vec<isize>>, capacity: isize) -> isize {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_115_max_fill.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = max_fill;\n    assert_eq!(candidate(vec![vec![0, 0, 1, 0], vec![0, 1, 0, 0], vec![1, 1, 1, 1]], 1), 6);\n    assert_eq!(candidate(vec![vec![0, 0, 1, 1], vec![0, 0, 0, 0], vec![1, 1, 1, 1], vec![0, 1, 1, 1]], 2), 5);\n    assert_eq!(candidate(vec![vec![0, 0, 0], vec![0, 0, 0]], 5), 0);\n    assert_eq!(candidate(vec![vec![1, 1, 1, 1], vec![1, 1, 1, 1]], 2), 4);\n    assert_eq!(candidate(vec![vec![1, 1, 1, 1], vec![1, 1, 1, 1]], 9), 2);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage max_fill_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc max_fill(grid [][]int, capacity int) int {\n    sum := 0\n    for _, arr := range grid {\n        s := 0\n        for _, v := range arr {\n            s += v\n        }\n        sum += (s+capacity-1)/capacity\n    }\n    return sum\n}\n\n### Rust version\n\nfn max_fill(grid: Vec<Vec<isize>>, capacity: isize) -> isize {\n"
+  },
+  {
+    "name": "HumanEval_0_has_close_elements",
+    "language": "rs",
+    "prompt": "fn has_close_elements(numbers: Vec<f64>, threshold: f64) -> bool {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_0_has_close_elements.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = has_close_elements;\n    assert_eq!(candidate(vec![1.0, 2.0, 3.9, 4.0, 5.0, 2.2], 0.3), true);\n    assert_eq!(candidate(vec![1.0, 2.0, 3.9, 4.0, 5.0, 2.2], 0.05), false);\n    assert_eq!(candidate(vec![1.0, 2.0, 5.9, 4.0, 5.0], 0.95), true);\n    assert_eq!(candidate(vec![1.0, 2.0, 5.9, 4.0, 5.0], 0.8), false);\n    assert_eq!(candidate(vec![1.0, 2.0, 3.0, 4.0, 5.0, 2.0], 0.1), true);\n    assert_eq!(candidate(vec![1.1, 2.2, 3.1, 4.1, 5.1], 1.0), true);\n    assert_eq!(candidate(vec![1.1, 2.2, 3.1, 4.1, 5.1], 0.5), false);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage has_close_elements_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc has_close_elements(numbers []float64, threshold float64) bool {\n    for i, elem := range numbers {\n        for j, elem2 := range numbers {\n            if i != j {\n                distance := elem - elem2\n                if distance < 0 {\n                    distance = -distance\n                }\n                if distance < threshold {\n                    return true\n                }\n            }\n        }\n    }\n    return false\n}\n\n### Rust version\n\nfn has_close_elements(numbers: Vec<f64>, threshold: f64) -> bool {\n"
+  },
+  {
+    "name": "HumanEval_81_numerical_letter_grade",
+    "language": "rs",
+    "prompt": "fn numerical_letter_grade(grades: Vec<f64>) -> Vec<String> {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_81_numerical_letter_grade.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = numerical_letter_grade;\n    assert_eq!(candidate(vec![4.0, 3.0, 1.7, 2.0, 3.5]), vec![String::from(\"A+\"), String::from(\"B\"), String::from(\"C-\"), String::from(\"C\"), String::from(\"A-\")]);\n    assert_eq!(candidate(vec![1.2]), vec![String::from(\"D+\")]);\n    assert_eq!(candidate(vec![0.5]), vec![String::from(\"D-\")]);\n    assert_eq!(candidate(vec![0.0]), vec![String::from(\"E\")]);\n    assert_eq!(candidate(vec![1.0, 0.3, 1.5, 2.8, 3.3]), vec![String::from(\"D\"), String::from(\"D-\"), String::from(\"C-\"), String::from(\"B\"), String::from(\"B+\")]);\n    assert_eq!(candidate(vec![0.0, 0.7]), vec![String::from(\"E\"), String::from(\"D-\")]);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage numerical_letter_grade_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc numerical_letter_grade(grades []float64) []string {\n    letterGrades := make([]string, len(grades))\n\n    for i, gpa := range grades {\n        switch {\n        case gpa == 4.0:\n            letterGrades[i] = \"A+\"\n        case gpa > 3.7:\n            letterGrades[i] = \"A\"\n        case gpa > 3.3:\n            letterGrades[i] = \"A-\"\n        case gpa > 3.0:\n            letterGrades[i] = \"B+\"\n        case gpa > 2.7:\n            letterGrades[i] = \"B\"\n        case gpa > 2.3:\n            letterGrades[i] = \"B-\"\n        case gpa > 2.0:\n            letterGrades[i] = \"C+\"\n        case gpa > 1.7:\n            letterGrades[i] = \"C\"\n        case gpa > 1.3:\n            letterGrades[i] = \"C-\"\n        case gpa > 1.0:\n            letterGrades[i] = \"D+\"\n        case gpa > 0.7:\n            letterGrades[i] = \"D\"\n        case gpa > 0.0:\n            letterGrades[i] = \"D-\"\n        default:\n            letterGrades[i] = \"E\"\n        }\n    }\n\n    return letterGrades\n}\n\n### Rust version\n\nfn numerical_letter_grade(grades: Vec<f64>) -> Vec<String> {\n"
+  },
+  {
+    "name": "HumanEval_150_x_or_y",
+    "language": "rs",
+    "prompt": "fn x_or_y(n: isize, x: isize, y: isize) -> isize {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_150_x_or_y.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = x_or_y;\n    assert_eq!(candidate(7, 34, 12), 34);\n    assert_eq!(candidate(15, 8, 5), 5);\n    assert_eq!(candidate(3, 33, 5212), 33);\n    assert_eq!(candidate(1259, 3, 52), 3);\n    assert_eq!(candidate(7919, -1, 12), -1);\n    assert_eq!(candidate(3609, 1245, 583), 583);\n    assert_eq!(candidate(91, 56, 129), 129);\n    assert_eq!(candidate(6, 34, 1234), 1234);\n    assert_eq!(candidate(1, 2, 0), 0);\n    assert_eq!(candidate(2, 2, 0), 2);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage x_or_y_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc x_or_y(n int, x int, y int) int {\n\tif n == 1 {\n\t\treturn y\n\t}\n\tfor i := 2; i < n; i++ {\n\t\tif n%i == 0 {\n\t\t\treturn y\n\t\t}\n\t}\n\treturn x\n}\n\n### Rust version\n\nfn x_or_y(n: isize, x: isize, y: isize) -> isize {\n"
+  },
+  {
+    "name": "HumanEval_146_specialFilter",
+    "language": "rs",
+    "prompt": "fn specialFilter(nums: Vec<isize>) -> isize {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_146_specialFilter.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = specialFilter;\n    assert_eq!(candidate(vec![5, -2, 1, -5]), 0);\n    assert_eq!(candidate(vec![15, -73, 14, -15]), 1);\n    assert_eq!(candidate(vec![33, -2, -3, 45, 21, 109]), 2);\n    assert_eq!(candidate(vec![43, -12, 93, 125, 121, 109]), 4);\n    assert_eq!(candidate(vec![71, -2, -33, 75, 21, 19]), 3);\n    assert_eq!(candidate(vec![1]), 0);\n    assert_eq!(candidate(Vec::<isize>::new()), 0);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage specialFilter_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc specialFilter(nums []int) int {\n    count := 0\n    for _, num := range nums {\n        if num > 10 {\n            numberAsString := fmt.Sprintf(\"%d\", num)\n            if (numberAsString[0] - '0')%2 == 1 && (numberAsString[len(numberAsString)-1]-'0')%2 == 1 {\n                count += 1\n            }\n        }\n    }\n    return count\n}\n\n### Rust version\n\nfn specialFilter(nums: Vec<isize>) -> isize {\n"
+  },
+  {
+    "name": "HumanEval_66_digitSum",
+    "language": "rs",
+    "prompt": "fn digitSum(s: String) -> isize {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_66_digitSum.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = digitSum;\n    assert_eq!(candidate(String::from(\"\")), 0);\n    assert_eq!(candidate(String::from(\"abAB\")), 131);\n    assert_eq!(candidate(String::from(\"abcCd\")), 67);\n    assert_eq!(candidate(String::from(\"helloE\")), 69);\n    assert_eq!(candidate(String::from(\"woArBld\")), 131);\n    assert_eq!(candidate(String::from(\"aAaaaXa\")), 153);\n    assert_eq!(candidate(String::from(\" How are yOu?\")), 151);\n    assert_eq!(candidate(String::from(\"You arE Very Smart\")), 327);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage digitSum_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc digitSum(s string) int {\n    sum := 0\n    for _, c := range s {\n        if c >= 'A' && c <= 'Z' {\n            sum += int(c)\n        }\n    }\n    return sum\n}\n\n### Rust version\n\nfn digitSum(s: String) -> isize {\n"
+  },
+  {
+    "name": "HumanEval_142_sum_squares",
+    "language": "rs",
+    "prompt": "fn sum_squares(lst: Vec<isize>) -> isize {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_142_sum_squares.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = sum_squares;\n    assert_eq!(candidate(vec![1, 2, 3]), 6);\n    assert_eq!(candidate(vec![1, 4, 9]), 14);\n    assert_eq!(candidate(Vec::<isize>::new()), 0);\n    assert_eq!(candidate(vec![1, 1, 1, 1, 1, 1, 1, 1, 1]), 9);\n    assert_eq!(candidate(vec![-1, -1, -1, -1, -1, -1, -1, -1, -1]), -3);\n    assert_eq!(candidate(vec![0]), 0);\n    assert_eq!(candidate(vec![-1, -5, 2, -1, -5]), -126);\n    assert_eq!(candidate(vec![-56, -99, 1, 0, -2]), 3030);\n    assert_eq!(candidate(vec![-1, 0, 0, 0, 0, 0, 0, 0, -1]), 0);\n    assert_eq!(candidate(vec![-16, -9, -2, 36, 36, 26, -20, 25, -40, 20, -4, 12, -26, 35, 37]), -14196);\n    assert_eq!(candidate(vec![-1, -3, 17, -1, -15, 13, -1, 14, -14, -12, -5, 14, -14, 6, 13, 11, 16, 16, 4, 10]), -1448);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage sum_squares_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc sum_squares(lst []int) int {\n    result := 0\n\n    for i, v := range lst {\n        if i%3 == 0 {\n            result += v * v\n        } else if i%4 == 0 && i%3 != 0 {\n            result += v * v * v\n        } else {\n            result += v\n        }\n    }\n\n    return result\n}\n\n### Rust version\n\nfn sum_squares(lst: Vec<isize>) -> isize {\n"
+  },
+  {
+    "name": "HumanEval_96_count_up_to",
+    "language": "rs",
+    "prompt": "fn count_up_to(n: isize) -> Vec<isize> {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_96_count_up_to.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = count_up_to;\n    assert_eq!(candidate(5), vec![2, 3]);\n    assert_eq!(candidate(6), vec![2, 3, 5]);\n    assert_eq!(candidate(7), vec![2, 3, 5]);\n    assert_eq!(candidate(10), vec![2, 3, 5, 7]);\n    assert_eq!(candidate(0), Vec::<isize>::new());\n    assert_eq!(candidate(22), vec![2, 3, 5, 7, 11, 13, 17, 19]);\n    assert_eq!(candidate(1), Vec::<isize>::new());\n    assert_eq!(candidate(18), vec![2, 3, 5, 7, 11, 13, 17]);\n    assert_eq!(candidate(47), vec![2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43]);\n    assert_eq!(candidate(101), vec![2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage count_up_to_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc count_up_to(n int) []int {\n\tprimes := make([]int, 0)\n\tfor i := 2; i < n; i++ {\n\t\tis_prime := true\n\t\tfor j := 2; j < i; j++ {\n\t\t\tif i%j == 0 {\n\t\t\t\tis_prime = false\n\t\t\t\tbreak\n\t\t\t}\n\t\t}\n\t\tif is_prime {\n\t\t\tprimes = append(primes, i)\n\t\t}\n\t}\n\treturn primes\n}\n\n### Rust version\n\nfn count_up_to(n: isize) -> Vec<isize> {\n"
+  },
+  {
+    "name": "HumanEval_34_unique",
+    "language": "rs",
+    "prompt": "fn unique(l: Vec<isize>) -> Vec<isize> {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_34_unique.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = unique;\n    assert_eq!(candidate(vec![5, 3, 5, 2, 3, 3, 9, 0, 123]), vec![0, 2, 3, 5, 9, 123]);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage unique_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc unique(l []int) []int {\n    m := make(map[int]bool)\n    for _, v := range l {\n        m[v] = true\n    }\n    var r []int\n    for k := range m {\n        r = append(r, k)\n    }\n    for i := 0; i < len(r); i++ {\n        for j := i + 1; j < len(r); j++ {\n            if r[i] > r[j] {\n                r[i], r[j] = r[j], r[i]\n            }\n        }\n    }\n    return r\n}\n\n### Rust version\n\nfn unique(l: Vec<isize>) -> Vec<isize> {\n"
+  },
+  {
+    "name": "HumanEval_55_fib",
+    "language": "rs",
+    "prompt": "fn fib(n: isize) -> isize {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_55_fib.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = fib;\n    assert_eq!(candidate(10), 55);\n    assert_eq!(candidate(1), 1);\n    assert_eq!(candidate(8), 21);\n    assert_eq!(candidate(11), 89);\n    assert_eq!(candidate(12), 144);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage fib_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc fib(n int) int {\n    if n == 0 {\n        return 0\n    }\n    if n == 1 {\n        return 1\n    }\n    return fib(n-1) + fib(n-2)\n}\n\n### Rust version\n\nfn fib(n: isize) -> isize {\n"
+  },
+  {
+    "name": "HumanEval_36_fizz_buzz",
+    "language": "rs",
+    "prompt": "fn fizz_buzz(n: isize) -> isize {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_36_fizz_buzz.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = fizz_buzz;\n    assert_eq!(candidate(50), 0);\n    assert_eq!(candidate(78), 2);\n    assert_eq!(candidate(79), 3);\n    assert_eq!(candidate(100), 3);\n    assert_eq!(candidate(200), 6);\n    assert_eq!(candidate(4000), 192);\n    assert_eq!(candidate(10000), 639);\n    assert_eq!(candidate(100000), 8026);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage fizz_buzz_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc fizz_buzz(n int) int {\n\tns := make([]int, 0)\n\tfor i := 0; i < n; i++ {\n\t\tif i%11 == 0 || i%13 == 0 {\n\t\t\tns = append(ns, i)\n\t\t}\n\t}\n\ts := \"\"\n\tfor _, i := range ns {\n\t\ts += fmt.Sprintf(\"%d\", i)\n\t}\n\tans := 0\n\tfor _, c := range s {\n\t\tif c == '7' {\n\t\t\tans += 1\n\t\t}\n\t}\n\treturn ans\n}\n\n### Rust version\n\nfn fizz_buzz(n: isize) -> isize {\n"
+  },
+  {
+    "name": "HumanEval_124_valid_date",
+    "language": "rs",
+    "prompt": "fn valid_date(date: String) -> bool {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_124_valid_date.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = valid_date;\n    assert_eq!(candidate(String::from(\"03-11-2000\")), true);\n    assert_eq!(candidate(String::from(\"15-01-2012\")), false);\n    assert_eq!(candidate(String::from(\"04-0-2040\")), false);\n    assert_eq!(candidate(String::from(\"06-04-2020\")), true);\n    assert_eq!(candidate(String::from(\"01-01-2007\")), true);\n    assert_eq!(candidate(String::from(\"03-32-2011\")), false);\n    assert_eq!(candidate(String::from(\"\")), false);\n    assert_eq!(candidate(String::from(\"04-31-3000\")), false);\n    assert_eq!(candidate(String::from(\"06-06-2005\")), true);\n    assert_eq!(candidate(String::from(\"21-31-2000\")), false);\n    assert_eq!(candidate(String::from(\"04-12-2003\")), true);\n    assert_eq!(candidate(String::from(\"04122003\")), false);\n    assert_eq!(candidate(String::from(\"20030412\")), false);\n    assert_eq!(candidate(String::from(\"2003-04\")), false);\n    assert_eq!(candidate(String::from(\"2003-04-12\")), false);\n    assert_eq!(candidate(String::from(\"04-2003\")), false);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage valid_date_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc valid_date(date string) bool {\n    var month, day, year int\n    _, err := fmt.Sscanf(date, \"%d-%d-%d\", &month, &day, &year)\n    if err != nil {\n        return false\n    }\n    if month < 1 || month > 12 {\n        return false\n    }\n    if month == 2 {\n        if year%4 == 0 && (year%100 != 0 || year%400 == 0) {\n            if day < 1 || day > 29 {\n                return false\n            }\n        } else {\n            if day < 1 || day > 28 {\n                return false\n            }\n        }\n    } else if month == 4 || month == 6 || month == 9 || month == 11 {\n        if day < 1 || day > 30 {\n            return false\n        }\n    } else {\n        if day < 1 || day > 31 {\n            return false\n        }\n    }\n    return true\n}\n\n### Rust version\n\nfn valid_date(date: String) -> bool {\n"
+  },
+  {
+    "name": "HumanEval_53_add",
+    "language": "rs",
+    "prompt": "fn add(x: isize, y: isize) -> isize {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_53_add.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = add;\n    assert_eq!(candidate(0, 1), 1);\n    assert_eq!(candidate(1, 0), 1);\n    assert_eq!(candidate(2, 3), 5);\n    assert_eq!(candidate(5, 7), 12);\n    assert_eq!(candidate(7, 5), 12);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage add_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc add(x int, y int) int {\n    return x + y\n}\n\n### Rust version\n\nfn add(x: isize, y: isize) -> isize {\n"
+  },
+  {
+    "name": "HumanEval_40_triples_sum_to_zero",
+    "language": "rs",
+    "prompt": "fn triples_sum_to_zero(l: Vec<isize>) -> bool {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_40_triples_sum_to_zero.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = triples_sum_to_zero;\n    assert_eq!(candidate(vec![1, 3, 5, 0]), false);\n    assert_eq!(candidate(vec![1, 3, 5, -1]), false);\n    assert_eq!(candidate(vec![1, 3, -2, 1]), true);\n    assert_eq!(candidate(vec![1, 2, 3, 7]), false);\n    assert_eq!(candidate(vec![1, 2, 5, 7]), false);\n    assert_eq!(candidate(vec![2, 4, -5, 3, 9, 7]), true);\n    assert_eq!(candidate(vec![1]), false);\n    assert_eq!(candidate(vec![1, 3, 5, -100]), false);\n    assert_eq!(candidate(vec![100, 3, 5, -100]), false);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage triples_sum_to_zero_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc triples_sum_to_zero(l []int) bool {\n\tfor i := 0; i < len(l); i++ {\n\t\tfor j := i + 1; j < len(l); j++ {\n\t\t\tfor k := j + 1; k < len(l); k++ {\n\t\t\t\tif l[i]+l[j]+l[k] == 0 {\n\t\t\t\t\treturn true\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n\treturn false\n}\n\n### Rust version\n\nfn triples_sum_to_zero(l: Vec<isize>) -> bool {\n"
+  },
+  {
+    "name": "HumanEval_24_largest_divisor",
+    "language": "rs",
+    "prompt": "fn largest_divisor(n: isize) -> isize {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_24_largest_divisor.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = largest_divisor;\n    assert_eq!(candidate(3), 1);\n    assert_eq!(candidate(7), 1);\n    assert_eq!(candidate(10), 5);\n    assert_eq!(candidate(100), 50);\n    assert_eq!(candidate(49), 7);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage largest_divisor_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc largest_divisor(n int) int {\n    for i := n-1; i > 0; i-- {\n        if n % i == 0 {\n            return i\n        }\n    }\n    return 0\n}\n\n### Rust version\n\nfn largest_divisor(n: isize) -> isize {\n"
+  },
+  {
+    "name": "HumanEval_73_smallest_change",
+    "language": "rs",
+    "prompt": "fn smallest_change(arr: Vec<isize>) -> isize {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_73_smallest_change.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = smallest_change;\n    assert_eq!(candidate(vec![1, 2, 3, 5, 4, 7, 9, 6]), 4);\n    assert_eq!(candidate(vec![1, 2, 3, 4, 3, 2, 2]), 1);\n    assert_eq!(candidate(vec![1, 4, 2]), 1);\n    assert_eq!(candidate(vec![1, 4, 4, 2]), 1);\n    assert_eq!(candidate(vec![1, 2, 3, 2, 1]), 0);\n    assert_eq!(candidate(vec![3, 1, 1, 3]), 0);\n    assert_eq!(candidate(vec![1]), 0);\n    assert_eq!(candidate(vec![0, 1]), 1);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage smallest_change_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc smallest_change(arr []int) int {\n\tans := 0\n\tfor i := 0; i < len(arr)/2; i++ {\n\t\tif arr[i] != arr[len(arr)-i-1] {\n\t\t\tans += 1\n\t\t}\n\t}\n\treturn ans\n}\n\n### Rust version\n\nfn smallest_change(arr: Vec<isize>) -> isize {\n"
+  },
+  {
+    "name": "HumanEval_52_below_threshold",
+    "language": "rs",
+    "prompt": "fn below_threshold(l: Vec<isize>, t: isize) -> bool {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_52_below_threshold.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = below_threshold;\n    assert_eq!(candidate(vec![1, 2, 4, 10], 100), true);\n    assert_eq!(candidate(vec![1, 20, 4, 10], 5), false);\n    assert_eq!(candidate(vec![1, 20, 4, 10], 21), true);\n    assert_eq!(candidate(vec![1, 20, 4, 10], 22), true);\n    assert_eq!(candidate(vec![1, 8, 4, 10], 11), true);\n    assert_eq!(candidate(vec![1, 8, 4, 10], 10), false);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage below_threshold_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc below_threshold(l []int, t int) bool {\n    for _, e := range l {\n        if e >= t {\n            return false\n        }\n    }\n    return true\n}\n\n### Rust version\n\nfn below_threshold(l: Vec<isize>, t: isize) -> bool {\n"
+  },
+  {
+    "name": "HumanEval_49_modp",
+    "language": "rs",
+    "prompt": "fn modp(n: isize, p: isize) -> isize {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_49_modp.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = modp;\n    assert_eq!(candidate(3, 5), 3);\n    assert_eq!(candidate(1101, 101), 2);\n    assert_eq!(candidate(0, 101), 1);\n    assert_eq!(candidate(3, 11), 8);\n    assert_eq!(candidate(100, 101), 1);\n    assert_eq!(candidate(30, 5), 4);\n    assert_eq!(candidate(31, 5), 3);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage modp_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc modp(n int, p int) int {\n    ret := 1\n    for i := 0; i < n; i++ {\n        ret = (2 * ret) % p\n    }\n    return ret\n}\n\n### Rust version\n\nfn modp(n: isize, p: isize) -> isize {\n"
+  },
+  {
+    "name": "HumanEval_98_count_upper",
+    "language": "rs",
+    "prompt": "fn count_upper(s: String) -> isize {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_98_count_upper.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = count_upper;\n    assert_eq!(candidate(String::from(\"aBCdEf\")), 1);\n    assert_eq!(candidate(String::from(\"abcdefg\")), 0);\n    assert_eq!(candidate(String::from(\"dBBE\")), 0);\n    assert_eq!(candidate(String::from(\"B\")), 0);\n    assert_eq!(candidate(String::from(\"U\")), 1);\n    assert_eq!(candidate(String::from(\"\")), 0);\n    assert_eq!(candidate(String::from(\"EEEE\")), 2);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage count_upper_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc count_upper(s string) int {\n\tcount := 0\n\tfor i := 0; i < len(s); i += 2 {\n\t\tif s[i] == 'A' || s[i] == 'E' || s[i] == 'I' || s[i] == 'O' || s[i] == 'U' {\n\t\t\tcount += 1\n\t\t}\n\t}\n\treturn count\n}\n\n### Rust version\n\nfn count_upper(s: String) -> isize {\n"
+  },
+  {
+    "name": "HumanEval_75_is_multiply_prime",
+    "language": "rs",
+    "prompt": "fn is_multiply_prime(a: isize) -> bool {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_75_is_multiply_prime.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = is_multiply_prime;\n    assert_eq!(candidate(5), false);\n    assert_eq!(candidate(30), true);\n    assert_eq!(candidate(8), true);\n    assert_eq!(candidate(10), false);\n    assert_eq!(candidate(125), true);\n    assert_eq!(candidate(105), true);\n    assert_eq!(candidate(126), false);\n    assert_eq!(candidate(729), false);\n    assert_eq!(candidate(891), false);\n    assert_eq!(candidate(1001), true);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage is_multiply_prime_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc is_multiply_prime(a int) bool {\n    is_prime := func(n int) bool {\n        for j := 2; j < n; j++ {\n            if n%j == 0 {\n                return false\n            }\n        }\n        return true\n    }\n\n    for i := 2; i < 101; i++ {\n        if !is_prime(i) {\n            continue\n        }\n        for j := 2; j < 101; j++ {\n            if !is_prime(j) {\n                continue\n            }\n            for k := 2; k < 101; k++ {\n                if !is_prime(k) {\n                    continue\n                }\n                if i*j*k == a {\n                    return true\n                }\n            }\n        }\n    }\n    return false\n}\n\n### Rust version\n\nfn is_multiply_prime(a: isize) -> bool {\n"
+  },
+  {
+    "name": "HumanEval_1_separate_paren_groups",
+    "language": "rs",
+    "prompt": "fn separate_paren_groups(paren_string: String) -> Vec<String> {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_1_separate_paren_groups.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = separate_paren_groups;\n    assert_eq!(candidate(String::from(\"(()()) ((())) () ((())()())\")), vec![String::from(\"(()())\"), String::from(\"((()))\"), String::from(\"()\"), String::from(\"((())()())\")]);\n    assert_eq!(candidate(String::from(\"() (()) ((())) (((())))\")), vec![String::from(\"()\"), String::from(\"(())\"), String::from(\"((()))\"), String::from(\"(((())))\")]);\n    assert_eq!(candidate(String::from(\"(()(())((())))\")), vec![String::from(\"(()(())((())))\")]);\n    assert_eq!(candidate(String::from(\"( ) (( )) (( )( ))\")), vec![String::from(\"()\"), String::from(\"(())\"), String::from(\"(()())\")]);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage separate_paren_groups_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc separate_paren_groups(paren_string string) []string {\n    result := []string{}\n    currentString := []rune{}\n    currentDepth := 0\n\n    for _, c := range paren_string {\n        if c == '(' {\n            currentDepth += 1\n            currentString = append(currentString, c)\n        } else if c == ')' {\n            currentDepth -= 1\n            currentString = append(currentString, c)\n\n            if currentDepth == 0 {\n                result = append(result, string(currentString))\n                currentString = []rune{}\n            }\n        }\n    }\n\n    return result\n}\n\n### Rust version\n\nfn separate_paren_groups(paren_string: String) -> Vec<String> {\n"
+  },
+  {
+    "name": "HumanEval_94_skjkasdkd",
+    "language": "rs",
+    "prompt": "fn skjkasdkd(lst: Vec<isize>) -> isize {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_94_skjkasdkd.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = skjkasdkd;\n    assert_eq!(candidate(vec![0, 3, 2, 1, 3, 5, 7, 4, 5, 5, 5, 2, 181, 32, 4, 32, 3, 2, 32, 324, 4, 3]), 10);\n    assert_eq!(candidate(vec![1, 0, 1, 8, 2, 4597, 2, 1, 3, 40, 1, 2, 1, 2, 4, 2, 5, 1]), 25);\n    assert_eq!(candidate(vec![1, 3, 1, 32, 5107, 34, 83278, 109, 163, 23, 2323, 32, 30, 1, 9, 3]), 13);\n    assert_eq!(candidate(vec![0, 724, 32, 71, 99, 32, 6, 0, 5, 91, 83, 0, 5, 6]), 11);\n    assert_eq!(candidate(vec![0, 81, 12, 3, 1, 21]), 3);\n    assert_eq!(candidate(vec![0, 8, 1, 2, 1, 7]), 7);\n    assert_eq!(candidate(vec![8191]), 19);\n    assert_eq!(candidate(vec![8191, 123456, 127, 7]), 19);\n    assert_eq!(candidate(vec![127, 97, 8192]), 10);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage skjkasdkd_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc skjkasdkd(lst []int) int {\n\tisPrime := func(n int) bool {\n\t\tfor i := 2; i*i <= n; i++ {\n\t\t\tif n%i == 0 {\n\t\t\t\treturn false\n\t\t\t}\n\t\t}\n\t\treturn true\n\t}\n\n\tmaxx := 0\n\tfor _, i := range lst {\n\t\tif i > maxx && isPrime(i) {\n\t\t\tmaxx = i\n\t\t}\n\t}\n\n\tresult := 0\n\tfor maxx > 0 {\n\t\tresult += maxx % 10\n\t\tmaxx /= 10\n\t}\n\n\treturn result\n}\n\n### Rust version\n\nfn skjkasdkd(lst: Vec<isize>) -> isize {\n"
+  },
+  {
+    "name": "HumanEval_74_total_match",
+    "language": "rs",
+    "prompt": "fn total_match(lst1: Vec<String>, lst2: Vec<String>) -> Vec<String> {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_74_total_match.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = total_match;\n    assert_eq!(candidate(Vec::<String>::new(), Vec::<String>::new()), Vec::<String>::new());\n    assert_eq!(candidate(vec![String::from(\"hi\"), String::from(\"admin\")], vec![String::from(\"hi\"), String::from(\"hi\")]), vec![String::from(\"hi\"), String::from(\"hi\")]);\n    assert_eq!(candidate(vec![String::from(\"hi\"), String::from(\"admin\")], vec![String::from(\"hi\"), String::from(\"hi\"), String::from(\"admin\"), String::from(\"project\")]), vec![String::from(\"hi\"), String::from(\"admin\")]);\n    assert_eq!(candidate(vec![String::from(\"4\")], vec![String::from(\"1\"), String::from(\"2\"), String::from(\"3\"), String::from(\"4\"), String::from(\"5\")]), vec![String::from(\"4\")]);\n    assert_eq!(candidate(vec![String::from(\"hi\"), String::from(\"admin\")], vec![String::from(\"hI\"), String::from(\"Hi\")]), vec![String::from(\"hI\"), String::from(\"Hi\")]);\n    assert_eq!(candidate(vec![String::from(\"hi\"), String::from(\"admin\")], vec![String::from(\"hI\"), String::from(\"hi\"), String::from(\"hi\")]), vec![String::from(\"hI\"), String::from(\"hi\"), String::from(\"hi\")]);\n    assert_eq!(candidate(vec![String::from(\"hi\"), String::from(\"admin\")], vec![String::from(\"hI\"), String::from(\"hi\"), String::from(\"hii\")]), vec![String::from(\"hi\"), String::from(\"admin\")]);\n    assert_eq!(candidate(Vec::<String>::new(), vec![String::from(\"this\")]), Vec::<String>::new());\n    assert_eq!(candidate(vec![String::from(\"this\")], Vec::<String>::new()), Vec::<String>::new());\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage total_match_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc total_match(lst1 []string, lst2 []string) []string {\n\tl1 := 0\n\tfor _, st := range lst1 {\n\t\tl1 += len(st)\n\t}\n\n\tl2 := 0\n\tfor _, st := range lst2 {\n\t\tl2 += len(st)\n\t}\n\n\tif l1 <= l2 {\n\t\treturn lst1\n\t} else {\n\t\treturn lst2\n\t}\n}\n\n### Rust version\n\nfn total_match(lst1: Vec<String>, lst2: Vec<String>) -> Vec<String> {\n"
+  },
+  {
+    "name": "HumanEval_41_car_race_collision",
+    "language": "rs",
+    "prompt": "fn car_race_collision(n: isize) -> isize {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_41_car_race_collision.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = car_race_collision;\n    assert_eq!(candidate(2), 4);\n    assert_eq!(candidate(3), 9);\n    assert_eq!(candidate(4), 16);\n    assert_eq!(candidate(8), 64);\n    assert_eq!(candidate(10), 100);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage car_race_collision_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc car_race_collision(n int) int {\n    return n * n\n}\n\n### Rust version\n\nfn car_race_collision(n: isize) -> isize {\n"
+  },
+  {
+    "name": "HumanEval_76_is_simple_power",
+    "language": "rs",
+    "prompt": "fn is_simple_power(x: isize, n: isize) -> bool {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_76_is_simple_power.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = is_simple_power;\n    assert_eq!(candidate(16, 2), true);\n    assert_eq!(candidate(143214, 16), false);\n    assert_eq!(candidate(4, 2), true);\n    assert_eq!(candidate(9, 3), true);\n    assert_eq!(candidate(16, 4), true);\n    assert_eq!(candidate(24, 2), false);\n    assert_eq!(candidate(128, 4), false);\n    assert_eq!(candidate(12, 6), false);\n    assert_eq!(candidate(1, 1), true);\n    assert_eq!(candidate(1, 12), true);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage is_simple_power_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc is_simple_power(x int, n int) bool {\n    if n == 1 {\n        return x == 1\n    }\n    power := 1\n    for power < x {\n        power *= n\n    }\n    return power == x\n}\n\n### Rust version\n\nfn is_simple_power(x: isize, n: isize) -> bool {\n"
+  },
+  {
+    "name": "HumanEval_42_incr_list",
+    "language": "rs",
+    "prompt": "fn incr_list(l: Vec<isize>) -> Vec<isize> {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_42_incr_list.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = incr_list;\n    assert_eq!(candidate(Vec::<isize>::new()), Vec::<isize>::new());\n    assert_eq!(candidate(vec![3, 2, 1]), vec![4, 3, 2]);\n    assert_eq!(candidate(vec![5, 2, 5, 2, 3, 3, 9, 0, 123]), vec![6, 3, 6, 3, 4, 4, 10, 1, 124]);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage incr_list_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc incr_list(l []int) []int {\n    r := make([]int, len(l))\n    for i, e := range l {\n        r[i] = e + 1\n    }\n    return r\n}\n\n### Rust version\n\nfn incr_list(l: Vec<isize>) -> Vec<isize> {\n"
+  },
+  {
+    "name": "HumanEval_27_flip_case",
+    "language": "rs",
+    "prompt": "fn flip_case(string: String) -> String {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_27_flip_case.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = flip_case;\n    assert_eq!(candidate(String::from(\"\")), String::from(\"\"));\n    assert_eq!(candidate(String::from(\"Hello!\")), String::from(\"hELLO!\"));\n    assert_eq!(candidate(String::from(\"These violent delights have violent ends\")), String::from(\"tHESE VIOLENT DELIGHTS HAVE VIOLENT ENDS\"));\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage flip_case_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc flip_case(myString string) string {\n    result := \"\"\n    for _, c := range myString {\n        if c >= 'a' && c <= 'z' {\n            result += string(c - 32)\n        } else if c >= 'A' && c <= 'Z' {\n            result += string(c + 32)\n        } else {\n            result += string(c)\n        }\n    }\n    return result\n}\n\n### Rust version\n\nfn flip_case(string: String) -> String {\n"
+  },
+  {
+    "name": "HumanEval_149_sorted_list_sum",
+    "language": "rs",
+    "prompt": "fn sorted_list_sum(lst: Vec<String>) -> Vec<String> {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_149_sorted_list_sum.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = sorted_list_sum;\n    assert_eq!(candidate(vec![String::from(\"aa\"), String::from(\"a\"), String::from(\"aaa\")]), vec![String::from(\"aa\")]);\n    assert_eq!(candidate(vec![String::from(\"school\"), String::from(\"AI\"), String::from(\"asdf\"), String::from(\"b\")]), vec![String::from(\"AI\"), String::from(\"asdf\"), String::from(\"school\")]);\n    assert_eq!(candidate(vec![String::from(\"d\"), String::from(\"b\"), String::from(\"c\"), String::from(\"a\")]), Vec::<String>::new());\n    assert_eq!(candidate(vec![String::from(\"d\"), String::from(\"dcba\"), String::from(\"abcd\"), String::from(\"a\")]), vec![String::from(\"abcd\"), String::from(\"dcba\")]);\n    assert_eq!(candidate(vec![String::from(\"AI\"), String::from(\"ai\"), String::from(\"au\")]), vec![String::from(\"AI\"), String::from(\"ai\"), String::from(\"au\")]);\n    assert_eq!(candidate(vec![String::from(\"a\"), String::from(\"b\"), String::from(\"b\"), String::from(\"c\"), String::from(\"c\"), String::from(\"a\")]), Vec::<String>::new());\n    assert_eq!(candidate(vec![String::from(\"aaaa\"), String::from(\"bbbb\"), String::from(\"dd\"), String::from(\"cc\")]), vec![String::from(\"cc\"), String::from(\"dd\"), String::from(\"aaaa\"), String::from(\"bbbb\")]);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage sorted_list_sum_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc sorted_list_sum(lst []string) []string {\n    for i := 0; i < len(lst); i++ {\n        for j := i+1; j < len(lst); j++ {\n            if lst[i] > lst[j] {\n                lst[i], lst[j] = lst[j], lst[i]\n            }\n        }\n    }\n    new_lst := []string{}\n    for _, i := range lst {\n        if len(i)%2 == 0 {\n            new_lst = append(new_lst, i)\n        }\n    }\n    for i := 0; i < len(new_lst); i++ {\n        for j := i+1; j < len(new_lst); j++ {\n            if len(new_lst[i]) > len(new_lst[j]) {\n                new_lst[i], new_lst[j] = new_lst[j], new_lst[i]\n            }\n        }\n    }\n    return new_lst\n}\n\n### Rust version\n\nfn sorted_list_sum(lst: Vec<String>) -> Vec<String> {\n"
+  },
+  {
+    "name": "HumanEval_107_even_odd_palindrome",
+    "language": "rs",
+    "prompt": "fn even_odd_palindrome(n: isize) -> (isize, isize) {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_107_even_odd_palindrome.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = even_odd_palindrome;\n    assert_eq!(candidate(123), (8, 13));\n    assert_eq!(candidate(12), (4, 6));\n    assert_eq!(candidate(3), (1, 2));\n    assert_eq!(candidate(63), (6, 8));\n    assert_eq!(candidate(25), (5, 6));\n    assert_eq!(candidate(19), (4, 6));\n    assert_eq!(candidate(9), (4, 5));\n    assert_eq!(candidate(1), (0, 1));\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage even_odd_palindrome_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc even_odd_palindrome(n int) []interface{} {\n    is_palindrome := func(n int) bool {\n        s := fmt.Sprintf(\"%d\", n)\n        for i := 0; i < len(s)/2; i++ {\n            if s[i] != s[len(s)-i-1] {\n                return false\n            }\n        }\n        return true\n    }\n\n    even_palindrome_count := 0\n    odd_palindrome_count := 0\n\n    for i := 1; i <= n; i++ {\n        if i%2 == 1 && is_palindrome(i) {\n            odd_palindrome_count++\n        } else if i%2 == 0 && is_palindrome(i) {\n            even_palindrome_count++\n        }\n    }\n    return []interface{}{even_palindrome_count, odd_palindrome_count}\n}\n\n### Rust version\n\nfn even_odd_palindrome(n: isize) -> (isize, isize) {\n"
+  },
+  {
+    "name": "HumanEval_130_tri",
+    "language": "rs",
+    "prompt": "fn tri(n: isize) -> Vec<isize> {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_130_tri.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = tri;\n    assert_eq!(candidate(3), vec![1, 3, 2, 8]);\n    assert_eq!(candidate(4), vec![1, 3, 2, 8, 3]);\n    assert_eq!(candidate(5), vec![1, 3, 2, 8, 3, 15]);\n    assert_eq!(candidate(6), vec![1, 3, 2, 8, 3, 15, 4]);\n    assert_eq!(candidate(7), vec![1, 3, 2, 8, 3, 15, 4, 24]);\n    assert_eq!(candidate(8), vec![1, 3, 2, 8, 3, 15, 4, 24, 5]);\n    assert_eq!(candidate(9), vec![1, 3, 2, 8, 3, 15, 4, 24, 5, 35]);\n    assert_eq!(candidate(20), vec![1, 3, 2, 8, 3, 15, 4, 24, 5, 35, 6, 48, 7, 63, 8, 80, 9, 99, 10, 120, 11]);\n    assert_eq!(candidate(0), vec![1]);\n    assert_eq!(candidate(1), vec![1, 3]);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage tri_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc tri(n int) []int {\n    if n == 0 {\n        return []int{1}\n    }\n    myTri := []int{1, 3}\n    for i := 2; i <= n; i++ {\n        if i%2 == 0 {\n            myTri = append(myTri, i/2+1)\n        } else {\n            myTri = append(myTri, myTri[i-1]+myTri[i-2]+(i+3)/2)\n        }\n    }\n    return myTri\n}\n\n### Rust version\n\nfn tri(n: isize) -> Vec<isize> {\n"
+  },
+  {
+    "name": "HumanEval_44_change_base",
+    "language": "rs",
+    "prompt": "fn change_base(x: isize, base: isize) -> String {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_44_change_base.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = change_base;\n    assert_eq!(candidate(8, 3), String::from(\"22\"));\n    assert_eq!(candidate(9, 3), String::from(\"100\"));\n    assert_eq!(candidate(234, 2), String::from(\"11101010\"));\n    assert_eq!(candidate(16, 2), String::from(\"10000\"));\n    assert_eq!(candidate(8, 2), String::from(\"1000\"));\n    assert_eq!(candidate(7, 2), String::from(\"111\"));\n    assert_eq!(candidate(2, 3), String::from(\"2\"));\n    assert_eq!(candidate(3, 4), String::from(\"3\"));\n    assert_eq!(candidate(4, 5), String::from(\"4\"));\n    assert_eq!(candidate(5, 6), String::from(\"5\"));\n    assert_eq!(candidate(6, 7), String::from(\"6\"));\n    assert_eq!(candidate(7, 8), String::from(\"7\"));\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage change_base_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc change_base(x int, base int) string {\n    ret := \"\"\n    for x > 0 {\n        ret = fmt.Sprintf(\"%d%s\", x%base, ret)\n        x /= base\n    }\n    return ret\n}\n\n### Rust version\n\nfn change_base(x: isize, base: isize) -> String {\n"
+  },
+  {
+    "name": "HumanEval_154_cycpattern_check",
+    "language": "rs",
+    "prompt": "fn cycpattern_check(a: String, b: String) -> bool {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_154_cycpattern_check.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = cycpattern_check;\n    assert_eq!(candidate(String::from(\"xyzw\"), String::from(\"xyw\")), false);\n    assert_eq!(candidate(String::from(\"yello\"), String::from(\"ell\")), true);\n    assert_eq!(candidate(String::from(\"whattup\"), String::from(\"ptut\")), false);\n    assert_eq!(candidate(String::from(\"efef\"), String::from(\"fee\")), true);\n    assert_eq!(candidate(String::from(\"abab\"), String::from(\"aabb\")), false);\n    assert_eq!(candidate(String::from(\"winemtt\"), String::from(\"tinem\")), true);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage cycpattern_check_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc cycpattern_check(a string, b string) bool {\n\tl := len(b)\n\tpat := b + b\n\tfor i := 0; i < len(a)-l+1; i++ {\n\t\tfor j := 0; j < l+1; j++ {\n\t\t\tif a[i:i+l] == pat[j:j+l] {\n\t\t\t\treturn true\n\t\t\t}\n\t\t}\n\t}\n\treturn false\n}\n\n### Rust version\n\nfn cycpattern_check(a: String, b: String) -> bool {\n"
+  },
+  {
+    "name": "HumanEval_114_minSubArraySum",
+    "language": "rs",
+    "prompt": "fn minSubArraySum(nums: Vec<isize>) -> isize {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_114_minSubArraySum.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = minSubArraySum;\n    assert_eq!(candidate(vec![2, 3, 4, 1, 2, 4]), 1);\n    assert_eq!(candidate(vec![-1, -2, -3]), -6);\n    assert_eq!(candidate(vec![-1, -2, -3, 2, -10]), -14);\n    assert_eq!(candidate(vec![-9999999999999999]), -9999999999999999);\n    assert_eq!(candidate(vec![0, 10, 20, 1000000]), 0);\n    assert_eq!(candidate(vec![-1, -2, -3, 10, -5]), -6);\n    assert_eq!(candidate(vec![100, -1, -2, -3, 10, -5]), -6);\n    assert_eq!(candidate(vec![10, 11, 13, 8, 3, 4]), 3);\n    assert_eq!(candidate(vec![100, -33, 32, -1, 0, -2]), -33);\n    assert_eq!(candidate(vec![-10]), -10);\n    assert_eq!(candidate(vec![7]), 7);\n    assert_eq!(candidate(vec![1, -1]), -1);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage minSubArraySum_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc minSubArraySum(nums []int) int {\n    maxSum := 0\n    s := 0\n    for _, num := range nums {\n        s += -num\n        if s < 0 {\n            s = 0\n        }\n        if s > maxSum {\n            maxSum = s\n        }\n    }\n    if maxSum == 0 {\n        maxSum = -1 << 31\n        for _, num := range nums {\n            if -num > maxSum {\n                maxSum = -num\n            }\n        }\n    }\n    return -maxSum\n}\n\n### Rust version\n\nfn minSubArraySum(nums: Vec<isize>) -> isize {\n"
+  },
+  {
+    "name": "HumanEval_88_sort_array",
+    "language": "rs",
+    "prompt": "fn sort_array(array: Vec<isize>) -> Vec<isize> {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_88_sort_array.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = sort_array;\n    assert_eq!(candidate(Vec::<isize>::new()), Vec::<isize>::new());\n    assert_eq!(candidate(vec![5]), vec![5]);\n    assert_eq!(candidate(vec![2, 4, 3, 0, 1, 5]), vec![0, 1, 2, 3, 4, 5]);\n    assert_eq!(candidate(vec![2, 4, 3, 0, 1, 5, 6]), vec![6, 5, 4, 3, 2, 1, 0]);\n    assert_eq!(candidate(vec![2, 1]), vec![1, 2]);\n    assert_eq!(candidate(vec![15, 42, 87, 32, 11, 0]), vec![0, 11, 15, 32, 42, 87]);\n    assert_eq!(candidate(vec![21, 14, 23, 11]), vec![23, 21, 14, 11]);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage sort_array_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n    \"sort\"\n)\n\nfunc sort_array(array []int) []int {\n\tif len(array) == 0 {\n\t\treturn []int{}\n\t}\n\n\treverse := (array[0]+array[len(array)-1])%2 == 0\n\tsort.Ints(array)\n\n\tif reverse {\n\t\tfor i, j := 0, len(array)-1; i < j; i, j = i+1, j-1 {\n\t\t\tarray[i], array[j] = array[j], array[i]\n\t\t}\n\t}\n\n\treturn array\n}\n\n### Rust version\n\nfn sort_array(array: Vec<isize>) -> Vec<isize> {\n"
+  },
+  {
+    "name": "HumanEval_62_derivative",
+    "language": "rs",
+    "prompt": "fn derivative(xs: Vec<isize>) -> Vec<isize> {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_62_derivative.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = derivative;\n    assert_eq!(candidate(vec![3, 1, 2, 4, 5]), vec![1, 4, 12, 20]);\n    assert_eq!(candidate(vec![1, 2, 3]), vec![2, 6]);\n    assert_eq!(candidate(vec![3, 2, 1]), vec![2, 2]);\n    assert_eq!(candidate(vec![3, 2, 1, 0, 4]), vec![2, 2, 0, 16]);\n    assert_eq!(candidate(vec![1]), Vec::<isize>::new());\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage derivative_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc derivative(xs []int) []int {\n    ys := make([]int, len(xs)-1)\n    for i, x := range xs[1:] {\n        ys[i] = (i+1) * x\n    }\n    return ys\n}\n\n### Rust version\n\nfn derivative(xs: Vec<isize>) -> Vec<isize> {\n"
+  },
+  {
+    "name": "HumanEval_63_fibfib",
+    "language": "rs",
+    "prompt": "fn fibfib(n: isize) -> isize {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_63_fibfib.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = fibfib;\n    assert_eq!(candidate(2), 1);\n    assert_eq!(candidate(1), 0);\n    assert_eq!(candidate(5), 4);\n    assert_eq!(candidate(8), 24);\n    assert_eq!(candidate(10), 81);\n    assert_eq!(candidate(12), 274);\n    assert_eq!(candidate(14), 927);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage fibfib_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc fibfib(n int) int {\n    if n == 0 {\n        return 0\n    }\n    if n == 1 {\n        return 0\n    }\n    if n == 2 {\n        return 1\n    }\n    return fibfib(n-1) + fibfib(n-2) + fibfib(n-3)\n}\n\n### Rust version\n\nfn fibfib(n: isize) -> isize {\n"
+  },
+  {
+    "name": "HumanEval_2_truncate_number",
+    "language": "rs",
+    "prompt": "fn truncate_number(number: f64) -> f64 {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_2_truncate_number.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = truncate_number;\n    assert_eq!(candidate(3.5), 0.5);\n    assert_eq!(candidate(1.25), 0.25);\n    assert_eq!(candidate(123.0), 0.0);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage truncate_number_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc truncate_number(number float64) float64 {\n    return number - float64(int(number))\n}\n\n### Rust version\n\nfn truncate_number(number: f64) -> f64 {\n"
+  },
+  {
+    "name": "HumanEval_35_max_element",
+    "language": "rs",
+    "prompt": "fn max_element(l: Vec<isize>) -> isize {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_35_max_element.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = max_element;\n    assert_eq!(candidate(vec![1, 2, 3]), 3);\n    assert_eq!(candidate(vec![5, 3, -5, 2, -3, 3, 9, 0, 124, 1, -10]), 124);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage max_element_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc max_element(l []int) int {\n    m := l[0]\n    for _, e := range l {\n        if e > m {\n            m = e\n        }\n    }\n    return m\n}\n\n### Rust version\n\nfn max_element(l: Vec<isize>) -> isize {\n"
+  },
+  {
+    "name": "HumanEval_39_prime_fib",
+    "language": "rs",
+    "prompt": "fn prime_fib(n: isize) -> isize {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_39_prime_fib.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = prime_fib;\n    assert_eq!(candidate(1), 2);\n    assert_eq!(candidate(2), 3);\n    assert_eq!(candidate(3), 5);\n    assert_eq!(candidate(4), 13);\n    assert_eq!(candidate(5), 89);\n    assert_eq!(candidate(6), 233);\n    assert_eq!(candidate(7), 1597);\n    assert_eq!(candidate(8), 28657);\n    assert_eq!(candidate(9), 514229);\n    assert_eq!(candidate(10), 433494437);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage prime_fib_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc prime_fib(n int) int {\n    is_prime := func(p int) bool {\n        if p < 2 {\n            return false\n        }\n        for k := 2; k < p; k++ {\n            if p%k == 0 {\n                return false\n            }\n        }\n        return true\n    }\n    f := []int{0, 1}\n    for {\n        f = append(f, f[len(f)-1]+f[len(f)-2])\n        if is_prime(f[len(f)-1]) {\n            n -= 1\n        }\n        if n == 0 {\n            return f[len(f)-1]\n        }\n    }\n}\n\n### Rust version\n\nfn prime_fib(n: isize) -> isize {\n"
+  },
+  {
+    "name": "HumanEval_8_sum_product",
+    "language": "rs",
+    "prompt": "fn sum_product(numbers: Vec<isize>) -> (isize, isize) {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_8_sum_product.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = sum_product;\n    assert_eq!(candidate(Vec::<isize>::new()), (0, 1));\n    assert_eq!(candidate(vec![1, 1, 1]), (3, 1));\n    assert_eq!(candidate(vec![100, 0]), (100, 0));\n    assert_eq!(candidate(vec![3, 5, 7]), (15, 105));\n    assert_eq!(candidate(vec![10]), (10, 10));\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage sum_product_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc sum_product(numbers []int) []interface{} {\n    sumValue := 0\n    prodValue := 1\n\n    for _, n := range numbers {\n        sumValue += n\n        prodValue *= n\n    }\n\n    return []interface{}{sumValue, prodValue}\n}\n\n### Rust version\n\nfn sum_product(numbers: Vec<isize>) -> (isize, isize) {\n"
+  },
+  {
+    "name": "HumanEval_122_add_elements",
+    "language": "rs",
+    "prompt": "fn add_elements(arr: Vec<isize>, k: isize) -> isize {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_122_add_elements.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = add_elements;\n    assert_eq!(candidate(vec![1, -2, -3, 41, 57, 76, 87, 88, 99], 3), -4);\n    assert_eq!(candidate(vec![111, 121, 3, 4000, 5, 6], 2), 0);\n    assert_eq!(candidate(vec![11, 21, 3, 90, 5, 6, 7, 8, 9], 4), 125);\n    assert_eq!(candidate(vec![111, 21, 3, 4000, 5, 6, 7, 8, 9], 4), 24);\n    assert_eq!(candidate(vec![1], 1), 1);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage add_elements_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc add_elements(arr []int, k int) int {\n    sum := 0\n    for _, elem := range arr[:k] {\n        if elem < 100 {\n            sum += elem\n        }\n    }\n    return sum\n}\n\n### Rust version\n\nfn add_elements(arr: Vec<isize>, k: isize) -> isize {\n"
+  },
+  {
+    "name": "HumanEval_159_eat",
+    "language": "rs",
+    "prompt": "fn eat(number: isize, need: isize, remaining: isize) -> Vec<isize> {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_159_eat.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = eat;\n    assert_eq!(candidate(5, 6, 10), vec![11, 4]);\n    assert_eq!(candidate(4, 8, 9), vec![12, 1]);\n    assert_eq!(candidate(1, 10, 10), vec![11, 0]);\n    assert_eq!(candidate(2, 11, 5), vec![7, 0]);\n    assert_eq!(candidate(4, 5, 7), vec![9, 2]);\n    assert_eq!(candidate(4, 5, 1), vec![5, 0]);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage eat_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc eat(number int, need int, remaining int) []int {\n\tif need <= remaining {\n\t\treturn []int{number + need, remaining - need}\n\t} else {\n\t\treturn []int{number + remaining, 0}\n\t}\n}\n\n### Rust version\n\nfn eat(number: isize, need: isize, remaining: isize) -> Vec<isize> {\n"
+  },
+  {
+    "name": "HumanEval_29_filter_by_prefix",
+    "language": "rs",
+    "prompt": "fn filter_by_prefix(strings: Vec<String>, prefix: String) -> Vec<String> {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_29_filter_by_prefix.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = filter_by_prefix;\n    assert_eq!(candidate(Vec::<String>::new(), String::from(\"john\")), Vec::<String>::new());\n    assert_eq!(candidate(vec![String::from(\"xxx\"), String::from(\"asd\"), String::from(\"xxy\"), String::from(\"john doe\"), String::from(\"xxxAAA\"), String::from(\"xxx\")], String::from(\"xxx\")), vec![String::from(\"xxx\"), String::from(\"xxxAAA\"), String::from(\"xxx\")]);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage filter_by_prefix_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc filter_by_prefix(strings []string, prefix string) []string {\n    var res []string\n    for _, s := range strings {\n        if len(s) >= len(prefix) && s[:len(prefix)] == prefix {\n            res = append(res, s)\n        }\n    }\n    return res\n}\n\n### Rust version\n\nfn filter_by_prefix(strings: Vec<String>, prefix: String) -> Vec<String> {\n"
+  },
+  {
+    "name": "HumanEval_102_choose_num",
+    "language": "rs",
+    "prompt": "fn choose_num(x: isize, y: isize) -> isize {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_102_choose_num.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = choose_num;\n    assert_eq!(candidate(12, 15), 14);\n    assert_eq!(candidate(13, 12), -1);\n    assert_eq!(candidate(33, 12354), 12354);\n    assert_eq!(candidate(5234, 5233), -1);\n    assert_eq!(candidate(6, 29), 28);\n    assert_eq!(candidate(27, 10), -1);\n    assert_eq!(candidate(7, 7), -1);\n    assert_eq!(candidate(546, 546), 546);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage choose_num_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc choose_num(x int, y int) int {\n    if x > y {\n        return -1\n    }\n    if y%2 == 0 {\n        return y\n    }\n    if x == y {\n        return -1\n    }\n    return y - 1\n}\n\n### Rust version\n\nfn choose_num(x: isize, y: isize) -> isize {\n"
+  },
+  {
+    "name": "HumanEval_82_prime_length",
+    "language": "rs",
+    "prompt": "fn prime_length(string: String) -> bool {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_82_prime_length.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = prime_length;\n    assert_eq!(candidate(String::from(\"Hello\")), true);\n    assert_eq!(candidate(String::from(\"abcdcba\")), true);\n    assert_eq!(candidate(String::from(\"kittens\")), true);\n    assert_eq!(candidate(String::from(\"orange\")), false);\n    assert_eq!(candidate(String::from(\"wow\")), true);\n    assert_eq!(candidate(String::from(\"world\")), true);\n    assert_eq!(candidate(String::from(\"MadaM\")), true);\n    assert_eq!(candidate(String::from(\"Wow\")), true);\n    assert_eq!(candidate(String::from(\"\")), false);\n    assert_eq!(candidate(String::from(\"HI\")), true);\n    assert_eq!(candidate(String::from(\"go\")), true);\n    assert_eq!(candidate(String::from(\"gogo\")), false);\n    assert_eq!(candidate(String::from(\"aaaaaaaaaaaaaaa\")), false);\n    assert_eq!(candidate(String::from(\"Madam\")), true);\n    assert_eq!(candidate(String::from(\"M\")), false);\n    assert_eq!(candidate(String::from(\"0\")), false);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage prime_length_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc prime_length(myString string) bool {\n\tl := len(myString)\n\tif l == 0 || l == 1 {\n\t\treturn false\n\t}\n\tfor i := 2; i < l; i++ {\n\t\tif l%i == 0 {\n\t\t\treturn false\n\t\t}\n\t}\n\treturn true\n}\n\n### Rust version\n\nfn prime_length(string: String) -> bool {\n"
+  },
+  {
+    "name": "HumanEval_60_sum_to_n",
+    "language": "rs",
+    "prompt": "fn sum_to_n(n: isize) -> isize {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_60_sum_to_n.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = sum_to_n;\n    assert_eq!(candidate(1), 1);\n    assert_eq!(candidate(6), 21);\n    assert_eq!(candidate(11), 66);\n    assert_eq!(candidate(30), 465);\n    assert_eq!(candidate(100), 5050);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage sum_to_n_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc sum_to_n(n int) int {\n    return n * (n + 1) / 2\n}\n\n### Rust version\n\nfn sum_to_n(n: isize) -> isize {\n"
+  },
+  {
+    "name": "HumanEval_140_fix_spaces",
+    "language": "rs",
+    "prompt": "fn fix_spaces(text: String) -> String {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_140_fix_spaces.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = fix_spaces;\n    assert_eq!(candidate(String::from(\"Example\")), String::from(\"Example\"));\n    assert_eq!(candidate(String::from(\"Mudasir Hanif \")), String::from(\"Mudasir_Hanif_\"));\n    assert_eq!(candidate(String::from(\"Yellow Yellow  Dirty  Fellow\")), String::from(\"Yellow_Yellow__Dirty__Fellow\"));\n    assert_eq!(candidate(String::from(\"Exa   mple\")), String::from(\"Exa-mple\"));\n    assert_eq!(candidate(String::from(\"   Exa 1 2 2 mple\")), String::from(\"-Exa_1_2_2_mple\"));\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage fix_spaces_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc fix_spaces(text string) string {\n    new_text := \"\"\n    start, end := 0, 0\n    for i, c := range text {\n        if c == ' ' {\n            end += 1\n        } else {\n            if end - start > 2 {\n                new_text += \"-\"+string(c)\n            } else if end - start > 0 {\n                for j := 0; j < end-start; j++ {\n                    new_text += \"_\"\n                }\n                new_text += string(c)\n            } else {\n                new_text += string(c)\n            }\n            start, end = i+1, i+1\n        }\n    }\n    if end - start > 2 {\n        new_text += \"-\"\n    } else if end - start > 0 {\n        for j := 0; j < end-start; j++ {\n            new_text += \"_\"\n        }\n    }\n    return new_text\n}\n\n### Rust version\n\nfn fix_spaces(text: String) -> String {\n"
+  },
+  {
+    "name": "HumanEval_9_rolling_max",
+    "language": "rs",
+    "prompt": "fn rolling_max(numbers: Vec<isize>) -> Vec<isize> {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_9_rolling_max.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = rolling_max;\n    assert_eq!(candidate(Vec::<isize>::new()), Vec::<isize>::new());\n    assert_eq!(candidate(vec![1, 2, 3, 4]), vec![1, 2, 3, 4]);\n    assert_eq!(candidate(vec![4, 3, 2, 1]), vec![4, 4, 4, 4]);\n    assert_eq!(candidate(vec![3, 2, 3, 100, 3]), vec![3, 3, 3, 100, 100]);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage rolling_max_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc rolling_max(numbers []int) []int {\n    runningMax := 0\n    result := make([]int, 0)\n\n    for _, n := range numbers {\n        if runningMax < n {\n            runningMax = n\n        }\n        result = append(result, runningMax)\n    }\n\n    return result\n}\n\n### Rust version\n\nfn rolling_max(numbers: Vec<isize>) -> Vec<isize> {\n"
+  },
+  {
+    "name": "HumanEval_118_get_closest_vowel",
+    "language": "rs",
+    "prompt": "fn get_closest_vowel(word: String) -> String {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_118_get_closest_vowel.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = get_closest_vowel;\n    assert_eq!(candidate(String::from(\"yogurt\")), String::from(\"u\"));\n    assert_eq!(candidate(String::from(\"full\")), String::from(\"u\"));\n    assert_eq!(candidate(String::from(\"easy\")), String::from(\"\"));\n    assert_eq!(candidate(String::from(\"eAsy\")), String::from(\"\"));\n    assert_eq!(candidate(String::from(\"ali\")), String::from(\"\"));\n    assert_eq!(candidate(String::from(\"bad\")), String::from(\"a\"));\n    assert_eq!(candidate(String::from(\"most\")), String::from(\"o\"));\n    assert_eq!(candidate(String::from(\"ab\")), String::from(\"\"));\n    assert_eq!(candidate(String::from(\"ba\")), String::from(\"\"));\n    assert_eq!(candidate(String::from(\"quick\")), String::from(\"\"));\n    assert_eq!(candidate(String::from(\"anime\")), String::from(\"i\"));\n    assert_eq!(candidate(String::from(\"Asia\")), String::from(\"\"));\n    assert_eq!(candidate(String::from(\"Above\")), String::from(\"o\"));\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage get_closest_vowel_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc get_closest_vowel(word string) string {\n\tif len(word) < 3 {\n\t\treturn \"\"\n\t}\n\n\tvowels := map[rune]bool{\n\t\t'a': true, 'e': true, 'i': true, 'o': true, 'u': true,\n\t\t'A': true, 'E': true, 'I': true, 'O': true, 'U': true,\n\t}\n\n\tfor i := len(word) - 2; i > 0; i-- {\n\t\tif _, ok := vowels[rune(word[i])]; ok {\n\t\t\tif _, ok1 := vowels[rune(word[i+1])]; !ok1 {\n\t\t\t\tif _, ok2 := vowels[rune(word[i-1])]; !ok2 {\n\t\t\t\t\treturn string(word[i])\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n\n\treturn \"\"\n}\n\n### Rust version\n\nfn get_closest_vowel(word: String) -> String {\n"
+  },
+  {
+    "name": "HumanEval_26_remove_duplicates",
+    "language": "rs",
+    "prompt": "fn remove_duplicates(numbers: Vec<isize>) -> Vec<isize> {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_26_remove_duplicates.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = remove_duplicates;\n    assert_eq!(candidate(Vec::<isize>::new()), Vec::<isize>::new());\n    assert_eq!(candidate(vec![1, 2, 3, 4]), vec![1, 2, 3, 4]);\n    assert_eq!(candidate(vec![1, 2, 3, 2, 4, 3, 5]), vec![1, 4, 5]);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage remove_duplicates_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc remove_duplicates(numbers []int) []int {\n\tc := make(map[int]int)\n\tfor _, n := range numbers {\n\t\tc[n] += 1\n\t}\n\n\tresult := make([]int, 0)\n\tfor _, n := range numbers {\n\t\tif c[n] <= 1 {\n\t\t\tresult = append(result, n)\n\t\t}\n\t}\n\treturn result\n}\n\n### Rust version\n\nfn remove_duplicates(numbers: Vec<isize>) -> Vec<isize> {\n"
+  },
+  {
+    "name": "HumanEval_54_same_chars",
+    "language": "rs",
+    "prompt": "fn same_chars(s0: String, s1: String) -> bool {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_54_same_chars.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = same_chars;\n    assert_eq!(candidate(String::from(\"eabcdzzzz\"), String::from(\"dddzzzzzzzddeddabc\")), true);\n    assert_eq!(candidate(String::from(\"abcd\"), String::from(\"dddddddabc\")), true);\n    assert_eq!(candidate(String::from(\"dddddddabc\"), String::from(\"abcd\")), true);\n    assert_eq!(candidate(String::from(\"eabcd\"), String::from(\"dddddddabc\")), false);\n    assert_eq!(candidate(String::from(\"abcd\"), String::from(\"dddddddabcf\")), false);\n    assert_eq!(candidate(String::from(\"eabcdzzzz\"), String::from(\"dddzzzzzzzddddabc\")), false);\n    assert_eq!(candidate(String::from(\"aabb\"), String::from(\"aaccc\")), false);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage same_chars_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc same_chars(s0 string, s1 string) bool {\n    set0 := make(map[rune]bool)\n    set1 := make(map[rune]bool)\n    for _, r := range s0 {\n        set0[r] = true\n    }\n    for _, r := range s1 {\n        set1[r] = true\n    }\n    return fmt.Sprint(set0) == fmt.Sprint(set1)\n}\n\n### Rust version\n\nfn same_chars(s0: String, s1: String) -> bool {\n"
+  },
+  {
+    "name": "HumanEval_11_string_xor",
+    "language": "rs",
+    "prompt": "fn string_xor(a: String, b: String) -> String {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_11_string_xor.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = string_xor;\n    assert_eq!(candidate(String::from(\"111000\"), String::from(\"101010\")), String::from(\"010010\"));\n    assert_eq!(candidate(String::from(\"1\"), String::from(\"1\")), String::from(\"0\"));\n    assert_eq!(candidate(String::from(\"0101\"), String::from(\"0000\")), String::from(\"0101\"));\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage string_xor_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc string_xor(a string, b string) string {\n    var res string\n    for i := 0; i < len(a); i++ {\n        if a[i] == b[i] {\n            res += \"0\"\n        } else {\n            res += \"1\"\n        }\n    }\n    return res\n}\n\n### Rust version\n\nfn string_xor(a: String, b: String) -> String {\n"
+  },
+  {
+    "name": "HumanEval_23_strlen",
+    "language": "rs",
+    "prompt": "fn strlen(string: String) -> isize {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_23_strlen.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = strlen;\n    assert_eq!(candidate(String::from(\"\")), 0);\n    assert_eq!(candidate(String::from(\"x\")), 1);\n    assert_eq!(candidate(String::from(\"asdasnakj\")), 9);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage strlen_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc strlen(myString string) int {\n    return len(myString)\n}\n\n### Rust version\n\nfn strlen(string: String) -> isize {\n"
+  },
+  {
+    "name": "HumanEval_15_string_sequence",
+    "language": "rs",
+    "prompt": "fn string_sequence(n: isize) -> String {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_15_string_sequence.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = string_sequence;\n    assert_eq!(candidate(0), String::from(\"0\"));\n    assert_eq!(candidate(3), String::from(\"0 1 2 3\"));\n    assert_eq!(candidate(10), String::from(\"0 1 2 3 4 5 6 7 8 9 10\"));\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage string_sequence_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc string_sequence(n int) string {\n    s := \"\"\n    for i := 0; i <= n; i++ {\n        s += fmt.Sprintf(\"%d \", i)\n    }\n    return s[:len(s)-1]\n}\n\n### Rust version\n\nfn string_sequence(n: isize) -> String {\n"
+  },
+  {
+    "name": "HumanEval_135_can_arrange",
+    "language": "rs",
+    "prompt": "fn can_arrange(arr: Vec<isize>) -> isize {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_135_can_arrange.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = can_arrange;\n    assert_eq!(candidate(vec![1, 2, 4, 3, 5]), 3);\n    assert_eq!(candidate(vec![1, 2, 4, 5]), -1);\n    assert_eq!(candidate(vec![1, 4, 2, 5, 6, 7, 8, 9, 10]), 2);\n    assert_eq!(candidate(vec![4, 8, 5, 7, 3]), 4);\n    assert_eq!(candidate(Vec::<isize>::new()), -1);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage can_arrange_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc can_arrange(arr []int) int {\n\tind := -1\n\tfor i := 1; i < len(arr); i++ {\n\t\tif arr[i] < arr[i-1] {\n\t\t\tind = i\n\t\t}\n\t}\n\treturn ind\n}\n\n### Rust version\n\nfn can_arrange(arr: Vec<isize>) -> isize {\n"
+  },
+  {
+    "name": "HumanEval_85_add",
+    "language": "rs",
+    "prompt": "fn add(lst: Vec<isize>) -> isize {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_85_add.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = add;\n    assert_eq!(candidate(vec![4, 88]), 88);\n    assert_eq!(candidate(vec![4, 5, 6, 7, 2, 122]), 122);\n    assert_eq!(candidate(vec![4, 0, 6, 7]), 0);\n    assert_eq!(candidate(vec![4, 4, 6, 8]), 12);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage add_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc add(lst []int) int {\n    sum := 0\n    for i := 1; i < len(lst); i += 2 {\n        if lst[i]%2 == 0 {\n            sum += lst[i]\n        }\n    }\n    return sum\n}\n\n### Rust version\n\nfn add(lst: Vec<isize>) -> isize {\n"
+  },
+  {
+    "name": "HumanEval_5_intersperse",
+    "language": "rs",
+    "prompt": "fn intersperse(numbers: Vec<isize>, delimeter: isize) -> Vec<isize> {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_5_intersperse.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = intersperse;\n    assert_eq!(candidate(Vec::<isize>::new(), 7), Vec::<isize>::new());\n    assert_eq!(candidate(vec![5, 6, 3, 2], 8), vec![5, 8, 6, 8, 3, 8, 2]);\n    assert_eq!(candidate(vec![2, 2, 2], 2), vec![2, 2, 2, 2, 2]);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage intersperse_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc intersperse(numbers []int, delimeter int) []int {\n    if len(numbers) == 0 {\n        return []int{}\n    }\n\n    result := make([]int, 0)\n\n    for i, n := range numbers {\n        if i > 0 {\n            result = append(result, delimeter)\n        }\n        result = append(result, n)\n    }\n\n    return result\n}\n\n### Rust version\n\nfn intersperse(numbers: Vec<isize>, delimeter: isize) -> Vec<isize> {\n"
+  },
+  {
+    "name": "HumanEval_119_match_parens",
+    "language": "rs",
+    "prompt": "fn match_parens(lst: Vec<String>) -> String {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_119_match_parens.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = match_parens;\n    assert_eq!(candidate(vec![String::from(\"()(\"), String::from(\")\")]), String::from(\"Yes\"));\n    assert_eq!(candidate(vec![String::from(\")\"), String::from(\")\")]), String::from(\"No\"));\n    assert_eq!(candidate(vec![String::from(\"(()(())\"), String::from(\"())())\")]), String::from(\"No\"));\n    assert_eq!(candidate(vec![String::from(\")())\"), String::from(\"(()()(\")]), String::from(\"Yes\"));\n    assert_eq!(candidate(vec![String::from(\"(())))\"), String::from(\"(()())((\")]), String::from(\"Yes\"));\n    assert_eq!(candidate(vec![String::from(\"()\"), String::from(\"())\")]), String::from(\"No\"));\n    assert_eq!(candidate(vec![String::from(\"(()(\"), String::from(\"()))()\")]), String::from(\"Yes\"));\n    assert_eq!(candidate(vec![String::from(\"((((\"), String::from(\"((())\")]), String::from(\"No\"));\n    assert_eq!(candidate(vec![String::from(\")(()\"), String::from(\"(()(\")]), String::from(\"No\"));\n    assert_eq!(candidate(vec![String::from(\")(\"), String::from(\")(\")]), String::from(\"No\"));\n    assert_eq!(candidate(vec![String::from(\"(\"), String::from(\")\")]), String::from(\"Yes\"));\n    assert_eq!(candidate(vec![String::from(\")\"), String::from(\"(\")]), String::from(\"Yes\"));\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage match_parens_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc match_parens(lst []string) string {\n    check := func(s string) bool {\n        val := 0\n        for _, i := range s {\n            if i == '(' {\n                val = val + 1\n            } else {\n                val = val - 1\n            }\n            if val < 0 {\n                return false\n            }\n        }\n        return val == 0\n    }\n\n    S1 := lst[0] + lst[1]\n    S2 := lst[1] + lst[0]\n    if check(S1) || check(S2) {\n        return \"Yes\"\n    }\n    return \"No\"\n}\n\n### Rust version\n\nfn match_parens(lst: Vec<String>) -> String {\n"
+  },
+  {
+    "name": "HumanEval_163_generate_integers",
+    "language": "rs",
+    "prompt": "fn generate_integers(a: isize, b: isize) -> Vec<isize> {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_163_generate_integers.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = generate_integers;\n    assert_eq!(candidate(2, 10), vec![2, 4, 6, 8]);\n    assert_eq!(candidate(10, 2), vec![2, 4, 6, 8]);\n    assert_eq!(candidate(132, 2), vec![2, 4, 6, 8]);\n    assert_eq!(candidate(17, 89), Vec::<isize>::new());\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage generate_integers_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc generate_integers(a int, b int) []int {\n    lower := 2\n    if a > b {\n        lower = b\n    } else {\n        lower = a\n    }\n    if lower < 2 {\n        lower = 2\n    }\n\n    upper := 8\n    if a > b {\n        upper = a\n    } else {\n        upper = b\n    }\n    if upper > 8 {\n        upper = 8\n    }\n\n    var result []int\n    for i := lower; i <= upper; i++ {\n        if i % 2 == 0 {\n            result = append(result, i)\n        }\n    }\n    return result\n}\n\n### Rust version\n\nfn generate_integers(a: isize, b: isize) -> Vec<isize> {\n"
+  },
+  {
+    "name": "HumanEval_110_exchange",
+    "language": "rs",
+    "prompt": "fn exchange(lst1: Vec<isize>, lst2: Vec<isize>) -> String {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_110_exchange.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = exchange;\n    assert_eq!(candidate(vec![1, 2, 3, 4], vec![1, 2, 3, 4]), String::from(\"YES\"));\n    assert_eq!(candidate(vec![1, 2, 3, 4], vec![1, 5, 3, 4]), String::from(\"NO\"));\n    assert_eq!(candidate(vec![1, 2, 3, 4], vec![2, 1, 4, 3]), String::from(\"YES\"));\n    assert_eq!(candidate(vec![5, 7, 3], vec![2, 6, 4]), String::from(\"YES\"));\n    assert_eq!(candidate(vec![5, 7, 3], vec![2, 6, 3]), String::from(\"NO\"));\n    assert_eq!(candidate(vec![3, 2, 6, 1, 8, 9], vec![3, 5, 5, 1, 1, 1]), String::from(\"NO\"));\n    assert_eq!(candidate(vec![100, 200], vec![200, 200]), String::from(\"YES\"));\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage exchange_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc exchange(lst1 []int, lst2 []int) string {\n\todd := 0\n\teven := 0\n\tfor _, i := range lst1 {\n\t\tif i%2 == 1 {\n\t\t\todd += 1\n\t\t}\n\t}\n\tfor _, i := range lst2 {\n\t\tif i%2 == 0 {\n\t\t\teven += 1\n\t\t}\n\t}\n\tif even >= odd {\n\t\treturn \"YES\"\n\t}\n\treturn \"NO\"\n}\n\n### Rust version\n\nfn exchange(lst1: Vec<isize>, lst2: Vec<isize>) -> String {\n"
+  },
+  {
+    "name": "HumanEval_138_is_equal_to_sum_even",
+    "language": "rs",
+    "prompt": "fn is_equal_to_sum_even(n: isize) -> bool {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_138_is_equal_to_sum_even.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = is_equal_to_sum_even;\n    assert_eq!(candidate(4), false);\n    assert_eq!(candidate(6), false);\n    assert_eq!(candidate(8), true);\n    assert_eq!(candidate(10), true);\n    assert_eq!(candidate(11), false);\n    assert_eq!(candidate(12), true);\n    assert_eq!(candidate(13), false);\n    assert_eq!(candidate(16), true);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage is_equal_to_sum_even_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc is_equal_to_sum_even(n int) bool {\n    return n%2 == 0 && n >= 8\n}\n\n### Rust version\n\nfn is_equal_to_sum_even(n: isize) -> bool {\n"
+  },
+  {
+    "name": "HumanEval_79_decimal_to_binary",
+    "language": "rs",
+    "prompt": "fn decimal_to_binary(decimal: isize) -> String {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_79_decimal_to_binary.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = decimal_to_binary;\n    assert_eq!(candidate(0), String::from(\"db0db\"));\n    assert_eq!(candidate(32), String::from(\"db100000db\"));\n    assert_eq!(candidate(103), String::from(\"db1100111db\"));\n    assert_eq!(candidate(15), String::from(\"db1111db\"));\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage decimal_to_binary_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc decimal_to_binary(decimal int) string {\n    return fmt.Sprintf(\"db%bdb\", decimal)\n}\n\n### Rust version\n\nfn decimal_to_binary(decimal: isize) -> String {\n"
+  },
+  {
+    "name": "HumanEval_144_simplify",
+    "language": "rs",
+    "prompt": "fn simplify(x: String, n: String) -> bool {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_144_simplify.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = simplify;\n    assert_eq!(candidate(String::from(\"1/5\"), String::from(\"5/1\")), true);\n    assert_eq!(candidate(String::from(\"1/6\"), String::from(\"2/1\")), false);\n    assert_eq!(candidate(String::from(\"5/1\"), String::from(\"3/1\")), true);\n    assert_eq!(candidate(String::from(\"7/10\"), String::from(\"10/2\")), false);\n    assert_eq!(candidate(String::from(\"2/10\"), String::from(\"50/10\")), true);\n    assert_eq!(candidate(String::from(\"7/2\"), String::from(\"4/2\")), true);\n    assert_eq!(candidate(String::from(\"11/6\"), String::from(\"6/1\")), true);\n    assert_eq!(candidate(String::from(\"2/3\"), String::from(\"5/2\")), false);\n    assert_eq!(candidate(String::from(\"5/2\"), String::from(\"3/5\")), false);\n    assert_eq!(candidate(String::from(\"2/4\"), String::from(\"8/4\")), true);\n    assert_eq!(candidate(String::from(\"2/4\"), String::from(\"4/2\")), true);\n    assert_eq!(candidate(String::from(\"1/5\"), String::from(\"5/1\")), true);\n    assert_eq!(candidate(String::from(\"1/5\"), String::from(\"1/5\")), false);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage simplify_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc simplify(x string, n string) bool {\n    var a, b, c, d int\n    fmt.Sscanf(x, \"%d/%d\", &a, &b)\n    fmt.Sscanf(n, \"%d/%d\", &c, &d)\n    numerator := a * c\n    denom := b * d\n    if float64(numerator)/float64(denom) == float64(int(numerator/denom)) {\n        return true\n    }\n    return false\n}\n\n### Rust version\n\nfn simplify(x: String, n: String) -> bool {\n"
+  },
+  {
+    "name": "HumanEval_161_solve",
+    "language": "rs",
+    "prompt": "fn solve(s: String) -> String {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_161_solve.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = solve;\n    assert_eq!(candidate(String::from(\"AsDf\")), String::from(\"aSdF\"));\n    assert_eq!(candidate(String::from(\"1234\")), String::from(\"4321\"));\n    assert_eq!(candidate(String::from(\"ab\")), String::from(\"AB\"));\n    assert_eq!(candidate(String::from(\"#a@C\")), String::from(\"#A@c\"));\n    assert_eq!(candidate(String::from(\"#AsdfW^45\")), String::from(\"#aSDFw^45\"));\n    assert_eq!(candidate(String::from(\"#6@2\")), String::from(\"2@6#\"));\n    assert_eq!(candidate(String::from(\"#$a^D\")), String::from(\"#$A^d\"));\n    assert_eq!(candidate(String::from(\"#ccc\")), String::from(\"#CCC\"));\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage solve_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc solve(s string) string {\n\tflg := 0\n\tidx := 0\n\tnewStr := []rune(s)\n\tfor _, i := range s {\n\t\tif (i >= 'a' && i <= 'z') || (i >= 'A' && i <= 'Z') {\n\t\t\tnewStr[idx] = rune(i) ^ 32\n\t\t\tflg = 1\n\t\t}\n\t\tidx += 1\n\t}\n\tif flg == 0 {\n\t\tfor i, j := 0, len(newStr)-1; i < j; i, j = i+1, j-1 {\n\t\t\tnewStr[i], newStr[j] = newStr[j], newStr[i]\n\t\t}\n\t}\n\treturn string(newStr)\n}\n\n### Rust version\n\nfn solve(s: String) -> String {\n"
+  },
+  {
+    "name": "HumanEval_157_right_angle_triangle",
+    "language": "rs",
+    "prompt": "fn right_angle_triangle(a: isize, b: isize, c: isize) -> bool {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_157_right_angle_triangle.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = right_angle_triangle;\n    assert_eq!(candidate(3, 4, 5), true);\n    assert_eq!(candidate(1, 2, 3), false);\n    assert_eq!(candidate(10, 6, 8), true);\n    assert_eq!(candidate(2, 2, 2), false);\n    assert_eq!(candidate(7, 24, 25), true);\n    assert_eq!(candidate(10, 5, 7), false);\n    assert_eq!(candidate(5, 12, 13), true);\n    assert_eq!(candidate(15, 8, 17), true);\n    assert_eq!(candidate(48, 55, 73), true);\n    assert_eq!(candidate(1, 1, 1), false);\n    assert_eq!(candidate(2, 2, 10), false);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage right_angle_triangle_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc right_angle_triangle(a int, b int, c int) bool {\n    return a*a == b*b+c*c || b*b == a*a+c*c || c*c == a*a+b*b\n}\n\n### Rust version\n\nfn right_angle_triangle(a: isize, b: isize, c: isize) -> bool {\n"
+  },
+  {
+    "name": "HumanEval_151_double_the_difference",
+    "language": "rs",
+    "prompt": "fn double_the_difference(lst: Vec<f64>) -> isize {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_151_double_the_difference.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = double_the_difference;\n    assert_eq!(candidate(Vec::<f64>::new()), 0);\n    assert_eq!(candidate(vec![5.0, 4.0]), 25);\n    assert_eq!(candidate(vec![0.1, 0.2, 0.3]), 0);\n    assert_eq!(candidate(vec![-10.0, -20.0, -30.0]), 0);\n    assert_eq!(candidate(vec![-1.0, -2.0, 8.0]), 0);\n    assert_eq!(candidate(vec![0.2, 3.0, 5.0]), 34);\n    assert_eq!(candidate(vec![-9.0, -7.0, -5.0, -3.0, -1.0, 1.0, 3.0, 5.0, 7.0, 9.0]), 165);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage double_the_difference_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc double_the_difference(lst []float64) int {\n    sum := 0\n    for _, i := range lst {\n        if i > 0 && int(i)%2 != 0 && fmt.Sprintf(\"%f\", i)[len(fmt.Sprintf(\"%f\", i))-2] != '.' {\n            sum += int(i*i)\n        }\n    }\n    return sum\n}\n\n### Rust version\n\nfn double_the_difference(lst: Vec<f64>) -> isize {\n"
+  },
+  {
+    "name": "HumanEval_3_below_zero",
+    "language": "rs",
+    "prompt": "fn below_zero(operations: Vec<isize>) -> bool {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_3_below_zero.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = below_zero;\n    assert_eq!(candidate(Vec::<isize>::new()), false);\n    assert_eq!(candidate(vec![1, 2, -3, 1, 2, -3]), false);\n    assert_eq!(candidate(vec![1, 2, -4, 5, 6]), true);\n    assert_eq!(candidate(vec![1, -1, 2, -2, 5, -5, 4, -4]), false);\n    assert_eq!(candidate(vec![1, -1, 2, -2, 5, -5, 4, -5]), true);\n    assert_eq!(candidate(vec![1, -2, 2, -2, 5, -5, 4, -4]), true);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage below_zero_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc below_zero(operations []int) bool {\n\tbalance := 0\n\n\tfor _, op := range operations {\n\t\tbalance += op\n\t\tif balance < 0 {\n\t\t\treturn true\n\t\t}\n\t}\n\n\treturn false\n}\n\n### Rust version\n\nfn below_zero(operations: Vec<isize>) -> bool {\n"
+  },
+  {
+    "name": "HumanEval_13_greatest_common_divisor",
+    "language": "rs",
+    "prompt": "fn greatest_common_divisor(a: isize, b: isize) -> isize {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_13_greatest_common_divisor.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = greatest_common_divisor;\n    assert_eq!(candidate(3, 7), 1);\n    assert_eq!(candidate(10, 15), 5);\n    assert_eq!(candidate(49, 14), 7);\n    assert_eq!(candidate(144, 60), 12);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage greatest_common_divisor_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc greatest_common_divisor(a int, b int) int {\n    for b != 0 {\n        a, b = b, a%b\n    }\n    return a\n}\n\n### Rust version\n\nfn greatest_common_divisor(a: isize, b: isize) -> isize {\n"
+  },
+  {
+    "name": "HumanEval_106_f",
+    "language": "rs",
+    "prompt": "fn f(n: isize) -> Vec<isize> {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_106_f.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = f;\n    assert_eq!(candidate(5), vec![1, 2, 6, 24, 15]);\n    assert_eq!(candidate(7), vec![1, 2, 6, 24, 15, 720, 28]);\n    assert_eq!(candidate(1), vec![1]);\n    assert_eq!(candidate(3), vec![1, 2, 6]);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage f_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc f(n int) []int {\n    ret := []int{}\n    for i := 1; i <= n; i++ {\n        if i%2 == 0 {\n            x := 1\n            for j := 1; j <= i; j++ { x *= j }\n            ret = append(ret, x)\n        } else {\n            x := 0\n            for j := 1; j <= i; j++ { x += j }\n            ret = append(ret, x)\n        }\n    }\n    return ret\n}\n\n### Rust version\n\nfn f(n: isize) -> Vec<isize> {\n"
+  },
+  {
+    "name": "HumanEval_57_monotonic",
+    "language": "rs",
+    "prompt": "fn monotonic(l: Vec<isize>) -> bool {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_57_monotonic.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = monotonic;\n    assert_eq!(candidate(vec![1, 2, 4, 10]), true);\n    assert_eq!(candidate(vec![1, 2, 4, 20]), true);\n    assert_eq!(candidate(vec![1, 20, 4, 10]), false);\n    assert_eq!(candidate(vec![4, 1, 0, -10]), true);\n    assert_eq!(candidate(vec![4, 1, 1, 0]), true);\n    assert_eq!(candidate(vec![1, 2, 3, 2, 5, 60]), false);\n    assert_eq!(candidate(vec![1, 2, 3, 4, 5, 60]), true);\n    assert_eq!(candidate(vec![9, 9, 9, 9]), true);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage monotonic_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc monotonic(l []int) bool {\n    isSorted := func(l []int, reverse bool) bool {\n        for i := 1; i < len(l); i++ {\n            if reverse {\n                if l[i-1] < l[i] {\n                    return false\n                }\n            } else {\n                if l[i-1] > l[i] {\n                    return false\n                }\n            }\n        }\n        return true\n    }\n\n    if isSorted(l, false) || isSorted(l, true) {\n        return true\n    }\n    return false\n}\n\n### Rust version\n\nfn monotonic(l: Vec<isize>) -> bool {\n"
+  },
+  {
+    "name": "HumanEval_105_by_length",
+    "language": "rs",
+    "prompt": "fn by_length(arr: Vec<isize>) -> Vec<String> {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_105_by_length.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = by_length;\n    assert_eq!(candidate(vec![2, 1, 1, 4, 5, 8, 2, 3]), vec![String::from(\"Eight\"), String::from(\"Five\"), String::from(\"Four\"), String::from(\"Three\"), String::from(\"Two\"), String::from(\"Two\"), String::from(\"One\"), String::from(\"One\")]);\n    assert_eq!(candidate(Vec::<isize>::new()), Vec::<String>::new());\n    assert_eq!(candidate(vec![1, -1, 55]), vec![String::from(\"One\")]);\n    assert_eq!(candidate(vec![1, -1, 3, 2]), vec![String::from(\"Three\"), String::from(\"Two\"), String::from(\"One\")]);\n    assert_eq!(candidate(vec![9, 4, 8]), vec![String::from(\"Nine\"), String::from(\"Eight\"), String::from(\"Four\")]);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage by_length_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc by_length(arr []int) []string {\n    dic := map[int]string{\n        1: \"One\",\n        2: \"Two\",\n        3: \"Three\",\n        4: \"Four\",\n        5: \"Five\",\n        6: \"Six\",\n        7: \"Seven\",\n        8: \"Eight\",\n        9: \"Nine\",\n    }\n    sorted_arr := make([]int, len(arr))\n    copy(sorted_arr, arr)\n    for i := 0; i < len(sorted_arr); i++ {\n        for j := i + 1; j < len(sorted_arr); j++ {\n            if sorted_arr[i] < sorted_arr[j] {\n                sorted_arr[i], sorted_arr[j] = sorted_arr[j], sorted_arr[i]\n            }\n        }\n    }\n    new_arr := []string{}\n    for _, val := range sorted_arr {\n        if word, ok := dic[val]; ok {\n            new_arr = append(new_arr, word)\n        }\n    }\n    return new_arr\n}\n\n### Rust version\n\nfn by_length(arr: Vec<isize>) -> Vec<String> {\n"
+  },
+  {
+    "name": "HumanEval_51_remove_vowels",
+    "language": "rs",
+    "prompt": "fn remove_vowels(text: String) -> String {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_51_remove_vowels.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = remove_vowels;\n    assert_eq!(candidate(String::from(\"\")), String::from(\"\"));\n    assert_eq!(candidate(String::from(\"abcdef\nghijklm\")), String::from(\"bcdf\nghjklm\"));\n    assert_eq!(candidate(String::from(\"fedcba\")), String::from(\"fdcb\"));\n    assert_eq!(candidate(String::from(\"eeeee\")), String::from(\"\"));\n    assert_eq!(candidate(String::from(\"acBAA\")), String::from(\"cB\"));\n    assert_eq!(candidate(String::from(\"EcBOO\")), String::from(\"cB\"));\n    assert_eq!(candidate(String::from(\"ybcd\")), String::from(\"ybcd\"));\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage remove_vowels_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc remove_vowels(text string) string {\n    result := \"\"\n    for _, s := range text {\n        if s != 'a' && s != 'e' && s != 'i' && s != 'o' && s != 'u' && s != 'A' && s != 'E' && s != 'I' && s != 'O' && s != 'U' {\n            result += string(s)\n        }\n    }\n    return result\n}\n\n### Rust version\n\nfn remove_vowels(text: String) -> String {\n"
+  },
+  {
+    "name": "HumanEval_56_correct_bracketing",
+    "language": "rs",
+    "prompt": "fn correct_bracketing(brackets: String) -> bool {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_56_correct_bracketing.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = correct_bracketing;\n    assert_eq!(candidate(String::from(\"<>\")), true);\n    assert_eq!(candidate(String::from(\"<<><>>\")), true);\n    assert_eq!(candidate(String::from(\"<><><<><>><>\")), true);\n    assert_eq!(candidate(String::from(\"<><><<<><><>><>><<><><<>>>\")), true);\n    assert_eq!(candidate(String::from(\"<<<><>>>>\")), false);\n    assert_eq!(candidate(String::from(\"><<>\")), false);\n    assert_eq!(candidate(String::from(\"<\")), false);\n    assert_eq!(candidate(String::from(\"<<<<\")), false);\n    assert_eq!(candidate(String::from(\">\")), false);\n    assert_eq!(candidate(String::from(\"<<>\")), false);\n    assert_eq!(candidate(String::from(\"<><><<><>><>><<>\")), false);\n    assert_eq!(candidate(String::from(\"<><><<><>><>>><>\")), false);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage correct_bracketing_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc correct_bracketing(brackets string) bool {\n\tdepth := 0\n\tfor _, b := range brackets {\n\t\tif b == '<' {\n\t\t\tdepth += 1\n\t\t} else {\n\t\t\tdepth -= 1\n\t\t}\n\t\tif depth < 0 {\n\t\t\treturn false\n\t\t}\n\t}\n\treturn depth == 0\n}\n\n### Rust version\n\nfn correct_bracketing(brackets: String) -> bool {\n"
+  },
+  {
+    "name": "HumanEval_21_rescale_to_unit",
+    "language": "rs",
+    "prompt": "fn rescale_to_unit(numbers: Vec<f64>) -> Vec<f64> {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_21_rescale_to_unit.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = rescale_to_unit;\n    assert_eq!(candidate(vec![2.0, 49.9]), vec![0.0, 1.0]);\n    assert_eq!(candidate(vec![100.0, 49.9]), vec![1.0, 0.0]);\n    assert_eq!(candidate(vec![1.0, 2.0, 3.0, 4.0, 5.0]), vec![0.0, 0.25, 0.5, 0.75, 1.0]);\n    assert_eq!(candidate(vec![2.0, 1.0, 5.0, 3.0, 4.0]), vec![0.25, 0.0, 1.0, 0.5, 0.75]);\n    assert_eq!(candidate(vec![12.0, 11.0, 15.0, 13.0, 14.0]), vec![0.25, 0.0, 1.0, 0.5, 0.75]);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage rescale_to_unit_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc rescale_to_unit(numbers []float64) []float64 {\n    minNumber := numbers[0]\n    maxNumber := numbers[0]\n\n    for _, x := range numbers {\n        if x < minNumber {\n            minNumber = x\n        }\n        if x > maxNumber {\n            maxNumber = x\n        }\n    }\n\n    result := make([]float64, len(numbers))\n    for i, x := range numbers {\n        result[i] = (x - minNumber) / (maxNumber - minNumber)\n    }\n\n    return result\n}\n\n### Rust version\n\nfn rescale_to_unit(numbers: Vec<f64>) -> Vec<f64> {\n"
+  },
+  {
+    "name": "HumanEval_127_intersection",
+    "language": "rs",
+    "prompt": "fn intersection(interval1: (isize, isize), interval2: (isize, isize)) -> String {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_127_intersection.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = intersection;\n    assert_eq!(candidate((1, 2), (2, 3)), String::from(\"NO\"));\n    assert_eq!(candidate((-1, 1), (0, 4)), String::from(\"NO\"));\n    assert_eq!(candidate((-3, -1), (-5, 5)), String::from(\"YES\"));\n    assert_eq!(candidate((-2, 2), (-4, 0)), String::from(\"YES\"));\n    assert_eq!(candidate((-11, 2), (-1, -1)), String::from(\"NO\"));\n    assert_eq!(candidate((1, 2), (3, 5)), String::from(\"NO\"));\n    assert_eq!(candidate((1, 2), (1, 2)), String::from(\"NO\"));\n    assert_eq!(candidate((-2, -2), (-3, -2)), String::from(\"NO\"));\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage intersection_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc intersection(interval1 []interface{}, interval2 []interface{}) string {\n    is_prime := func(num int) bool {\n        if num == 1 || num == 0 {\n            return false\n        }\n        if num == 2 {\n            return true\n        }\n        for i := 2; i < num; i++ {\n            if num%i == 0 {\n                return false\n            }\n        }\n        return true\n    }\n\n    l := interval1[0].(int)\n    if interval2[0].(int) > l {\n        l = interval2[0].(int)\n    }\n\n    r := interval1[1].(int)\n    if interval2[1].(int) < r {\n        r = interval2[1].(int)\n    }\n\n    length := r - l\n    if length > 0 && is_prime(length) {\n        return \"YES\"\n    }\n    return \"NO\"\n}\n\n### Rust version\n\nfn intersection(interval1: (isize, isize), interval2: (isize, isize)) -> String {\n"
+  },
+  {
+    "name": "HumanEval_78_hex_key",
+    "language": "rs",
+    "prompt": "fn hex_key(num: String) -> isize {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_78_hex_key.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = hex_key;\n    assert_eq!(candidate(String::from(\"AB\")), 1);\n    assert_eq!(candidate(String::from(\"1077E\")), 2);\n    assert_eq!(candidate(String::from(\"ABED1A33\")), 4);\n    assert_eq!(candidate(String::from(\"2020\")), 2);\n    assert_eq!(candidate(String::from(\"123456789ABCDEF0\")), 6);\n    assert_eq!(candidate(String::from(\"112233445566778899AABBCCDDEEFF00\")), 12);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage hex_key_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc hex_key(num string) int {\n\tprimes := []rune{'2', '3', '5', '7', 'B', 'D'}\n\ttotal := 0\n\tfor _, c := range num {\n\t\tfor _, p := range primes {\n\t\t\tif c == p {\n\t\t\t\ttotal += 1\n\t\t\t}\n\t\t}\n\t}\n\treturn total\n}\n\n### Rust version\n\nfn hex_key(num: String) -> isize {\n"
+  },
+  {
+    "name": "HumanEval_70_strange_sort_list",
+    "language": "rs",
+    "prompt": "fn strange_sort_list(lst: Vec<isize>) -> Vec<isize> {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_70_strange_sort_list.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = strange_sort_list;\n    assert_eq!(candidate(vec![1, 2, 3, 4]), vec![1, 4, 2, 3]);\n    assert_eq!(candidate(vec![5, 6, 7, 8, 9]), vec![5, 9, 6, 8, 7]);\n    assert_eq!(candidate(vec![1, 2, 3, 4, 5]), vec![1, 5, 2, 4, 3]);\n    assert_eq!(candidate(vec![5, 6, 7, 8, 9, 1]), vec![1, 9, 5, 8, 6, 7]);\n    assert_eq!(candidate(vec![5, 5, 5, 5]), vec![5, 5, 5, 5]);\n    assert_eq!(candidate(Vec::<isize>::new()), Vec::<isize>::new());\n    assert_eq!(candidate(vec![1, 2, 3, 4, 5, 6, 7, 8]), vec![1, 8, 2, 7, 3, 6, 4, 5]);\n    assert_eq!(candidate(vec![0, 2, 2, 2, 5, 5, -5, -5]), vec![-5, 5, -5, 5, 0, 2, 2, 2]);\n    assert_eq!(candidate(vec![111111]), vec![111111]);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage strange_sort_list_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc strange_sort_list(lst []int) []int {\n    res, switch_ := []int{}, true\n    for len(lst) > 0 {\n        if switch_ {\n            min := lst[0]\n            for _, v := range lst {\n                if v < min {\n                    min = v\n                }\n            }\n            res = append(res, min)\n        } else {\n            max := lst[0]\n            for _, v := range lst {\n                if v > max {\n                    max = v\n                }\n            }\n            res = append(res, max)\n        }\n        for i, v := range lst {\n            if v == res[len(res)-1] {\n                lst = append(lst[:i], lst[i+1:]...)\n                break\n            }\n        }\n        switch_ = !switch_\n    }\n    return res\n}\n\n### Rust version\n\nfn strange_sort_list(lst: Vec<isize>) -> Vec<isize> {\n"
+  },
+  {
+    "name": "HumanEval_14_all_prefixes",
+    "language": "rs",
+    "prompt": "fn all_prefixes(string: String) -> Vec<String> {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_14_all_prefixes.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = all_prefixes;\n    assert_eq!(candidate(String::from(\"\")), Vec::<String>::new());\n    assert_eq!(candidate(String::from(\"asdfgh\")), vec![String::from(\"a\"), String::from(\"as\"), String::from(\"asd\"), String::from(\"asdf\"), String::from(\"asdfg\"), String::from(\"asdfgh\")]);\n    assert_eq!(candidate(String::from(\"WWW\")), vec![String::from(\"W\"), String::from(\"WW\"), String::from(\"WWW\")]);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage all_prefixes_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc all_prefixes(myString string) []string {\n    var result []string\n\n    for i := 0; i < len(myString); i++ {\n        result = append(result, myString[:i+1])\n    }\n    return result\n}\n\n### Rust version\n\nfn all_prefixes(string: String) -> Vec<String> {\n"
+  },
+  {
+    "name": "HumanEval_18_how_many_times",
+    "language": "rs",
+    "prompt": "fn how_many_times(string: String, substring: String) -> isize {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_18_how_many_times.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = how_many_times;\n    assert_eq!(candidate(String::from(\"\"), String::from(\"x\")), 0);\n    assert_eq!(candidate(String::from(\"xyxyxyx\"), String::from(\"x\")), 4);\n    assert_eq!(candidate(String::from(\"cacacacac\"), String::from(\"cac\")), 4);\n    assert_eq!(candidate(String::from(\"john doe\"), String::from(\"john\")), 1);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage how_many_times_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc how_many_times(myString string, substring string) int {\n\ttimes := 0\n\n\tfor i := 0; i < len(myString)-len(substring)+1; i++ {\n\t\tif myString[i:i+len(substring)] == substring {\n\t\t\ttimes += 1\n\t\t}\n\t}\n\n\treturn times\n}\n\n### Rust version\n\nfn how_many_times(string: String, substring: String) -> isize {\n"
+  },
+  {
+    "name": "HumanEval_121_solution",
+    "language": "rs",
+    "prompt": "fn solution(lst: Vec<isize>) -> isize {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_121_solution.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = solution;\n    assert_eq!(candidate(vec![5, 8, 7, 1]), 12);\n    assert_eq!(candidate(vec![3, 3, 3, 3, 3]), 9);\n    assert_eq!(candidate(vec![30, 13, 24, 321]), 0);\n    assert_eq!(candidate(vec![5, 9]), 5);\n    assert_eq!(candidate(vec![2, 4, 8]), 0);\n    assert_eq!(candidate(vec![30, 13, 23, 32]), 23);\n    assert_eq!(candidate(vec![3, 13, 2, 9]), 3);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage solution_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc solution(lst []int) int {\n    sum := 0\n    for i, x := range lst {\n        if i%2 == 0 && x%2 == 1 {\n            sum += x\n        }\n    }\n    return sum\n}\n\n### Rust version\n\nfn solution(lst: Vec<isize>) -> isize {\n"
+  },
+  {
+    "name": "HumanEval_126_is_sorted",
+    "language": "rs",
+    "prompt": "fn is_sorted(lst: Vec<isize>) -> bool {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_126_is_sorted.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = is_sorted;\n    assert_eq!(candidate(vec![5]), true);\n    assert_eq!(candidate(vec![1, 2, 3, 4, 5]), true);\n    assert_eq!(candidate(vec![1, 3, 2, 4, 5]), false);\n    assert_eq!(candidate(vec![1, 2, 3, 4, 5, 6]), true);\n    assert_eq!(candidate(vec![1, 2, 3, 4, 5, 6, 7]), true);\n    assert_eq!(candidate(vec![1, 3, 2, 4, 5, 6, 7]), false);\n    assert_eq!(candidate(Vec::<isize>::new()), true);\n    assert_eq!(candidate(vec![1]), true);\n    assert_eq!(candidate(vec![3, 2, 1]), false);\n    assert_eq!(candidate(vec![1, 2, 2, 2, 3, 4]), false);\n    assert_eq!(candidate(vec![1, 2, 3, 3, 3, 4]), false);\n    assert_eq!(candidate(vec![1, 2, 2, 3, 3, 4]), true);\n    assert_eq!(candidate(vec![1, 2, 3, 4]), true);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage is_sorted_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc is_sorted(lst []int) bool {\n    count_digit := make(map[int]int)\n    for _, i := range lst {\n        count_digit[i]++\n    }\n    for _, v := range count_digit {\n        if v > 2 {\n            return false\n        }\n    }\n    for i := 1; i < len(lst); i++ {\n        if lst[i-1] > lst[i] {\n            return false\n        }\n    }\n    return true\n}\n\n### Rust version\n\nfn is_sorted(lst: Vec<isize>) -> bool {\n"
+  },
+  {
+    "name": "HumanEval_69_search",
+    "language": "rs",
+    "prompt": "fn search(lst: Vec<isize>) -> isize {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_69_search.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = search;\n    assert_eq!(candidate(vec![5, 5, 5, 5, 1]), 1);\n    assert_eq!(candidate(vec![4, 1, 4, 1, 4, 4]), 4);\n    assert_eq!(candidate(vec![3, 3]), -1);\n    assert_eq!(candidate(vec![8, 8, 8, 8, 8, 8, 8, 8]), 8);\n    assert_eq!(candidate(vec![2, 3, 3, 2, 2]), 2);\n    assert_eq!(candidate(vec![2, 7, 8, 8, 4, 8, 7, 3, 9, 6, 5, 10, 4, 3, 6, 7, 1, 7, 4, 10, 8, 1]), 1);\n    assert_eq!(candidate(vec![3, 2, 8, 2]), 2);\n    assert_eq!(candidate(vec![6, 7, 1, 8, 8, 10, 5, 8, 5, 3, 10]), 1);\n    assert_eq!(candidate(vec![8, 8, 3, 6, 5, 6, 4]), -1);\n    assert_eq!(candidate(vec![6, 9, 6, 7, 1, 4, 7, 1, 8, 8, 9, 8, 10, 10, 8, 4, 10, 4, 10, 1, 2, 9, 5, 7, 9]), 1);\n    assert_eq!(candidate(vec![1, 9, 10, 1, 3]), 1);\n    assert_eq!(candidate(vec![6, 9, 7, 5, 8, 7, 5, 3, 7, 5, 10, 10, 3, 6, 10, 2, 8, 6, 5, 4, 9, 5, 3, 10]), 5);\n    assert_eq!(candidate(vec![1]), 1);\n    assert_eq!(candidate(vec![8, 8, 10, 6, 4, 3, 5, 8, 2, 4, 2, 8, 4, 6, 10, 4, 2, 1, 10, 2, 1, 1, 5]), 4);\n    assert_eq!(candidate(vec![2, 10, 4, 8, 2, 10, 5, 1, 2, 9, 5, 5, 6, 3, 8, 6, 4, 10]), 2);\n    assert_eq!(candidate(vec![1, 6, 10, 1, 6, 9, 10, 8, 6, 8, 7, 3]), 1);\n    assert_eq!(candidate(vec![9, 2, 4, 1, 5, 1, 5, 2, 5, 7, 7, 7, 3, 10, 1, 5, 4, 2, 8, 4, 1, 9, 10, 7, 10, 2, 8, 10, 9, 4]), 4);\n    assert_eq!(candidate(vec![2, 6, 4, 2, 8, 7, 5, 6, 4, 10, 4, 6, 3, 7, 8, 8, 3, 1, 4, 2, 2, 10, 7]), 4);\n    assert_eq!(candidate(vec![9, 8, 6, 10, 2, 6, 10, 2, 7, 8, 10, 3, 8, 2, 6, 2, 3, 1]), 2);\n    assert_eq!(candidate(vec![5, 5, 3, 9, 5, 6, 3, 2, 8, 5, 6, 10, 10, 6, 8, 4, 10, 7, 7, 10, 8]), -1);\n    assert_eq!(candidate(vec![10]), -1);\n    assert_eq!(candidate(vec![9, 7, 7, 2, 4, 7, 2, 10, 9, 7, 5, 7, 2]), 2);\n    assert_eq!(candidate(vec![5, 4, 10, 2, 1, 1, 10, 3, 6, 1, 8]), 1);\n    assert_eq!(candidate(vec![7, 9, 9, 9, 3, 4, 1, 5, 9, 1, 2, 1, 1, 10, 7, 5, 6, 7, 6, 7, 7, 6]), 1);\n    assert_eq!(candidate(vec![3, 10, 10, 9, 2]), -1);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage search_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc search(lst []int) int {\n    max := 0\n    for _, i := range lst {\n        if i > max {\n            max = i\n        }\n    }\n\n    frq := make([]int, max+1)\n    for _, i := range lst {\n        frq[i]++\n    }\n\n    ans := -1\n    for i := 1; i < len(frq); i++ {\n        if frq[i] >= i {\n            ans = i\n        }\n    }\n\n    return ans\n}\n\n### Rust version\n\nfn search(lst: Vec<isize>) -> isize {\n"
+  },
+  {
+    "name": "HumanEval_68_pluck",
+    "language": "rs",
+    "prompt": "fn pluck(arr: Vec<isize>) -> Vec<isize> {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_68_pluck.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = pluck;\n    assert_eq!(candidate(vec![4, 2, 3]), vec![2, 1]);\n    assert_eq!(candidate(vec![1, 2, 3]), vec![2, 1]);\n    assert_eq!(candidate(Vec::<isize>::new()), Vec::<isize>::new());\n    assert_eq!(candidate(vec![5, 0, 3, 0, 4, 2]), vec![0, 1]);\n    assert_eq!(candidate(vec![1, 2, 3, 0, 5, 3]), vec![0, 3]);\n    assert_eq!(candidate(vec![5, 4, 8, 4, 8]), vec![4, 1]);\n    assert_eq!(candidate(vec![7, 6, 7, 1]), vec![6, 1]);\n    assert_eq!(candidate(vec![7, 9, 7, 1]), Vec::<isize>::new());\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage pluck_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc pluck(arr []int) []int {\n    if len(arr) == 0 { return []int{} }\n    evens := []int{}\n    for _, v := range arr {\n        if v%2 == 0 {\n            evens = append(evens, v)\n        }\n    }\n    if len(evens) == 0 { return []int{} }\n    min := evens[0]\n    for _, v := range evens {\n        if v < min {\n            min = v\n        }\n    }\n    for i, v := range arr {\n        if v == min {\n            return []int{min, i}\n        }\n    }\n    return []int{}\n}\n\n### Rust version\n\nfn pluck(arr: Vec<isize>) -> Vec<isize> {\n"
+  },
+  {
+    "name": "HumanEval_43_pairs_sum_to_zero",
+    "language": "rs",
+    "prompt": "fn pairs_sum_to_zero(l: Vec<isize>) -> bool {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_43_pairs_sum_to_zero.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = pairs_sum_to_zero;\n    assert_eq!(candidate(vec![1, 3, 5, 0]), false);\n    assert_eq!(candidate(vec![1, 3, -2, 1]), false);\n    assert_eq!(candidate(vec![1, 2, 3, 7]), false);\n    assert_eq!(candidate(vec![2, 4, -5, 3, 5, 7]), true);\n    assert_eq!(candidate(vec![1]), false);\n    assert_eq!(candidate(vec![-3, 9, -1, 3, 2, 30]), true);\n    assert_eq!(candidate(vec![-3, 9, -1, 3, 2, 31]), true);\n    assert_eq!(candidate(vec![-3, 9, -1, 4, 2, 30]), false);\n    assert_eq!(candidate(vec![-3, 9, -1, 4, 2, 31]), false);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage pairs_sum_to_zero_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc pairs_sum_to_zero(l []int) bool {\n    for i, l1 := range l {\n        for _, l2 := range l[i+1:] {\n            if l1+l2 == 0 {\n                return true\n            }\n        }\n    }\n    return false\n}\n\n### Rust version\n\nfn pairs_sum_to_zero(l: Vec<isize>) -> bool {\n"
+  },
+  {
+    "name": "HumanEval_30_get_positive",
+    "language": "rs",
+    "prompt": "fn get_positive(l: Vec<isize>) -> Vec<isize> {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_30_get_positive.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = get_positive;\n    assert_eq!(candidate(vec![-1, -2, 4, 5, 6]), vec![4, 5, 6]);\n    assert_eq!(candidate(vec![5, 3, -5, 2, 3, 3, 9, 0, 123, 1, -10]), vec![5, 3, 2, 3, 3, 9, 123, 1]);\n    assert_eq!(candidate(vec![-1, -2]), Vec::<isize>::new());\n    assert_eq!(candidate(Vec::<isize>::new()), Vec::<isize>::new());\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage get_positive_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc get_positive(l []int) []int {\n    var r []int\n    for _, e := range l {\n        if e > 0 {\n            r = append(r, e)\n        }\n    }\n    return r\n}\n\n### Rust version\n\nfn get_positive(l: Vec<isize>) -> Vec<isize> {\n"
+  },
+  {
+    "name": "HumanEval_132_is_nested",
+    "language": "rs",
+    "prompt": "fn is_nested(string: String) -> bool {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_132_is_nested.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = is_nested;\n    assert_eq!(candidate(String::from(\"[[]]\")), true);\n    assert_eq!(candidate(String::from(\"[]]]]]]][[[[[]\")), false);\n    assert_eq!(candidate(String::from(\"[][]\")), false);\n    assert_eq!(candidate(String::from(\"[]\")), false);\n    assert_eq!(candidate(String::from(\"[[[[]]]]\")), true);\n    assert_eq!(candidate(String::from(\"[]]]]]]]]]]\")), false);\n    assert_eq!(candidate(String::from(\"[][][[]]\")), true);\n    assert_eq!(candidate(String::from(\"[[]\")), false);\n    assert_eq!(candidate(String::from(\"[]]\")), false);\n    assert_eq!(candidate(String::from(\"[[]][[\")), true);\n    assert_eq!(candidate(String::from(\"[[][]]\")), true);\n    assert_eq!(candidate(String::from(\"\")), false);\n    assert_eq!(candidate(String::from(\"[[[[[[[[\")), false);\n    assert_eq!(candidate(String::from(\"]]]]]]]]\")), false);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage is_nested_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc is_nested(myString string) bool {\n    opening_bracket_index := []int{}\n    closing_bracket_index := []int{}\n    for i := 0; i < len(myString); i++ {\n        if myString[i] == '[' {\n            opening_bracket_index = append(opening_bracket_index, i)\n        } else {\n            closing_bracket_index = append(closing_bracket_index, i)\n        }\n    }\n    for i, j := 0, len(closing_bracket_index)-1; i < j; i, j = i+1, j-1 {\n        closing_bracket_index[i], closing_bracket_index[j] = closing_bracket_index[j], closing_bracket_index[i]\n    }\n    cnt := 0\n    i := 0\n    l := len(closing_bracket_index)\n    for _, idx := range opening_bracket_index {\n        if i < l && idx < closing_bracket_index[i] {\n            cnt += 1\n            i += 1\n        }\n    }\n    return cnt >= 2\n}\n\n### Rust version\n\nfn is_nested(string: String) -> bool {\n"
+  },
+  {
+    "name": "HumanEval_48_is_palindrome",
+    "language": "rs",
+    "prompt": "fn is_palindrome(text: String) -> bool {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_48_is_palindrome.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = is_palindrome;\n    assert_eq!(candidate(String::from(\"\")), true);\n    assert_eq!(candidate(String::from(\"aba\")), true);\n    assert_eq!(candidate(String::from(\"aaaaa\")), true);\n    assert_eq!(candidate(String::from(\"zbcd\")), false);\n    assert_eq!(candidate(String::from(\"xywyx\")), true);\n    assert_eq!(candidate(String::from(\"xywyz\")), false);\n    assert_eq!(candidate(String::from(\"xywzx\")), false);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage is_palindrome_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc is_palindrome(text string) bool {\n\tfor i := 0; i < len(text)/2; i++ {\n\t\tif text[i] != text[len(text)-1-i] {\n\t\t\treturn false\n\t\t}\n\t}\n\treturn true\n}\n\n### Rust version\n\nfn is_palindrome(text: String) -> bool {\n"
+  },
+  {
+    "name": "HumanEval_25_factorize",
+    "language": "rs",
+    "prompt": "fn factorize(n: isize) -> Vec<isize> {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_25_factorize.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = factorize;\n    assert_eq!(candidate(2), vec![2]);\n    assert_eq!(candidate(4), vec![2, 2]);\n    assert_eq!(candidate(8), vec![2, 2, 2]);\n    assert_eq!(candidate(57), vec![3, 19]);\n    assert_eq!(candidate(3249), vec![3, 3, 19, 19]);\n    assert_eq!(candidate(185193), vec![3, 3, 3, 19, 19, 19]);\n    assert_eq!(candidate(20577), vec![3, 19, 19, 19]);\n    assert_eq!(candidate(18), vec![2, 3, 3]);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage factorize_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc factorize(n int) []int {\n    fact := make([]int, 0)\n    i := 2\n\n    for i <= n {\n        if n%i == 0 {\n            fact = append(fact, i)\n            n /= i\n        } else {\n            i += 1\n        }\n    }\n\n    return fact\n}\n\n### Rust version\n\nfn factorize(n: isize) -> Vec<isize> {\n"
+  },
+  {
+    "name": "HumanEval_59_largest_prime_factor",
+    "language": "rs",
+    "prompt": "fn largest_prime_factor(n: isize) -> isize {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_59_largest_prime_factor.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = largest_prime_factor;\n    assert_eq!(candidate(15), 5);\n    assert_eq!(candidate(27), 3);\n    assert_eq!(candidate(63), 7);\n    assert_eq!(candidate(330), 11);\n    assert_eq!(candidate(13195), 29);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage largest_prime_factor_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc largest_prime_factor(n int) int {\n    is_prime := func(k int) bool {\n        if k < 2 {\n            return false\n        }\n        for i := 2; i < k; i++ {\n            if k%i == 0 {\n                return false\n            }\n        }\n        return true\n    }\n\n    largest := 1\n    for j := 2; j <= n; j++ {\n        if n%j == 0 && is_prime(j) {\n            largest = j\n        }\n    }\n    return largest\n}\n\n### Rust version\n\nfn largest_prime_factor(n: isize) -> isize {\n"
+  },
+  {
+    "name": "HumanEval_147_get_max_triples",
+    "language": "rs",
+    "prompt": "fn get_max_triples(n: isize) -> isize {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_147_get_max_triples.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = get_max_triples;\n    assert_eq!(candidate(5), 1);\n    assert_eq!(candidate(6), 4);\n    assert_eq!(candidate(10), 36);\n    assert_eq!(candidate(100), 53361);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage get_max_triples_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc get_max_triples(n int) int {\n\tA := make([]int, n)\n\tfor i := 1; i <= n; i++ {\n\t\tA[i-1] = i*i - i + 1\n\t}\n\tans := 0\n\tfor i := 0; i < n; i++ {\n\t\tfor j := i+1; j < n; j++ {\n\t\t\tfor k := j+1; k < n; k++ {\n\t\t\t\tif (A[i]+A[j]+A[k])%3 == 0 {\n\t\t\t\t\tans += 1\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n\treturn ans\n}\n\n### Rust version\n\nfn get_max_triples(n: isize) -> isize {\n"
+  },
+  {
+    "name": "HumanEval_84_solve",
+    "language": "rs",
+    "prompt": "fn solve(N: isize) -> String {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_84_solve.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = solve;\n    assert_eq!(candidate(1000), String::from(\"1\"));\n    assert_eq!(candidate(150), String::from(\"110\"));\n    assert_eq!(candidate(147), String::from(\"1100\"));\n    assert_eq!(candidate(333), String::from(\"1001\"));\n    assert_eq!(candidate(963), String::from(\"10010\"));\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage solve_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc solve(N int) string {\n    sum := 0\n    for N > 0 {\n        sum += N % 10\n        N /= 10\n    }\n    return fmt.Sprintf(\"%b\", sum)\n}\n\n### Rust version\n\nfn solve(N: isize) -> String {\n"
+  },
+  {
+    "name": "HumanEval_129_minPath",
+    "language": "rs",
+    "prompt": "fn minPath(grid: Vec<Vec<isize>>, k: isize) -> Vec<isize> {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_129_minPath.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = minPath;\n    assert_eq!(candidate(vec![vec![1, 2, 3], vec![4, 5, 6], vec![7, 8, 9]], 3), vec![1, 2, 1]);\n    assert_eq!(candidate(vec![vec![5, 9, 3], vec![4, 1, 6], vec![7, 8, 2]], 1), vec![1]);\n    assert_eq!(candidate(vec![vec![1, 2, 3, 4], vec![5, 6, 7, 8], vec![9, 10, 11, 12], vec![13, 14, 15, 16]], 4), vec![1, 2, 1, 2]);\n    assert_eq!(candidate(vec![vec![6, 4, 13, 10], vec![5, 7, 12, 1], vec![3, 16, 11, 15], vec![8, 14, 9, 2]], 7), vec![1, 10, 1, 10, 1, 10, 1]);\n    assert_eq!(candidate(vec![vec![8, 14, 9, 2], vec![6, 4, 13, 15], vec![5, 7, 1, 12], vec![3, 10, 11, 16]], 5), vec![1, 7, 1, 7, 1]);\n    assert_eq!(candidate(vec![vec![11, 8, 7, 2], vec![5, 16, 14, 4], vec![9, 3, 15, 6], vec![12, 13, 10, 1]], 9), vec![1, 6, 1, 6, 1, 6, 1, 6, 1]);\n    assert_eq!(candidate(vec![vec![12, 13, 10, 1], vec![9, 3, 15, 6], vec![5, 16, 14, 4], vec![11, 8, 7, 2]], 12), vec![1, 6, 1, 6, 1, 6, 1, 6, 1, 6, 1, 6]);\n    assert_eq!(candidate(vec![vec![2, 7, 4], vec![3, 1, 5], vec![6, 8, 9]], 8), vec![1, 3, 1, 3, 1, 3, 1, 3]);\n    assert_eq!(candidate(vec![vec![6, 1, 5], vec![3, 8, 9], vec![2, 7, 4]], 8), vec![1, 5, 1, 5, 1, 5, 1, 5]);\n    assert_eq!(candidate(vec![vec![1, 2], vec![3, 4]], 10), vec![1, 2, 1, 2, 1, 2, 1, 2, 1, 2]);\n    assert_eq!(candidate(vec![vec![1, 3], vec![3, 2]], 10), vec![1, 3, 1, 3, 1, 3, 1, 3, 1, 3]);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage minPath_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc minPath(grid [][]int, k int) []int {\n\tn := len(grid)\n\tval := n*n + 1\n\tfor i := 0; i < n; i++ {\n\t\tfor j := 0; j < n; j++ {\n\t\t\tif grid[i][j] == 1 {\n\t\t\t\ttemp := []int{}\n\t\t\t\tif i != 0 {\n\t\t\t\t\ttemp = append(temp, grid[i-1][j])\n\t\t\t\t}\n\t\t\t\tif j != 0 {\n\t\t\t\t\ttemp = append(temp, grid[i][j-1])\n\t\t\t\t}\n\t\t\t\tif i != n-1 {\n\t\t\t\t\ttemp = append(temp, grid[i+1][j])\n\t\t\t\t}\n\t\t\t\tif j != n-1 {\n\t\t\t\t\ttemp = append(temp, grid[i][j+1])\n\t\t\t\t}\n\t\t\t\tfor _, t := range temp {\n\t\t\t\t\tif t < val {\n\t\t\t\t\t\tval = t\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n\n\tans := make([]int, k)\n\tfor i := 0; i < k; i++ {\n\t\tif i%2 == 0 {\n\t\t\tans[i] = 1\n\t\t} else {\n\t\t\tans[i] = val\n\t\t}\n\t}\n\treturn ans\n}\n\n### Rust version\n\nfn minPath(grid: Vec<Vec<isize>>, k: isize) -> Vec<isize> {\n"
+  },
+  {
+    "name": "HumanEval_89_encrypt",
+    "language": "rs",
+    "prompt": "fn encrypt(s: String) -> String {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_89_encrypt.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = encrypt;\n    assert_eq!(candidate(String::from(\"hi\")), String::from(\"lm\"));\n    assert_eq!(candidate(String::from(\"asdfghjkl\")), String::from(\"ewhjklnop\"));\n    assert_eq!(candidate(String::from(\"gf\")), String::from(\"kj\"));\n    assert_eq!(candidate(String::from(\"et\")), String::from(\"ix\"));\n    assert_eq!(candidate(String::from(\"faewfawefaewg\")), String::from(\"jeiajeaijeiak\"));\n    assert_eq!(candidate(String::from(\"hellomyfriend\")), String::from(\"lippsqcjvmirh\"));\n    assert_eq!(candidate(String::from(\"dxzdlmnilfuhmilufhlihufnmlimnufhlimnufhfucufh\")), String::from(\"hbdhpqrmpjylqmpyjlpmlyjrqpmqryjlpmqryjljygyjl\"));\n    assert_eq!(candidate(String::from(\"a\")), String::from(\"e\"));\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage encrypt_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc encrypt(s string) string {\n\td := \"abcdefghijklmnopqrstuvwxyz\"\n\tout := \"\"\n\n\tfor _, c := range s {\n\t\tif i := int(c - 'a'); 0 <= i && i < 26 {\n\t\t\tout += string(d[(i+2*2)%26])\n\t\t} else {\n\t\t\tout += string(c)\n\t\t}\n\t}\n\n\treturn out\n}\n\n### Rust version\n\nfn encrypt(s: String) -> String {\n"
+  },
+  {
+    "name": "HumanEval_100_make_a_pile",
+    "language": "rs",
+    "prompt": "fn make_a_pile(n: isize) -> Vec<isize> {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_100_make_a_pile.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = make_a_pile;\n    assert_eq!(candidate(3), vec![3, 5, 7]);\n    assert_eq!(candidate(4), vec![4, 6, 8, 10]);\n    assert_eq!(candidate(5), vec![5, 7, 9, 11, 13]);\n    assert_eq!(candidate(6), vec![6, 8, 10, 12, 14, 16]);\n    assert_eq!(candidate(8), vec![8, 10, 12, 14, 16, 18, 20, 22]);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage make_a_pile_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc make_a_pile(n int) []int {\n    res := make([]int, n)\n    for i := 0; i < n; i++ {\n        res[i] = n + 2*i\n    }\n    return res\n}\n\n### Rust version\n\nfn make_a_pile(n: isize) -> Vec<isize> {\n"
+  },
+  {
+    "name": "HumanEval_31_is_prime",
+    "language": "rs",
+    "prompt": "fn is_prime(n: isize) -> bool {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_31_is_prime.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = is_prime;\n    assert_eq!(candidate(6), false);\n    assert_eq!(candidate(101), true);\n    assert_eq!(candidate(11), true);\n    assert_eq!(candidate(13441), true);\n    assert_eq!(candidate(61), true);\n    assert_eq!(candidate(4), false);\n    assert_eq!(candidate(1), false);\n    assert_eq!(candidate(5), true);\n    assert_eq!(candidate(11), true);\n    assert_eq!(candidate(17), true);\n    assert_eq!(candidate(85), false);\n    assert_eq!(candidate(77), false);\n    assert_eq!(candidate(255379), false);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### Go version\n\npackage is_prime_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc is_prime(n int) bool {\n\tif n < 2 {\n\t\treturn false\n\t}\n\n\tfor k := 2; k < n; k++ {\n\t\tif n%k == 0 {\n\t\t\treturn false\n\t\t}\n\t}\n\n\treturn true\n}\n\n### Rust version\n\nfn is_prime(n: isize) -> bool {\n"
+  }
+]

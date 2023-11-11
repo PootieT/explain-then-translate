@@ -1,0 +1,1856 @@
+[
+  {
+    "name": "HumanEval_61_correct_bracketing",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (correct_bracketing brackets)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_61_correct_bracketing.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate correct_bracketing))\n    (check-within (candidate \"()\") #t 0.001)\n    (check-within (candidate \"(()())\") #t 0.001)\n    (check-within (candidate \"()()(()())()\") #t 0.001)\n    (check-within (candidate \"()()((()()())())(()()(()))\") #t 0.001)\n    (check-within (candidate \"((()())))\") #f 0.001)\n    (check-within (candidate \")(()\") #f 0.001)\n    (check-within (candidate \"(\") #f 0.001)\n    (check-within (candidate \"((((\") #f 0.001)\n    (check-within (candidate \")\") #f 0.001)\n    (check-within (candidate \"(()\") #f 0.001)\n    (check-within (candidate \"()()(()())())(()\") #f 0.001)\n    (check-within (candidate \"()()(()())()))()\") #f 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage correct_bracketing_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc correct_bracketing(brackets string) bool {\n\tdepth := 0\n\tfor _, b := range brackets {\n\t\tif b == '(' {\n\t\t\tdepth += 1\n\t\t} else {\n\t\t\tdepth -= 1\n\t\t}\n\t\tif depth < 0 {\n\t\t\treturn false\n\t\t}\n\t}\n\treturn depth == 0\n}\n\n### Racket version\n\n#lang racket\n\n(define (correct_bracketing brackets)\n"
+  },
+  {
+    "name": "HumanEval_45_triangle_area",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (triangle_area a h)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_45_triangle_area.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate triangle_area))\n    (check-within (candidate 5 3) 7.5 0.001)\n    (check-within (candidate 2 2) 2.0 0.001)\n    (check-within (candidate 10 8) 40.0 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage triangle_area_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc triangle_area(a int, h int) float64 {\n    return float64(a*h)/2.0\n}\n\n### Racket version\n\n#lang racket\n\n(define (triangle_area a h)\n"
+  },
+  {
+    "name": "HumanEval_139_special_factorial",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (special_factorial n)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_139_special_factorial.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate special_factorial))\n    (check-within (candidate 4) 288 0.001)\n    (check-within (candidate 5) 34560 0.001)\n    (check-within (candidate 7) 125411328000 0.001)\n    (check-within (candidate 1) 1 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage special_factorial_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc special_factorial(n int) int {\n    fact_i := 1\n    special_fact := 1\n    for i := 1; i <= n; i++ {\n        fact_i *= i\n        special_fact *= fact_i\n    }\n    return special_fact\n}\n\n### Racket version\n\n#lang racket\n\n(define (special_factorial n)\n"
+  },
+  {
+    "name": "HumanEval_136_largest_smallest_integers",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (largest_smallest_integers lst)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_136_largest_smallest_integers.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate largest_smallest_integers))\n    (check-within (candidate (list 2 4 1 3 5 7)) (list #f 1) 0.001)\n    (check-within (candidate (list 2 4 1 3 5 7 0)) (list #f 1) 0.001)\n    (check-within (candidate (list 1 3 2 4 5 6 -2)) (list -2 1) 0.001)\n    (check-within (candidate (list 4 5 3 6 2 7 -7)) (list -7 2) 0.001)\n    (check-within (candidate (list 7 3 8 4 9 2 5 -9)) (list -9 2) 0.001)\n    (check-within (candidate (list )) (list #f #f) 0.001)\n    (check-within (candidate (list 0)) (list #f #f) 0.001)\n    (check-within (candidate (list -1 -3 -5 -6)) (list -1 #f) 0.001)\n    (check-within (candidate (list -1 -3 -5 -6 0)) (list -1 #f) 0.001)\n    (check-within (candidate (list -6 -4 -4 -3 1)) (list -3 1) 0.001)\n    (check-within (candidate (list -6 -4 -4 -3 -100 1)) (list -3 1) 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage largest_smallest_integers_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc largest_smallest_integers(lst []int) []interface{} {\n\tsmallest := make([]int, 0)\n\tlargest := make([]int, 0)\n\n\tfor _, i := range lst {\n\t\tif i < 0 {\n\t\t\tsmallest = append(smallest, i)\n\t\t} else if i > 0 {\n\t\t\tlargest = append(largest, i)\n\t\t}\n\t}\n\n\tvar smallestVal interface{}\n\tif len(smallest) > 0 {\n\t\tsmallestVal = smallest[0]\n\t\tfor _, i := range smallest {\n\t\t\tif i > smallestVal.(int) {\n\t\t\t\tsmallestVal = i\n\t\t\t}\n\t\t}\n\t} else {\n\t\tsmallestVal = nil\n\t}\n\n\tvar largestVal interface{}\n\tif len(largest) > 0 {\n\t\tlargestVal = largest[0]\n\t\tfor _, i := range largest {\n\t\t\tif i < largestVal.(int) {\n\t\t\t\tlargestVal = i\n\t\t\t}\n\t\t}\n\t} else {\n\t\tlargestVal = nil\n\t}\n\n\treturn []interface{}{smallestVal, largestVal}\n}\n\n### Racket version\n\n#lang racket\n\n(define (largest_smallest_integers lst)\n"
+  },
+  {
+    "name": "HumanEval_131_digits",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (digits n)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_131_digits.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate digits))\n    (check-within (candidate 5) 5 0.001)\n    (check-within (candidate 54) 5 0.001)\n    (check-within (candidate 120) 1 0.001)\n    (check-within (candidate 5014) 5 0.001)\n    (check-within (candidate 98765) 315 0.001)\n    (check-within (candidate 5576543) 2625 0.001)\n    (check-within (candidate 2468) 0 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage digits_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc digits(n int) int {\n\tproduct := 1\n\toddCount := 0\n\n\tfor _, digit := range fmt.Sprintf(\"%d\", n) {\n\t\tintDigit := int(digit - '0')\n\t\tif intDigit%2 == 1 {\n\t\t\tproduct *= intDigit\n\t\t\toddCount += 1\n\t\t}\n\t}\n\n\tif oddCount == 0 {\n\t\treturn 0\n\t} else {\n\t\treturn product\n\t}\n}\n\n### Racket version\n\n#lang racket\n\n(define (digits n)\n"
+  },
+  {
+    "name": "HumanEval_46_fib4",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (fib4 n)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_46_fib4.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate fib4))\n    (check-within (candidate 5) 4 0.001)\n    (check-within (candidate 8) 28 0.001)\n    (check-within (candidate 10) 104 0.001)\n    (check-within (candidate 12) 386 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage fib4_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc fib4(n int) int {\n    results := []int{0, 0, 2, 0}\n    if n < 4 {\n        return results[n]\n    }\n\n    for i := 4; i <= n; i++ {\n        sum := results[0] + results[1] + results[2] + results[3]\n        results = append(results, sum)\n        results = results[1:]\n    }\n\n    return results[3]\n}\n\n### Racket version\n\n#lang racket\n\n(define (fib4 n)\n"
+  },
+  {
+    "name": "HumanEval_80_is_happy",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (is_happy s)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_80_is_happy.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate is_happy))\n    (check-within (candidate \"a\") #f 0.001)\n    (check-within (candidate \"aa\") #f 0.001)\n    (check-within (candidate \"abcd\") #t 0.001)\n    (check-within (candidate \"aabb\") #f 0.001)\n    (check-within (candidate \"adb\") #t 0.001)\n    (check-within (candidate \"xyy\") #f 0.001)\n    (check-within (candidate \"iopaxpoi\") #t 0.001)\n    (check-within (candidate \"iopaxioi\") #f 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage is_happy_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc is_happy(s string) bool {\n    if len(s) < 3 {\n        return false\n    }\n\n    for i := 0; i < len(s)-2; i++ {\n        if s[i] == s[i+1] || s[i+1] == s[i+2] || s[i] == s[i+2] {\n            return false\n        }\n    }\n    return true\n}\n\n### Racket version\n\n#lang racket\n\n(define (is_happy s)\n"
+  },
+  {
+    "name": "HumanEval_115_max_fill",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (max_fill grid capacity)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_115_max_fill.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate max_fill))\n    (check-within (candidate (list (list 0 0 1 0) (list 0 1 0 0) (list 1 1 1 1)) 1) 6 0.001)\n    (check-within (candidate (list (list 0 0 1 1) (list 0 0 0 0) (list 1 1 1 1) (list 0 1 1 1)) 2) 5 0.001)\n    (check-within (candidate (list (list 0 0 0) (list 0 0 0)) 5) 0 0.001)\n    (check-within (candidate (list (list 1 1 1 1) (list 1 1 1 1)) 2) 4 0.001)\n    (check-within (candidate (list (list 1 1 1 1) (list 1 1 1 1)) 9) 2 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage max_fill_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc max_fill(grid [][]int, capacity int) int {\n    sum := 0\n    for _, arr := range grid {\n        s := 0\n        for _, v := range arr {\n            s += v\n        }\n        sum += (s+capacity-1)/capacity\n    }\n    return sum\n}\n\n### Racket version\n\n#lang racket\n\n(define (max_fill grid capacity)\n"
+  },
+  {
+    "name": "HumanEval_0_has_close_elements",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (has_close_elements numbers threshold)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_0_has_close_elements.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate has_close_elements))\n    (check-within (candidate (list 1.0 2.0 3.9 4.0 5.0 2.2) 0.3) #t 0.001)\n    (check-within (candidate (list 1.0 2.0 3.9 4.0 5.0 2.2) 0.05) #f 0.001)\n    (check-within (candidate (list 1.0 2.0 5.9 4.0 5.0) 0.95) #t 0.001)\n    (check-within (candidate (list 1.0 2.0 5.9 4.0 5.0) 0.8) #f 0.001)\n    (check-within (candidate (list 1.0 2.0 3.0 4.0 5.0 2.0) 0.1) #t 0.001)\n    (check-within (candidate (list 1.1 2.2 3.1 4.1 5.1) 1.0) #t 0.001)\n    (check-within (candidate (list 1.1 2.2 3.1 4.1 5.1) 0.5) #f 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage has_close_elements_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc has_close_elements(numbers []float64, threshold float64) bool {\n    for i, elem := range numbers {\n        for j, elem2 := range numbers {\n            if i != j {\n                distance := elem - elem2\n                if distance < 0 {\n                    distance = -distance\n                }\n                if distance < threshold {\n                    return true\n                }\n            }\n        }\n    }\n    return false\n}\n\n### Racket version\n\n#lang racket\n\n(define (has_close_elements numbers threshold)\n"
+  },
+  {
+    "name": "HumanEval_81_numerical_letter_grade",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (numerical_letter_grade grades)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_81_numerical_letter_grade.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate numerical_letter_grade))\n    (check-within (candidate (list 4.0 3 1.7 2 3.5)) (list \"A+\" \"B\" \"C-\" \"C\" \"A-\") 0.001)\n    (check-within (candidate (list 1.2)) (list \"D+\") 0.001)\n    (check-within (candidate (list 0.5)) (list \"D-\") 0.001)\n    (check-within (candidate (list 0.0)) (list \"E\") 0.001)\n    (check-within (candidate (list 1.0 0.3 1.5 2.8 3.3)) (list \"D\" \"D-\" \"C-\" \"B\" \"B+\") 0.001)\n    (check-within (candidate (list 0.0 0.7)) (list \"E\" \"D-\") 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage numerical_letter_grade_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc numerical_letter_grade(grades []float64) []string {\n    letterGrades := make([]string, len(grades))\n\n    for i, gpa := range grades {\n        switch {\n        case gpa == 4.0:\n            letterGrades[i] = \"A+\"\n        case gpa > 3.7:\n            letterGrades[i] = \"A\"\n        case gpa > 3.3:\n            letterGrades[i] = \"A-\"\n        case gpa > 3.0:\n            letterGrades[i] = \"B+\"\n        case gpa > 2.7:\n            letterGrades[i] = \"B\"\n        case gpa > 2.3:\n            letterGrades[i] = \"B-\"\n        case gpa > 2.0:\n            letterGrades[i] = \"C+\"\n        case gpa > 1.7:\n            letterGrades[i] = \"C\"\n        case gpa > 1.3:\n            letterGrades[i] = \"C-\"\n        case gpa > 1.0:\n            letterGrades[i] = \"D+\"\n        case gpa > 0.7:\n            letterGrades[i] = \"D\"\n        case gpa > 0.0:\n            letterGrades[i] = \"D-\"\n        default:\n            letterGrades[i] = \"E\"\n        }\n    }\n\n    return letterGrades\n}\n\n### Racket version\n\n#lang racket\n\n(define (numerical_letter_grade grades)\n"
+  },
+  {
+    "name": "HumanEval_150_x_or_y",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (x_or_y n x y)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_150_x_or_y.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate x_or_y))\n    (check-within (candidate 7 34 12) 34 0.001)\n    (check-within (candidate 15 8 5) 5 0.001)\n    (check-within (candidate 3 33 5212) 33 0.001)\n    (check-within (candidate 1259 3 52) 3 0.001)\n    (check-within (candidate 7919 -1 12) -1 0.001)\n    (check-within (candidate 3609 1245 583) 583 0.001)\n    (check-within (candidate 91 56 129) 129 0.001)\n    (check-within (candidate 6 34 1234) 1234 0.001)\n    (check-within (candidate 1 2 0) 0 0.001)\n    (check-within (candidate 2 2 0) 2 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage x_or_y_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc x_or_y(n int, x int, y int) int {\n\tif n == 1 {\n\t\treturn y\n\t}\n\tfor i := 2; i < n; i++ {\n\t\tif n%i == 0 {\n\t\t\treturn y\n\t\t}\n\t}\n\treturn x\n}\n\n### Racket version\n\n#lang racket\n\n(define (x_or_y n x y)\n"
+  },
+  {
+    "name": "HumanEval_146_specialFilter",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (specialFilter nums)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_146_specialFilter.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate specialFilter))\n    (check-within (candidate (list 5 -2 1 -5)) 0 0.001)\n    (check-within (candidate (list 15 -73 14 -15)) 1 0.001)\n    (check-within (candidate (list 33 -2 -3 45 21 109)) 2 0.001)\n    (check-within (candidate (list 43 -12 93 125 121 109)) 4 0.001)\n    (check-within (candidate (list 71 -2 -33 75 21 19)) 3 0.001)\n    (check-within (candidate (list 1)) 0 0.001)\n    (check-within (candidate (list )) 0 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage specialFilter_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc specialFilter(nums []int) int {\n    count := 0\n    for _, num := range nums {\n        if num > 10 {\n            numberAsString := fmt.Sprintf(\"%d\", num)\n            if (numberAsString[0] - '0')%2 == 1 && (numberAsString[len(numberAsString)-1]-'0')%2 == 1 {\n                count += 1\n            }\n        }\n    }\n    return count\n}\n\n### Racket version\n\n#lang racket\n\n(define (specialFilter nums)\n"
+  },
+  {
+    "name": "HumanEval_66_digitSum",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (digitSum s)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_66_digitSum.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate digitSum))\n    (check-within (candidate \"\") 0 0.001)\n    (check-within (candidate \"abAB\") 131 0.001)\n    (check-within (candidate \"abcCd\") 67 0.001)\n    (check-within (candidate \"helloE\") 69 0.001)\n    (check-within (candidate \"woArBld\") 131 0.001)\n    (check-within (candidate \"aAaaaXa\") 153 0.001)\n    (check-within (candidate \" How are yOu?\") 151 0.001)\n    (check-within (candidate \"You arE Very Smart\") 327 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage digitSum_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc digitSum(s string) int {\n    sum := 0\n    for _, c := range s {\n        if c >= 'A' && c <= 'Z' {\n            sum += int(c)\n        }\n    }\n    return sum\n}\n\n### Racket version\n\n#lang racket\n\n(define (digitSum s)\n"
+  },
+  {
+    "name": "HumanEval_142_sum_squares",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (sum_squares lst)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_142_sum_squares.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate sum_squares))\n    (check-within (candidate (list 1 2 3)) 6 0.001)\n    (check-within (candidate (list 1 4 9)) 14 0.001)\n    (check-within (candidate (list )) 0 0.001)\n    (check-within (candidate (list 1 1 1 1 1 1 1 1 1)) 9 0.001)\n    (check-within (candidate (list -1 -1 -1 -1 -1 -1 -1 -1 -1)) -3 0.001)\n    (check-within (candidate (list 0)) 0 0.001)\n    (check-within (candidate (list -1 -5 2 -1 -5)) -126 0.001)\n    (check-within (candidate (list -56 -99 1 0 -2)) 3030 0.001)\n    (check-within (candidate (list -1 0 0 0 0 0 0 0 -1)) 0 0.001)\n    (check-within (candidate (list -16 -9 -2 36 36 26 -20 25 -40 20 -4 12 -26 35 37)) -14196 0.001)\n    (check-within (candidate (list -1 -3 17 -1 -15 13 -1 14 -14 -12 -5 14 -14 6 13 11 16 16 4 10)) -1448 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage sum_squares_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc sum_squares(lst []int) int {\n    result := 0\n\n    for i, v := range lst {\n        if i%3 == 0 {\n            result += v * v\n        } else if i%4 == 0 && i%3 != 0 {\n            result += v * v * v\n        } else {\n            result += v\n        }\n    }\n\n    return result\n}\n\n### Racket version\n\n#lang racket\n\n(define (sum_squares lst)\n"
+  },
+  {
+    "name": "HumanEval_96_count_up_to",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (count_up_to n)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_96_count_up_to.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate count_up_to))\n    (check-within (candidate 5) (list 2 3) 0.001)\n    (check-within (candidate 6) (list 2 3 5) 0.001)\n    (check-within (candidate 7) (list 2 3 5) 0.001)\n    (check-within (candidate 10) (list 2 3 5 7) 0.001)\n    (check-within (candidate 0) (list ) 0.001)\n    (check-within (candidate 22) (list 2 3 5 7 11 13 17 19) 0.001)\n    (check-within (candidate 1) (list ) 0.001)\n    (check-within (candidate 18) (list 2 3 5 7 11 13 17) 0.001)\n    (check-within (candidate 47) (list 2 3 5 7 11 13 17 19 23 29 31 37 41 43) 0.001)\n    (check-within (candidate 101) (list 2 3 5 7 11 13 17 19 23 29 31 37 41 43 47 53 59 61 67 71 73 79 83 89 97) 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage count_up_to_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc count_up_to(n int) []int {\n\tprimes := make([]int, 0)\n\tfor i := 2; i < n; i++ {\n\t\tis_prime := true\n\t\tfor j := 2; j < i; j++ {\n\t\t\tif i%j == 0 {\n\t\t\t\tis_prime = false\n\t\t\t\tbreak\n\t\t\t}\n\t\t}\n\t\tif is_prime {\n\t\t\tprimes = append(primes, i)\n\t\t}\n\t}\n\treturn primes\n}\n\n### Racket version\n\n#lang racket\n\n(define (count_up_to n)\n"
+  },
+  {
+    "name": "HumanEval_34_unique",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (unique l)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_34_unique.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate unique))\n    (check-within (candidate (list 5 3 5 2 3 3 9 0 123)) (list 0 2 3 5 9 123) 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage unique_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc unique(l []int) []int {\n    m := make(map[int]bool)\n    for _, v := range l {\n        m[v] = true\n    }\n    var r []int\n    for k := range m {\n        r = append(r, k)\n    }\n    for i := 0; i < len(r); i++ {\n        for j := i + 1; j < len(r); j++ {\n            if r[i] > r[j] {\n                r[i], r[j] = r[j], r[i]\n            }\n        }\n    }\n    return r\n}\n\n### Racket version\n\n#lang racket\n\n(define (unique l)\n"
+  },
+  {
+    "name": "HumanEval_55_fib",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (fib n)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_55_fib.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate fib))\n    (check-within (candidate 10) 55 0.001)\n    (check-within (candidate 1) 1 0.001)\n    (check-within (candidate 8) 21 0.001)\n    (check-within (candidate 11) 89 0.001)\n    (check-within (candidate 12) 144 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage fib_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc fib(n int) int {\n    if n == 0 {\n        return 0\n    }\n    if n == 1 {\n        return 1\n    }\n    return fib(n-1) + fib(n-2)\n}\n\n### Racket version\n\n#lang racket\n\n(define (fib n)\n"
+  },
+  {
+    "name": "HumanEval_36_fizz_buzz",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (fizz_buzz n)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_36_fizz_buzz.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate fizz_buzz))\n    (check-within (candidate 50) 0 0.001)\n    (check-within (candidate 78) 2 0.001)\n    (check-within (candidate 79) 3 0.001)\n    (check-within (candidate 100) 3 0.001)\n    (check-within (candidate 200) 6 0.001)\n    (check-within (candidate 4000) 192 0.001)\n    (check-within (candidate 10000) 639 0.001)\n    (check-within (candidate 100000) 8026 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage fizz_buzz_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc fizz_buzz(n int) int {\n\tns := make([]int, 0)\n\tfor i := 0; i < n; i++ {\n\t\tif i%11 == 0 || i%13 == 0 {\n\t\t\tns = append(ns, i)\n\t\t}\n\t}\n\ts := \"\"\n\tfor _, i := range ns {\n\t\ts += fmt.Sprintf(\"%d\", i)\n\t}\n\tans := 0\n\tfor _, c := range s {\n\t\tif c == '7' {\n\t\t\tans += 1\n\t\t}\n\t}\n\treturn ans\n}\n\n### Racket version\n\n#lang racket\n\n(define (fizz_buzz n)\n"
+  },
+  {
+    "name": "HumanEval_124_valid_date",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (valid_date date)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_124_valid_date.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate valid_date))\n    (check-within (candidate \"03-11-2000\") #t 0.001)\n    (check-within (candidate \"15-01-2012\") #f 0.001)\n    (check-within (candidate \"04-0-2040\") #f 0.001)\n    (check-within (candidate \"06-04-2020\") #t 0.001)\n    (check-within (candidate \"01-01-2007\") #t 0.001)\n    (check-within (candidate \"03-32-2011\") #f 0.001)\n    (check-within (candidate \"\") #f 0.001)\n    (check-within (candidate \"04-31-3000\") #f 0.001)\n    (check-within (candidate \"06-06-2005\") #t 0.001)\n    (check-within (candidate \"21-31-2000\") #f 0.001)\n    (check-within (candidate \"04-12-2003\") #t 0.001)\n    (check-within (candidate \"04122003\") #f 0.001)\n    (check-within (candidate \"20030412\") #f 0.001)\n    (check-within (candidate \"2003-04\") #f 0.001)\n    (check-within (candidate \"2003-04-12\") #f 0.001)\n    (check-within (candidate \"04-2003\") #f 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage valid_date_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc valid_date(date string) bool {\n    var month, day, year int\n    _, err := fmt.Sscanf(date, \"%d-%d-%d\", &month, &day, &year)\n    if err != nil {\n        return false\n    }\n    if month < 1 || month > 12 {\n        return false\n    }\n    if month == 2 {\n        if year%4 == 0 && (year%100 != 0 || year%400 == 0) {\n            if day < 1 || day > 29 {\n                return false\n            }\n        } else {\n            if day < 1 || day > 28 {\n                return false\n            }\n        }\n    } else if month == 4 || month == 6 || month == 9 || month == 11 {\n        if day < 1 || day > 30 {\n            return false\n        }\n    } else {\n        if day < 1 || day > 31 {\n            return false\n        }\n    }\n    return true\n}\n\n### Racket version\n\n#lang racket\n\n(define (valid_date date)\n"
+  },
+  {
+    "name": "HumanEval_53_add",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (add x y)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_53_add.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate add))\n    (check-within (candidate 0 1) 1 0.001)\n    (check-within (candidate 1 0) 1 0.001)\n    (check-within (candidate 2 3) 5 0.001)\n    (check-within (candidate 5 7) 12 0.001)\n    (check-within (candidate 7 5) 12 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage add_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc add(x int, y int) int {\n    return x + y\n}\n\n### Racket version\n\n#lang racket\n\n(define (add x y)\n"
+  },
+  {
+    "name": "HumanEval_40_triples_sum_to_zero",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (triples_sum_to_zero l)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_40_triples_sum_to_zero.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate triples_sum_to_zero))\n    (check-within (candidate (list 1 3 5 0)) #f 0.001)\n    (check-within (candidate (list 1 3 5 -1)) #f 0.001)\n    (check-within (candidate (list 1 3 -2 1)) #t 0.001)\n    (check-within (candidate (list 1 2 3 7)) #f 0.001)\n    (check-within (candidate (list 1 2 5 7)) #f 0.001)\n    (check-within (candidate (list 2 4 -5 3 9 7)) #t 0.001)\n    (check-within (candidate (list 1)) #f 0.001)\n    (check-within (candidate (list 1 3 5 -100)) #f 0.001)\n    (check-within (candidate (list 100 3 5 -100)) #f 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage triples_sum_to_zero_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc triples_sum_to_zero(l []int) bool {\n\tfor i := 0; i < len(l); i++ {\n\t\tfor j := i + 1; j < len(l); j++ {\n\t\t\tfor k := j + 1; k < len(l); k++ {\n\t\t\t\tif l[i]+l[j]+l[k] == 0 {\n\t\t\t\t\treturn true\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n\treturn false\n}\n\n### Racket version\n\n#lang racket\n\n(define (triples_sum_to_zero l)\n"
+  },
+  {
+    "name": "HumanEval_24_largest_divisor",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (largest_divisor n)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_24_largest_divisor.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate largest_divisor))\n    (check-within (candidate 3) 1 0.001)\n    (check-within (candidate 7) 1 0.001)\n    (check-within (candidate 10) 5 0.001)\n    (check-within (candidate 100) 50 0.001)\n    (check-within (candidate 49) 7 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage largest_divisor_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc largest_divisor(n int) int {\n    for i := n-1; i > 0; i-- {\n        if n % i == 0 {\n            return i\n        }\n    }\n    return 0\n}\n\n### Racket version\n\n#lang racket\n\n(define (largest_divisor n)\n"
+  },
+  {
+    "name": "HumanEval_73_smallest_change",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (smallest_change arr)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_73_smallest_change.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate smallest_change))\n    (check-within (candidate (list 1 2 3 5 4 7 9 6)) 4 0.001)\n    (check-within (candidate (list 1 2 3 4 3 2 2)) 1 0.001)\n    (check-within (candidate (list 1 4 2)) 1 0.001)\n    (check-within (candidate (list 1 4 4 2)) 1 0.001)\n    (check-within (candidate (list 1 2 3 2 1)) 0 0.001)\n    (check-within (candidate (list 3 1 1 3)) 0 0.001)\n    (check-within (candidate (list 1)) 0 0.001)\n    (check-within (candidate (list 0 1)) 1 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage smallest_change_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc smallest_change(arr []int) int {\n\tans := 0\n\tfor i := 0; i < len(arr)/2; i++ {\n\t\tif arr[i] != arr[len(arr)-i-1] {\n\t\t\tans += 1\n\t\t}\n\t}\n\treturn ans\n}\n\n### Racket version\n\n#lang racket\n\n(define (smallest_change arr)\n"
+  },
+  {
+    "name": "HumanEval_52_below_threshold",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (below_threshold l t)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_52_below_threshold.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate below_threshold))\n    (check-within (candidate (list 1 2 4 10) 100) #t 0.001)\n    (check-within (candidate (list 1 20 4 10) 5) #f 0.001)\n    (check-within (candidate (list 1 20 4 10) 21) #t 0.001)\n    (check-within (candidate (list 1 20 4 10) 22) #t 0.001)\n    (check-within (candidate (list 1 8 4 10) 11) #t 0.001)\n    (check-within (candidate (list 1 8 4 10) 10) #f 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage below_threshold_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc below_threshold(l []int, t int) bool {\n    for _, e := range l {\n        if e >= t {\n            return false\n        }\n    }\n    return true\n}\n\n### Racket version\n\n#lang racket\n\n(define (below_threshold l t)\n"
+  },
+  {
+    "name": "HumanEval_49_modp",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (modp n p)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_49_modp.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate modp))\n    (check-within (candidate 3 5) 3 0.001)\n    (check-within (candidate 1101 101) 2 0.001)\n    (check-within (candidate 0 101) 1 0.001)\n    (check-within (candidate 3 11) 8 0.001)\n    (check-within (candidate 100 101) 1 0.001)\n    (check-within (candidate 30 5) 4 0.001)\n    (check-within (candidate 31 5) 3 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage modp_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc modp(n int, p int) int {\n    ret := 1\n    for i := 0; i < n; i++ {\n        ret = (2 * ret) % p\n    }\n    return ret\n}\n\n### Racket version\n\n#lang racket\n\n(define (modp n p)\n"
+  },
+  {
+    "name": "HumanEval_98_count_upper",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (count_upper s)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_98_count_upper.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate count_upper))\n    (check-within (candidate \"aBCdEf\") 1 0.001)\n    (check-within (candidate \"abcdefg\") 0 0.001)\n    (check-within (candidate \"dBBE\") 0 0.001)\n    (check-within (candidate \"B\") 0 0.001)\n    (check-within (candidate \"U\") 1 0.001)\n    (check-within (candidate \"\") 0 0.001)\n    (check-within (candidate \"EEEE\") 2 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage count_upper_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc count_upper(s string) int {\n\tcount := 0\n\tfor i := 0; i < len(s); i += 2 {\n\t\tif s[i] == 'A' || s[i] == 'E' || s[i] == 'I' || s[i] == 'O' || s[i] == 'U' {\n\t\t\tcount += 1\n\t\t}\n\t}\n\treturn count\n}\n\n### Racket version\n\n#lang racket\n\n(define (count_upper s)\n"
+  },
+  {
+    "name": "HumanEval_75_is_multiply_prime",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (is_multiply_prime a)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_75_is_multiply_prime.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate is_multiply_prime))\n    (check-within (candidate 5) #f 0.001)\n    (check-within (candidate 30) #t 0.001)\n    (check-within (candidate 8) #t 0.001)\n    (check-within (candidate 10) #f 0.001)\n    (check-within (candidate 125) #t 0.001)\n    (check-within (candidate 105) #t 0.001)\n    (check-within (candidate 126) #f 0.001)\n    (check-within (candidate 729) #f 0.001)\n    (check-within (candidate 891) #f 0.001)\n    (check-within (candidate 1001) #t 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage is_multiply_prime_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc is_multiply_prime(a int) bool {\n    is_prime := func(n int) bool {\n        for j := 2; j < n; j++ {\n            if n%j == 0 {\n                return false\n            }\n        }\n        return true\n    }\n\n    for i := 2; i < 101; i++ {\n        if !is_prime(i) {\n            continue\n        }\n        for j := 2; j < 101; j++ {\n            if !is_prime(j) {\n                continue\n            }\n            for k := 2; k < 101; k++ {\n                if !is_prime(k) {\n                    continue\n                }\n                if i*j*k == a {\n                    return true\n                }\n            }\n        }\n    }\n    return false\n}\n\n### Racket version\n\n#lang racket\n\n(define (is_multiply_prime a)\n"
+  },
+  {
+    "name": "HumanEval_1_separate_paren_groups",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (separate_paren_groups paren_string)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_1_separate_paren_groups.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate separate_paren_groups))\n    (check-within (candidate \"(()()) ((())) () ((())()())\") (list \"(()())\" \"((()))\" \"()\" \"((())()())\") 0.001)\n    (check-within (candidate \"() (()) ((())) (((())))\") (list \"()\" \"(())\" \"((()))\" \"(((())))\") 0.001)\n    (check-within (candidate \"(()(())((())))\") (list \"(()(())((())))\") 0.001)\n    (check-within (candidate \"( ) (( )) (( )( ))\") (list \"()\" \"(())\" \"(()())\") 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage separate_paren_groups_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc separate_paren_groups(paren_string string) []string {\n    result := []string{}\n    currentString := []rune{}\n    currentDepth := 0\n\n    for _, c := range paren_string {\n        if c == '(' {\n            currentDepth += 1\n            currentString = append(currentString, c)\n        } else if c == ')' {\n            currentDepth -= 1\n            currentString = append(currentString, c)\n\n            if currentDepth == 0 {\n                result = append(result, string(currentString))\n                currentString = []rune{}\n            }\n        }\n    }\n\n    return result\n}\n\n### Racket version\n\n#lang racket\n\n(define (separate_paren_groups paren_string)\n"
+  },
+  {
+    "name": "HumanEval_22_filter_integers",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (filter_integers values)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_22_filter_integers.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate filter_integers))\n    (check-within (candidate (list )) (list ) 0.001)\n    (check-within (candidate (list 4 #hash() (list ) 23.2 9 \"adasd\")) (list 4 9) 0.001)\n    (check-within (candidate (list 3 \"c\" 3 3 \"a\" \"b\")) (list 3 3 3) 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage filter_integers_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc filter_integers(values []interface{}) []int {\n    res := []int{}\n    for _, v := range values {\n        if i, ok := v.(int); ok {\n            res = append(res, i)\n        }\n    }\n    return res\n}\n\n### Racket version\n\n#lang racket\n\n(define (filter_integers values)\n"
+  },
+  {
+    "name": "HumanEval_94_skjkasdkd",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (skjkasdkd lst)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_94_skjkasdkd.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate skjkasdkd))\n    (check-within (candidate (list 0 3 2 1 3 5 7 4 5 5 5 2 181 32 4 32 3 2 32 324 4 3)) 10 0.001)\n    (check-within (candidate (list 1 0 1 8 2 4597 2 1 3 40 1 2 1 2 4 2 5 1)) 25 0.001)\n    (check-within (candidate (list 1 3 1 32 5107 34 83278 109 163 23 2323 32 30 1 9 3)) 13 0.001)\n    (check-within (candidate (list 0 724 32 71 99 32 6 0 5 91 83 0 5 6)) 11 0.001)\n    (check-within (candidate (list 0 81 12 3 1 21)) 3 0.001)\n    (check-within (candidate (list 0 8 1 2 1 7)) 7 0.001)\n    (check-within (candidate (list 8191)) 19 0.001)\n    (check-within (candidate (list 8191 123456 127 7)) 19 0.001)\n    (check-within (candidate (list 127 97 8192)) 10 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage skjkasdkd_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc skjkasdkd(lst []int) int {\n\tisPrime := func(n int) bool {\n\t\tfor i := 2; i*i <= n; i++ {\n\t\t\tif n%i == 0 {\n\t\t\t\treturn false\n\t\t\t}\n\t\t}\n\t\treturn true\n\t}\n\n\tmaxx := 0\n\tfor _, i := range lst {\n\t\tif i > maxx && isPrime(i) {\n\t\t\tmaxx = i\n\t\t}\n\t}\n\n\tresult := 0\n\tfor maxx > 0 {\n\t\tresult += maxx % 10\n\t\tmaxx /= 10\n\t}\n\n\treturn result\n}\n\n### Racket version\n\n#lang racket\n\n(define (skjkasdkd lst)\n"
+  },
+  {
+    "name": "HumanEval_74_total_match",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (total_match lst1 lst2)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_74_total_match.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate total_match))\n    (check-within (candidate (list ) (list )) (list ) 0.001)\n    (check-within (candidate (list \"hi\" \"admin\") (list \"hi\" \"hi\")) (list \"hi\" \"hi\") 0.001)\n    (check-within (candidate (list \"hi\" \"admin\") (list \"hi\" \"hi\" \"admin\" \"project\")) (list \"hi\" \"admin\") 0.001)\n    (check-within (candidate (list \"4\") (list \"1\" \"2\" \"3\" \"4\" \"5\")) (list \"4\") 0.001)\n    (check-within (candidate (list \"hi\" \"admin\") (list \"hI\" \"Hi\")) (list \"hI\" \"Hi\") 0.001)\n    (check-within (candidate (list \"hi\" \"admin\") (list \"hI\" \"hi\" \"hi\")) (list \"hI\" \"hi\" \"hi\") 0.001)\n    (check-within (candidate (list \"hi\" \"admin\") (list \"hI\" \"hi\" \"hii\")) (list \"hi\" \"admin\") 0.001)\n    (check-within (candidate (list ) (list \"this\")) (list ) 0.001)\n    (check-within (candidate (list \"this\") (list )) (list ) 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage total_match_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc total_match(lst1 []string, lst2 []string) []string {\n\tl1 := 0\n\tfor _, st := range lst1 {\n\t\tl1 += len(st)\n\t}\n\n\tl2 := 0\n\tfor _, st := range lst2 {\n\t\tl2 += len(st)\n\t}\n\n\tif l1 <= l2 {\n\t\treturn lst1\n\t} else {\n\t\treturn lst2\n\t}\n}\n\n### Racket version\n\n#lang racket\n\n(define (total_match lst1 lst2)\n"
+  },
+  {
+    "name": "HumanEval_41_car_race_collision",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (car_race_collision n)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_41_car_race_collision.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate car_race_collision))\n    (check-within (candidate 2) 4 0.001)\n    (check-within (candidate 3) 9 0.001)\n    (check-within (candidate 4) 16 0.001)\n    (check-within (candidate 8) 64 0.001)\n    (check-within (candidate 10) 100 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage car_race_collision_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc car_race_collision(n int) int {\n    return n * n\n}\n\n### Racket version\n\n#lang racket\n\n(define (car_race_collision n)\n"
+  },
+  {
+    "name": "HumanEval_76_is_simple_power",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (is_simple_power x n)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_76_is_simple_power.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate is_simple_power))\n    (check-within (candidate 16 2) #t 0.001)\n    (check-within (candidate 143214 16) #f 0.001)\n    (check-within (candidate 4 2) #t 0.001)\n    (check-within (candidate 9 3) #t 0.001)\n    (check-within (candidate 16 4) #t 0.001)\n    (check-within (candidate 24 2) #f 0.001)\n    (check-within (candidate 128 4) #f 0.001)\n    (check-within (candidate 12 6) #f 0.001)\n    (check-within (candidate 1 1) #t 0.001)\n    (check-within (candidate 1 12) #t 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage is_simple_power_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc is_simple_power(x int, n int) bool {\n    if n == 1 {\n        return x == 1\n    }\n    power := 1\n    for power < x {\n        power *= n\n    }\n    return power == x\n}\n\n### Racket version\n\n#lang racket\n\n(define (is_simple_power x n)\n"
+  },
+  {
+    "name": "HumanEval_42_incr_list",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (incr_list l)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_42_incr_list.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate incr_list))\n    (check-within (candidate (list )) (list ) 0.001)\n    (check-within (candidate (list 3 2 1)) (list 4 3 2) 0.001)\n    (check-within (candidate (list 5 2 5 2 3 3 9 0 123)) (list 6 3 6 3 4 4 10 1 124) 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage incr_list_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc incr_list(l []int) []int {\n    r := make([]int, len(l))\n    for i, e := range l {\n        r[i] = e + 1\n    }\n    return r\n}\n\n### Racket version\n\n#lang racket\n\n(define (incr_list l)\n"
+  },
+  {
+    "name": "HumanEval_27_flip_case",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (flip_case string)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_27_flip_case.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate flip_case))\n    (check-within (candidate \"\") \"\" 0.001)\n    (check-within (candidate \"Hello!\") \"hELLO!\" 0.001)\n    (check-within (candidate \"These violent delights have violent ends\") \"tHESE VIOLENT DELIGHTS HAVE VIOLENT ENDS\" 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage flip_case_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc flip_case(myString string) string {\n    result := \"\"\n    for _, c := range myString {\n        if c >= 'a' && c <= 'z' {\n            result += string(c - 32)\n        } else if c >= 'A' && c <= 'Z' {\n            result += string(c + 32)\n        } else {\n            result += string(c)\n        }\n    }\n    return result\n}\n\n### Racket version\n\n#lang racket\n\n(define (flip_case string)\n"
+  },
+  {
+    "name": "HumanEval_149_sorted_list_sum",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (sorted_list_sum lst)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_149_sorted_list_sum.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate sorted_list_sum))\n    (check-within (candidate (list \"aa\" \"a\" \"aaa\")) (list \"aa\") 0.001)\n    (check-within (candidate (list \"school\" \"AI\" \"asdf\" \"b\")) (list \"AI\" \"asdf\" \"school\") 0.001)\n    (check-within (candidate (list \"d\" \"b\" \"c\" \"a\")) (list ) 0.001)\n    (check-within (candidate (list \"d\" \"dcba\" \"abcd\" \"a\")) (list \"abcd\" \"dcba\") 0.001)\n    (check-within (candidate (list \"AI\" \"ai\" \"au\")) (list \"AI\" \"ai\" \"au\") 0.001)\n    (check-within (candidate (list \"a\" \"b\" \"b\" \"c\" \"c\" \"a\")) (list ) 0.001)\n    (check-within (candidate (list \"aaaa\" \"bbbb\" \"dd\" \"cc\")) (list \"cc\" \"dd\" \"aaaa\" \"bbbb\") 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage sorted_list_sum_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc sorted_list_sum(lst []string) []string {\n    for i := 0; i < len(lst); i++ {\n        for j := i+1; j < len(lst); j++ {\n            if lst[i] > lst[j] {\n                lst[i], lst[j] = lst[j], lst[i]\n            }\n        }\n    }\n    new_lst := []string{}\n    for _, i := range lst {\n        if len(i)%2 == 0 {\n            new_lst = append(new_lst, i)\n        }\n    }\n    for i := 0; i < len(new_lst); i++ {\n        for j := i+1; j < len(new_lst); j++ {\n            if len(new_lst[i]) > len(new_lst[j]) {\n                new_lst[i], new_lst[j] = new_lst[j], new_lst[i]\n            }\n        }\n    }\n    return new_lst\n}\n\n### Racket version\n\n#lang racket\n\n(define (sorted_list_sum lst)\n"
+  },
+  {
+    "name": "HumanEval_107_even_odd_palindrome",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (even_odd_palindrome n)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_107_even_odd_palindrome.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate even_odd_palindrome))\n    (check-within (candidate 123) (list 8 13) 0.001)\n    (check-within (candidate 12) (list 4 6) 0.001)\n    (check-within (candidate 3) (list 1 2) 0.001)\n    (check-within (candidate 63) (list 6 8) 0.001)\n    (check-within (candidate 25) (list 5 6) 0.001)\n    (check-within (candidate 19) (list 4 6) 0.001)\n    (check-within (candidate 9) (list 4 5) 0.001)\n    (check-within (candidate 1) (list 0 1) 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage even_odd_palindrome_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc even_odd_palindrome(n int) []interface{} {\n    is_palindrome := func(n int) bool {\n        s := fmt.Sprintf(\"%d\", n)\n        for i := 0; i < len(s)/2; i++ {\n            if s[i] != s[len(s)-i-1] {\n                return false\n            }\n        }\n        return true\n    }\n\n    even_palindrome_count := 0\n    odd_palindrome_count := 0\n\n    for i := 1; i <= n; i++ {\n        if i%2 == 1 && is_palindrome(i) {\n            odd_palindrome_count++\n        } else if i%2 == 0 && is_palindrome(i) {\n            even_palindrome_count++\n        }\n    }\n    return []interface{}{even_palindrome_count, odd_palindrome_count}\n}\n\n### Racket version\n\n#lang racket\n\n(define (even_odd_palindrome n)\n"
+  },
+  {
+    "name": "HumanEval_130_tri",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (tri n)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_130_tri.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate tri))\n    (check-within (candidate 3) (list 1 3 2 8) 0.001)\n    (check-within (candidate 4) (list 1 3 2 8 3) 0.001)\n    (check-within (candidate 5) (list 1 3 2 8 3 15) 0.001)\n    (check-within (candidate 6) (list 1 3 2 8 3 15 4) 0.001)\n    (check-within (candidate 7) (list 1 3 2 8 3 15 4 24) 0.001)\n    (check-within (candidate 8) (list 1 3 2 8 3 15 4 24 5) 0.001)\n    (check-within (candidate 9) (list 1 3 2 8 3 15 4 24 5 35) 0.001)\n    (check-within (candidate 20) (list 1 3 2 8 3 15 4 24 5 35 6 48 7 63 8 80 9 99 10 120 11) 0.001)\n    (check-within (candidate 0) (list 1) 0.001)\n    (check-within (candidate 1) (list 1 3) 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage tri_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc tri(n int) []int {\n    if n == 0 {\n        return []int{1}\n    }\n    myTri := []int{1, 3}\n    for i := 2; i <= n; i++ {\n        if i%2 == 0 {\n            myTri = append(myTri, i/2+1)\n        } else {\n            myTri = append(myTri, myTri[i-1]+myTri[i-2]+(i+3)/2)\n        }\n    }\n    return myTri\n}\n\n### Racket version\n\n#lang racket\n\n(define (tri n)\n"
+  },
+  {
+    "name": "HumanEval_44_change_base",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (change_base x base)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_44_change_base.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate change_base))\n    (check-within (candidate 8 3) \"22\" 0.001)\n    (check-within (candidate 9 3) \"100\" 0.001)\n    (check-within (candidate 234 2) \"11101010\" 0.001)\n    (check-within (candidate 16 2) \"10000\" 0.001)\n    (check-within (candidate 8 2) \"1000\" 0.001)\n    (check-within (candidate 7 2) \"111\" 0.001)\n    (check-within (candidate 2 3) \"2\" 0.001)\n    (check-within (candidate 3 4) \"3\" 0.001)\n    (check-within (candidate 4 5) \"4\" 0.001)\n    (check-within (candidate 5 6) \"5\" 0.001)\n    (check-within (candidate 6 7) \"6\" 0.001)\n    (check-within (candidate 7 8) \"7\" 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage change_base_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc change_base(x int, base int) string {\n    ret := \"\"\n    for x > 0 {\n        ret = fmt.Sprintf(\"%d%s\", x%base, ret)\n        x /= base\n    }\n    return ret\n}\n\n### Racket version\n\n#lang racket\n\n(define (change_base x base)\n"
+  },
+  {
+    "name": "HumanEval_154_cycpattern_check",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (cycpattern_check a b)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_154_cycpattern_check.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate cycpattern_check))\n    (check-within (candidate \"xyzw\" \"xyw\") #f 0.001)\n    (check-within (candidate \"yello\" \"ell\") #t 0.001)\n    (check-within (candidate \"whattup\" \"ptut\") #f 0.001)\n    (check-within (candidate \"efef\" \"fee\") #t 0.001)\n    (check-within (candidate \"abab\" \"aabb\") #f 0.001)\n    (check-within (candidate \"winemtt\" \"tinem\") #t 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage cycpattern_check_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc cycpattern_check(a string, b string) bool {\n\tl := len(b)\n\tpat := b + b\n\tfor i := 0; i < len(a)-l+1; i++ {\n\t\tfor j := 0; j < l+1; j++ {\n\t\t\tif a[i:i+l] == pat[j:j+l] {\n\t\t\t\treturn true\n\t\t\t}\n\t\t}\n\t}\n\treturn false\n}\n\n### Racket version\n\n#lang racket\n\n(define (cycpattern_check a b)\n"
+  },
+  {
+    "name": "HumanEval_114_minSubArraySum",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (minSubArraySum nums)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_114_minSubArraySum.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate minSubArraySum))\n    (check-within (candidate (list 2 3 4 1 2 4)) 1 0.001)\n    (check-within (candidate (list -1 -2 -3)) -6 0.001)\n    (check-within (candidate (list -1 -2 -3 2 -10)) -14 0.001)\n    (check-within (candidate (list -9999999999999999)) -9999999999999999 0.001)\n    (check-within (candidate (list 0 10 20 1000000)) 0 0.001)\n    (check-within (candidate (list -1 -2 -3 10 -5)) -6 0.001)\n    (check-within (candidate (list 100 -1 -2 -3 10 -5)) -6 0.001)\n    (check-within (candidate (list 10 11 13 8 3 4)) 3 0.001)\n    (check-within (candidate (list 100 -33 32 -1 0 -2)) -33 0.001)\n    (check-within (candidate (list -10)) -10 0.001)\n    (check-within (candidate (list 7)) 7 0.001)\n    (check-within (candidate (list 1 -1)) -1 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage minSubArraySum_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc minSubArraySum(nums []int) int {\n    maxSum := 0\n    s := 0\n    for _, num := range nums {\n        s += -num\n        if s < 0 {\n            s = 0\n        }\n        if s > maxSum {\n            maxSum = s\n        }\n    }\n    if maxSum == 0 {\n        maxSum = -1 << 31\n        for _, num := range nums {\n            if -num > maxSum {\n                maxSum = -num\n            }\n        }\n    }\n    return -maxSum\n}\n\n### Racket version\n\n#lang racket\n\n(define (minSubArraySum nums)\n"
+  },
+  {
+    "name": "HumanEval_88_sort_array",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (sort_array array)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_88_sort_array.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate sort_array))\n    (check-within (candidate (list )) (list ) 0.001)\n    (check-within (candidate (list 5)) (list 5) 0.001)\n    (check-within (candidate (list 2 4 3 0 1 5)) (list 0 1 2 3 4 5) 0.001)\n    (check-within (candidate (list 2 4 3 0 1 5 6)) (list 6 5 4 3 2 1 0) 0.001)\n    (check-within (candidate (list 2 1)) (list 1 2) 0.001)\n    (check-within (candidate (list 15 42 87 32 11 0)) (list 0 11 15 32 42 87) 0.001)\n    (check-within (candidate (list 21 14 23 11)) (list 23 21 14 11) 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage sort_array_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n    \"sort\"\n)\n\nfunc sort_array(array []int) []int {\n\tif len(array) == 0 {\n\t\treturn []int{}\n\t}\n\n\treverse := (array[0]+array[len(array)-1])%2 == 0\n\tsort.Ints(array)\n\n\tif reverse {\n\t\tfor i, j := 0, len(array)-1; i < j; i, j = i+1, j-1 {\n\t\t\tarray[i], array[j] = array[j], array[i]\n\t\t}\n\t}\n\n\treturn array\n}\n\n### Racket version\n\n#lang racket\n\n(define (sort_array array)\n"
+  },
+  {
+    "name": "HumanEval_62_derivative",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (derivative xs)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_62_derivative.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate derivative))\n    (check-within (candidate (list 3 1 2 4 5)) (list 1 4 12 20) 0.001)\n    (check-within (candidate (list 1 2 3)) (list 2 6) 0.001)\n    (check-within (candidate (list 3 2 1)) (list 2 2) 0.001)\n    (check-within (candidate (list 3 2 1 0 4)) (list 2 2 0 16) 0.001)\n    (check-within (candidate (list 1)) (list ) 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage derivative_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc derivative(xs []int) []int {\n    ys := make([]int, len(xs)-1)\n    for i, x := range xs[1:] {\n        ys[i] = (i+1) * x\n    }\n    return ys\n}\n\n### Racket version\n\n#lang racket\n\n(define (derivative xs)\n"
+  },
+  {
+    "name": "HumanEval_63_fibfib",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (fibfib n)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_63_fibfib.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate fibfib))\n    (check-within (candidate 2) 1 0.001)\n    (check-within (candidate 1) 0 0.001)\n    (check-within (candidate 5) 4 0.001)\n    (check-within (candidate 8) 24 0.001)\n    (check-within (candidate 10) 81 0.001)\n    (check-within (candidate 12) 274 0.001)\n    (check-within (candidate 14) 927 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage fibfib_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc fibfib(n int) int {\n    if n == 0 {\n        return 0\n    }\n    if n == 1 {\n        return 0\n    }\n    if n == 2 {\n        return 1\n    }\n    return fibfib(n-1) + fibfib(n-2) + fibfib(n-3)\n}\n\n### Racket version\n\n#lang racket\n\n(define (fibfib n)\n"
+  },
+  {
+    "name": "HumanEval_2_truncate_number",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (truncate_number number)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_2_truncate_number.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate truncate_number))\n    (check-within (candidate 3.5) 0.5 0.001)\n    (check-within (candidate 1.25) 0.25 0.001)\n    (check-within (candidate 123.0) 0.0 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage truncate_number_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc truncate_number(number float64) float64 {\n    return number - float64(int(number))\n}\n\n### Racket version\n\n#lang racket\n\n(define (truncate_number number)\n"
+  },
+  {
+    "name": "HumanEval_35_max_element",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (max_element l)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_35_max_element.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate max_element))\n    (check-within (candidate (list 1 2 3)) 3 0.001)\n    (check-within (candidate (list 5 3 -5 2 -3 3 9 0 124 1 -10)) 124 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage max_element_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc max_element(l []int) int {\n    m := l[0]\n    for _, e := range l {\n        if e > m {\n            m = e\n        }\n    }\n    return m\n}\n\n### Racket version\n\n#lang racket\n\n(define (max_element l)\n"
+  },
+  {
+    "name": "HumanEval_39_prime_fib",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (prime_fib n)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_39_prime_fib.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate prime_fib))\n    (check-within (candidate 1) 2 0.001)\n    (check-within (candidate 2) 3 0.001)\n    (check-within (candidate 3) 5 0.001)\n    (check-within (candidate 4) 13 0.001)\n    (check-within (candidate 5) 89 0.001)\n    (check-within (candidate 6) 233 0.001)\n    (check-within (candidate 7) 1597 0.001)\n    (check-within (candidate 8) 28657 0.001)\n    (check-within (candidate 9) 514229 0.001)\n    (check-within (candidate 10) 433494437 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage prime_fib_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc prime_fib(n int) int {\n    is_prime := func(p int) bool {\n        if p < 2 {\n            return false\n        }\n        for k := 2; k < p; k++ {\n            if p%k == 0 {\n                return false\n            }\n        }\n        return true\n    }\n    f := []int{0, 1}\n    for {\n        f = append(f, f[len(f)-1]+f[len(f)-2])\n        if is_prime(f[len(f)-1]) {\n            n -= 1\n        }\n        if n == 0 {\n            return f[len(f)-1]\n        }\n    }\n}\n\n### Racket version\n\n#lang racket\n\n(define (prime_fib n)\n"
+  },
+  {
+    "name": "HumanEval_8_sum_product",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (sum_product numbers)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_8_sum_product.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate sum_product))\n    (check-within (candidate (list )) (list 0 1) 0.001)\n    (check-within (candidate (list 1 1 1)) (list 3 1) 0.001)\n    (check-within (candidate (list 100 0)) (list 100 0) 0.001)\n    (check-within (candidate (list 3 5 7)) (list 15 105) 0.001)\n    (check-within (candidate (list 10)) (list 10 10) 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage sum_product_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc sum_product(numbers []int) []interface{} {\n    sumValue := 0\n    prodValue := 1\n\n    for _, n := range numbers {\n        sumValue += n\n        prodValue *= n\n    }\n\n    return []interface{}{sumValue, prodValue}\n}\n\n### Racket version\n\n#lang racket\n\n(define (sum_product numbers)\n"
+  },
+  {
+    "name": "HumanEval_122_add_elements",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (add_elements arr k)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_122_add_elements.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate add_elements))\n    (check-within (candidate (list 1 -2 -3 41 57 76 87 88 99) 3) -4 0.001)\n    (check-within (candidate (list 111 121 3 4000 5 6) 2) 0 0.001)\n    (check-within (candidate (list 11 21 3 90 5 6 7 8 9) 4) 125 0.001)\n    (check-within (candidate (list 111 21 3 4000 5 6 7 8 9) 4) 24 0.001)\n    (check-within (candidate (list 1) 1) 1 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage add_elements_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc add_elements(arr []int, k int) int {\n    sum := 0\n    for _, elem := range arr[:k] {\n        if elem < 100 {\n            sum += elem\n        }\n    }\n    return sum\n}\n\n### Racket version\n\n#lang racket\n\n(define (add_elements arr k)\n"
+  },
+  {
+    "name": "HumanEval_159_eat",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (eat number need remaining)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_159_eat.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate eat))\n    (check-within (candidate 5 6 10) (list 11 4) 0.001)\n    (check-within (candidate 4 8 9) (list 12 1) 0.001)\n    (check-within (candidate 1 10 10) (list 11 0) 0.001)\n    (check-within (candidate 2 11 5) (list 7 0) 0.001)\n    (check-within (candidate 4 5 7) (list 9 2) 0.001)\n    (check-within (candidate 4 5 1) (list 5 0) 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage eat_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc eat(number int, need int, remaining int) []int {\n\tif need <= remaining {\n\t\treturn []int{number + need, remaining - need}\n\t} else {\n\t\treturn []int{number + remaining, 0}\n\t}\n}\n\n### Racket version\n\n#lang racket\n\n(define (eat number need remaining)\n"
+  },
+  {
+    "name": "HumanEval_29_filter_by_prefix",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (filter_by_prefix strings prefix)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_29_filter_by_prefix.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate filter_by_prefix))\n    (check-within (candidate (list ) \"john\") (list ) 0.001)\n    (check-within (candidate (list \"xxx\" \"asd\" \"xxy\" \"john doe\" \"xxxAAA\" \"xxx\") \"xxx\") (list \"xxx\" \"xxxAAA\" \"xxx\") 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage filter_by_prefix_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc filter_by_prefix(strings []string, prefix string) []string {\n    var res []string\n    for _, s := range strings {\n        if len(s) >= len(prefix) && s[:len(prefix)] == prefix {\n            res = append(res, s)\n        }\n    }\n    return res\n}\n\n### Racket version\n\n#lang racket\n\n(define (filter_by_prefix strings prefix)\n"
+  },
+  {
+    "name": "HumanEval_102_choose_num",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (choose_num x y)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_102_choose_num.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate choose_num))\n    (check-within (candidate 12 15) 14 0.001)\n    (check-within (candidate 13 12) -1 0.001)\n    (check-within (candidate 33 12354) 12354 0.001)\n    (check-within (candidate 5234 5233) -1 0.001)\n    (check-within (candidate 6 29) 28 0.001)\n    (check-within (candidate 27 10) -1 0.001)\n    (check-within (candidate 7 7) -1 0.001)\n    (check-within (candidate 546 546) 546 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage choose_num_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc choose_num(x int, y int) int {\n    if x > y {\n        return -1\n    }\n    if y%2 == 0 {\n        return y\n    }\n    if x == y {\n        return -1\n    }\n    return y - 1\n}\n\n### Racket version\n\n#lang racket\n\n(define (choose_num x y)\n"
+  },
+  {
+    "name": "HumanEval_82_prime_length",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (prime_length string)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_82_prime_length.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate prime_length))\n    (check-within (candidate \"Hello\") #t 0.001)\n    (check-within (candidate \"abcdcba\") #t 0.001)\n    (check-within (candidate \"kittens\") #t 0.001)\n    (check-within (candidate \"orange\") #f 0.001)\n    (check-within (candidate \"wow\") #t 0.001)\n    (check-within (candidate \"world\") #t 0.001)\n    (check-within (candidate \"MadaM\") #t 0.001)\n    (check-within (candidate \"Wow\") #t 0.001)\n    (check-within (candidate \"\") #f 0.001)\n    (check-within (candidate \"HI\") #t 0.001)\n    (check-within (candidate \"go\") #t 0.001)\n    (check-within (candidate \"gogo\") #f 0.001)\n    (check-within (candidate \"aaaaaaaaaaaaaaa\") #f 0.001)\n    (check-within (candidate \"Madam\") #t 0.001)\n    (check-within (candidate \"M\") #f 0.001)\n    (check-within (candidate \"0\") #f 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage prime_length_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc prime_length(myString string) bool {\n\tl := len(myString)\n\tif l == 0 || l == 1 {\n\t\treturn false\n\t}\n\tfor i := 2; i < l; i++ {\n\t\tif l%i == 0 {\n\t\t\treturn false\n\t\t}\n\t}\n\treturn true\n}\n\n### Racket version\n\n#lang racket\n\n(define (prime_length string)\n"
+  },
+  {
+    "name": "HumanEval_60_sum_to_n",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (sum_to_n n)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_60_sum_to_n.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate sum_to_n))\n    (check-within (candidate 1) 1 0.001)\n    (check-within (candidate 6) 21 0.001)\n    (check-within (candidate 11) 66 0.001)\n    (check-within (candidate 30) 465 0.001)\n    (check-within (candidate 100) 5050 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage sum_to_n_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc sum_to_n(n int) int {\n    return n * (n + 1) / 2\n}\n\n### Racket version\n\n#lang racket\n\n(define (sum_to_n n)\n"
+  },
+  {
+    "name": "HumanEval_140_fix_spaces",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (fix_spaces text)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_140_fix_spaces.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate fix_spaces))\n    (check-within (candidate \"Example\") \"Example\" 0.001)\n    (check-within (candidate \"Mudasir Hanif \") \"Mudasir_Hanif_\" 0.001)\n    (check-within (candidate \"Yellow Yellow  Dirty  Fellow\") \"Yellow_Yellow__Dirty__Fellow\" 0.001)\n    (check-within (candidate \"Exa   mple\") \"Exa-mple\" 0.001)\n    (check-within (candidate \"   Exa 1 2 2 mple\") \"-Exa_1_2_2_mple\" 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage fix_spaces_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc fix_spaces(text string) string {\n    new_text := \"\"\n    start, end := 0, 0\n    for i, c := range text {\n        if c == ' ' {\n            end += 1\n        } else {\n            if end - start > 2 {\n                new_text += \"-\"+string(c)\n            } else if end - start > 0 {\n                for j := 0; j < end-start; j++ {\n                    new_text += \"_\"\n                }\n                new_text += string(c)\n            } else {\n                new_text += string(c)\n            }\n            start, end = i+1, i+1\n        }\n    }\n    if end - start > 2 {\n        new_text += \"-\"\n    } else if end - start > 0 {\n        for j := 0; j < end-start; j++ {\n            new_text += \"_\"\n        }\n    }\n    return new_text\n}\n\n### Racket version\n\n#lang racket\n\n(define (fix_spaces text)\n"
+  },
+  {
+    "name": "HumanEval_9_rolling_max",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (rolling_max numbers)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_9_rolling_max.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate rolling_max))\n    (check-within (candidate (list )) (list ) 0.001)\n    (check-within (candidate (list 1 2 3 4)) (list 1 2 3 4) 0.001)\n    (check-within (candidate (list 4 3 2 1)) (list 4 4 4 4) 0.001)\n    (check-within (candidate (list 3 2 3 100 3)) (list 3 3 3 100 100) 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage rolling_max_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc rolling_max(numbers []int) []int {\n    runningMax := 0\n    result := make([]int, 0)\n\n    for _, n := range numbers {\n        if runningMax < n {\n            runningMax = n\n        }\n        result = append(result, runningMax)\n    }\n\n    return result\n}\n\n### Racket version\n\n#lang racket\n\n(define (rolling_max numbers)\n"
+  },
+  {
+    "name": "HumanEval_118_get_closest_vowel",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (get_closest_vowel word)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_118_get_closest_vowel.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate get_closest_vowel))\n    (check-within (candidate \"yogurt\") \"u\" 0.001)\n    (check-within (candidate \"full\") \"u\" 0.001)\n    (check-within (candidate \"easy\") \"\" 0.001)\n    (check-within (candidate \"eAsy\") \"\" 0.001)\n    (check-within (candidate \"ali\") \"\" 0.001)\n    (check-within (candidate \"bad\") \"a\" 0.001)\n    (check-within (candidate \"most\") \"o\" 0.001)\n    (check-within (candidate \"ab\") \"\" 0.001)\n    (check-within (candidate \"ba\") \"\" 0.001)\n    (check-within (candidate \"quick\") \"\" 0.001)\n    (check-within (candidate \"anime\") \"i\" 0.001)\n    (check-within (candidate \"Asia\") \"\" 0.001)\n    (check-within (candidate \"Above\") \"o\" 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage get_closest_vowel_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc get_closest_vowel(word string) string {\n\tif len(word) < 3 {\n\t\treturn \"\"\n\t}\n\n\tvowels := map[rune]bool{\n\t\t'a': true, 'e': true, 'i': true, 'o': true, 'u': true,\n\t\t'A': true, 'E': true, 'I': true, 'O': true, 'U': true,\n\t}\n\n\tfor i := len(word) - 2; i > 0; i-- {\n\t\tif _, ok := vowels[rune(word[i])]; ok {\n\t\t\tif _, ok1 := vowels[rune(word[i+1])]; !ok1 {\n\t\t\t\tif _, ok2 := vowels[rune(word[i-1])]; !ok2 {\n\t\t\t\t\treturn string(word[i])\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n\n\treturn \"\"\n}\n\n### Racket version\n\n#lang racket\n\n(define (get_closest_vowel word)\n"
+  },
+  {
+    "name": "HumanEval_26_remove_duplicates",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (remove_duplicates numbers)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_26_remove_duplicates.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate remove_duplicates))\n    (check-within (candidate (list )) (list ) 0.001)\n    (check-within (candidate (list 1 2 3 4)) (list 1 2 3 4) 0.001)\n    (check-within (candidate (list 1 2 3 2 4 3 5)) (list 1 4 5) 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage remove_duplicates_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc remove_duplicates(numbers []int) []int {\n\tc := make(map[int]int)\n\tfor _, n := range numbers {\n\t\tc[n] += 1\n\t}\n\n\tresult := make([]int, 0)\n\tfor _, n := range numbers {\n\t\tif c[n] <= 1 {\n\t\t\tresult = append(result, n)\n\t\t}\n\t}\n\treturn result\n}\n\n### Racket version\n\n#lang racket\n\n(define (remove_duplicates numbers)\n"
+  },
+  {
+    "name": "HumanEval_54_same_chars",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (same_chars s0 s1)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_54_same_chars.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate same_chars))\n    (check-within (candidate \"eabcdzzzz\" \"dddzzzzzzzddeddabc\") #t 0.001)\n    (check-within (candidate \"abcd\" \"dddddddabc\") #t 0.001)\n    (check-within (candidate \"dddddddabc\" \"abcd\") #t 0.001)\n    (check-within (candidate \"eabcd\" \"dddddddabc\") #f 0.001)\n    (check-within (candidate \"abcd\" \"dddddddabcf\") #f 0.001)\n    (check-within (candidate \"eabcdzzzz\" \"dddzzzzzzzddddabc\") #f 0.001)\n    (check-within (candidate \"aabb\" \"aaccc\") #f 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage same_chars_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc same_chars(s0 string, s1 string) bool {\n    set0 := make(map[rune]bool)\n    set1 := make(map[rune]bool)\n    for _, r := range s0 {\n        set0[r] = true\n    }\n    for _, r := range s1 {\n        set1[r] = true\n    }\n    return fmt.Sprint(set0) == fmt.Sprint(set1)\n}\n\n### Racket version\n\n#lang racket\n\n(define (same_chars s0 s1)\n"
+  },
+  {
+    "name": "HumanEval_11_string_xor",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (string_xor a b)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_11_string_xor.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate string_xor))\n    (check-within (candidate \"111000\" \"101010\") \"010010\" 0.001)\n    (check-within (candidate \"1\" \"1\") \"0\" 0.001)\n    (check-within (candidate \"0101\" \"0000\") \"0101\" 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage string_xor_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc string_xor(a string, b string) string {\n    var res string\n    for i := 0; i < len(a); i++ {\n        if a[i] == b[i] {\n            res += \"0\"\n        } else {\n            res += \"1\"\n        }\n    }\n    return res\n}\n\n### Racket version\n\n#lang racket\n\n(define (string_xor a b)\n"
+  },
+  {
+    "name": "HumanEval_23_strlen",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (strlen string)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_23_strlen.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate strlen))\n    (check-within (candidate \"\") 0 0.001)\n    (check-within (candidate \"x\") 1 0.001)\n    (check-within (candidate \"asdasnakj\") 9 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage strlen_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc strlen(myString string) int {\n    return len(myString)\n}\n\n### Racket version\n\n#lang racket\n\n(define (strlen string)\n"
+  },
+  {
+    "name": "HumanEval_15_string_sequence",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (string_sequence n)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_15_string_sequence.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate string_sequence))\n    (check-within (candidate 0) \"0\" 0.001)\n    (check-within (candidate 3) \"0 1 2 3\" 0.001)\n    (check-within (candidate 10) \"0 1 2 3 4 5 6 7 8 9 10\" 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage string_sequence_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc string_sequence(n int) string {\n    s := \"\"\n    for i := 0; i <= n; i++ {\n        s += fmt.Sprintf(\"%d \", i)\n    }\n    return s[:len(s)-1]\n}\n\n### Racket version\n\n#lang racket\n\n(define (string_sequence n)\n"
+  },
+  {
+    "name": "HumanEval_135_can_arrange",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (can_arrange arr)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_135_can_arrange.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate can_arrange))\n    (check-within (candidate (list 1 2 4 3 5)) 3 0.001)\n    (check-within (candidate (list 1 2 4 5)) -1 0.001)\n    (check-within (candidate (list 1 4 2 5 6 7 8 9 10)) 2 0.001)\n    (check-within (candidate (list 4 8 5 7 3)) 4 0.001)\n    (check-within (candidate (list )) -1 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage can_arrange_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc can_arrange(arr []int) int {\n\tind := -1\n\tfor i := 1; i < len(arr); i++ {\n\t\tif arr[i] < arr[i-1] {\n\t\t\tind = i\n\t\t}\n\t}\n\treturn ind\n}\n\n### Racket version\n\n#lang racket\n\n(define (can_arrange arr)\n"
+  },
+  {
+    "name": "HumanEval_85_add",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (add lst)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_85_add.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate add))\n    (check-within (candidate (list 4 88)) 88 0.001)\n    (check-within (candidate (list 4 5 6 7 2 122)) 122 0.001)\n    (check-within (candidate (list 4 0 6 7)) 0 0.001)\n    (check-within (candidate (list 4 4 6 8)) 12 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage add_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc add(lst []int) int {\n    sum := 0\n    for i := 1; i < len(lst); i += 2 {\n        if lst[i]%2 == 0 {\n            sum += lst[i]\n        }\n    }\n    return sum\n}\n\n### Racket version\n\n#lang racket\n\n(define (add lst)\n"
+  },
+  {
+    "name": "HumanEval_5_intersperse",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (intersperse numbers delimeter)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_5_intersperse.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate intersperse))\n    (check-within (candidate (list ) 7) (list ) 0.001)\n    (check-within (candidate (list 5 6 3 2) 8) (list 5 8 6 8 3 8 2) 0.001)\n    (check-within (candidate (list 2 2 2) 2) (list 2 2 2 2 2) 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage intersperse_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc intersperse(numbers []int, delimeter int) []int {\n    if len(numbers) == 0 {\n        return []int{}\n    }\n\n    result := make([]int, 0)\n\n    for i, n := range numbers {\n        if i > 0 {\n            result = append(result, delimeter)\n        }\n        result = append(result, n)\n    }\n\n    return result\n}\n\n### Racket version\n\n#lang racket\n\n(define (intersperse numbers delimeter)\n"
+  },
+  {
+    "name": "HumanEval_119_match_parens",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (match_parens lst)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_119_match_parens.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate match_parens))\n    (check-within (candidate (list \"()(\" \")\")) \"Yes\" 0.001)\n    (check-within (candidate (list \")\" \")\")) \"No\" 0.001)\n    (check-within (candidate (list \"(()(())\" \"())())\")) \"No\" 0.001)\n    (check-within (candidate (list \")())\" \"(()()(\")) \"Yes\" 0.001)\n    (check-within (candidate (list \"(())))\" \"(()())((\")) \"Yes\" 0.001)\n    (check-within (candidate (list \"()\" \"())\")) \"No\" 0.001)\n    (check-within (candidate (list \"(()(\" \"()))()\")) \"Yes\" 0.001)\n    (check-within (candidate (list \"((((\" \"((())\")) \"No\" 0.001)\n    (check-within (candidate (list \")(()\" \"(()(\")) \"No\" 0.001)\n    (check-within (candidate (list \")(\" \")(\")) \"No\" 0.001)\n    (check-within (candidate (list \"(\" \")\")) \"Yes\" 0.001)\n    (check-within (candidate (list \")\" \"(\")) \"Yes\" 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage match_parens_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc match_parens(lst []string) string {\n    check := func(s string) bool {\n        val := 0\n        for _, i := range s {\n            if i == '(' {\n                val = val + 1\n            } else {\n                val = val - 1\n            }\n            if val < 0 {\n                return false\n            }\n        }\n        return val == 0\n    }\n\n    S1 := lst[0] + lst[1]\n    S2 := lst[1] + lst[0]\n    if check(S1) || check(S2) {\n        return \"Yes\"\n    }\n    return \"No\"\n}\n\n### Racket version\n\n#lang racket\n\n(define (match_parens lst)\n"
+  },
+  {
+    "name": "HumanEval_163_generate_integers",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (generate_integers a b)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_163_generate_integers.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate generate_integers))\n    (check-within (candidate 2 10) (list 2 4 6 8) 0.001)\n    (check-within (candidate 10 2) (list 2 4 6 8) 0.001)\n    (check-within (candidate 132 2) (list 2 4 6 8) 0.001)\n    (check-within (candidate 17 89) (list ) 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage generate_integers_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc generate_integers(a int, b int) []int {\n    lower := 2\n    if a > b {\n        lower = b\n    } else {\n        lower = a\n    }\n    if lower < 2 {\n        lower = 2\n    }\n\n    upper := 8\n    if a > b {\n        upper = a\n    } else {\n        upper = b\n    }\n    if upper > 8 {\n        upper = 8\n    }\n\n    var result []int\n    for i := lower; i <= upper; i++ {\n        if i % 2 == 0 {\n            result = append(result, i)\n        }\n    }\n    return result\n}\n\n### Racket version\n\n#lang racket\n\n(define (generate_integers a b)\n"
+  },
+  {
+    "name": "HumanEval_110_exchange",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (exchange lst1 lst2)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_110_exchange.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate exchange))\n    (check-within (candidate (list 1 2 3 4) (list 1 2 3 4)) \"YES\" 0.001)\n    (check-within (candidate (list 1 2 3 4) (list 1 5 3 4)) \"NO\" 0.001)\n    (check-within (candidate (list 1 2 3 4) (list 2 1 4 3)) \"YES\" 0.001)\n    (check-within (candidate (list 5 7 3) (list 2 6 4)) \"YES\" 0.001)\n    (check-within (candidate (list 5 7 3) (list 2 6 3)) \"NO\" 0.001)\n    (check-within (candidate (list 3 2 6 1 8 9) (list 3 5 5 1 1 1)) \"NO\" 0.001)\n    (check-within (candidate (list 100 200) (list 200 200)) \"YES\" 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage exchange_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc exchange(lst1 []int, lst2 []int) string {\n\todd := 0\n\teven := 0\n\tfor _, i := range lst1 {\n\t\tif i%2 == 1 {\n\t\t\todd += 1\n\t\t}\n\t}\n\tfor _, i := range lst2 {\n\t\tif i%2 == 0 {\n\t\t\teven += 1\n\t\t}\n\t}\n\tif even >= odd {\n\t\treturn \"YES\"\n\t}\n\treturn \"NO\"\n}\n\n### Racket version\n\n#lang racket\n\n(define (exchange lst1 lst2)\n"
+  },
+  {
+    "name": "HumanEval_138_is_equal_to_sum_even",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (is_equal_to_sum_even n)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_138_is_equal_to_sum_even.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate is_equal_to_sum_even))\n    (check-within (candidate 4) #f 0.001)\n    (check-within (candidate 6) #f 0.001)\n    (check-within (candidate 8) #t 0.001)\n    (check-within (candidate 10) #t 0.001)\n    (check-within (candidate 11) #f 0.001)\n    (check-within (candidate 12) #t 0.001)\n    (check-within (candidate 13) #f 0.001)\n    (check-within (candidate 16) #t 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage is_equal_to_sum_even_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc is_equal_to_sum_even(n int) bool {\n    return n%2 == 0 && n >= 8\n}\n\n### Racket version\n\n#lang racket\n\n(define (is_equal_to_sum_even n)\n"
+  },
+  {
+    "name": "HumanEval_79_decimal_to_binary",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (decimal_to_binary decimal)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_79_decimal_to_binary.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate decimal_to_binary))\n    (check-within (candidate 0) \"db0db\" 0.001)\n    (check-within (candidate 32) \"db100000db\" 0.001)\n    (check-within (candidate 103) \"db1100111db\" 0.001)\n    (check-within (candidate 15) \"db1111db\" 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage decimal_to_binary_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc decimal_to_binary(decimal int) string {\n    return fmt.Sprintf(\"db%bdb\", decimal)\n}\n\n### Racket version\n\n#lang racket\n\n(define (decimal_to_binary decimal)\n"
+  },
+  {
+    "name": "HumanEval_144_simplify",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (simplify x n)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_144_simplify.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate simplify))\n    (check-within (candidate \"1/5\" \"5/1\") #t 0.001)\n    (check-within (candidate \"1/6\" \"2/1\") #f 0.001)\n    (check-within (candidate \"5/1\" \"3/1\") #t 0.001)\n    (check-within (candidate \"7/10\" \"10/2\") #f 0.001)\n    (check-within (candidate \"2/10\" \"50/10\") #t 0.001)\n    (check-within (candidate \"7/2\" \"4/2\") #t 0.001)\n    (check-within (candidate \"11/6\" \"6/1\") #t 0.001)\n    (check-within (candidate \"2/3\" \"5/2\") #f 0.001)\n    (check-within (candidate \"5/2\" \"3/5\") #f 0.001)\n    (check-within (candidate \"2/4\" \"8/4\") #t 0.001)\n    (check-within (candidate \"2/4\" \"4/2\") #t 0.001)\n    (check-within (candidate \"1/5\" \"5/1\") #t 0.001)\n    (check-within (candidate \"1/5\" \"1/5\") #f 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage simplify_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc simplify(x string, n string) bool {\n    var a, b, c, d int\n    fmt.Sscanf(x, \"%d/%d\", &a, &b)\n    fmt.Sscanf(n, \"%d/%d\", &c, &d)\n    numerator := a * c\n    denom := b * d\n    if float64(numerator)/float64(denom) == float64(int(numerator/denom)) {\n        return true\n    }\n    return false\n}\n\n### Racket version\n\n#lang racket\n\n(define (simplify x n)\n"
+  },
+  {
+    "name": "HumanEval_161_solve",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (solve s)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_161_solve.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate solve))\n    (check-within (candidate \"AsDf\") \"aSdF\" 0.001)\n    (check-within (candidate \"1234\") \"4321\" 0.001)\n    (check-within (candidate \"ab\") \"AB\" 0.001)\n    (check-within (candidate \"#a@C\") \"#A@c\" 0.001)\n    (check-within (candidate \"#AsdfW^45\") \"#aSDFw^45\" 0.001)\n    (check-within (candidate \"#6@2\") \"2@6#\" 0.001)\n    (check-within (candidate \"#$a^D\") \"#$A^d\" 0.001)\n    (check-within (candidate \"#ccc\") \"#CCC\" 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage solve_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc solve(s string) string {\n\tflg := 0\n\tidx := 0\n\tnewStr := []rune(s)\n\tfor _, i := range s {\n\t\tif (i >= 'a' && i <= 'z') || (i >= 'A' && i <= 'Z') {\n\t\t\tnewStr[idx] = rune(i) ^ 32\n\t\t\tflg = 1\n\t\t}\n\t\tidx += 1\n\t}\n\tif flg == 0 {\n\t\tfor i, j := 0, len(newStr)-1; i < j; i, j = i+1, j-1 {\n\t\t\tnewStr[i], newStr[j] = newStr[j], newStr[i]\n\t\t}\n\t}\n\treturn string(newStr)\n}\n\n### Racket version\n\n#lang racket\n\n(define (solve s)\n"
+  },
+  {
+    "name": "HumanEval_157_right_angle_triangle",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (right_angle_triangle a b c)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_157_right_angle_triangle.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate right_angle_triangle))\n    (check-within (candidate 3 4 5) #t 0.001)\n    (check-within (candidate 1 2 3) #f 0.001)\n    (check-within (candidate 10 6 8) #t 0.001)\n    (check-within (candidate 2 2 2) #f 0.001)\n    (check-within (candidate 7 24 25) #t 0.001)\n    (check-within (candidate 10 5 7) #f 0.001)\n    (check-within (candidate 5 12 13) #t 0.001)\n    (check-within (candidate 15 8 17) #t 0.001)\n    (check-within (candidate 48 55 73) #t 0.001)\n    (check-within (candidate 1 1 1) #f 0.001)\n    (check-within (candidate 2 2 10) #f 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage right_angle_triangle_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc right_angle_triangle(a int, b int, c int) bool {\n    return a*a == b*b+c*c || b*b == a*a+c*c || c*c == a*a+b*b\n}\n\n### Racket version\n\n#lang racket\n\n(define (right_angle_triangle a b c)\n"
+  },
+  {
+    "name": "HumanEval_151_double_the_difference",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (double_the_difference lst)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_151_double_the_difference.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate double_the_difference))\n    (check-within (candidate (list )) 0 0.001)\n    (check-within (candidate (list 5.0 4.0)) 25 0.001)\n    (check-within (candidate (list 0.1 0.2 0.3)) 0 0.001)\n    (check-within (candidate (list -10.0 -20.0 -30.0)) 0 0.001)\n    (check-within (candidate (list -1.0 -2.0 8.0)) 0 0.001)\n    (check-within (candidate (list 0.2 3.0 5.0)) 34 0.001)\n    (check-within (candidate (list -9.0 -7.0 -5.0 -3.0 -1.0 1.0 3.0 5.0 7.0 9.0)) 165 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage double_the_difference_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc double_the_difference(lst []float64) int {\n    sum := 0\n    for _, i := range lst {\n        if i > 0 && int(i)%2 != 0 && fmt.Sprintf(\"%f\", i)[len(fmt.Sprintf(\"%f\", i))-2] != '.' {\n            sum += int(i*i)\n        }\n    }\n    return sum\n}\n\n### Racket version\n\n#lang racket\n\n(define (double_the_difference lst)\n"
+  },
+  {
+    "name": "HumanEval_3_below_zero",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (below_zero operations)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_3_below_zero.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate below_zero))\n    (check-within (candidate (list )) #f 0.001)\n    (check-within (candidate (list 1 2 -3 1 2 -3)) #f 0.001)\n    (check-within (candidate (list 1 2 -4 5 6)) #t 0.001)\n    (check-within (candidate (list 1 -1 2 -2 5 -5 4 -4)) #f 0.001)\n    (check-within (candidate (list 1 -1 2 -2 5 -5 4 -5)) #t 0.001)\n    (check-within (candidate (list 1 -2 2 -2 5 -5 4 -4)) #t 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage below_zero_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc below_zero(operations []int) bool {\n\tbalance := 0\n\n\tfor _, op := range operations {\n\t\tbalance += op\n\t\tif balance < 0 {\n\t\t\treturn true\n\t\t}\n\t}\n\n\treturn false\n}\n\n### Racket version\n\n#lang racket\n\n(define (below_zero operations)\n"
+  },
+  {
+    "name": "HumanEval_13_greatest_common_divisor",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (greatest_common_divisor a b)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_13_greatest_common_divisor.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate greatest_common_divisor))\n    (check-within (candidate 3 7) 1 0.001)\n    (check-within (candidate 10 15) 5 0.001)\n    (check-within (candidate 49 14) 7 0.001)\n    (check-within (candidate 144 60) 12 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage greatest_common_divisor_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc greatest_common_divisor(a int, b int) int {\n    for b != 0 {\n        a, b = b, a%b\n    }\n    return a\n}\n\n### Racket version\n\n#lang racket\n\n(define (greatest_common_divisor a b)\n"
+  },
+  {
+    "name": "HumanEval_106_f",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (f n)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_106_f.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate f))\n    (check-within (candidate 5) (list 1 2 6 24 15) 0.001)\n    (check-within (candidate 7) (list 1 2 6 24 15 720 28) 0.001)\n    (check-within (candidate 1) (list 1) 0.001)\n    (check-within (candidate 3) (list 1 2 6) 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage f_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc f(n int) []int {\n    ret := []int{}\n    for i := 1; i <= n; i++ {\n        if i%2 == 0 {\n            x := 1\n            for j := 1; j <= i; j++ { x *= j }\n            ret = append(ret, x)\n        } else {\n            x := 0\n            for j := 1; j <= i; j++ { x += j }\n            ret = append(ret, x)\n        }\n    }\n    return ret\n}\n\n### Racket version\n\n#lang racket\n\n(define (f n)\n"
+  },
+  {
+    "name": "HumanEval_57_monotonic",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (monotonic l)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_57_monotonic.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate monotonic))\n    (check-within (candidate (list 1 2 4 10)) #t 0.001)\n    (check-within (candidate (list 1 2 4 20)) #t 0.001)\n    (check-within (candidate (list 1 20 4 10)) #f 0.001)\n    (check-within (candidate (list 4 1 0 -10)) #t 0.001)\n    (check-within (candidate (list 4 1 1 0)) #t 0.001)\n    (check-within (candidate (list 1 2 3 2 5 60)) #f 0.001)\n    (check-within (candidate (list 1 2 3 4 5 60)) #t 0.001)\n    (check-within (candidate (list 9 9 9 9)) #t 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage monotonic_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc monotonic(l []int) bool {\n    isSorted := func(l []int, reverse bool) bool {\n        for i := 1; i < len(l); i++ {\n            if reverse {\n                if l[i-1] < l[i] {\n                    return false\n                }\n            } else {\n                if l[i-1] > l[i] {\n                    return false\n                }\n            }\n        }\n        return true\n    }\n\n    if isSorted(l, false) || isSorted(l, true) {\n        return true\n    }\n    return false\n}\n\n### Racket version\n\n#lang racket\n\n(define (monotonic l)\n"
+  },
+  {
+    "name": "HumanEval_105_by_length",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (by_length arr)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_105_by_length.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate by_length))\n    (check-within (candidate (list 2 1 1 4 5 8 2 3)) (list \"Eight\" \"Five\" \"Four\" \"Three\" \"Two\" \"Two\" \"One\" \"One\") 0.001)\n    (check-within (candidate (list )) (list ) 0.001)\n    (check-within (candidate (list 1 -1 55)) (list \"One\") 0.001)\n    (check-within (candidate (list 1 -1 3 2)) (list \"Three\" \"Two\" \"One\") 0.001)\n    (check-within (candidate (list 9 4 8)) (list \"Nine\" \"Eight\" \"Four\") 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage by_length_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc by_length(arr []int) []string {\n    dic := map[int]string{\n        1: \"One\",\n        2: \"Two\",\n        3: \"Three\",\n        4: \"Four\",\n        5: \"Five\",\n        6: \"Six\",\n        7: \"Seven\",\n        8: \"Eight\",\n        9: \"Nine\",\n    }\n    sorted_arr := make([]int, len(arr))\n    copy(sorted_arr, arr)\n    for i := 0; i < len(sorted_arr); i++ {\n        for j := i + 1; j < len(sorted_arr); j++ {\n            if sorted_arr[i] < sorted_arr[j] {\n                sorted_arr[i], sorted_arr[j] = sorted_arr[j], sorted_arr[i]\n            }\n        }\n    }\n    new_arr := []string{}\n    for _, val := range sorted_arr {\n        if word, ok := dic[val]; ok {\n            new_arr = append(new_arr, word)\n        }\n    }\n    return new_arr\n}\n\n### Racket version\n\n#lang racket\n\n(define (by_length arr)\n"
+  },
+  {
+    "name": "HumanEval_51_remove_vowels",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (remove_vowels text)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_51_remove_vowels.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate remove_vowels))\n    (check-within (candidate \"\") \"\" 0.001)\n    (check-within (candidate \"abcdef\nghijklm\") \"bcdf\nghjklm\" 0.001)\n    (check-within (candidate \"fedcba\") \"fdcb\" 0.001)\n    (check-within (candidate \"eeeee\") \"\" 0.001)\n    (check-within (candidate \"acBAA\") \"cB\" 0.001)\n    (check-within (candidate \"EcBOO\") \"cB\" 0.001)\n    (check-within (candidate \"ybcd\") \"ybcd\" 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage remove_vowels_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc remove_vowels(text string) string {\n    result := \"\"\n    for _, s := range text {\n        if s != 'a' && s != 'e' && s != 'i' && s != 'o' && s != 'u' && s != 'A' && s != 'E' && s != 'I' && s != 'O' && s != 'U' {\n            result += string(s)\n        }\n    }\n    return result\n}\n\n### Racket version\n\n#lang racket\n\n(define (remove_vowels text)\n"
+  },
+  {
+    "name": "HumanEval_56_correct_bracketing",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (correct_bracketing brackets)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_56_correct_bracketing.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate correct_bracketing))\n    (check-within (candidate \"<>\") #t 0.001)\n    (check-within (candidate \"<<><>>\") #t 0.001)\n    (check-within (candidate \"<><><<><>><>\") #t 0.001)\n    (check-within (candidate \"<><><<<><><>><>><<><><<>>>\") #t 0.001)\n    (check-within (candidate \"<<<><>>>>\") #f 0.001)\n    (check-within (candidate \"><<>\") #f 0.001)\n    (check-within (candidate \"<\") #f 0.001)\n    (check-within (candidate \"<<<<\") #f 0.001)\n    (check-within (candidate \">\") #f 0.001)\n    (check-within (candidate \"<<>\") #f 0.001)\n    (check-within (candidate \"<><><<><>><>><<>\") #f 0.001)\n    (check-within (candidate \"<><><<><>><>>><>\") #f 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage correct_bracketing_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc correct_bracketing(brackets string) bool {\n\tdepth := 0\n\tfor _, b := range brackets {\n\t\tif b == '<' {\n\t\t\tdepth += 1\n\t\t} else {\n\t\t\tdepth -= 1\n\t\t}\n\t\tif depth < 0 {\n\t\t\treturn false\n\t\t}\n\t}\n\treturn depth == 0\n}\n\n### Racket version\n\n#lang racket\n\n(define (correct_bracketing brackets)\n"
+  },
+  {
+    "name": "HumanEval_21_rescale_to_unit",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (rescale_to_unit numbers)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_21_rescale_to_unit.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate rescale_to_unit))\n    (check-within (candidate (list 2.0 49.9)) (list 0.0 1.0) 0.001)\n    (check-within (candidate (list 100.0 49.9)) (list 1.0 0.0) 0.001)\n    (check-within (candidate (list 1.0 2.0 3.0 4.0 5.0)) (list 0.0 0.25 0.5 0.75 1.0) 0.001)\n    (check-within (candidate (list 2.0 1.0 5.0 3.0 4.0)) (list 0.25 0.0 1.0 0.5 0.75) 0.001)\n    (check-within (candidate (list 12.0 11.0 15.0 13.0 14.0)) (list 0.25 0.0 1.0 0.5 0.75) 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage rescale_to_unit_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc rescale_to_unit(numbers []float64) []float64 {\n    minNumber := numbers[0]\n    maxNumber := numbers[0]\n\n    for _, x := range numbers {\n        if x < minNumber {\n            minNumber = x\n        }\n        if x > maxNumber {\n            maxNumber = x\n        }\n    }\n\n    result := make([]float64, len(numbers))\n    for i, x := range numbers {\n        result[i] = (x - minNumber) / (maxNumber - minNumber)\n    }\n\n    return result\n}\n\n### Racket version\n\n#lang racket\n\n(define (rescale_to_unit numbers)\n"
+  },
+  {
+    "name": "HumanEval_127_intersection",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (intersection interval1 interval2)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_127_intersection.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate intersection))\n    (check-within (candidate (list 1 2) (list 2 3)) \"NO\" 0.001)\n    (check-within (candidate (list -1 1) (list 0 4)) \"NO\" 0.001)\n    (check-within (candidate (list -3 -1) (list -5 5)) \"YES\" 0.001)\n    (check-within (candidate (list -2 2) (list -4 0)) \"YES\" 0.001)\n    (check-within (candidate (list -11 2) (list -1 -1)) \"NO\" 0.001)\n    (check-within (candidate (list 1 2) (list 3 5)) \"NO\" 0.001)\n    (check-within (candidate (list 1 2) (list 1 2)) \"NO\" 0.001)\n    (check-within (candidate (list -2 -2) (list -3 -2)) \"NO\" 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage intersection_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc intersection(interval1 []interface{}, interval2 []interface{}) string {\n    is_prime := func(num int) bool {\n        if num == 1 || num == 0 {\n            return false\n        }\n        if num == 2 {\n            return true\n        }\n        for i := 2; i < num; i++ {\n            if num%i == 0 {\n                return false\n            }\n        }\n        return true\n    }\n\n    l := interval1[0].(int)\n    if interval2[0].(int) > l {\n        l = interval2[0].(int)\n    }\n\n    r := interval1[1].(int)\n    if interval2[1].(int) < r {\n        r = interval2[1].(int)\n    }\n\n    length := r - l\n    if length > 0 && is_prime(length) {\n        return \"YES\"\n    }\n    return \"NO\"\n}\n\n### Racket version\n\n#lang racket\n\n(define (intersection interval1 interval2)\n"
+  },
+  {
+    "name": "HumanEval_78_hex_key",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (hex_key num)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_78_hex_key.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate hex_key))\n    (check-within (candidate \"AB\") 1 0.001)\n    (check-within (candidate \"1077E\") 2 0.001)\n    (check-within (candidate \"ABED1A33\") 4 0.001)\n    (check-within (candidate \"2020\") 2 0.001)\n    (check-within (candidate \"123456789ABCDEF0\") 6 0.001)\n    (check-within (candidate \"112233445566778899AABBCCDDEEFF00\") 12 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage hex_key_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc hex_key(num string) int {\n\tprimes := []rune{'2', '3', '5', '7', 'B', 'D'}\n\ttotal := 0\n\tfor _, c := range num {\n\t\tfor _, p := range primes {\n\t\t\tif c == p {\n\t\t\t\ttotal += 1\n\t\t\t}\n\t\t}\n\t}\n\treturn total\n}\n\n### Racket version\n\n#lang racket\n\n(define (hex_key num)\n"
+  },
+  {
+    "name": "HumanEval_70_strange_sort_list",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (strange_sort_list lst)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_70_strange_sort_list.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate strange_sort_list))\n    (check-within (candidate (list 1 2 3 4)) (list 1 4 2 3) 0.001)\n    (check-within (candidate (list 5 6 7 8 9)) (list 5 9 6 8 7) 0.001)\n    (check-within (candidate (list 1 2 3 4 5)) (list 1 5 2 4 3) 0.001)\n    (check-within (candidate (list 5 6 7 8 9 1)) (list 1 9 5 8 6 7) 0.001)\n    (check-within (candidate (list 5 5 5 5)) (list 5 5 5 5) 0.001)\n    (check-within (candidate (list )) (list ) 0.001)\n    (check-within (candidate (list 1 2 3 4 5 6 7 8)) (list 1 8 2 7 3 6 4 5) 0.001)\n    (check-within (candidate (list 0 2 2 2 5 5 -5 -5)) (list -5 5 -5 5 0 2 2 2) 0.001)\n    (check-within (candidate (list 111111)) (list 111111) 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage strange_sort_list_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc strange_sort_list(lst []int) []int {\n    res, switch_ := []int{}, true\n    for len(lst) > 0 {\n        if switch_ {\n            min := lst[0]\n            for _, v := range lst {\n                if v < min {\n                    min = v\n                }\n            }\n            res = append(res, min)\n        } else {\n            max := lst[0]\n            for _, v := range lst {\n                if v > max {\n                    max = v\n                }\n            }\n            res = append(res, max)\n        }\n        for i, v := range lst {\n            if v == res[len(res)-1] {\n                lst = append(lst[:i], lst[i+1:]...)\n                break\n            }\n        }\n        switch_ = !switch_\n    }\n    return res\n}\n\n### Racket version\n\n#lang racket\n\n(define (strange_sort_list lst)\n"
+  },
+  {
+    "name": "HumanEval_14_all_prefixes",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (all_prefixes string)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_14_all_prefixes.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate all_prefixes))\n    (check-within (candidate \"\") (list ) 0.001)\n    (check-within (candidate \"asdfgh\") (list \"a\" \"as\" \"asd\" \"asdf\" \"asdfg\" \"asdfgh\") 0.001)\n    (check-within (candidate \"WWW\") (list \"W\" \"WW\" \"WWW\") 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage all_prefixes_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc all_prefixes(myString string) []string {\n    var result []string\n\n    for i := 0; i < len(myString); i++ {\n        result = append(result, myString[:i+1])\n    }\n    return result\n}\n\n### Racket version\n\n#lang racket\n\n(define (all_prefixes string)\n"
+  },
+  {
+    "name": "HumanEval_18_how_many_times",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (how_many_times string substring)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_18_how_many_times.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate how_many_times))\n    (check-within (candidate \"\" \"x\") 0 0.001)\n    (check-within (candidate \"xyxyxyx\" \"x\") 4 0.001)\n    (check-within (candidate \"cacacacac\" \"cac\") 4 0.001)\n    (check-within (candidate \"john doe\" \"john\") 1 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage how_many_times_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc how_many_times(myString string, substring string) int {\n\ttimes := 0\n\n\tfor i := 0; i < len(myString)-len(substring)+1; i++ {\n\t\tif myString[i:i+len(substring)] == substring {\n\t\t\ttimes += 1\n\t\t}\n\t}\n\n\treturn times\n}\n\n### Racket version\n\n#lang racket\n\n(define (how_many_times string substring)\n"
+  },
+  {
+    "name": "HumanEval_121_solution",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (solution lst)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_121_solution.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate solution))\n    (check-within (candidate (list 5 8 7 1)) 12 0.001)\n    (check-within (candidate (list 3 3 3 3 3)) 9 0.001)\n    (check-within (candidate (list 30 13 24 321)) 0 0.001)\n    (check-within (candidate (list 5 9)) 5 0.001)\n    (check-within (candidate (list 2 4 8)) 0 0.001)\n    (check-within (candidate (list 30 13 23 32)) 23 0.001)\n    (check-within (candidate (list 3 13 2 9)) 3 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage solution_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc solution(lst []int) int {\n    sum := 0\n    for i, x := range lst {\n        if i%2 == 0 && x%2 == 1 {\n            sum += x\n        }\n    }\n    return sum\n}\n\n### Racket version\n\n#lang racket\n\n(define (solution lst)\n"
+  },
+  {
+    "name": "HumanEval_126_is_sorted",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (is_sorted lst)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_126_is_sorted.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate is_sorted))\n    (check-within (candidate (list 5)) #t 0.001)\n    (check-within (candidate (list 1 2 3 4 5)) #t 0.001)\n    (check-within (candidate (list 1 3 2 4 5)) #f 0.001)\n    (check-within (candidate (list 1 2 3 4 5 6)) #t 0.001)\n    (check-within (candidate (list 1 2 3 4 5 6 7)) #t 0.001)\n    (check-within (candidate (list 1 3 2 4 5 6 7)) #f 0.001)\n    (check-within (candidate (list )) #t 0.001)\n    (check-within (candidate (list 1)) #t 0.001)\n    (check-within (candidate (list 3 2 1)) #f 0.001)\n    (check-within (candidate (list 1 2 2 2 3 4)) #f 0.001)\n    (check-within (candidate (list 1 2 3 3 3 4)) #f 0.001)\n    (check-within (candidate (list 1 2 2 3 3 4)) #t 0.001)\n    (check-within (candidate (list 1 2 3 4)) #t 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage is_sorted_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc is_sorted(lst []int) bool {\n    count_digit := make(map[int]int)\n    for _, i := range lst {\n        count_digit[i]++\n    }\n    for _, v := range count_digit {\n        if v > 2 {\n            return false\n        }\n    }\n    for i := 1; i < len(lst); i++ {\n        if lst[i-1] > lst[i] {\n            return false\n        }\n    }\n    return true\n}\n\n### Racket version\n\n#lang racket\n\n(define (is_sorted lst)\n"
+  },
+  {
+    "name": "HumanEval_69_search",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (search lst)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_69_search.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate search))\n    (check-within (candidate (list 5 5 5 5 1)) 1 0.001)\n    (check-within (candidate (list 4 1 4 1 4 4)) 4 0.001)\n    (check-within (candidate (list 3 3)) -1 0.001)\n    (check-within (candidate (list 8 8 8 8 8 8 8 8)) 8 0.001)\n    (check-within (candidate (list 2 3 3 2 2)) 2 0.001)\n    (check-within (candidate (list 2 7 8 8 4 8 7 3 9 6 5 10 4 3 6 7 1 7 4 10 8 1)) 1 0.001)\n    (check-within (candidate (list 3 2 8 2)) 2 0.001)\n    (check-within (candidate (list 6 7 1 8 8 10 5 8 5 3 10)) 1 0.001)\n    (check-within (candidate (list 8 8 3 6 5 6 4)) -1 0.001)\n    (check-within (candidate (list 6 9 6 7 1 4 7 1 8 8 9 8 10 10 8 4 10 4 10 1 2 9 5 7 9)) 1 0.001)\n    (check-within (candidate (list 1 9 10 1 3)) 1 0.001)\n    (check-within (candidate (list 6 9 7 5 8 7 5 3 7 5 10 10 3 6 10 2 8 6 5 4 9 5 3 10)) 5 0.001)\n    (check-within (candidate (list 1)) 1 0.001)\n    (check-within (candidate (list 8 8 10 6 4 3 5 8 2 4 2 8 4 6 10 4 2 1 10 2 1 1 5)) 4 0.001)\n    (check-within (candidate (list 2 10 4 8 2 10 5 1 2 9 5 5 6 3 8 6 4 10)) 2 0.001)\n    (check-within (candidate (list 1 6 10 1 6 9 10 8 6 8 7 3)) 1 0.001)\n    (check-within (candidate (list 9 2 4 1 5 1 5 2 5 7 7 7 3 10 1 5 4 2 8 4 1 9 10 7 10 2 8 10 9 4)) 4 0.001)\n    (check-within (candidate (list 2 6 4 2 8 7 5 6 4 10 4 6 3 7 8 8 3 1 4 2 2 10 7)) 4 0.001)\n    (check-within (candidate (list 9 8 6 10 2 6 10 2 7 8 10 3 8 2 6 2 3 1)) 2 0.001)\n    (check-within (candidate (list 5 5 3 9 5 6 3 2 8 5 6 10 10 6 8 4 10 7 7 10 8)) -1 0.001)\n    (check-within (candidate (list 10)) -1 0.001)\n    (check-within (candidate (list 9 7 7 2 4 7 2 10 9 7 5 7 2)) 2 0.001)\n    (check-within (candidate (list 5 4 10 2 1 1 10 3 6 1 8)) 1 0.001)\n    (check-within (candidate (list 7 9 9 9 3 4 1 5 9 1 2 1 1 10 7 5 6 7 6 7 7 6)) 1 0.001)\n    (check-within (candidate (list 3 10 10 9 2)) -1 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage search_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc search(lst []int) int {\n    max := 0\n    for _, i := range lst {\n        if i > max {\n            max = i\n        }\n    }\n\n    frq := make([]int, max+1)\n    for _, i := range lst {\n        frq[i]++\n    }\n\n    ans := -1\n    for i := 1; i < len(frq); i++ {\n        if frq[i] >= i {\n            ans = i\n        }\n    }\n\n    return ans\n}\n\n### Racket version\n\n#lang racket\n\n(define (search lst)\n"
+  },
+  {
+    "name": "HumanEval_68_pluck",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (pluck arr)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_68_pluck.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate pluck))\n    (check-within (candidate (list 4 2 3)) (list 2 1) 0.001)\n    (check-within (candidate (list 1 2 3)) (list 2 1) 0.001)\n    (check-within (candidate (list )) (list ) 0.001)\n    (check-within (candidate (list 5 0 3 0 4 2)) (list 0 1) 0.001)\n    (check-within (candidate (list 1 2 3 0 5 3)) (list 0 3) 0.001)\n    (check-within (candidate (list 5 4 8 4 8)) (list 4 1) 0.001)\n    (check-within (candidate (list 7 6 7 1)) (list 6 1) 0.001)\n    (check-within (candidate (list 7 9 7 1)) (list ) 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage pluck_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc pluck(arr []int) []int {\n    if len(arr) == 0 { return []int{} }\n    evens := []int{}\n    for _, v := range arr {\n        if v%2 == 0 {\n            evens = append(evens, v)\n        }\n    }\n    if len(evens) == 0 { return []int{} }\n    min := evens[0]\n    for _, v := range evens {\n        if v < min {\n            min = v\n        }\n    }\n    for i, v := range arr {\n        if v == min {\n            return []int{min, i}\n        }\n    }\n    return []int{}\n}\n\n### Racket version\n\n#lang racket\n\n(define (pluck arr)\n"
+  },
+  {
+    "name": "HumanEval_43_pairs_sum_to_zero",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (pairs_sum_to_zero l)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_43_pairs_sum_to_zero.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate pairs_sum_to_zero))\n    (check-within (candidate (list 1 3 5 0)) #f 0.001)\n    (check-within (candidate (list 1 3 -2 1)) #f 0.001)\n    (check-within (candidate (list 1 2 3 7)) #f 0.001)\n    (check-within (candidate (list 2 4 -5 3 5 7)) #t 0.001)\n    (check-within (candidate (list 1)) #f 0.001)\n    (check-within (candidate (list -3 9 -1 3 2 30)) #t 0.001)\n    (check-within (candidate (list -3 9 -1 3 2 31)) #t 0.001)\n    (check-within (candidate (list -3 9 -1 4 2 30)) #f 0.001)\n    (check-within (candidate (list -3 9 -1 4 2 31)) #f 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage pairs_sum_to_zero_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc pairs_sum_to_zero(l []int) bool {\n    for i, l1 := range l {\n        for _, l2 := range l[i+1:] {\n            if l1+l2 == 0 {\n                return true\n            }\n        }\n    }\n    return false\n}\n\n### Racket version\n\n#lang racket\n\n(define (pairs_sum_to_zero l)\n"
+  },
+  {
+    "name": "HumanEval_30_get_positive",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (get_positive l)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_30_get_positive.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate get_positive))\n    (check-within (candidate (list -1 -2 4 5 6)) (list 4 5 6) 0.001)\n    (check-within (candidate (list 5 3 -5 2 3 3 9 0 123 1 -10)) (list 5 3 2 3 3 9 123 1) 0.001)\n    (check-within (candidate (list -1 -2)) (list ) 0.001)\n    (check-within (candidate (list )) (list ) 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage get_positive_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc get_positive(l []int) []int {\n    var r []int\n    for _, e := range l {\n        if e > 0 {\n            r = append(r, e)\n        }\n    }\n    return r\n}\n\n### Racket version\n\n#lang racket\n\n(define (get_positive l)\n"
+  },
+  {
+    "name": "HumanEval_132_is_nested",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (is_nested string)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_132_is_nested.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate is_nested))\n    (check-within (candidate \"[[]]\") #t 0.001)\n    (check-within (candidate \"[]]]]]]][[[[[]\") #f 0.001)\n    (check-within (candidate \"[][]\") #f 0.001)\n    (check-within (candidate \"[]\") #f 0.001)\n    (check-within (candidate \"[[[[]]]]\") #t 0.001)\n    (check-within (candidate \"[]]]]]]]]]]\") #f 0.001)\n    (check-within (candidate \"[][][[]]\") #t 0.001)\n    (check-within (candidate \"[[]\") #f 0.001)\n    (check-within (candidate \"[]]\") #f 0.001)\n    (check-within (candidate \"[[]][[\") #t 0.001)\n    (check-within (candidate \"[[][]]\") #t 0.001)\n    (check-within (candidate \"\") #f 0.001)\n    (check-within (candidate \"[[[[[[[[\") #f 0.001)\n    (check-within (candidate \"]]]]]]]]\") #f 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage is_nested_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc is_nested(myString string) bool {\n    opening_bracket_index := []int{}\n    closing_bracket_index := []int{}\n    for i := 0; i < len(myString); i++ {\n        if myString[i] == '[' {\n            opening_bracket_index = append(opening_bracket_index, i)\n        } else {\n            closing_bracket_index = append(closing_bracket_index, i)\n        }\n    }\n    for i, j := 0, len(closing_bracket_index)-1; i < j; i, j = i+1, j-1 {\n        closing_bracket_index[i], closing_bracket_index[j] = closing_bracket_index[j], closing_bracket_index[i]\n    }\n    cnt := 0\n    i := 0\n    l := len(closing_bracket_index)\n    for _, idx := range opening_bracket_index {\n        if i < l && idx < closing_bracket_index[i] {\n            cnt += 1\n            i += 1\n        }\n    }\n    return cnt >= 2\n}\n\n### Racket version\n\n#lang racket\n\n(define (is_nested string)\n"
+  },
+  {
+    "name": "HumanEval_48_is_palindrome",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (is_palindrome text)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_48_is_palindrome.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate is_palindrome))\n    (check-within (candidate \"\") #t 0.001)\n    (check-within (candidate \"aba\") #t 0.001)\n    (check-within (candidate \"aaaaa\") #t 0.001)\n    (check-within (candidate \"zbcd\") #f 0.001)\n    (check-within (candidate \"xywyx\") #t 0.001)\n    (check-within (candidate \"xywyz\") #f 0.001)\n    (check-within (candidate \"xywzx\") #f 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage is_palindrome_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc is_palindrome(text string) bool {\n\tfor i := 0; i < len(text)/2; i++ {\n\t\tif text[i] != text[len(text)-1-i] {\n\t\t\treturn false\n\t\t}\n\t}\n\treturn true\n}\n\n### Racket version\n\n#lang racket\n\n(define (is_palindrome text)\n"
+  },
+  {
+    "name": "HumanEval_25_factorize",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (factorize n)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_25_factorize.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate factorize))\n    (check-within (candidate 2) (list 2) 0.001)\n    (check-within (candidate 4) (list 2 2) 0.001)\n    (check-within (candidate 8) (list 2 2 2) 0.001)\n    (check-within (candidate 57) (list 3 19) 0.001)\n    (check-within (candidate 3249) (list 3 3 19 19) 0.001)\n    (check-within (candidate 185193) (list 3 3 3 19 19 19) 0.001)\n    (check-within (candidate 20577) (list 3 19 19 19) 0.001)\n    (check-within (candidate 18) (list 2 3 3) 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage factorize_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc factorize(n int) []int {\n    fact := make([]int, 0)\n    i := 2\n\n    for i <= n {\n        if n%i == 0 {\n            fact = append(fact, i)\n            n /= i\n        } else {\n            i += 1\n        }\n    }\n\n    return fact\n}\n\n### Racket version\n\n#lang racket\n\n(define (factorize n)\n"
+  },
+  {
+    "name": "HumanEval_59_largest_prime_factor",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (largest_prime_factor n)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_59_largest_prime_factor.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate largest_prime_factor))\n    (check-within (candidate 15) 5 0.001)\n    (check-within (candidate 27) 3 0.001)\n    (check-within (candidate 63) 7 0.001)\n    (check-within (candidate 330) 11 0.001)\n    (check-within (candidate 13195) 29 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage largest_prime_factor_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc largest_prime_factor(n int) int {\n    is_prime := func(k int) bool {\n        if k < 2 {\n            return false\n        }\n        for i := 2; i < k; i++ {\n            if k%i == 0 {\n                return false\n            }\n        }\n        return true\n    }\n\n    largest := 1\n    for j := 2; j <= n; j++ {\n        if n%j == 0 && is_prime(j) {\n            largest = j\n        }\n    }\n    return largest\n}\n\n### Racket version\n\n#lang racket\n\n(define (largest_prime_factor n)\n"
+  },
+  {
+    "name": "HumanEval_147_get_max_triples",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (get_max_triples n)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_147_get_max_triples.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate get_max_triples))\n    (check-within (candidate 5) 1 0.001)\n    (check-within (candidate 6) 4 0.001)\n    (check-within (candidate 10) 36 0.001)\n    (check-within (candidate 100) 53361 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage get_max_triples_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc get_max_triples(n int) int {\n\tA := make([]int, n)\n\tfor i := 1; i <= n; i++ {\n\t\tA[i-1] = i*i - i + 1\n\t}\n\tans := 0\n\tfor i := 0; i < n; i++ {\n\t\tfor j := i+1; j < n; j++ {\n\t\t\tfor k := j+1; k < n; k++ {\n\t\t\t\tif (A[i]+A[j]+A[k])%3 == 0 {\n\t\t\t\t\tans += 1\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n\treturn ans\n}\n\n### Racket version\n\n#lang racket\n\n(define (get_max_triples n)\n"
+  },
+  {
+    "name": "HumanEval_84_solve",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (solve N)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_84_solve.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate solve))\n    (check-within (candidate 1000) \"1\" 0.001)\n    (check-within (candidate 150) \"110\" 0.001)\n    (check-within (candidate 147) \"1100\" 0.001)\n    (check-within (candidate 333) \"1001\" 0.001)\n    (check-within (candidate 963) \"10010\" 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage solve_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc solve(N int) string {\n    sum := 0\n    for N > 0 {\n        sum += N % 10\n        N /= 10\n    }\n    return fmt.Sprintf(\"%b\", sum)\n}\n\n### Racket version\n\n#lang racket\n\n(define (solve N)\n"
+  },
+  {
+    "name": "HumanEval_129_minPath",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (minPath grid k)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_129_minPath.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate minPath))\n    (check-within (candidate (list (list 1 2 3) (list 4 5 6) (list 7 8 9)) 3) (list 1 2 1) 0.001)\n    (check-within (candidate (list (list 5 9 3) (list 4 1 6) (list 7 8 2)) 1) (list 1) 0.001)\n    (check-within (candidate (list (list 1 2 3 4) (list 5 6 7 8) (list 9 10 11 12) (list 13 14 15 16)) 4) (list 1 2 1 2) 0.001)\n    (check-within (candidate (list (list 6 4 13 10) (list 5 7 12 1) (list 3 16 11 15) (list 8 14 9 2)) 7) (list 1 10 1 10 1 10 1) 0.001)\n    (check-within (candidate (list (list 8 14 9 2) (list 6 4 13 15) (list 5 7 1 12) (list 3 10 11 16)) 5) (list 1 7 1 7 1) 0.001)\n    (check-within (candidate (list (list 11 8 7 2) (list 5 16 14 4) (list 9 3 15 6) (list 12 13 10 1)) 9) (list 1 6 1 6 1 6 1 6 1) 0.001)\n    (check-within (candidate (list (list 12 13 10 1) (list 9 3 15 6) (list 5 16 14 4) (list 11 8 7 2)) 12) (list 1 6 1 6 1 6 1 6 1 6 1 6) 0.001)\n    (check-within (candidate (list (list 2 7 4) (list 3 1 5) (list 6 8 9)) 8) (list 1 3 1 3 1 3 1 3) 0.001)\n    (check-within (candidate (list (list 6 1 5) (list 3 8 9) (list 2 7 4)) 8) (list 1 5 1 5 1 5 1 5) 0.001)\n    (check-within (candidate (list (list 1 2) (list 3 4)) 10) (list 1 2 1 2 1 2 1 2 1 2) 0.001)\n    (check-within (candidate (list (list 1 3) (list 3 2)) 10) (list 1 3 1 3 1 3 1 3 1 3) 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage minPath_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc minPath(grid [][]int, k int) []int {\n\tn := len(grid)\n\tval := n*n + 1\n\tfor i := 0; i < n; i++ {\n\t\tfor j := 0; j < n; j++ {\n\t\t\tif grid[i][j] == 1 {\n\t\t\t\ttemp := []int{}\n\t\t\t\tif i != 0 {\n\t\t\t\t\ttemp = append(temp, grid[i-1][j])\n\t\t\t\t}\n\t\t\t\tif j != 0 {\n\t\t\t\t\ttemp = append(temp, grid[i][j-1])\n\t\t\t\t}\n\t\t\t\tif i != n-1 {\n\t\t\t\t\ttemp = append(temp, grid[i+1][j])\n\t\t\t\t}\n\t\t\t\tif j != n-1 {\n\t\t\t\t\ttemp = append(temp, grid[i][j+1])\n\t\t\t\t}\n\t\t\t\tfor _, t := range temp {\n\t\t\t\t\tif t < val {\n\t\t\t\t\t\tval = t\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n\n\tans := make([]int, k)\n\tfor i := 0; i < k; i++ {\n\t\tif i%2 == 0 {\n\t\t\tans[i] = 1\n\t\t} else {\n\t\t\tans[i] = val\n\t\t}\n\t}\n\treturn ans\n}\n\n### Racket version\n\n#lang racket\n\n(define (minPath grid k)\n"
+  },
+  {
+    "name": "HumanEval_89_encrypt",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (encrypt s)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_89_encrypt.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate encrypt))\n    (check-within (candidate \"hi\") \"lm\" 0.001)\n    (check-within (candidate \"asdfghjkl\") \"ewhjklnop\" 0.001)\n    (check-within (candidate \"gf\") \"kj\" 0.001)\n    (check-within (candidate \"et\") \"ix\" 0.001)\n    (check-within (candidate \"faewfawefaewg\") \"jeiajeaijeiak\" 0.001)\n    (check-within (candidate \"hellomyfriend\") \"lippsqcjvmirh\" 0.001)\n    (check-within (candidate \"dxzdlmnilfuhmilufhlihufnmlimnufhlimnufhfucufh\") \"hbdhpqrmpjylqmpyjlpmlyjrqpmqryjlpmqryjljygyjl\" 0.001)\n    (check-within (candidate \"a\") \"e\" 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage encrypt_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc encrypt(s string) string {\n\td := \"abcdefghijklmnopqrstuvwxyz\"\n\tout := \"\"\n\n\tfor _, c := range s {\n\t\tif i := int(c - 'a'); 0 <= i && i < 26 {\n\t\t\tout += string(d[(i+2*2)%26])\n\t\t} else {\n\t\t\tout += string(c)\n\t\t}\n\t}\n\n\treturn out\n}\n\n### Racket version\n\n#lang racket\n\n(define (encrypt s)\n"
+  },
+  {
+    "name": "HumanEval_100_make_a_pile",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (make_a_pile n)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_100_make_a_pile.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate make_a_pile))\n    (check-within (candidate 3) (list 3 5 7) 0.001)\n    (check-within (candidate 4) (list 4 6 8 10) 0.001)\n    (check-within (candidate 5) (list 5 7 9 11 13) 0.001)\n    (check-within (candidate 6) (list 6 8 10 12 14 16) 0.001)\n    (check-within (candidate 8) (list 8 10 12 14 16 18 20 22) 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage make_a_pile_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc make_a_pile(n int) []int {\n    res := make([]int, n)\n    for i := 0; i < n; i++ {\n        res[i] = n + 2*i\n    }\n    return res\n}\n\n### Racket version\n\n#lang racket\n\n(define (make_a_pile n)\n"
+  },
+  {
+    "name": "HumanEval_31_is_prime",
+    "language": "rkt",
+    "prompt": "#lang racket\n\n(define (is_prime n)\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_31_is_prime.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate is_prime))\n    (check-within (candidate 6) #f 0.001)\n    (check-within (candidate 101) #t 0.001)\n    (check-within (candidate 11) #t 0.001)\n    (check-within (candidate 13441) #t 0.001)\n    (check-within (candidate 61) #t 0.001)\n    (check-within (candidate 4) #f 0.001)\n    (check-within (candidate 1) #f 0.001)\n    (check-within (candidate 5) #t 0.001)\n    (check-within (candidate 11) #t 0.001)\n    (check-within (candidate 17) #t 0.001)\n    (check-within (candidate 85) #f 0.001)\n    (check-within (candidate 77) #f 0.001)\n    (check-within (candidate 255379) #f 0.001)\n))\n\n(test-humaneval)",
+    "stop_tokens": [
+      "\n(define ",
+      "\n#|",
+      "\n;",
+      "\n("
+    ],
+    "translation_prompt": "### Go version\n\npackage is_prime_test\n\nimport (\n    \"testing\"\n    \"fmt\"\n)\n\nfunc is_prime(n int) bool {\n\tif n < 2 {\n\t\treturn false\n\t}\n\n\tfor k := 2; k < n; k++ {\n\t\tif n%k == 0 {\n\t\t\treturn false\n\t\t}\n\t}\n\n\treturn true\n}\n\n### Racket version\n\n#lang racket\n\n(define (is_prime n)\n"
+  }
+]

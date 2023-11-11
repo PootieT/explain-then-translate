@@ -1,0 +1,1832 @@
+[
+  {
+    "name": "HumanEval_61_correct_bracketing",
+    "language": "rs",
+    "prompt": "fn correct_bracketing(brackets: String) -> bool {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_61_correct_bracketing.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = correct_bracketing;\n    assert_eq!(candidate(String::from(\"()\")), true);\n    assert_eq!(candidate(String::from(\"(()())\")), true);\n    assert_eq!(candidate(String::from(\"()()(()())()\")), true);\n    assert_eq!(candidate(String::from(\"()()((()()())())(()()(()))\")), true);\n    assert_eq!(candidate(String::from(\"((()())))\")), false);\n    assert_eq!(candidate(String::from(\")(()\")), false);\n    assert_eq!(candidate(String::from(\"(\")), false);\n    assert_eq!(candidate(String::from(\"((((\")), false);\n    assert_eq!(candidate(String::from(\")\")), false);\n    assert_eq!(candidate(String::from(\"(()\")), false);\n    assert_eq!(candidate(String::from(\"()()(()())())(()\")), false);\n    assert_eq!(candidate(String::from(\"()()(()())()))()\")), false);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nlibrary(sets)\nlibrary(stringi)\nsuppressPackageStartupMessages(library(R.utils))\nsuppressPackageStartupMessages(library(stringr))\nsuppressPackageStartupMessages(library(hash))\ncorrect_bracketing <- function(brackets) {\n  depth <- 0\n  for (b in strsplit(brackets, \"\")[[1]]) {\n    if (b == \"(\") {\n      depth <- depth + 1\n    } else {\n      depth <- depth - 1\n    }\n    if (depth < 0) {\n      return(FALSE)\n    }\n  }\n  return(depth == 0)\n\n}\n\n### Rust version\n\nfn correct_bracketing(brackets: String) -> bool {\n"
+  },
+  {
+    "name": "HumanEval_45_triangle_area",
+    "language": "rs",
+    "prompt": "fn triangle_area(a: isize, h: isize) -> f64 {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_45_triangle_area.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = triangle_area;\n    assert_eq!(candidate(5, 3), 7.5);\n    assert_eq!(candidate(2, 2), 2.0);\n    assert_eq!(candidate(10, 8), 40.0);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\ntriangle_area <- function(a, h) {\n    a * h / 2.0\n\n}\n\n### Rust version\n\nfn triangle_area(a: isize, h: isize) -> f64 {\n"
+  },
+  {
+    "name": "HumanEval_139_special_factorial",
+    "language": "rs",
+    "prompt": "fn special_factorial(n: isize) -> isize {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_139_special_factorial.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = special_factorial;\n    assert_eq!(candidate(4), 288);\n    assert_eq!(candidate(5), 34560);\n    assert_eq!(candidate(7), 125411328000);\n    assert_eq!(candidate(1), 1);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nspecial_factorial <- function(n) {\n    fact_i <- 1\n    special_fact <- 1\n    for (i in 1:n) {\n        fact_i <- fact_i * i\n        special_fact <- special_fact * fact_i\n    }\n    return(special_fact)\n\n}\n\n### Rust version\n\nfn special_factorial(n: isize) -> isize {\n"
+  },
+  {
+    "name": "HumanEval_109_move_one_ball",
+    "language": "rs",
+    "prompt": "fn move_one_ball(arr: Vec<isize>) -> bool {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_109_move_one_ball.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = move_one_ball;\n    assert_eq!(candidate(vec![3, 4, 5, 1, 2]), true);\n    assert_eq!(candidate(vec![3, 5, 10, 1, 2]), true);\n    assert_eq!(candidate(vec![4, 3, 1, 2]), false);\n    assert_eq!(candidate(vec![3, 5, 4, 1, 2]), false);\n    assert_eq!(candidate(Vec::<isize>::new()), true);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nmove_one_ball <- function(arr) {\n  if (length(arr)==0) {\n    return(TRUE)\n  }\n  sorted_array <- sort(arr)\n  my_arr <- c()\n  \n  min_value <- min(arr)\n  min_index <- which(arr == min_value)\n  my_arr <- c(arr[min_index:length(arr)], arr[1:(min_index-1)])\n  for (i in 1:length(arr)) {\n    if (my_arr[i] != sorted_array[i]) {\n      return(FALSE)\n    }\n  }\n  return(TRUE)\n\n}\n\n### Rust version\n\nfn move_one_ball(arr: Vec<isize>) -> bool {\n"
+  },
+  {
+    "name": "HumanEval_131_digits",
+    "language": "rs",
+    "prompt": "fn digits(n: isize) -> isize {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_131_digits.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = digits;\n    assert_eq!(candidate(5), 5);\n    assert_eq!(candidate(54), 5);\n    assert_eq!(candidate(120), 1);\n    assert_eq!(candidate(5014), 5);\n    assert_eq!(candidate(98765), 315);\n    assert_eq!(candidate(5576543), 2625);\n    assert_eq!(candidate(2468), 0);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\ndigits <- function(n) {\n    product <- 1\n    odd_count <- 0\n    for (digit in strsplit(as.character(n), \"\")[[1]]) {\n        int_digit <- as.integer(digit)\n        if (int_digit%%2 == 1) {\n            product <- product*int_digit\n            odd_count <- odd_count+1\n        }\n    }\n    if (odd_count ==0) {\n        return(0)\n    } else {\n        return(product)\n    }\n\n}\n\n### Rust version\n\nfn digits(n: isize) -> isize {\n"
+  },
+  {
+    "name": "HumanEval_46_fib4",
+    "language": "rs",
+    "prompt": "fn fib4(n: isize) -> isize {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_46_fib4.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = fib4;\n    assert_eq!(candidate(5), 4);\n    assert_eq!(candidate(8), 28);\n    assert_eq!(candidate(10), 104);\n    assert_eq!(candidate(12), 386);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nlibrary(sets)\nlibrary(stringi)\nsuppressPackageStartupMessages(library(R.utils))\nsuppressPackageStartupMessages(library(stringr))\nsuppressPackageStartupMessages(library(hash))\nfib4 <- function(n) {\n    results <- c(0, 0, 2, 0)\n    if (n < 4) {\n        return(results[n])\n    }\n    for (i in 4:n) {\n        results <- c(results[2], results[3], results[4], sum(results))\n    }\n    return(results[4])\n\n}\n\n### Rust version\n\nfn fib4(n: isize) -> isize {\n"
+  },
+  {
+    "name": "HumanEval_80_is_happy",
+    "language": "rs",
+    "prompt": "fn is_happy(s: String) -> bool {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_80_is_happy.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = is_happy;\n    assert_eq!(candidate(String::from(\"a\")), false);\n    assert_eq!(candidate(String::from(\"aa\")), false);\n    assert_eq!(candidate(String::from(\"abcd\")), true);\n    assert_eq!(candidate(String::from(\"aabb\")), false);\n    assert_eq!(candidate(String::from(\"adb\")), true);\n    assert_eq!(candidate(String::from(\"xyy\")), false);\n    assert_eq!(candidate(String::from(\"iopaxpoi\")), true);\n    assert_eq!(candidate(String::from(\"iopaxioi\")), false);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nis_happy <- function(s) {\n  if (nchar(s) < 3) {\n    return(FALSE)\n  }\n  \n  for (i in 1:(nchar(s) - 2)) {\n    if (substr(s, i, i) == substr(s, i+1, i+1) || \n        substr(s, i+1, i+1) == substr(s, i+2, i+2) || \n        substr(s, i, i) == substr(s, i+2, i+2)) {\n      return(FALSE)\n    }\n  }\n  return(TRUE)\n\n}\n\n### Rust version\n\nfn is_happy(s: String) -> bool {\n"
+  },
+  {
+    "name": "HumanEval_65_circular_shift",
+    "language": "rs",
+    "prompt": "fn circular_shift(x: isize, shift: isize) -> String {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_65_circular_shift.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = circular_shift;\n    assert_eq!(candidate(100, 2), String::from(\"001\"));\n    assert_eq!(candidate(12, 2), String::from(\"12\"));\n    assert_eq!(candidate(97, 8), String::from(\"79\"));\n    assert_eq!(candidate(12, 1), String::from(\"21\"));\n    assert_eq!(candidate(11, 101), String::from(\"11\"));\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nlibrary(sets)\nlibrary(stringi)\nsuppressPackageStartupMessages(library(R.utils))\nsuppressPackageStartupMessages(library(stringr))\nsuppressPackageStartupMessages(library(hash))\ncircular_shift <- function(x, shift) {\n    s <- as.character(x)\n    if (shift > nchar(s)) {\n        return(stri_reverse(s))\n    } else {\n        return(paste0(substr(s, nchar(s) - shift + 1, nchar(s)), substr(s, 1, nchar(s) - shift)))\n    }\n\n}\n\n### Rust version\n\nfn circular_shift(x: isize, shift: isize) -> String {\n"
+  },
+  {
+    "name": "HumanEval_115_max_fill",
+    "language": "rs",
+    "prompt": "fn max_fill(grid: Vec<Vec<isize>>, capacity: isize) -> isize {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_115_max_fill.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = max_fill;\n    assert_eq!(candidate(vec![vec![0, 0, 1, 0], vec![0, 1, 0, 0], vec![1, 1, 1, 1]], 1), 6);\n    assert_eq!(candidate(vec![vec![0, 0, 1, 1], vec![0, 0, 0, 0], vec![1, 1, 1, 1], vec![0, 1, 1, 1]], 2), 5);\n    assert_eq!(candidate(vec![vec![0, 0, 0], vec![0, 0, 0]], 5), 0);\n    assert_eq!(candidate(vec![vec![1, 1, 1, 1], vec![1, 1, 1, 1]], 2), 4);\n    assert_eq!(candidate(vec![vec![1, 1, 1, 1], vec![1, 1, 1, 1]], 9), 2);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nlibrary(sets)\nlibrary(stringi)\nsuppressPackageStartupMessages(library(R.utils))\nsuppressPackageStartupMessages(library(stringr))\nsuppressPackageStartupMessages(library(hash))\nmax_fill <- function(grid, capacity) {\n  return(sum(sapply(grid, function(arr) {ceiling(sum(arr)/capacity)})))\n\n}\n\n### Rust version\n\nfn max_fill(grid: Vec<Vec<isize>>, capacity: isize) -> isize {\n"
+  },
+  {
+    "name": "HumanEval_0_has_close_elements",
+    "language": "rs",
+    "prompt": "fn has_close_elements(numbers: Vec<f64>, threshold: f64) -> bool {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_0_has_close_elements.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = has_close_elements;\n    assert_eq!(candidate(vec![1.0, 2.0, 3.9, 4.0, 5.0, 2.2], 0.3), true);\n    assert_eq!(candidate(vec![1.0, 2.0, 3.9, 4.0, 5.0, 2.2], 0.05), false);\n    assert_eq!(candidate(vec![1.0, 2.0, 5.9, 4.0, 5.0], 0.95), true);\n    assert_eq!(candidate(vec![1.0, 2.0, 5.9, 4.0, 5.0], 0.8), false);\n    assert_eq!(candidate(vec![1.0, 2.0, 3.0, 4.0, 5.0, 2.0], 0.1), true);\n    assert_eq!(candidate(vec![1.1, 2.2, 3.1, 4.1, 5.1], 1.0), true);\n    assert_eq!(candidate(vec![1.1, 2.2, 3.1, 4.1, 5.1], 0.5), false);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nhas_close_elements <- function(numbers, threshold) {\n    for (idx in seq_along(numbers)) {\n        for (idx2 in seq_along(numbers)) {\n            if (idx != idx2) {\n                distance <- abs(numbers[idx] - numbers[idx2])\n                if (distance < threshold) {\n                    return(TRUE)\n                }\n            }\n        }\n    }\n    return(FALSE)\n\n}\n\n### Rust version\n\nfn has_close_elements(numbers: Vec<f64>, threshold: f64) -> bool {\n"
+  },
+  {
+    "name": "HumanEval_81_numerical_letter_grade",
+    "language": "rs",
+    "prompt": "fn numerical_letter_grade(grades: Vec<f64>) -> Vec<String> {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_81_numerical_letter_grade.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = numerical_letter_grade;\n    assert_eq!(candidate(vec![4.0, 3.0, 1.7, 2.0, 3.5]), vec![String::from(\"A+\"), String::from(\"B\"), String::from(\"C-\"), String::from(\"C\"), String::from(\"A-\")]);\n    assert_eq!(candidate(vec![1.2]), vec![String::from(\"D+\")]);\n    assert_eq!(candidate(vec![0.5]), vec![String::from(\"D-\")]);\n    assert_eq!(candidate(vec![0.0]), vec![String::from(\"E\")]);\n    assert_eq!(candidate(vec![1.0, 0.3, 1.5, 2.8, 3.3]), vec![String::from(\"D\"), String::from(\"D-\"), String::from(\"C-\"), String::from(\"B\"), String::from(\"B+\")]);\n    assert_eq!(candidate(vec![0.0, 0.7]), vec![String::from(\"E\"), String::from(\"D-\")]);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nlibrary(sets)\nlibrary(stringi)\nsuppressPackageStartupMessages(library(R.utils))\nsuppressPackageStartupMessages(library(stringr))\nsuppressPackageStartupMessages(library(hash))\nnumerical_letter_grade <- function(grades) {\n  letter_grade <- vector(mode = \"character\", length = length(grades))\n  for (i in 1:length(grades)) {\n    if (grades[i] == 4.0) {\n      letter_grade[i] <- \"A+\"\n    } else if (grades[i] > 3.7) {\n      letter_grade[i] <- \"A\"\n    } else if (grades[i] > 3.3) {\n      letter_grade[i] <- \"A-\"\n    } else if (grades[i] > 3.0) {\n      letter_grade[i] <- \"B+\"\n    } else if (grades[i] > 2.7) {\n      letter_grade[i] <- \"B\"\n    } else if (grades[i] > 2.3) {\n      letter_grade[i] <- \"B-\"\n    } else if (grades[i] > 2.0) {\n      letter_grade[i] <- \"C+\"\n    } else if (grades[i] > 1.7) {\n      letter_grade[i] <- \"C\"\n    } else if (grades[i] > 1.3) {\n      letter_grade[i] <- \"C-\"\n    } else if (grades[i] > 1.0) {\n      letter_grade[i] <- \"D+\"\n    } else if (grades[i] > 0.7) {\n      letter_grade[i] <- \"D\"\n    } else if (grades[i] > 0.0) {\n      letter_grade[i] <- \"D-\"\n    } else {\n      letter_grade[i] <- \"E\"\n    }\n  }\n  return(letter_grade)\n\n}\n\n### Rust version\n\nfn numerical_letter_grade(grades: Vec<f64>) -> Vec<String> {\n"
+  },
+  {
+    "name": "HumanEval_146_specialFilter",
+    "language": "rs",
+    "prompt": "fn specialFilter(nums: Vec<isize>) -> isize {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_146_specialFilter.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = specialFilter;\n    assert_eq!(candidate(vec![5, -2, 1, -5]), 0);\n    assert_eq!(candidate(vec![15, -73, 14, -15]), 1);\n    assert_eq!(candidate(vec![33, -2, -3, 45, 21, 109]), 2);\n    assert_eq!(candidate(vec![43, -12, 93, 125, 121, 109]), 4);\n    assert_eq!(candidate(vec![71, -2, -33, 75, 21, 19]), 3);\n    assert_eq!(candidate(vec![1]), 0);\n    assert_eq!(candidate(Vec::<isize>::new()), 0);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nlibrary(sets)\nlibrary(stringi)\nsuppressPackageStartupMessages(library(R.utils))\nsuppressPackageStartupMessages(library(stringr))\nsuppressPackageStartupMessages(library(hash))\nspecialFilter <- function(nums) {\n  count <- 0\n  for (num in nums) {\n    if (num > 10) {\n      odd_digits <- c(1, 3, 5, 7, 9)\n      number_as_string <- as.character(num)\n      if (as.integer(strsplit(number_as_string, \"\")[[1]][1]) %in% odd_digits && as.integer(strsplit(number_as_string, \"\")[[1]][nchar(number_as_string)]) %in% odd_digits) {\n        count <- count + 1\n      }\n    }\n  }\n  return(count)\n\n}\n\n### Rust version\n\nfn specialFilter(nums: Vec<isize>) -> isize {\n"
+  },
+  {
+    "name": "HumanEval_17_parse_music",
+    "language": "rs",
+    "prompt": "fn parse_music(music_string: String) -> Vec<isize> {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_17_parse_music.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = parse_music;\n    assert_eq!(candidate(String::from(\"\")), Vec::<isize>::new());\n    assert_eq!(candidate(String::from(\"o o o o\")), vec![4, 4, 4, 4]);\n    assert_eq!(candidate(String::from(\".| .| .| .|\")), vec![1, 1, 1, 1]);\n    assert_eq!(candidate(String::from(\"o| o| .| .| o o o o\")), vec![2, 2, 1, 1, 4, 4, 4, 4]);\n    assert_eq!(candidate(String::from(\"o| .| o| .| o o| o o|\")), vec![2, 1, 2, 1, 4, 2, 4, 2]);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nlibrary(sets)\nlibrary(stringi)\nsuppressPackageStartupMessages(library(R.utils))\nsuppressPackageStartupMessages(library(stringr))\nsuppressPackageStartupMessages(library(hash))\nparse_music <- function(music_string) {\n  note_map <- list(o = 4, `o|` = 2, `.|` = 1)\n  return (unlist(lapply(strsplit(music_string, \" \")[[1]], function(x) note_map[[x]])))\n\n}\n\n### Rust version\n\nfn parse_music(music_string: String) -> Vec<isize> {\n"
+  },
+  {
+    "name": "HumanEval_16_count_distinct_characters",
+    "language": "rs",
+    "prompt": "fn count_distinct_characters(string: String) -> isize {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_16_count_distinct_characters.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = count_distinct_characters;\n    assert_eq!(candidate(String::from(\"\")), 0);\n    assert_eq!(candidate(String::from(\"abcde\")), 5);\n    assert_eq!(candidate(String::from(\"abcdecadeCADE\")), 5);\n    assert_eq!(candidate(String::from(\"aaaaAAAAaaaa\")), 1);\n    assert_eq!(candidate(String::from(\"Jerry jERRY JeRRRY\")), 5);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nlibrary(sets)\nlibrary(stringi)\nsuppressPackageStartupMessages(library(R.utils))\nsuppressPackageStartupMessages(library(stringr))\nsuppressPackageStartupMessages(library(hash))\ncount_distinct_characters <- function(string) {\n    length(unique(tolower(strsplit(string, \"\")[[1]])))\n\n}\n\n### Rust version\n\nfn count_distinct_characters(string: String) -> isize {\n"
+  },
+  {
+    "name": "HumanEval_66_digitSum",
+    "language": "rs",
+    "prompt": "fn digitSum(s: String) -> isize {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_66_digitSum.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = digitSum;\n    assert_eq!(candidate(String::from(\"\")), 0);\n    assert_eq!(candidate(String::from(\"abAB\")), 131);\n    assert_eq!(candidate(String::from(\"abcCd\")), 67);\n    assert_eq!(candidate(String::from(\"helloE\")), 69);\n    assert_eq!(candidate(String::from(\"woArBld\")), 131);\n    assert_eq!(candidate(String::from(\"aAaaaXa\")), 153);\n    assert_eq!(candidate(String::from(\" How are yOu?\")), 151);\n    assert_eq!(candidate(String::from(\"You arE Very Smart\")), 327);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nlibrary(sets)\nlibrary(stringi)\nsuppressPackageStartupMessages(library(R.utils))\nsuppressPackageStartupMessages(library(stringr))\nsuppressPackageStartupMessages(library(hash))\ndigitSum <- function(s) {\n  if (s == \"\") {\n    return(0)\n  }\n  sum <- 0\n  for (char in strsplit(s, \"\")[[1]]) {\n    if (char %in% LETTERS) {\n      sum <- sum + utf8ToInt(char)\n    }\n  }\n  return(sum)\n\n}\n\n### Rust version\n\nfn digitSum(s: String) -> isize {\n"
+  },
+  {
+    "name": "HumanEval_133_sum_squares",
+    "language": "rs",
+    "prompt": "fn sum_squares(lst: Vec<f64>) -> isize {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_133_sum_squares.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = sum_squares;\n    assert_eq!(candidate(vec![1.0, 2.0, 3.0]), 14);\n    assert_eq!(candidate(vec![1.0, 2.0, 3.0]), 14);\n    assert_eq!(candidate(vec![1.0, 3.0, 5.0, 7.0]), 84);\n    assert_eq!(candidate(vec![1.4, 4.2, 0.0]), 29);\n    assert_eq!(candidate(vec![-2.4, 1.0, 1.0]), 6);\n    assert_eq!(candidate(vec![100.0, 1.0, 15.0, 2.0]), 10230);\n    assert_eq!(candidate(vec![10000.0, 10000.0]), 200000000);\n    assert_eq!(candidate(vec![-1.4, 4.6, 6.3]), 75);\n    assert_eq!(candidate(vec![-1.4, 17.9, 18.9, 19.9]), 1086);\n    assert_eq!(candidate(vec![0.0]), 0);\n    assert_eq!(candidate(vec![-1.0]), 1);\n    assert_eq!(candidate(vec![-1.0, 1.0, 0.0]), 2);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nsum_squares <- function(lst) {\n    squared <- 0\n    for (i in lst) {\n        squared <- squared + ceiling(i)^2\n    }\n    return(squared)\n\n}\n\n### Rust version\n\nfn sum_squares(lst: Vec<f64>) -> isize {\n"
+  },
+  {
+    "name": "HumanEval_55_fib",
+    "language": "rs",
+    "prompt": "fn fib(n: isize) -> isize {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_55_fib.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = fib;\n    assert_eq!(candidate(10), 55);\n    assert_eq!(candidate(1), 1);\n    assert_eq!(candidate(8), 21);\n    assert_eq!(candidate(11), 89);\n    assert_eq!(candidate(12), 144);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nfib <- function(n) {\n  if (n == 0) {\n    return(0)\n  }\n  if (n == 1) {\n    return(1)\n  }\n  return(fib(n - 1) + fib(n - 2))\n\n}\n\n### Rust version\n\nfn fib(n: isize) -> isize {\n"
+  },
+  {
+    "name": "HumanEval_36_fizz_buzz",
+    "language": "rs",
+    "prompt": "fn fizz_buzz(n: isize) -> isize {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_36_fizz_buzz.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = fizz_buzz;\n    assert_eq!(candidate(50), 0);\n    assert_eq!(candidate(78), 2);\n    assert_eq!(candidate(79), 3);\n    assert_eq!(candidate(100), 3);\n    assert_eq!(candidate(200), 6);\n    assert_eq!(candidate(4000), 192);\n    assert_eq!(candidate(10000), 639);\n    assert_eq!(candidate(100000), 8026);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nfizz_buzz <- function(n) {\n    ns <- c()\n    for (i in 0:(n-1)) {\n        if (i %% 11 == 0 || i %% 13 == 0) {\n            ns <- c(ns, i)\n        }\n    }\n    s <- paste(as.character(ns), collapse = '')\n    ans <- 0\n    for (c in strsplit(s, '')[[1]]) {\n        ans <- ans + (c == '7')\n    }\n    return(ans)\n\n}\n\n### Rust version\n\nfn fizz_buzz(n: isize) -> isize {\n"
+  },
+  {
+    "name": "HumanEval_153_Strongest_Extension",
+    "language": "rs",
+    "prompt": "fn Strongest_Extension(class_name: String, extensions: Vec<String>) -> String {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_153_Strongest_Extension.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = Strongest_Extension;\n    assert_eq!(candidate(String::from(\"Watashi\"), vec![String::from(\"tEN\"), String::from(\"niNE\"), String::from(\"eIGHt8OKe\")]), String::from(\"Watashi.eIGHt8OKe\"));\n    assert_eq!(candidate(String::from(\"Boku123\"), vec![String::from(\"nani\"), String::from(\"NazeDa\"), String::from(\"YEs.WeCaNe\"), String::from(\"32145tggg\")]), String::from(\"Boku123.YEs.WeCaNe\"));\n    assert_eq!(candidate(String::from(\"__YESIMHERE\"), vec![String::from(\"t\"), String::from(\"eMptY\"), String::from(\"nothing\"), String::from(\"zeR00\"), String::from(\"NuLl__\"), String::from(\"123NoooneB321\")]), String::from(\"__YESIMHERE.NuLl__\"));\n    assert_eq!(candidate(String::from(\"K\"), vec![String::from(\"Ta\"), String::from(\"TAR\"), String::from(\"t234An\"), String::from(\"cosSo\")]), String::from(\"K.TAR\"));\n    assert_eq!(candidate(String::from(\"__HAHA\"), vec![String::from(\"Tab\"), String::from(\"123\"), String::from(\"781345\"), String::from(\"-_-\")]), String::from(\"__HAHA.123\"));\n    assert_eq!(candidate(String::from(\"YameRore\"), vec![String::from(\"HhAas\"), String::from(\"okIWILL123\"), String::from(\"WorkOut\"), String::from(\"Fails\"), String::from(\"-_-\")]), String::from(\"YameRore.okIWILL123\"));\n    assert_eq!(candidate(String::from(\"finNNalLLly\"), vec![String::from(\"Die\"), String::from(\"NowW\"), String::from(\"Wow\"), String::from(\"WoW\")]), String::from(\"finNNalLLly.WoW\"));\n    assert_eq!(candidate(String::from(\"_\"), vec![String::from(\"Bb\"), String::from(\"91245\")]), String::from(\"_.Bb\"));\n    assert_eq!(candidate(String::from(\"Sp\"), vec![String::from(\"671235\"), String::from(\"Bb\")]), String::from(\"Sp.671235\"));\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nlibrary(sets)\nlibrary(stringi)\nsuppressPackageStartupMessages(library(R.utils))\nsuppressPackageStartupMessages(library(stringr))\nsuppressPackageStartupMessages(library(hash))\nStrongest_Extension <- function(class_name, extensions) {\n  strong <- extensions[1]\n  my_val <- nchar(gsub(\"[^[:upper:]]\", \"\", extensions[1])) - nchar(gsub(\"[^[:lower:]]\", \"\", extensions[1]))\n  for (s in extensions) {\n    val <- nchar(gsub(\"[^[:upper:]]\", \"\", s)) - nchar(gsub(\"[^[:lower:]]\", \"\", s))\n    if (val > my_val) {\n      strong <- s\n      my_val <- val\n    }\n  }\n  ans <- paste(class_name, strong, sep = \".\")\n  return(ans)\n\n}\n\n### Rust version\n\nfn Strongest_Extension(class_name: String, extensions: Vec<String>) -> String {\n"
+  },
+  {
+    "name": "HumanEval_20_find_closest_elements",
+    "language": "rs",
+    "prompt": "fn find_closest_elements(numbers: Vec<f64>) -> (f64, f64) {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_20_find_closest_elements.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = find_closest_elements;\n    assert_eq!(candidate(vec![1.0, 2.0, 3.9, 4.0, 5.0, 2.2]), (3.9, 4.0));\n    assert_eq!(candidate(vec![1.0, 2.0, 5.9, 4.0, 5.0]), (5.0, 5.9));\n    assert_eq!(candidate(vec![1.0, 2.0, 3.0, 4.0, 5.0, 2.2]), (2.0, 2.2));\n    assert_eq!(candidate(vec![1.0, 2.0, 3.0, 4.0, 5.0, 2.0]), (2.0, 2.0));\n    assert_eq!(candidate(vec![1.1, 2.2, 3.1, 4.1, 5.1]), (2.2, 3.1));\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nlibrary(sets)\nlibrary(stringi)\nsuppressPackageStartupMessages(library(R.utils))\nsuppressPackageStartupMessages(library(stringr))\nsuppressPackageStartupMessages(library(hash))\nfind_closest_elements <- function(numbers) {\n  closest_pair <- NULL\n  distance <- NULL\n  \n  for (i in 1:length(numbers)) {\n    for (j in 1:length(numbers)) {\n      if (i != j) {\n        if (is.null(distance)) {\n          distance <- abs(numbers[i] - numbers[j])\n          closest_pair <- sort(c(numbers[i], numbers[j]))\n        } else {\n          new_distance <- abs(numbers[i] - numbers[j])\n          if (new_distance < distance) {\n            distance <- new_distance\n            closest_pair <- sort(c(numbers[i], numbers[j]))\n          }\n        }\n      }\n    }\n  }\n  \n  return(closest_pair)\n\n}\n\n### Rust version\n\nfn find_closest_elements(numbers: Vec<f64>) -> (f64, f64) {\n"
+  },
+  {
+    "name": "HumanEval_124_valid_date",
+    "language": "rs",
+    "prompt": "fn valid_date(date: String) -> bool {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_124_valid_date.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = valid_date;\n    assert_eq!(candidate(String::from(\"03-11-2000\")), true);\n    assert_eq!(candidate(String::from(\"15-01-2012\")), false);\n    assert_eq!(candidate(String::from(\"04-0-2040\")), false);\n    assert_eq!(candidate(String::from(\"06-04-2020\")), true);\n    assert_eq!(candidate(String::from(\"01-01-2007\")), true);\n    assert_eq!(candidate(String::from(\"03-32-2011\")), false);\n    assert_eq!(candidate(String::from(\"\")), false);\n    assert_eq!(candidate(String::from(\"04-31-3000\")), false);\n    assert_eq!(candidate(String::from(\"06-06-2005\")), true);\n    assert_eq!(candidate(String::from(\"21-31-2000\")), false);\n    assert_eq!(candidate(String::from(\"04-12-2003\")), true);\n    assert_eq!(candidate(String::from(\"04122003\")), false);\n    assert_eq!(candidate(String::from(\"20030412\")), false);\n    assert_eq!(candidate(String::from(\"2003-04\")), false);\n    assert_eq!(candidate(String::from(\"2003-04-12\")), false);\n    assert_eq!(candidate(String::from(\"04-2003\")), false);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nlibrary(sets)\nlibrary(stringi)\nsuppressPackageStartupMessages(library(R.utils))\nsuppressPackageStartupMessages(library(stringr))\nsuppressPackageStartupMessages(library(hash))\nvalid_date <- function(date) {\n  tryCatch({\n    date <- stri_trim_both(date)\n    parts <- str_split(date, \"-\")[[1]]\n    month <- as.integer(parts[1])\n    day <- as.integer(parts[2])\n    year <- as.integer(parts[3])\n    if (month < 1 || month > 12) {\n      return(FALSE)\n    }\n    if (month %in% c(1,3,5,7,8,10,12) && (day < 1 || day > 31)) {\n      return(FALSE)\n    }\n    if (month %in% c(4,6,9,11) && (day < 1 || day > 30)) {\n      return(FALSE)\n    }\n    if (month == 2 && (day < 1 || day > 29)) {\n      return(FALSE)\n    }\n    return(TRUE)\n  }, error = function(e) {\n    return(FALSE)\n  })\n\n}\n\n### Rust version\n\nfn valid_date(date: String) -> bool {\n"
+  },
+  {
+    "name": "HumanEval_53_add",
+    "language": "rs",
+    "prompt": "fn add(x: isize, y: isize) -> isize {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_53_add.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = add;\n    assert_eq!(candidate(0, 1), 1);\n    assert_eq!(candidate(1, 0), 1);\n    assert_eq!(candidate(2, 3), 5);\n    assert_eq!(candidate(5, 7), 12);\n    assert_eq!(candidate(7, 5), 12);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nadd <- function(x, y) {\n    return(x + y)\n\n}\n\n### Rust version\n\nfn add(x: isize, y: isize) -> isize {\n"
+  },
+  {
+    "name": "HumanEval_24_largest_divisor",
+    "language": "rs",
+    "prompt": "fn largest_divisor(n: isize) -> isize {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_24_largest_divisor.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = largest_divisor;\n    assert_eq!(candidate(3), 1);\n    assert_eq!(candidate(7), 1);\n    assert_eq!(candidate(10), 5);\n    assert_eq!(candidate(100), 50);\n    assert_eq!(candidate(49), 7);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nlibrary(sets)\nlibrary(stringi)\nsuppressPackageStartupMessages(library(R.utils))\nsuppressPackageStartupMessages(library(stringr))\nsuppressPackageStartupMessages(library(hash))\nlargest_divisor <- function(n) {\n    for (i in rev(seq(n-1))) {\n        if (n %% i == 0) {\n            return (i)\n        }\n    }\n\n}\n\n### Rust version\n\nfn largest_divisor(n: isize) -> isize {\n"
+  },
+  {
+    "name": "HumanEval_19_sort_numbers",
+    "language": "rs",
+    "prompt": "fn sort_numbers(numbers: String) -> String {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_19_sort_numbers.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = sort_numbers;\n    assert_eq!(candidate(String::from(\"\")), String::from(\"\"));\n    assert_eq!(candidate(String::from(\"three\")), String::from(\"three\"));\n    assert_eq!(candidate(String::from(\"three five nine\")), String::from(\"three five nine\"));\n    assert_eq!(candidate(String::from(\"five zero four seven nine eight\")), String::from(\"zero four five seven eight nine\"));\n    assert_eq!(candidate(String::from(\"six five four three two one zero\")), String::from(\"zero one two three four five six\"));\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nlibrary(sets)\nlibrary(stringi)\nsuppressPackageStartupMessages(library(R.utils))\nsuppressPackageStartupMessages(library(stringr))\nsuppressPackageStartupMessages(library(hash))\nsort_numbers <- function(numbers) {\n    value_map <- c(\"zero\" = 0, \"one\" = 1, \"two\" = 2, \"three\" = 3, \"four\" = 4, \"five\" = 5, \"six\" = 6, \"seven\" = 7, \"eight\" = 8, \"nine\" = 9)\n    words <- unlist(strsplit(numbers, \" \"))\n    words <- words[words != \"\"]\n    words <- words[order(sapply(words, function(x) value_map[x]))]\n    return(paste(words, collapse = \" \"))\n\n}\n\n### Rust version\n\nfn sort_numbers(numbers: String) -> String {\n"
+  },
+  {
+    "name": "HumanEval_73_smallest_change",
+    "language": "rs",
+    "prompt": "fn smallest_change(arr: Vec<isize>) -> isize {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_73_smallest_change.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = smallest_change;\n    assert_eq!(candidate(vec![1, 2, 3, 5, 4, 7, 9, 6]), 4);\n    assert_eq!(candidate(vec![1, 2, 3, 4, 3, 2, 2]), 1);\n    assert_eq!(candidate(vec![1, 4, 2]), 1);\n    assert_eq!(candidate(vec![1, 4, 4, 2]), 1);\n    assert_eq!(candidate(vec![1, 2, 3, 2, 1]), 0);\n    assert_eq!(candidate(vec![3, 1, 1, 3]), 0);\n    assert_eq!(candidate(vec![1]), 0);\n    assert_eq!(candidate(vec![0, 1]), 1);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nlibrary(sets)\nlibrary(stringi)\nsuppressPackageStartupMessages(library(R.utils))\nsuppressPackageStartupMessages(library(stringr))\nsuppressPackageStartupMessages(library(hash))\nsmallest_change <- function(arr) {\n  ans <- 0\n  for (i in 1:(length(arr) / 2)) {\n    if (arr[i] != arr[length(arr) - i + 1]) {\n      ans <- ans + 1\n    }\n  }\n  return (ans)\n\n}\n\n### Rust version\n\nfn smallest_change(arr: Vec<isize>) -> isize {\n"
+  },
+  {
+    "name": "HumanEval_52_below_threshold",
+    "language": "rs",
+    "prompt": "fn below_threshold(l: Vec<isize>, t: isize) -> bool {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_52_below_threshold.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = below_threshold;\n    assert_eq!(candidate(vec![1, 2, 4, 10], 100), true);\n    assert_eq!(candidate(vec![1, 20, 4, 10], 5), false);\n    assert_eq!(candidate(vec![1, 20, 4, 10], 21), true);\n    assert_eq!(candidate(vec![1, 20, 4, 10], 22), true);\n    assert_eq!(candidate(vec![1, 8, 4, 10], 11), true);\n    assert_eq!(candidate(vec![1, 8, 4, 10], 10), false);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nbelow_threshold <- function(l, t) {\n    for (e in l) {\n        if (e >= t) {\n            return(FALSE)\n        }\n    }\n    return(TRUE)\n\n}\n\n### Rust version\n\nfn below_threshold(l: Vec<isize>, t: isize) -> bool {\n"
+  },
+  {
+    "name": "HumanEval_128_prod_signs",
+    "language": "rs",
+    "prompt": "fn prod_signs(arr: Vec<isize>) -> Option<isize> {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_128_prod_signs.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = prod_signs;\n    assert_eq!(candidate(vec![1, 2, 2, -4]), Some(-9));\n    assert_eq!(candidate(vec![0, 1]), Some(0));\n    assert_eq!(candidate(vec![1, 1, 1, 2, 3, -1, 1]), Some(-10));\n    assert_eq!(candidate(Vec::<isize>::new()), None);\n    assert_eq!(candidate(vec![2, 4, 1, 2, -1, -1, 9]), Some(20));\n    assert_eq!(candidate(vec![-1, 1, -1, 1]), Some(4));\n    assert_eq!(candidate(vec![-1, 1, 1, 1]), Some(-4));\n    assert_eq!(candidate(vec![-1, 1, 1, 0]), Some(0));\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nprod_signs <- function(arr) {\n  if (is.null(arr)) return(NULL)\n  prod <- 0\n  if (0 %in% arr) {\n    prod <- 0\n  } else {\n    prod <- (-1) ^ length(Filter(function(x) x < 0, arr))\n  }\n  return(prod * sum(abs(arr)))\n\n}\n\n### Rust version\n\nfn prod_signs(arr: Vec<isize>) -> Option<isize> {\n"
+  },
+  {
+    "name": "HumanEval_97_multiply",
+    "language": "rs",
+    "prompt": "fn multiply(a: isize, b: isize) -> isize {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_97_multiply.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = multiply;\n    assert_eq!(candidate(148, 412), 16);\n    assert_eq!(candidate(19, 28), 72);\n    assert_eq!(candidate(2020, 1851), 0);\n    assert_eq!(candidate(14, -15), 20);\n    assert_eq!(candidate(76, 67), 42);\n    assert_eq!(candidate(17, 27), 49);\n    assert_eq!(candidate(0, 1), 0);\n    assert_eq!(candidate(0, 0), 0);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nmultiply <- function(a, b) {\n    return(abs(a %% 10) * abs(b %% 10))\n\n}\n\n### Rust version\n\nfn multiply(a: isize, b: isize) -> isize {\n"
+  },
+  {
+    "name": "HumanEval_104_unique_digits",
+    "language": "rs",
+    "prompt": "fn unique_digits(x: Vec<isize>) -> Vec<isize> {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_104_unique_digits.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = unique_digits;\n    assert_eq!(candidate(vec![15, 33, 1422, 1]), vec![1, 15, 33]);\n    assert_eq!(candidate(vec![152, 323, 1422, 10]), Vec::<isize>::new());\n    assert_eq!(candidate(vec![12345, 2033, 111, 151]), vec![111, 151]);\n    assert_eq!(candidate(vec![135, 103, 31]), vec![31, 135]);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nlibrary(sets)\nlibrary(stringi)\nsuppressPackageStartupMessages(library(stringr))\nsuppressPackageStartupMessages(library(hash))\nunique_digits <- function(x) {\n    odd_digit_elements <- c()\n    for (i in x) {\n        if (all(strtoi(strsplit(as.character(i), \"\")[[1]]) %% 2 == 1)) {\n            odd_digit_elements <- c(odd_digit_elements, i)\n        }\n    }\n    sort(odd_digit_elements)\n\n}\n\n### Rust version\n\nfn unique_digits(x: Vec<isize>) -> Vec<isize> {\n"
+  },
+  {
+    "name": "HumanEval_72_will_it_fly",
+    "language": "rs",
+    "prompt": "fn will_it_fly(q: Vec<isize>, w: isize) -> bool {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_72_will_it_fly.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = will_it_fly;\n    assert_eq!(candidate(vec![3, 2, 3], 9), true);\n    assert_eq!(candidate(vec![1, 2], 5), false);\n    assert_eq!(candidate(vec![3], 5), true);\n    assert_eq!(candidate(vec![3, 2, 3], 1), false);\n    assert_eq!(candidate(vec![1, 2, 3], 6), false);\n    assert_eq!(candidate(vec![5], 5), true);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nwill_it_fly <- function(q, w) {\n    if (sum(q) > w) {\n        return(FALSE)\n    }\n    i <- 1\n    j <- length(q)\n    while (i < j) {\n        if (q[i] != q[j]) {\n            return(FALSE)\n        }\n        i <- i + 1\n        j <- j - 1\n    }\n    return(TRUE)\n\n}\n\n### Rust version\n\nfn will_it_fly(q: Vec<isize>, w: isize) -> bool {\n"
+  },
+  {
+    "name": "HumanEval_120_maximum",
+    "language": "rs",
+    "prompt": "fn maximum(arr: Vec<isize>, k: isize) -> Vec<isize> {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_120_maximum.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = maximum;\n    assert_eq!(candidate(vec![-3, -4, 5], 3), vec![-4, -3, 5]);\n    assert_eq!(candidate(vec![4, -4, 4], 2), vec![4, 4]);\n    assert_eq!(candidate(vec![-3, 2, 1, 2, -1, -2, 1], 1), vec![2]);\n    assert_eq!(candidate(vec![123, -123, 20, 0, 1, 2, -3], 3), vec![2, 20, 123]);\n    assert_eq!(candidate(vec![-123, 20, 0, 1, 2, -3], 4), vec![0, 1, 2, 20]);\n    assert_eq!(candidate(vec![5, 15, 0, 3, -13, -8, 0], 7), vec![-13, -8, 0, 0, 3, 5, 15]);\n    assert_eq!(candidate(vec![-1, 0, 2, 5, 3, -10], 2), vec![3, 5]);\n    assert_eq!(candidate(vec![1, 0, 5, -7], 1), vec![5]);\n    assert_eq!(candidate(vec![4, -4], 2), vec![-4, 4]);\n    assert_eq!(candidate(vec![-10, 10], 2), vec![-10, 10]);\n    assert_eq!(candidate(vec![1, 2, 3, -23, 243, -400, 0], 0), Vec::<isize>::new());\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nlibrary(sets)\nlibrary(stringi)\nsuppressPackageStartupMessages(library(R.utils))\nsuppressPackageStartupMessages(library(stringr))\nsuppressPackageStartupMessages(library(hash))\nmaximum <- function(arr, k) {\n  if (k == 0) {\n    return (c())\n  }\n  ans <- tail(sort(arr), k)\n  return (ans)\n\n}\n\n### Rust version\n\nfn maximum(arr: Vec<isize>, k: isize) -> Vec<isize> {\n"
+  },
+  {
+    "name": "HumanEval_1_separate_paren_groups",
+    "language": "rs",
+    "prompt": "fn separate_paren_groups(paren_string: String) -> Vec<String> {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_1_separate_paren_groups.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = separate_paren_groups;\n    assert_eq!(candidate(String::from(\"(()()) ((())) () ((())()())\")), vec![String::from(\"(()())\"), String::from(\"((()))\"), String::from(\"()\"), String::from(\"((())()())\")]);\n    assert_eq!(candidate(String::from(\"() (()) ((())) (((())))\")), vec![String::from(\"()\"), String::from(\"(())\"), String::from(\"((()))\"), String::from(\"(((())))\")]);\n    assert_eq!(candidate(String::from(\"(()(())((())))\")), vec![String::from(\"(()(())((())))\")]);\n    assert_eq!(candidate(String::from(\"( ) (( )) (( )( ))\")), vec![String::from(\"()\"), String::from(\"(())\"), String::from(\"(()())\")]);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nseparate_paren_groups <- function(paren_string) {\n    result <- list()\n    current_string <- c()\n    current_depth <- 0\n\n    for (c in strsplit(paren_string, \"\")[[1]]) {\n        if (c == \"(\") {\n            current_depth <- current_depth + 1\n            current_string <- c(current_string, c)\n        } else if (c == \")\") {\n            current_depth <- current_depth - 1\n            current_string <- c(current_string, c)\n\n            if (current_depth == 0) {\n                result <- c(result, paste(current_string, collapse = \"\"))\n                current_string <- c()\n            }\n        }\n    }\n\n    return(result)\n\n}\n\n### Rust version\n\nfn separate_paren_groups(paren_string: String) -> Vec<String> {\n"
+  },
+  {
+    "name": "HumanEval_94_skjkasdkd",
+    "language": "rs",
+    "prompt": "fn skjkasdkd(lst: Vec<isize>) -> isize {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_94_skjkasdkd.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = skjkasdkd;\n    assert_eq!(candidate(vec![0, 3, 2, 1, 3, 5, 7, 4, 5, 5, 5, 2, 181, 32, 4, 32, 3, 2, 32, 324, 4, 3]), 10);\n    assert_eq!(candidate(vec![1, 0, 1, 8, 2, 4597, 2, 1, 3, 40, 1, 2, 1, 2, 4, 2, 5, 1]), 25);\n    assert_eq!(candidate(vec![1, 3, 1, 32, 5107, 34, 83278, 109, 163, 23, 2323, 32, 30, 1, 9, 3]), 13);\n    assert_eq!(candidate(vec![0, 724, 32, 71, 99, 32, 6, 0, 5, 91, 83, 0, 5, 6]), 11);\n    assert_eq!(candidate(vec![0, 81, 12, 3, 1, 21]), 3);\n    assert_eq!(candidate(vec![0, 8, 1, 2, 1, 7]), 7);\n    assert_eq!(candidate(vec![8191]), 19);\n    assert_eq!(candidate(vec![8191, 123456, 127, 7]), 19);\n    assert_eq!(candidate(vec![127, 97, 8192]), 10);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nlibrary(sets)\nlibrary(stringi)\nsuppressPackageStartupMessages(library(R.utils))\nsuppressPackageStartupMessages(library(stringr))\nsuppressPackageStartupMessages(library(hash))\nskjkasdkd <- function(lst) {\n  isPrime <- function(n) {\n    for (i in 2:(sqrt(n))) {\n      if (n %% i == 0) {\n        return (FALSE)\n      }\n    }\n    return (TRUE)\n  }\n  maxx <- 0\n  i <- 1\n  while (i <= length(lst)) {\n    if (lst[i] > maxx && isPrime(lst[i])) {\n      maxx <- lst[i]\n    }\n    i <- i + 1\n  }\n  result <- sum(as.numeric(strsplit(as.character(maxx), \"\")[[1]]))\n  return (result)\n\n}\n\n### Rust version\n\nfn skjkasdkd(lst: Vec<isize>) -> isize {\n"
+  },
+  {
+    "name": "HumanEval_74_total_match",
+    "language": "rs",
+    "prompt": "fn total_match(lst1: Vec<String>, lst2: Vec<String>) -> Vec<String> {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_74_total_match.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = total_match;\n    assert_eq!(candidate(Vec::<String>::new(), Vec::<String>::new()), Vec::<String>::new());\n    assert_eq!(candidate(vec![String::from(\"hi\"), String::from(\"admin\")], vec![String::from(\"hi\"), String::from(\"hi\")]), vec![String::from(\"hi\"), String::from(\"hi\")]);\n    assert_eq!(candidate(vec![String::from(\"hi\"), String::from(\"admin\")], vec![String::from(\"hi\"), String::from(\"hi\"), String::from(\"admin\"), String::from(\"project\")]), vec![String::from(\"hi\"), String::from(\"admin\")]);\n    assert_eq!(candidate(vec![String::from(\"4\")], vec![String::from(\"1\"), String::from(\"2\"), String::from(\"3\"), String::from(\"4\"), String::from(\"5\")]), vec![String::from(\"4\")]);\n    assert_eq!(candidate(vec![String::from(\"hi\"), String::from(\"admin\")], vec![String::from(\"hI\"), String::from(\"Hi\")]), vec![String::from(\"hI\"), String::from(\"Hi\")]);\n    assert_eq!(candidate(vec![String::from(\"hi\"), String::from(\"admin\")], vec![String::from(\"hI\"), String::from(\"hi\"), String::from(\"hi\")]), vec![String::from(\"hI\"), String::from(\"hi\"), String::from(\"hi\")]);\n    assert_eq!(candidate(vec![String::from(\"hi\"), String::from(\"admin\")], vec![String::from(\"hI\"), String::from(\"hi\"), String::from(\"hii\")]), vec![String::from(\"hi\"), String::from(\"admin\")]);\n    assert_eq!(candidate(Vec::<String>::new(), vec![String::from(\"this\")]), Vec::<String>::new());\n    assert_eq!(candidate(vec![String::from(\"this\")], Vec::<String>::new()), Vec::<String>::new());\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nlibrary(sets)\nlibrary(stringi)\nsuppressPackageStartupMessages(library(R.utils))\nsuppressPackageStartupMessages(library(stringr))\nsuppressPackageStartupMessages(library(hash))\ntotal_match <- function(lst1, lst2) {\n    l1 <- sum(nchar(lst1))\n    l2 <- sum(nchar(lst2))\n    if (l1 <= l2) {\n        return(lst1)\n    } else {\n        return(lst2)\n    }\n\n}\n\n### Rust version\n\nfn total_match(lst1: Vec<String>, lst2: Vec<String>) -> Vec<String> {\n"
+  },
+  {
+    "name": "HumanEval_162_string_to_md5",
+    "language": "rs",
+    "prompt": "fn string_to_md5(text: String) -> Option<String> {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_162_string_to_md5.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = string_to_md5;\n    assert_eq!(candidate(String::from(\"Hello world\")), Some(String::from(\"3e25960a79dbc69b674cd4ec67a72c62\")));\n    assert_eq!(candidate(String::from(\"\")), None);\n    assert_eq!(candidate(String::from(\"A B C\")), Some(String::from(\"0ef78513b0cb8cef12743f5aeb35f888\")));\n    assert_eq!(candidate(String::from(\"password\")), Some(String::from(\"5f4dcc3b5aa765d61d8327deb882cf99\")));\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nlibrary(sets)\nlibrary(stringi)\nsuppressPackageStartupMessages(library(R.utils))\nsuppressPackageStartupMessages(library(stringr))\nsuppressPackageStartupMessages(library(hash))\nstring_to_md5 <- function(text) {\n    if (text == \"\") {\n        return (NULL)\n    } else {\n        return (digest::digest(text, algo = \"md5\", serialize = FALSE))\n    }\n\n}\n\n### Rust version\n\nfn string_to_md5(text: String) -> Option<String> {\n"
+  },
+  {
+    "name": "HumanEval_41_car_race_collision",
+    "language": "rs",
+    "prompt": "fn car_race_collision(n: isize) -> isize {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_41_car_race_collision.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = car_race_collision;\n    assert_eq!(candidate(2), 4);\n    assert_eq!(candidate(3), 9);\n    assert_eq!(candidate(4), 16);\n    assert_eq!(candidate(8), 64);\n    assert_eq!(candidate(10), 100);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\ncar_race_collision <- function(n) {\n    return(n^2)\n\n}\n\n### Rust version\n\nfn car_race_collision(n: isize) -> isize {\n"
+  },
+  {
+    "name": "HumanEval_76_is_simple_power",
+    "language": "rs",
+    "prompt": "fn is_simple_power(x: isize, n: isize) -> bool {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_76_is_simple_power.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = is_simple_power;\n    assert_eq!(candidate(16, 2), true);\n    assert_eq!(candidate(143214, 16), false);\n    assert_eq!(candidate(4, 2), true);\n    assert_eq!(candidate(9, 3), true);\n    assert_eq!(candidate(16, 4), true);\n    assert_eq!(candidate(24, 2), false);\n    assert_eq!(candidate(128, 4), false);\n    assert_eq!(candidate(12, 6), false);\n    assert_eq!(candidate(1, 1), true);\n    assert_eq!(candidate(1, 12), true);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nis_simple_power <- function(x, n) {\n    if (n == 1) {\n        return (x == 1)\n    }\n    power <- 1\n    while (power < x) {\n        power <- power * n\n    }\n    return (power == x)\n\n}\n\n### Rust version\n\nfn is_simple_power(x: isize, n: isize) -> bool {\n"
+  },
+  {
+    "name": "HumanEval_27_flip_case",
+    "language": "rs",
+    "prompt": "fn flip_case(string: String) -> String {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_27_flip_case.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = flip_case;\n    assert_eq!(candidate(String::from(\"\")), String::from(\"\"));\n    assert_eq!(candidate(String::from(\"Hello!\")), String::from(\"hELLO!\"));\n    assert_eq!(candidate(String::from(\"These violent delights have violent ends\")), String::from(\"tHESE VIOLENT DELIGHTS HAVE VIOLENT ENDS\"));\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nlibrary(sets)\nlibrary(stringi)\nsuppressPackageStartupMessages(library(R.utils))\nsuppressPackageStartupMessages(library(stringr))\nsuppressPackageStartupMessages(library(hash))\nflip_case <- function(string) {\n  return(chartr(\"A-Za-z\", \"a-zA-Z\", string))\n\n}\n\n### Rust version\n\nfn flip_case(string: String) -> String {\n"
+  },
+  {
+    "name": "HumanEval_64_vowels_count",
+    "language": "rs",
+    "prompt": "fn vowels_count(s: String) -> isize {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_64_vowels_count.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = vowels_count;\n    assert_eq!(candidate(String::from(\"abcde\")), 2);\n    assert_eq!(candidate(String::from(\"Alone\")), 3);\n    assert_eq!(candidate(String::from(\"key\")), 2);\n    assert_eq!(candidate(String::from(\"bye\")), 1);\n    assert_eq!(candidate(String::from(\"keY\")), 2);\n    assert_eq!(candidate(String::from(\"bYe\")), 1);\n    assert_eq!(candidate(String::from(\"ACEDY\")), 3);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nlibrary(sets)\nlibrary(stringi)\nsuppressPackageStartupMessages(library(R.utils))\nsuppressPackageStartupMessages(library(stringr))\nsuppressPackageStartupMessages(library(hash))\nvowels_count <- function(s) {\n    vowels <- c(\"a\", \"e\", \"i\", \"o\", \"u\", \"A\", \"E\", \"I\", \"O\", \"U\")\n    n_vowels <- sum(stri_detect_fixed(s, vowels))\n    if (str_sub(s, -1) %in% c(\"y\", \"Y\")) {\n        n_vowels <- n_vowels + 1\n    }\n    return(n_vowels)\n\n}\n\n### Rust version\n\nfn vowels_count(s: String) -> isize {\n"
+  },
+  {
+    "name": "HumanEval_149_sorted_list_sum",
+    "language": "rs",
+    "prompt": "fn sorted_list_sum(lst: Vec<String>) -> Vec<String> {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_149_sorted_list_sum.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = sorted_list_sum;\n    assert_eq!(candidate(vec![String::from(\"aa\"), String::from(\"a\"), String::from(\"aaa\")]), vec![String::from(\"aa\")]);\n    assert_eq!(candidate(vec![String::from(\"school\"), String::from(\"AI\"), String::from(\"asdf\"), String::from(\"b\")]), vec![String::from(\"AI\"), String::from(\"asdf\"), String::from(\"school\")]);\n    assert_eq!(candidate(vec![String::from(\"d\"), String::from(\"b\"), String::from(\"c\"), String::from(\"a\")]), Vec::<String>::new());\n    assert_eq!(candidate(vec![String::from(\"d\"), String::from(\"dcba\"), String::from(\"abcd\"), String::from(\"a\")]), vec![String::from(\"abcd\"), String::from(\"dcba\")]);\n    assert_eq!(candidate(vec![String::from(\"AI\"), String::from(\"ai\"), String::from(\"au\")]), vec![String::from(\"AI\"), String::from(\"ai\"), String::from(\"au\")]);\n    assert_eq!(candidate(vec![String::from(\"a\"), String::from(\"b\"), String::from(\"b\"), String::from(\"c\"), String::from(\"c\"), String::from(\"a\")]), Vec::<String>::new());\n    assert_eq!(candidate(vec![String::from(\"aaaa\"), String::from(\"bbbb\"), String::from(\"dd\"), String::from(\"cc\")]), vec![String::from(\"cc\"), String::from(\"dd\"), String::from(\"aaaa\"), String::from(\"bbbb\")]);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nlibrary(sets)\nlibrary(stringi)\nsuppressPackageStartupMessages(library(R.utils))\nsuppressPackageStartupMessages(library(stringr))\nsuppressPackageStartupMessages(library(hash))\nsorted_list_sum <- function(lst) {\n  lst <- sort(lst)\n  new_lst <- c()\n  for (i in lst) {\n    if (nchar(i) %% 2 == 0) {\n      new_lst <- c(new_lst, i)\n    }\n  }\n  return (new_lst[order(nchar(new_lst))])\n\n}\n\n### Rust version\n\nfn sorted_list_sum(lst: Vec<String>) -> Vec<String> {\n"
+  },
+  {
+    "name": "HumanEval_107_even_odd_palindrome",
+    "language": "rs",
+    "prompt": "fn even_odd_palindrome(n: isize) -> (isize, isize) {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_107_even_odd_palindrome.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = even_odd_palindrome;\n    assert_eq!(candidate(123), (8, 13));\n    assert_eq!(candidate(12), (4, 6));\n    assert_eq!(candidate(3), (1, 2));\n    assert_eq!(candidate(63), (6, 8));\n    assert_eq!(candidate(25), (5, 6));\n    assert_eq!(candidate(19), (4, 6));\n    assert_eq!(candidate(9), (4, 5));\n    assert_eq!(candidate(1), (0, 1));\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nlibrary(sets)\nlibrary(stringi)\nsuppressPackageStartupMessages(library(R.utils))\nsuppressPackageStartupMessages(library(stringr))\nsuppressPackageStartupMessages(library(hash))\neven_odd_palindrome <- function(n) {\n  is_palindrome <- function(n) {\n    return (stri_reverse(as.character(n)) == as.character(n))\n  }\n  even_palindrome_count <- 0\n  odd_palindrome_count <- 0\n  for (i in 1:n) {\n    if (i %% 2 == 1 && is_palindrome(i)) {\n      odd_palindrome_count <- odd_palindrome_count + 1\n    } else if (i %% 2 == 0 && is_palindrome(i)) {\n      even_palindrome_count <- even_palindrome_count + 1\n    }\n  }\n  return (c(even_palindrome_count, odd_palindrome_count))\n\n}\n\n### Rust version\n\nfn even_odd_palindrome(n: isize) -> (isize, isize) {\n"
+  },
+  {
+    "name": "HumanEval_71_triangle_area",
+    "language": "rs",
+    "prompt": "fn triangle_area(a: isize, b: isize, c: isize) -> f64 {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_71_triangle_area.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = triangle_area;\n    assert_eq!(candidate(3, 4, 5), 6.0);\n    assert_eq!(candidate(1, 2, 10), -1.0);\n    assert_eq!(candidate(4, 8, 5), 8.18);\n    assert_eq!(candidate(2, 2, 2), 1.73);\n    assert_eq!(candidate(1, 2, 3), -1.0);\n    assert_eq!(candidate(10, 5, 7), 16.25);\n    assert_eq!(candidate(2, 6, 3), -1.0);\n    assert_eq!(candidate(1, 1, 1), 0.43);\n    assert_eq!(candidate(2, 2, 10), -1.0);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\ntriangle_area <- function(a, b, c) {\n    if (a + b <= c || a + c <= b || b + c <= a) {\n        return(-1)\n    }\n    s <- (a + b + c)/2\n    area <- (s * (s - a) * (s - b) * (s - c)) ** 0.5\n    area <- round(area, 2)\n    return(area)\n\n}\n\n### Rust version\n\nfn triangle_area(a: isize, b: isize, c: isize) -> f64 {\n"
+  },
+  {
+    "name": "HumanEval_95_check_dict_case",
+    "language": "rs",
+    "prompt": "use std::collections::HashMap;\n\nfn check_dict_case(dict: HashMap<String, String>) -> bool {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_95_check_dict_case.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = check_dict_case;\n    assert_eq!(candidate(HashMap::from([(String::from(\"p\"), String::from(\"pineapple\")), (String::from(\"b\"), String::from(\"banana\"))])), true);\n    assert_eq!(candidate(HashMap::from([(String::from(\"p\"), String::from(\"pineapple\")), (String::from(\"A\"), String::from(\"banana\")), (String::from(\"B\"), String::from(\"banana\"))])), false);\n    assert_eq!(candidate(HashMap::from([(String::from(\"p\"), String::from(\"pineapple\")), (String::from(\"5\"), String::from(\"banana\")), (String::from(\"a\"), String::from(\"apple\"))])), false);\n    assert_eq!(candidate(HashMap::from([(String::from(\"Name\"), String::from(\"John\")), (String::from(\"Age\"), String::from(\"36\")), (String::from(\"City\"), String::from(\"Houston\"))])), false);\n    assert_eq!(candidate(HashMap::from([(String::from(\"STATE\"), String::from(\"NC\")), (String::from(\"ZIP\"), String::from(\"12345\"))])), true);\n    assert_eq!(candidate(HashMap::from([(String::from(\"fruit\"), String::from(\"Orange\")), (String::from(\"taste\"), String::from(\"Sweet\"))])), true);\n    assert_eq!(candidate(HashMap::from([])), false);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nlibrary(sets)\nlibrary(stringi)\nsuppressPackageStartupMessages(library(R.utils))\nsuppressPackageStartupMessages(library(stringr))\nsuppressPackageStartupMessages(library(hash))\ncheck_dict_case <- function(dict) {\n  if (length(names(dict)) == 0) {\n    return (FALSE)\n  } else {\n    state <- \"start\"\n    for (key in names(dict)) {\n      if (is.character(key) == FALSE) {\n        state <- \"mixed\"\n        break\n      }\n      if (state == \"start\") {\n        if (str_detect(key, \"^[[:upper:]]+$\")) {\n          state <- \"upper\"\n        } else if (str_detect(key, \"^[[:lower:]]+$\")) {\n          state <- \"lower\"\n        } else {\n          break\n        }\n      } else if ((state == \"upper\" && !str_detect(key, \"^[[:upper:]]+$\")) || (state == \"lower\" && !str_detect(key, \"^[[:lower:]]+$\"))) {\n        state <- \"mixed\"\n        break\n      } else {\n        next\n      }\n    }\n    return (state == \"upper\" || state == \"lower\")\n  }\n\n}\n\n### Rust version\n\nuse std::collections::HashMap;\n\nfn check_dict_case(dict: HashMap<String, String>) -> bool {\n"
+  },
+  {
+    "name": "HumanEval_47_median",
+    "language": "rs",
+    "prompt": "fn median(l: Vec<isize>) -> f64 {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_47_median.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = median;\n    assert_eq!(candidate(vec![3, 1, 2, 4, 5]), 3.0);\n    assert_eq!(candidate(vec![-10, 4, 6, 1000, 10, 20]), 8.0);\n    assert_eq!(candidate(vec![5]), 5.0);\n    assert_eq!(candidate(vec![6, 5]), 5.5);\n    assert_eq!(candidate(vec![8, 1, 3, 9, 9, 2, 7]), 7.0);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nlibrary(sets)\nlibrary(stringi)\nsuppressPackageStartupMessages(library(R.utils))\nsuppressPackageStartupMessages(library(stringr))\nsuppressPackageStartupMessages(library(hash))\nmedian <- function(l) {\n  l <- sort(l)\n  if (length(l) %% 2 == 1) {\n    return(l[length(l) %/% 2 + 1])\n  } else {\n    return((l[length(l) %/% 2] + l[length(l) %/% 2 + 1]) / 2)\n  }\n\n}\n\n### Rust version\n\nfn median(l: Vec<isize>) -> f64 {\n"
+  },
+  {
+    "name": "HumanEval_44_change_base",
+    "language": "rs",
+    "prompt": "fn change_base(x: isize, base: isize) -> String {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_44_change_base.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = change_base;\n    assert_eq!(candidate(8, 3), String::from(\"22\"));\n    assert_eq!(candidate(9, 3), String::from(\"100\"));\n    assert_eq!(candidate(234, 2), String::from(\"11101010\"));\n    assert_eq!(candidate(16, 2), String::from(\"10000\"));\n    assert_eq!(candidate(8, 2), String::from(\"1000\"));\n    assert_eq!(candidate(7, 2), String::from(\"111\"));\n    assert_eq!(candidate(2, 3), String::from(\"2\"));\n    assert_eq!(candidate(3, 4), String::from(\"3\"));\n    assert_eq!(candidate(4, 5), String::from(\"4\"));\n    assert_eq!(candidate(5, 6), String::from(\"5\"));\n    assert_eq!(candidate(6, 7), String::from(\"6\"));\n    assert_eq!(candidate(7, 8), String::from(\"7\"));\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nchange_base <- function(x, base) {\n    ret <- \"\"\n    while (x > 0) {\n        ret <- paste0(x %% base, ret)\n        x <- x %/% base\n    }\n    return(ret)\n\n}\n\n### Rust version\n\nfn change_base(x: isize, base: isize) -> String {\n"
+  },
+  {
+    "name": "HumanEval_12_longest",
+    "language": "rs",
+    "prompt": "fn longest(strings: Vec<String>) -> Option<String> {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_12_longest.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = longest;\n    assert_eq!(candidate(Vec::<String>::new()), None);\n    assert_eq!(candidate(vec![String::from(\"x\"), String::from(\"y\"), String::from(\"z\")]), Some(String::from(\"x\")));\n    assert_eq!(candidate(vec![String::from(\"x\"), String::from(\"yyy\"), String::from(\"zzzz\"), String::from(\"www\"), String::from(\"kkkk\"), String::from(\"abc\")]), Some(String::from(\"zzzz\")));\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nlongest <- function(strings) {\n    if (is.null(strings) || length(strings) == 0) {\n        return(NULL)\n    }\n    \n    maxlen <- max(nchar(strings))\n    for (s in strings) {\n        if (nchar(s) == maxlen) {\n            return(s)\n        }\n    }\n\n}\n\n### Rust version\n\nfn longest(strings: Vec<String>) -> Option<String> {\n"
+  },
+  {
+    "name": "HumanEval_58_common",
+    "language": "rs",
+    "prompt": "fn common(l1: Vec<isize>, l2: Vec<isize>) -> Vec<isize> {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_58_common.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = common;\n    assert_eq!(candidate(vec![1, 4, 3, 34, 653, 2, 5], vec![5, 7, 1, 5, 9, 653, 121]), vec![1, 5, 653]);\n    assert_eq!(candidate(vec![5, 3, 2, 8], vec![3, 2]), vec![2, 3]);\n    assert_eq!(candidate(vec![4, 3, 2, 8], vec![3, 2, 4]), vec![2, 3, 4]);\n    assert_eq!(candidate(vec![4, 3, 2, 8], Vec::<isize>::new()), Vec::<isize>::new());\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nlibrary(sets)\nlibrary(stringi)\nsuppressPackageStartupMessages(library(R.utils))\nsuppressPackageStartupMessages(library(stringr))\nsuppressPackageStartupMessages(library(hash))\ncommon <- function(l1, l2) {\n    ret <- unique(intersect(l1, l2))\n    return (sort(ret))\n\n}\n\n### Rust version\n\nfn common(l1: Vec<isize>, l2: Vec<isize>) -> Vec<isize> {\n"
+  },
+  {
+    "name": "HumanEval_154_cycpattern_check",
+    "language": "rs",
+    "prompt": "fn cycpattern_check(a: String, b: String) -> bool {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_154_cycpattern_check.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = cycpattern_check;\n    assert_eq!(candidate(String::from(\"xyzw\"), String::from(\"xyw\")), false);\n    assert_eq!(candidate(String::from(\"yello\"), String::from(\"ell\")), true);\n    assert_eq!(candidate(String::from(\"whattup\"), String::from(\"ptut\")), false);\n    assert_eq!(candidate(String::from(\"efef\"), String::from(\"fee\")), true);\n    assert_eq!(candidate(String::from(\"abab\"), String::from(\"aabb\")), false);\n    assert_eq!(candidate(String::from(\"winemtt\"), String::from(\"tinem\")), true);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\ncycpattern_check <- function(a, b) {\n    l <- nchar(b)\n    pat <- paste0(b, b)\n    for (i in 1:(nchar(a) - l + 1)) {\n        for (j in 1:(l + 1)) {\n            if (substr(a, i, i + l - 1) == substr(pat, j, j + l - 1)) {\n                return(TRUE)\n            }\n        }\n    }\n    return(FALSE)\n\n}\n\n### Rust version\n\nfn cycpattern_check(a: String, b: String) -> bool {\n"
+  },
+  {
+    "name": "HumanEval_114_minSubArraySum",
+    "language": "rs",
+    "prompt": "fn minSubArraySum(nums: Vec<isize>) -> isize {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_114_minSubArraySum.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = minSubArraySum;\n    assert_eq!(candidate(vec![2, 3, 4, 1, 2, 4]), 1);\n    assert_eq!(candidate(vec![-1, -2, -3]), -6);\n    assert_eq!(candidate(vec![-1, -2, -3, 2, -10]), -14);\n    assert_eq!(candidate(vec![-9999999999999999]), -9999999999999999);\n    assert_eq!(candidate(vec![0, 10, 20, 1000000]), 0);\n    assert_eq!(candidate(vec![-1, -2, -3, 10, -5]), -6);\n    assert_eq!(candidate(vec![100, -1, -2, -3, 10, -5]), -6);\n    assert_eq!(candidate(vec![10, 11, 13, 8, 3, 4]), 3);\n    assert_eq!(candidate(vec![100, -33, 32, -1, 0, -2]), -33);\n    assert_eq!(candidate(vec![-10]), -10);\n    assert_eq!(candidate(vec![7]), 7);\n    assert_eq!(candidate(vec![1, -1]), -1);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nlibrary(sets)\nlibrary(stringi)\nsuppressPackageStartupMessages(library(R.utils))\nsuppressPackageStartupMessages(library(stringr))\nsuppressPackageStartupMessages(library(hash))\nminSubArraySum <- function(nums) {\n  max_sum <- 0\n  s <- 0\n  for (num in nums) {\n    s <- s - num\n    if (s < 0) {\n      s <- 0\n    }\n    max_sum <- max(s, max_sum)\n  }\n  if (max_sum == 0) {\n    max_sum <- max(-nums)\n  }\n  min_sum <- -max_sum\n  return(min_sum)\n\n}\n\n### Rust version\n\nfn minSubArraySum(nums: Vec<isize>) -> isize {\n"
+  },
+  {
+    "name": "HumanEval_88_sort_array",
+    "language": "rs",
+    "prompt": "fn sort_array(array: Vec<isize>) -> Vec<isize> {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_88_sort_array.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = sort_array;\n    assert_eq!(candidate(Vec::<isize>::new()), Vec::<isize>::new());\n    assert_eq!(candidate(vec![5]), vec![5]);\n    assert_eq!(candidate(vec![2, 4, 3, 0, 1, 5]), vec![0, 1, 2, 3, 4, 5]);\n    assert_eq!(candidate(vec![2, 4, 3, 0, 1, 5, 6]), vec![6, 5, 4, 3, 2, 1, 0]);\n    assert_eq!(candidate(vec![2, 1]), vec![1, 2]);\n    assert_eq!(candidate(vec![15, 42, 87, 32, 11, 0]), vec![0, 11, 15, 32, 42, 87]);\n    assert_eq!(candidate(vec![21, 14, 23, 11]), vec![23, 21, 14, 11]);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nlibrary(sets)\nlibrary(stringi)\nsuppressPackageStartupMessages(library(stringr))\nsuppressPackageStartupMessages(library(hash))\nsort_array <- function(array) {\n    if (length(array) == 0) {\n        return (c())\n    } else {\n        return (sort(array, decreasing = (sum(c(array[1], array[length(array)])) %% 2 == 0)))\n    }\n\n}\n\n### Rust version\n\nfn sort_array(array: Vec<isize>) -> Vec<isize> {\n"
+  },
+  {
+    "name": "HumanEval_111_histogram",
+    "language": "rs",
+    "prompt": "use std::collections::HashMap;\n\nfn histogram(test: String) -> HashMap<String, isize> {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_111_histogram.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = histogram;\n    assert_eq!(candidate(String::from(\"a b b a\")), HashMap::from([(String::from(\"a\"), 2), (String::from(\"b\"), 2)]));\n    assert_eq!(candidate(String::from(\"a b c a b\")), HashMap::from([(String::from(\"a\"), 2), (String::from(\"b\"), 2)]));\n    assert_eq!(candidate(String::from(\"a b c d g\")), HashMap::from([(String::from(\"a\"), 1), (String::from(\"b\"), 1), (String::from(\"c\"), 1), (String::from(\"d\"), 1), (String::from(\"g\"), 1)]));\n    assert_eq!(candidate(String::from(\"r t g\")), HashMap::from([(String::from(\"r\"), 1), (String::from(\"t\"), 1), (String::from(\"g\"), 1)]));\n    assert_eq!(candidate(String::from(\"b b b b a\")), HashMap::from([(String::from(\"b\"), 4)]));\n    assert_eq!(candidate(String::from(\"r t g\")), HashMap::from([(String::from(\"r\"), 1), (String::from(\"t\"), 1), (String::from(\"g\"), 1)]));\n    assert_eq!(candidate(String::from(\"\")), HashMap::from([]));\n    assert_eq!(candidate(String::from(\"a\")), HashMap::from([(String::from(\"a\"), 1)]));\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nlibrary(sets)\nlibrary(stringi)\nsuppressPackageStartupMessages(library(R.utils))\nsuppressPackageStartupMessages(library(stringr))\nsuppressPackageStartupMessages(library(hash))\nhistogram <- function(test) {\n  dict1 <- list()\n  list1 <- strsplit(test, \" \")[[1]]\n  t <- 0\n  for (i in list1) {\n    if (sum(list1 == i) > t && i != \"\") {\n      t <- sum(list1 == i)\n    }\n  }\n  if (t > 0) {\n    for (i in list1) {\n      if (sum(list1 == i) == t) {\n        dict1[i] <- t\n      }\n    }\n  }\n  return (dict1)\n\n}\n\n### Rust version\n\nuse std::collections::HashMap;\n\nfn histogram(test: String) -> HashMap<String, isize> {\n"
+  },
+  {
+    "name": "HumanEval_123_get_odd_collatz",
+    "language": "rs",
+    "prompt": "fn get_odd_collatz(n: isize) -> Vec<isize> {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_123_get_odd_collatz.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = get_odd_collatz;\n    assert_eq!(candidate(14), vec![1, 5, 7, 11, 13, 17]);\n    assert_eq!(candidate(5), vec![1, 5]);\n    assert_eq!(candidate(12), vec![1, 3, 5]);\n    assert_eq!(candidate(1), vec![1]);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nlibrary(sets)\nlibrary(stringi)\nsuppressPackageStartupMessages(library(R.utils))\nsuppressPackageStartupMessages(library(stringr))\nsuppressPackageStartupMessages(library(hash))\nget_odd_collatz <- function(n) {\n  if (n %% 2 == 0) {\n    odd_collatz <- c()\n  } else {\n    odd_collatz <- c(n)\n  }\n  while (n > 1) {\n    if (n %% 2 == 0) {\n      n <- n/2\n    } else {\n      n <- n*3 + 1\n    }\n    if (n %% 2 == 1) {\n      odd_collatz <- c(odd_collatz, n)\n    }\n  }\n  return (sort(odd_collatz))\n\n}\n\n### Rust version\n\nfn get_odd_collatz(n: isize) -> Vec<isize> {\n"
+  },
+  {
+    "name": "HumanEval_63_fibfib",
+    "language": "rs",
+    "prompt": "fn fibfib(n: isize) -> isize {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_63_fibfib.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = fibfib;\n    assert_eq!(candidate(2), 1);\n    assert_eq!(candidate(1), 0);\n    assert_eq!(candidate(5), 4);\n    assert_eq!(candidate(8), 24);\n    assert_eq!(candidate(10), 81);\n    assert_eq!(candidate(12), 274);\n    assert_eq!(candidate(14), 927);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nfibfib <- function(n) {\n  if (n == 0) {\n    return(0)\n  }\n  if (n == 1) {\n    return(0)\n  }\n  if (n == 2) {\n    return(1)\n  }\n  return(fibfib(n - 1) + fibfib(n - 2) + fibfib(n - 3))\n\n}\n\n### Rust version\n\nfn fibfib(n: isize) -> isize {\n"
+  },
+  {
+    "name": "HumanEval_2_truncate_number",
+    "language": "rs",
+    "prompt": "fn truncate_number(number: f64) -> f64 {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_2_truncate_number.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = truncate_number;\n    assert_eq!(candidate(3.5), 0.5);\n    assert_eq!(candidate(1.25), 0.25);\n    assert_eq!(candidate(123.0), 0.0);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\ntruncate_number <- function(number) {\n    return(number %% 1.0)\n\n}\n\n### Rust version\n\nfn truncate_number(number: f64) -> f64 {\n"
+  },
+  {
+    "name": "HumanEval_35_max_element",
+    "language": "rs",
+    "prompt": "fn max_element(l: Vec<isize>) -> isize {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_35_max_element.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = max_element;\n    assert_eq!(candidate(vec![1, 2, 3]), 3);\n    assert_eq!(candidate(vec![5, 3, -5, 2, -3, 3, 9, 0, 124, 1, -10]), 124);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nmax_element <- function(l) {\n    m <- l[1]\n    for (e in l) {\n        if (e > m) {\n            m <- e\n        }\n    }\n    return(m)\n\n}\n\n### Rust version\n\nfn max_element(l: Vec<isize>) -> isize {\n"
+  },
+  {
+    "name": "HumanEval_99_closest_integer",
+    "language": "rs",
+    "prompt": "fn closest_integer(value: String) -> isize {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_99_closest_integer.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = closest_integer;\n    assert_eq!(candidate(String::from(\"10\")), 10);\n    assert_eq!(candidate(String::from(\"14.5\")), 15);\n    assert_eq!(candidate(String::from(\"-15.5\")), -16);\n    assert_eq!(candidate(String::from(\"15.3\")), 15);\n    assert_eq!(candidate(String::from(\"0\")), 0);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nlibrary(sets)\nlibrary(stringi)\nsuppressPackageStartupMessages(library(R.utils))\nsuppressPackageStartupMessages(library(stringr))\nsuppressPackageStartupMessages(library(hash))\nclosest_integer <- function(value) {\n    num <- as.numeric(value)\n    if (substr(value, nchar(value)-1, nchar(value)) == \".5\") {\n        if (num > 0) {\n            res <- ceiling(num)\n        } else {\n            res <- floor(num)\n        }\n    } else if (nchar(value) > 0) {\n        res <- round(num)\n    } else {\n        res <- 0\n    }\n    return(res)\n\n}\n\n### Rust version\n\nfn closest_integer(value: String) -> isize {\n"
+  },
+  {
+    "name": "HumanEval_8_sum_product",
+    "language": "rs",
+    "prompt": "fn sum_product(numbers: Vec<isize>) -> (isize, isize) {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_8_sum_product.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = sum_product;\n    assert_eq!(candidate(Vec::<isize>::new()), (0, 1));\n    assert_eq!(candidate(vec![1, 1, 1]), (3, 1));\n    assert_eq!(candidate(vec![100, 0]), (100, 0));\n    assert_eq!(candidate(vec![3, 5, 7]), (15, 105));\n    assert_eq!(candidate(vec![10]), (10, 10));\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nlibrary(sets)\nlibrary(stringi)\nsuppressPackageStartupMessages(library(R.utils))\nsuppressPackageStartupMessages(library(stringr))\nsuppressPackageStartupMessages(library(hash))\nsum_product <- function(numbers) {\n    sum_value <- sum(numbers)\n    prod_value <- prod(numbers)\n    return (c(sum_value, prod_value))\n\n}\n\n### Rust version\n\nfn sum_product(numbers: Vec<isize>) -> (isize, isize) {\n"
+  },
+  {
+    "name": "HumanEval_117_select_words",
+    "language": "rs",
+    "prompt": "fn select_words(s: String, n: isize) -> Vec<String> {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_117_select_words.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = select_words;\n    assert_eq!(candidate(String::from(\"Mary had a little lamb\"), 4), vec![String::from(\"little\")]);\n    assert_eq!(candidate(String::from(\"Mary had a little lamb\"), 3), vec![String::from(\"Mary\"), String::from(\"lamb\")]);\n    assert_eq!(candidate(String::from(\"simple white space\"), 2), Vec::<String>::new());\n    assert_eq!(candidate(String::from(\"Hello world\"), 4), vec![String::from(\"world\")]);\n    assert_eq!(candidate(String::from(\"Uncle sam\"), 3), vec![String::from(\"Uncle\")]);\n    assert_eq!(candidate(String::from(\"\"), 4), Vec::<String>::new());\n    assert_eq!(candidate(String::from(\"a b c d e f\"), 1), vec![String::from(\"b\"), String::from(\"c\"), String::from(\"d\"), String::from(\"f\")]);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nlibrary(sets)\nlibrary(stringi)\nsuppressPackageStartupMessages(library(R.utils))\nsuppressPackageStartupMessages(library(stringr))\nsuppressPackageStartupMessages(library(hash))\nselect_words <- function(s, n) {\n    result <- c()\n    for (word in strsplit(s, \" \")[[1]]) {\n        n_consonants <- sum(str_count(tolower(word), \"[^aeiou]\"))\n        if (n_consonants == n) {\n            result <- c(result, word)\n        }\n    }\n    return(result)\n\n}\n\n### Rust version\n\nfn select_words(s: String, n: isize) -> Vec<String> {\n"
+  },
+  {
+    "name": "HumanEval_122_add_elements",
+    "language": "rs",
+    "prompt": "fn add_elements(arr: Vec<isize>, k: isize) -> isize {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_122_add_elements.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = add_elements;\n    assert_eq!(candidate(vec![1, -2, -3, 41, 57, 76, 87, 88, 99], 3), -4);\n    assert_eq!(candidate(vec![111, 121, 3, 4000, 5, 6], 2), 0);\n    assert_eq!(candidate(vec![11, 21, 3, 90, 5, 6, 7, 8, 9], 4), 125);\n    assert_eq!(candidate(vec![111, 21, 3, 4000, 5, 6, 7, 8, 9], 4), 24);\n    assert_eq!(candidate(vec![1], 1), 1);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nadd_elements <- function(arr, k) {\n    sum(arr[1:k][nchar(arr[1:k]) <= 2])\n\n}\n\n### Rust version\n\nfn add_elements(arr: Vec<isize>, k: isize) -> isize {\n"
+  },
+  {
+    "name": "HumanEval_159_eat",
+    "language": "rs",
+    "prompt": "fn eat(number: isize, need: isize, remaining: isize) -> Vec<isize> {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_159_eat.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = eat;\n    assert_eq!(candidate(5, 6, 10), vec![11, 4]);\n    assert_eq!(candidate(4, 8, 9), vec![12, 1]);\n    assert_eq!(candidate(1, 10, 10), vec![11, 0]);\n    assert_eq!(candidate(2, 11, 5), vec![7, 0]);\n    assert_eq!(candidate(4, 5, 7), vec![9, 2]);\n    assert_eq!(candidate(4, 5, 1), vec![5, 0]);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nlibrary(sets)\nlibrary(stringi)\nsuppressPackageStartupMessages(library(stringr))\nsuppressPackageStartupMessages(library(hash))\neat <- function(number, need, remaining) {\n    if(need <= remaining){\n        return(c(number + need , remaining-need))\n    } else {\n        return(c(number + remaining , 0))\n    }\n\n}\n\n### Rust version\n\nfn eat(number: isize, need: isize, remaining: isize) -> Vec<isize> {\n"
+  },
+  {
+    "name": "HumanEval_113_odd_count",
+    "language": "rs",
+    "prompt": "fn odd_count(lst: Vec<String>) -> Vec<String> {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_113_odd_count.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = odd_count;\n    assert_eq!(candidate(vec![String::from(\"1234567\")]), vec![String::from(\"the number of odd elements 4n the str4ng 4 of the 4nput.\")]);\n    assert_eq!(candidate(vec![String::from(\"3\"), String::from(\"11111111\")]), vec![String::from(\"the number of odd elements 1n the str1ng 1 of the 1nput.\"), String::from(\"the number of odd elements 8n the str8ng 8 of the 8nput.\")]);\n    assert_eq!(candidate(vec![String::from(\"271\"), String::from(\"137\"), String::from(\"314\")]), vec![String::from(\"the number of odd elements 2n the str2ng 2 of the 2nput.\"), String::from(\"the number of odd elements 3n the str3ng 3 of the 3nput.\"), String::from(\"the number of odd elements 2n the str2ng 2 of the 2nput.\")]);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nlibrary(sets)\nlibrary(stringi)\nsuppressPackageStartupMessages(library(R.utils))\nsuppressPackageStartupMessages(library(stringr))\nsuppressPackageStartupMessages(library(hash))\nodd_count <- function(lst) {\n  res <- c()\n  for (arr in lst) {\n    n <- sum(as.numeric(strsplit(arr, \"\")[[1]]) %% 2 == 1)\n    res <- c(res, paste0(\"the number of odd elements \", n, \"n the str\", n, \"ng \", n, \" of the \", n, \"nput.\"))\n  }\n  return (res)\n\n}\n\n### Rust version\n\nfn odd_count(lst: Vec<String>) -> Vec<String> {\n"
+  },
+  {
+    "name": "HumanEval_90_next_smallest",
+    "language": "rs",
+    "prompt": "fn next_smallest(lst: Vec<isize>) -> Option<isize> {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_90_next_smallest.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = next_smallest;\n    assert_eq!(candidate(vec![1, 2, 3, 4, 5]), Some(2));\n    assert_eq!(candidate(vec![5, 1, 4, 3, 2]), Some(2));\n    assert_eq!(candidate(Vec::<isize>::new()), None);\n    assert_eq!(candidate(vec![1, 1]), None);\n    assert_eq!(candidate(vec![1, 1, 1, 1, 0]), Some(1));\n    assert_eq!(candidate(vec![1, 1]), None);\n    assert_eq!(candidate(vec![-35, 34, 12, -45]), Some(-35));\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nnext_smallest <- function(lst) {\n    lst <- sort(unique(lst))\n    if (length(lst) < 2) {\n        return(NULL)\n    } else {\n        return(lst[2])\n    }\n\n}\n\n### Rust version\n\nfn next_smallest(lst: Vec<isize>) -> Option<isize> {\n"
+  },
+  {
+    "name": "HumanEval_29_filter_by_prefix",
+    "language": "rs",
+    "prompt": "fn filter_by_prefix(strings: Vec<String>, prefix: String) -> Vec<String> {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_29_filter_by_prefix.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = filter_by_prefix;\n    assert_eq!(candidate(Vec::<String>::new(), String::from(\"john\")), Vec::<String>::new());\n    assert_eq!(candidate(vec![String::from(\"xxx\"), String::from(\"asd\"), String::from(\"xxy\"), String::from(\"john doe\"), String::from(\"xxxAAA\"), String::from(\"xxx\")], String::from(\"xxx\")), vec![String::from(\"xxx\"), String::from(\"xxxAAA\"), String::from(\"xxx\")]);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nlibrary(sets)\nlibrary(stringi)\nsuppressPackageStartupMessages(library(stringr))\nsuppressPackageStartupMessages(library(hash))\nfilter_by_prefix <- function(strings, prefix) {\n  return (strings[str_detect(strings, prefix)])\n\n}\n\n### Rust version\n\nfn filter_by_prefix(strings: Vec<String>, prefix: String) -> Vec<String> {\n"
+  },
+  {
+    "name": "HumanEval_102_choose_num",
+    "language": "rs",
+    "prompt": "fn choose_num(x: isize, y: isize) -> isize {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_102_choose_num.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = choose_num;\n    assert_eq!(candidate(12, 15), 14);\n    assert_eq!(candidate(13, 12), -1);\n    assert_eq!(candidate(33, 12354), 12354);\n    assert_eq!(candidate(5234, 5233), -1);\n    assert_eq!(candidate(6, 29), 28);\n    assert_eq!(candidate(27, 10), -1);\n    assert_eq!(candidate(7, 7), -1);\n    assert_eq!(candidate(546, 546), 546);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nchoose_num <- function(x, y) {\n    if (x > y) {\n        return(-1)\n    }\n    if (y %% 2 == 0) {\n        return(y)\n    }\n    if (x == y) {\n        return(-1)\n    }\n    return(y - 1)\n\n}\n\n### Rust version\n\nfn choose_num(x: isize, y: isize) -> isize {\n"
+  },
+  {
+    "name": "HumanEval_60_sum_to_n",
+    "language": "rs",
+    "prompt": "fn sum_to_n(n: isize) -> isize {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_60_sum_to_n.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = sum_to_n;\n    assert_eq!(candidate(1), 1);\n    assert_eq!(candidate(6), 21);\n    assert_eq!(candidate(11), 66);\n    assert_eq!(candidate(30), 465);\n    assert_eq!(candidate(100), 5050);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nlibrary(sets)\nlibrary(stringi)\nsuppressPackageStartupMessages(library(R.utils))\nsuppressPackageStartupMessages(library(stringr))\nsuppressPackageStartupMessages(library(hash))\nsum_to_n <- function(n) {\n  sum(0:n)\n\n}\n\n### Rust version\n\nfn sum_to_n(n: isize) -> isize {\n"
+  },
+  {
+    "name": "HumanEval_140_fix_spaces",
+    "language": "rs",
+    "prompt": "fn fix_spaces(text: String) -> String {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_140_fix_spaces.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = fix_spaces;\n    assert_eq!(candidate(String::from(\"Example\")), String::from(\"Example\"));\n    assert_eq!(candidate(String::from(\"Mudasir Hanif \")), String::from(\"Mudasir_Hanif_\"));\n    assert_eq!(candidate(String::from(\"Yellow Yellow  Dirty  Fellow\")), String::from(\"Yellow_Yellow__Dirty__Fellow\"));\n    assert_eq!(candidate(String::from(\"Exa   mple\")), String::from(\"Exa-mple\"));\n    assert_eq!(candidate(String::from(\"   Exa 1 2 2 mple\")), String::from(\"-Exa_1_2_2_mple\"));\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nfix_spaces <- function(text) {\n    new_text <- \"\"\n    i <- 1\n    start <- 1\n    end <- 1\n    while (i <= nchar(text)) {\n        if (substr(text, i, i) == \" \") {\n            end <- end + 1\n        } else {\n            if (end - start > 2) {\n                new_text <- paste0(new_text, \"-\", substr(text, i, i))\n            } else if (end - start > 0) {\n                new_text <- paste0(new_text, strrep(\"_\", end - start), substr(text, i, i))\n            } else {\n                new_text <- paste0(new_text, substr(text, i, i))\n            }\n            start <- i + 1\n            end <- i + 1\n        }\n        i <- i + 1\n    }\n    if (end - start > 2) {\n        new_text <- paste0(new_text, \"-\")\n    } else if (end - start > 0) {\n        new_text <- paste0(new_text, \"_\")\n    }\n    return(new_text)\n\n}\n\n### Rust version\n\nfn fix_spaces(text: String) -> String {\n"
+  },
+  {
+    "name": "HumanEval_9_rolling_max",
+    "language": "rs",
+    "prompt": "fn rolling_max(numbers: Vec<isize>) -> Vec<isize> {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_9_rolling_max.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = rolling_max;\n    assert_eq!(candidate(Vec::<isize>::new()), Vec::<isize>::new());\n    assert_eq!(candidate(vec![1, 2, 3, 4]), vec![1, 2, 3, 4]);\n    assert_eq!(candidate(vec![4, 3, 2, 1]), vec![4, 4, 4, 4]);\n    assert_eq!(candidate(vec![3, 2, 3, 100, 3]), vec![3, 3, 3, 100, 100]);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nlibrary(sets)\nlibrary(stringi)\nsuppressPackageStartupMessages(library(R.utils))\nsuppressPackageStartupMessages(library(stringr))\nsuppressPackageStartupMessages(library(hash))\nrolling_max <- function(numbers) {\n  running_max <- NULL\n  result <- c()\n  for (n in numbers) {\n    if (is.null(running_max)) {\n      running_max <- n\n    } else {\n      running_max <- max(running_max, n)\n    }\n    result <- c(result, running_max)\n  }\n  return(result)\n\n}\n\n### Rust version\n\nfn rolling_max(numbers: Vec<isize>) -> Vec<isize> {\n"
+  },
+  {
+    "name": "HumanEval_118_get_closest_vowel",
+    "language": "rs",
+    "prompt": "fn get_closest_vowel(word: String) -> String {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_118_get_closest_vowel.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = get_closest_vowel;\n    assert_eq!(candidate(String::from(\"yogurt\")), String::from(\"u\"));\n    assert_eq!(candidate(String::from(\"full\")), String::from(\"u\"));\n    assert_eq!(candidate(String::from(\"easy\")), String::from(\"\"));\n    assert_eq!(candidate(String::from(\"eAsy\")), String::from(\"\"));\n    assert_eq!(candidate(String::from(\"ali\")), String::from(\"\"));\n    assert_eq!(candidate(String::from(\"bad\")), String::from(\"a\"));\n    assert_eq!(candidate(String::from(\"most\")), String::from(\"o\"));\n    assert_eq!(candidate(String::from(\"ab\")), String::from(\"\"));\n    assert_eq!(candidate(String::from(\"ba\")), String::from(\"\"));\n    assert_eq!(candidate(String::from(\"quick\")), String::from(\"\"));\n    assert_eq!(candidate(String::from(\"anime\")), String::from(\"i\"));\n    assert_eq!(candidate(String::from(\"Asia\")), String::from(\"\"));\n    assert_eq!(candidate(String::from(\"Above\")), String::from(\"o\"));\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nlibrary(sets)\nlibrary(stringi)\nsuppressPackageStartupMessages(library(R.utils))\nsuppressPackageStartupMessages(library(stringr))\nsuppressPackageStartupMessages(library(hash))\nget_closest_vowel <- function(word) {\n    if (nchar(word) < 3) {\n        return (\"\")\n    }\n    vowels <- c(\"a\", \"e\", \"i\", \"o\", \"u\", \"A\", \"E\", 'O', 'U', 'I')\n    for (i in (nchar(word)-1):2) {\n        if (substr(word, i, i) %in% vowels) {\n            if (!(substr(word, i-1, i-1) %in% vowels) && !(substr(word, i+1, i+1) %in% vowels)) {\n                return (substr(word, i, i))\n            }\n        }\n    }\n    return (\"\")\n\n}\n\n### Rust version\n\nfn get_closest_vowel(word: String) -> String {\n"
+  },
+  {
+    "name": "HumanEval_152_compare",
+    "language": "rs",
+    "prompt": "fn compare(game: Vec<isize>, guess: Vec<isize>) -> Vec<isize> {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_152_compare.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = compare;\n    assert_eq!(candidate(vec![1, 2, 3, 4, 5, 1], vec![1, 2, 3, 4, 2, -2]), vec![0, 0, 0, 0, 3, 3]);\n    assert_eq!(candidate(vec![0, 0, 0, 0, 0, 0], vec![0, 0, 0, 0, 0, 0]), vec![0, 0, 0, 0, 0, 0]);\n    assert_eq!(candidate(vec![1, 2, 3], vec![-1, -2, -3]), vec![2, 4, 6]);\n    assert_eq!(candidate(vec![1, 2, 3, 5], vec![-1, 2, 3, 4]), vec![2, 0, 0, 1]);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nlibrary(sets)\nlibrary(stringi)\nsuppressPackageStartupMessages(library(stringr))\nsuppressPackageStartupMessages(library(hash))\ncompare <- function(game, guess) {\n    return (sapply(1:length(game), function(i) abs(game[i] - guess[i])))\n\n}\n\n### Rust version\n\nfn compare(game: Vec<isize>, guess: Vec<isize>) -> Vec<isize> {\n"
+  },
+  {
+    "name": "HumanEval_26_remove_duplicates",
+    "language": "rs",
+    "prompt": "fn remove_duplicates(numbers: Vec<isize>) -> Vec<isize> {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_26_remove_duplicates.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = remove_duplicates;\n    assert_eq!(candidate(Vec::<isize>::new()), Vec::<isize>::new());\n    assert_eq!(candidate(vec![1, 2, 3, 4]), vec![1, 2, 3, 4]);\n    assert_eq!(candidate(vec![1, 2, 3, 2, 4, 3, 5]), vec![1, 4, 5]);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nlibrary(sets)\nlibrary(stringi)\nsuppressPackageStartupMessages(library(R.utils))\nsuppressPackageStartupMessages(library(stringr))\nsuppressPackageStartupMessages(library(hash))\nremove_duplicates <- function(numbers) {\n  c <- table(numbers)\n  return (numbers[c[numbers] <= 1])\n\n}\n\n### Rust version\n\nfn remove_duplicates(numbers: Vec<isize>) -> Vec<isize> {\n"
+  },
+  {
+    "name": "HumanEval_54_same_chars",
+    "language": "rs",
+    "prompt": "fn same_chars(s0: String, s1: String) -> bool {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_54_same_chars.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = same_chars;\n    assert_eq!(candidate(String::from(\"eabcdzzzz\"), String::from(\"dddzzzzzzzddeddabc\")), true);\n    assert_eq!(candidate(String::from(\"abcd\"), String::from(\"dddddddabc\")), true);\n    assert_eq!(candidate(String::from(\"dddddddabc\"), String::from(\"abcd\")), true);\n    assert_eq!(candidate(String::from(\"eabcd\"), String::from(\"dddddddabc\")), false);\n    assert_eq!(candidate(String::from(\"abcd\"), String::from(\"dddddddabcf\")), false);\n    assert_eq!(candidate(String::from(\"eabcdzzzz\"), String::from(\"dddzzzzzzzddddabc\")), false);\n    assert_eq!(candidate(String::from(\"aabb\"), String::from(\"aaccc\")), false);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nlibrary(sets)\nlibrary(stringi)\nsuppressPackageStartupMessages(library(R.utils))\nsuppressPackageStartupMessages(library(stringr))\nsuppressPackageStartupMessages(library(hash))\nsame_chars <- function(s0, s1) {\n  return (setequal(strsplit(s0, \"\")[[1]], strsplit(s1, \"\")[[1]]))\n\n}\n\n### Rust version\n\nfn same_chars(s0: String, s1: String) -> bool {\n"
+  },
+  {
+    "name": "HumanEval_155_even_odd_count",
+    "language": "rs",
+    "prompt": "fn even_odd_count(num: isize) -> (isize, isize) {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_155_even_odd_count.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = even_odd_count;\n    assert_eq!(candidate(7), (0, 1));\n    assert_eq!(candidate(-78), (1, 1));\n    assert_eq!(candidate(3452), (2, 2));\n    assert_eq!(candidate(346211), (3, 3));\n    assert_eq!(candidate(-345821), (3, 3));\n    assert_eq!(candidate(-2), (1, 0));\n    assert_eq!(candidate(-45347), (2, 3));\n    assert_eq!(candidate(0), (1, 0));\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nlibrary(sets)\nlibrary(stringi)\nsuppressPackageStartupMessages(library(stringr))\nsuppressPackageStartupMessages(library(hash))\neven_odd_count <- function(num) {\n    even_count <- 0\n    odd_count <- 0\n    for (i in strsplit(as.character(abs(num)), \"\")[[1]]) {\n        if (as.integer(i) %% 2 == 0) {\n            even_count <- even_count + 1\n        } else {\n            odd_count <- odd_count + 1\n        }\n    }\n    return (c(even_count, odd_count))\n\n}\n\n### Rust version\n\nfn even_odd_count(num: isize) -> (isize, isize) {\n"
+  },
+  {
+    "name": "HumanEval_67_fruit_distribution",
+    "language": "rs",
+    "prompt": "fn fruit_distribution(s: String, n: isize) -> isize {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_67_fruit_distribution.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = fruit_distribution;\n    assert_eq!(candidate(String::from(\"5 apples and 6 oranges\"), 19), 8);\n    assert_eq!(candidate(String::from(\"5 apples and 6 oranges\"), 21), 10);\n    assert_eq!(candidate(String::from(\"0 apples and 1 oranges\"), 3), 2);\n    assert_eq!(candidate(String::from(\"1 apples and 0 oranges\"), 3), 2);\n    assert_eq!(candidate(String::from(\"2 apples and 3 oranges\"), 100), 95);\n    assert_eq!(candidate(String::from(\"2 apples and 3 oranges\"), 5), 0);\n    assert_eq!(candidate(String::from(\"1 apples and 100 oranges\"), 120), 19);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nlibrary(sets)\nlibrary(stringi)\nsuppressPackageStartupMessages(library(R.utils))\nsuppressPackageStartupMessages(library(stringr))\nsuppressPackageStartupMessages(library(hash))\nfruit_distribution <- function(s, n) {\n    lis <- c()\n    for (i in strsplit(s, \" \")[[1]]) {\n        if (grepl(\"[0-9]\", i)) {\n            lis <- c(lis, as.integer(i))\n        }\n    }\n    return(n - sum(lis))\n\n}\n\n### Rust version\n\nfn fruit_distribution(s: String, n: isize) -> isize {\n"
+  },
+  {
+    "name": "HumanEval_11_string_xor",
+    "language": "rs",
+    "prompt": "fn string_xor(a: String, b: String) -> String {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_11_string_xor.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = string_xor;\n    assert_eq!(candidate(String::from(\"111000\"), String::from(\"101010\")), String::from(\"010010\"));\n    assert_eq!(candidate(String::from(\"1\"), String::from(\"1\")), String::from(\"0\"));\n    assert_eq!(candidate(String::from(\"0101\"), String::from(\"0000\")), String::from(\"0101\"));\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nlibrary(sets)\nlibrary(stringi)\nsuppressPackageStartupMessages(library(R.utils))\nsuppressPackageStartupMessages(library(stringr))\nsuppressPackageStartupMessages(library(hash))\nstring_xor <- function(a, b) {\n    return (paste(as.integer(as.logical(xor(as.integer(strsplit(a, \"\")[[1]]), as.integer(strsplit(b, \"\")[[1]])))), collapse = \"\"))\n\n}\n\n### Rust version\n\nfn string_xor(a: String, b: String) -> String {\n"
+  },
+  {
+    "name": "HumanEval_23_strlen",
+    "language": "rs",
+    "prompt": "fn strlen(string: String) -> isize {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_23_strlen.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = strlen;\n    assert_eq!(candidate(String::from(\"\")), 0);\n    assert_eq!(candidate(String::from(\"x\")), 1);\n    assert_eq!(candidate(String::from(\"asdasnakj\")), 9);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nlibrary(sets)\nlibrary(stringi)\nsuppressPackageStartupMessages(library(R.utils))\nsuppressPackageStartupMessages(library(stringr))\nsuppressPackageStartupMessages(library(hash))\nstrlen <- function(string) {\n    nchar(string)\n\n}\n\n### Rust version\n\nfn strlen(string: String) -> isize {\n"
+  },
+  {
+    "name": "HumanEval_15_string_sequence",
+    "language": "rs",
+    "prompt": "fn string_sequence(n: isize) -> String {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_15_string_sequence.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = string_sequence;\n    assert_eq!(candidate(0), String::from(\"0\"));\n    assert_eq!(candidate(3), String::from(\"0 1 2 3\"));\n    assert_eq!(candidate(10), String::from(\"0 1 2 3 4 5 6 7 8 9 10\"));\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nlibrary(sets)\nlibrary(stringi)\nsuppressPackageStartupMessages(library(R.utils))\nsuppressPackageStartupMessages(library(stringr))\nsuppressPackageStartupMessages(library(hash))\nstring_sequence <- function(n) {\n  return(paste0(0:n, collapse = \" \"))\n\n}\n\n### Rust version\n\nfn string_sequence(n: isize) -> String {\n"
+  },
+  {
+    "name": "HumanEval_141_file_name_check",
+    "language": "rs",
+    "prompt": "fn file_name_check(file_name: String) -> String {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_141_file_name_check.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = file_name_check;\n    assert_eq!(candidate(String::from(\"example.txt\")), String::from(\"Yes\"));\n    assert_eq!(candidate(String::from(\"1example.dll\")), String::from(\"No\"));\n    assert_eq!(candidate(String::from(\"s1sdf3.asd\")), String::from(\"No\"));\n    assert_eq!(candidate(String::from(\"K.dll\")), String::from(\"Yes\"));\n    assert_eq!(candidate(String::from(\"MY16FILE3.exe\")), String::from(\"Yes\"));\n    assert_eq!(candidate(String::from(\"His12FILE94.exe\")), String::from(\"No\"));\n    assert_eq!(candidate(String::from(\"_Y.txt\")), String::from(\"No\"));\n    assert_eq!(candidate(String::from(\"?aREYA.exe\")), String::from(\"No\"));\n    assert_eq!(candidate(String::from(\"/this_is_valid.dll\")), String::from(\"No\"));\n    assert_eq!(candidate(String::from(\"this_is_valid.wow\")), String::from(\"No\"));\n    assert_eq!(candidate(String::from(\"this_is_valid.txt\")), String::from(\"Yes\"));\n    assert_eq!(candidate(String::from(\"this_is_valid.txtexe\")), String::from(\"No\"));\n    assert_eq!(candidate(String::from(\"#this2_i4s_5valid.ten\")), String::from(\"No\"));\n    assert_eq!(candidate(String::from(\"@this1_is6_valid.exe\")), String::from(\"No\"));\n    assert_eq!(candidate(String::from(\"this_is_12valid.6exe4.txt\")), String::from(\"No\"));\n    assert_eq!(candidate(String::from(\"all.exe.txt\")), String::from(\"No\"));\n    assert_eq!(candidate(String::from(\"I563_No.exe\")), String::from(\"Yes\"));\n    assert_eq!(candidate(String::from(\"Is3youfault.txt\")), String::from(\"Yes\"));\n    assert_eq!(candidate(String::from(\"no_one#knows.dll\")), String::from(\"Yes\"));\n    assert_eq!(candidate(String::from(\"1I563_Yes3.exe\")), String::from(\"No\"));\n    assert_eq!(candidate(String::from(\"I563_Yes3.txtt\")), String::from(\"No\"));\n    assert_eq!(candidate(String::from(\"final..txt\")), String::from(\"No\"));\n    assert_eq!(candidate(String::from(\"final132\")), String::from(\"No\"));\n    assert_eq!(candidate(String::from(\"_f4indsartal132.\")), String::from(\"No\"));\n    assert_eq!(candidate(String::from(\".txt\")), String::from(\"No\"));\n    assert_eq!(candidate(String::from(\"s.\")), String::from(\"No\"));\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nfile_name_check <- function(file_name) {\n    suf <- c('txt', 'exe', 'dll')\n    lst <- strsplit(file_name, split='\\\\.')[[1]]\n    if (length(lst) != 2) {\n        return('No')\n    }\n    if (!(lst[2] %in% suf)) {\n        return('No')\n    }\n    if (nchar(lst[1]) == 0) {\n        return('No')\n    }\n    if (!(grepl('^[[:alpha:]]', lst[1]))) {\n        return('No')\n    }\n    t <- length(gregexpr('[[:digit:]]', lst[1])[[1]])\n    if (t > 3) {\n        return('No')\n    }\n    return('Yes')\n\n}\n\n### Rust version\n\nfn file_name_check(file_name: String) -> String {\n"
+  },
+  {
+    "name": "HumanEval_85_add",
+    "language": "rs",
+    "prompt": "fn add(lst: Vec<isize>) -> isize {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_85_add.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = add;\n    assert_eq!(candidate(vec![4, 88]), 88);\n    assert_eq!(candidate(vec![4, 5, 6, 7, 2, 122]), 122);\n    assert_eq!(candidate(vec![4, 0, 6, 7]), 0);\n    assert_eq!(candidate(vec![4, 4, 6, 8]), 12);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nadd <- function(lst) {\n  sum(lst[seq(2, length(lst), 2)][lst[seq(2, length(lst), 2)] %% 2 == 0])\n\n}\n\n### Rust version\n\nfn add(lst: Vec<isize>) -> isize {\n"
+  },
+  {
+    "name": "HumanEval_5_intersperse",
+    "language": "rs",
+    "prompt": "fn intersperse(numbers: Vec<isize>, delimeter: isize) -> Vec<isize> {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_5_intersperse.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = intersperse;\n    assert_eq!(candidate(Vec::<isize>::new(), 7), Vec::<isize>::new());\n    assert_eq!(candidate(vec![5, 6, 3, 2], 8), vec![5, 8, 6, 8, 3, 8, 2]);\n    assert_eq!(candidate(vec![2, 2, 2], 2), vec![2, 2, 2, 2, 2]);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nlibrary(sets)\nlibrary(stringi)\nsuppressPackageStartupMessages(library(stringr))\nsuppressPackageStartupMessages(library(hash))\nintersperse <- function(numbers, delimeter) {\n    if (length(numbers) == 0) {\n        return (c())\n    }\n    result <- c()\n    for (n in numbers[-length(numbers)]) {\n        result <- c(result, n, delimeter)\n    }\n    result <- c(result, numbers[length(numbers)])\n    return (result)\n\n}\n\n### Rust version\n\nfn intersperse(numbers: Vec<isize>, delimeter: isize) -> Vec<isize> {\n"
+  },
+  {
+    "name": "HumanEval_119_match_parens",
+    "language": "rs",
+    "prompt": "fn match_parens(lst: Vec<String>) -> String {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_119_match_parens.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = match_parens;\n    assert_eq!(candidate(vec![String::from(\"()(\"), String::from(\")\")]), String::from(\"Yes\"));\n    assert_eq!(candidate(vec![String::from(\")\"), String::from(\")\")]), String::from(\"No\"));\n    assert_eq!(candidate(vec![String::from(\"(()(())\"), String::from(\"())())\")]), String::from(\"No\"));\n    assert_eq!(candidate(vec![String::from(\")())\"), String::from(\"(()()(\")]), String::from(\"Yes\"));\n    assert_eq!(candidate(vec![String::from(\"(())))\"), String::from(\"(()())((\")]), String::from(\"Yes\"));\n    assert_eq!(candidate(vec![String::from(\"()\"), String::from(\"())\")]), String::from(\"No\"));\n    assert_eq!(candidate(vec![String::from(\"(()(\"), String::from(\"()))()\")]), String::from(\"Yes\"));\n    assert_eq!(candidate(vec![String::from(\"((((\"), String::from(\"((())\")]), String::from(\"No\"));\n    assert_eq!(candidate(vec![String::from(\")(()\"), String::from(\"(()(\")]), String::from(\"No\"));\n    assert_eq!(candidate(vec![String::from(\")(\"), String::from(\")(\")]), String::from(\"No\"));\n    assert_eq!(candidate(vec![String::from(\"(\"), String::from(\")\")]), String::from(\"Yes\"));\n    assert_eq!(candidate(vec![String::from(\")\"), String::from(\"(\")]), String::from(\"Yes\"));\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nlibrary(sets)\nlibrary(stringi)\nsuppressPackageStartupMessages(library(R.utils))\nsuppressPackageStartupMessages(library(stringr))\nsuppressPackageStartupMessages(library(hash))\nmatch_parens <- function(lst) {\n  check <- function(s) {\n    val <- 0\n    for (i in 1:nchar(s)) {\n      if (substr(s, i, i) == '(') {\n        val <- val + 1\n      } else {\n        val <- val - 1\n      }\n      if (val < 0) {\n        return(FALSE)\n      }\n    }\n    if (val == 0) {\n      return(TRUE)\n    } else {\n      return(FALSE)\n    }\n  }\n  S1 <- paste(lst[1], lst[2], sep = \"\")\n  S2 <- paste(lst[2], lst[1], sep = \"\")\n  if (check(S1) | check(S2)) {\n    return('Yes')\n  } else {\n    return('No')\n  }\n\n}\n\n### Rust version\n\nfn match_parens(lst: Vec<String>) -> String {\n"
+  },
+  {
+    "name": "HumanEval_7_filter_by_substring",
+    "language": "rs",
+    "prompt": "fn filter_by_substring(strings: Vec<String>, substring: String) -> Vec<String> {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_7_filter_by_substring.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = filter_by_substring;\n    assert_eq!(candidate(Vec::<String>::new(), String::from(\"john\")), Vec::<String>::new());\n    assert_eq!(candidate(vec![String::from(\"xxx\"), String::from(\"asd\"), String::from(\"xxy\"), String::from(\"john doe\"), String::from(\"xxxAAA\"), String::from(\"xxx\")], String::from(\"xxx\")), vec![String::from(\"xxx\"), String::from(\"xxxAAA\"), String::from(\"xxx\")]);\n    assert_eq!(candidate(vec![String::from(\"xxx\"), String::from(\"asd\"), String::from(\"aaaxxy\"), String::from(\"john doe\"), String::from(\"xxxAAA\"), String::from(\"xxx\")], String::from(\"xx\")), vec![String::from(\"xxx\"), String::from(\"aaaxxy\"), String::from(\"xxxAAA\"), String::from(\"xxx\")]);\n    assert_eq!(candidate(vec![String::from(\"grunt\"), String::from(\"trumpet\"), String::from(\"prune\"), String::from(\"gruesome\")], String::from(\"run\")), vec![String::from(\"grunt\"), String::from(\"prune\")]);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nlibrary(sets)\nlibrary(stringi)\nsuppressPackageStartupMessages(library(stringr))\nsuppressPackageStartupMessages(library(hash))\nfilter_by_substring <- function(strings, substring) {\n  return(strings[str_detect(strings, substring)])\n\n}\n\n### Rust version\n\nfn filter_by_substring(strings: Vec<String>, substring: String) -> Vec<String> {\n"
+  },
+  {
+    "name": "HumanEval_158_find_max",
+    "language": "rs",
+    "prompt": "fn find_max(words: Vec<String>) -> String {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_158_find_max.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = find_max;\n    assert_eq!(candidate(vec![String::from(\"name\"), String::from(\"of\"), String::from(\"string\")]), String::from(\"string\"));\n    assert_eq!(candidate(vec![String::from(\"name\"), String::from(\"enam\"), String::from(\"game\")]), String::from(\"enam\"));\n    assert_eq!(candidate(vec![String::from(\"aaaaaaa\"), String::from(\"bb\"), String::from(\"cc\")]), String::from(\"aaaaaaa\"));\n    assert_eq!(candidate(vec![String::from(\"abc\"), String::from(\"cba\")]), String::from(\"abc\"));\n    assert_eq!(candidate(vec![String::from(\"play\"), String::from(\"this\"), String::from(\"game\"), String::from(\"of\"), String::from(\"footbott\")]), String::from(\"footbott\"));\n    assert_eq!(candidate(vec![String::from(\"we\"), String::from(\"are\"), String::from(\"gonna\"), String::from(\"rock\")]), String::from(\"gonna\"));\n    assert_eq!(candidate(vec![String::from(\"we\"), String::from(\"are\"), String::from(\"a\"), String::from(\"mad\"), String::from(\"nation\")]), String::from(\"nation\"));\n    assert_eq!(candidate(vec![String::from(\"this\"), String::from(\"is\"), String::from(\"a\"), String::from(\"prrk\")]), String::from(\"this\"));\n    assert_eq!(candidate(vec![String::from(\"b\")]), String::from(\"b\"));\n    assert_eq!(candidate(vec![String::from(\"play\"), String::from(\"play\"), String::from(\"play\")]), String::from(\"play\"));\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nlibrary(sets)\nlibrary(stringi)\nsuppressPackageStartupMessages(library(R.utils))\nsuppressPackageStartupMessages(library(stringr))\nsuppressPackageStartupMessages(library(hash))\nfind_max <- function(words) {\n  sorted_words <- words[order(-sapply(words, function(x) length(unique(strsplit(x, \"\")[[1]]))), words)]\n  return(sorted_words[1])\n\n}\n\n### Rust version\n\nfn find_max(words: Vec<String>) -> String {\n"
+  },
+  {
+    "name": "HumanEval_110_exchange",
+    "language": "rs",
+    "prompt": "fn exchange(lst1: Vec<isize>, lst2: Vec<isize>) -> String {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_110_exchange.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = exchange;\n    assert_eq!(candidate(vec![1, 2, 3, 4], vec![1, 2, 3, 4]), String::from(\"YES\"));\n    assert_eq!(candidate(vec![1, 2, 3, 4], vec![1, 5, 3, 4]), String::from(\"NO\"));\n    assert_eq!(candidate(vec![1, 2, 3, 4], vec![2, 1, 4, 3]), String::from(\"YES\"));\n    assert_eq!(candidate(vec![5, 7, 3], vec![2, 6, 4]), String::from(\"YES\"));\n    assert_eq!(candidate(vec![5, 7, 3], vec![2, 6, 3]), String::from(\"NO\"));\n    assert_eq!(candidate(vec![3, 2, 6, 1, 8, 9], vec![3, 5, 5, 1, 1, 1]), String::from(\"NO\"));\n    assert_eq!(candidate(vec![100, 200], vec![200, 200]), String::from(\"YES\"));\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nexchange <- function(lst1, lst2) {\n    odd <- 0\n    even <- 0\n    for (i in lst1) {\n        if (i %% 2 == 1) {\n            odd <- odd + 1\n        }\n    }\n    for (i in lst2) {\n        if (i %% 2 == 0) {\n            even <- even + 1\n        }\n    }\n    if (even >= odd) {\n        return(\"YES\")\n    }\n    return(\"NO\")\n\n}\n\n### Rust version\n\nfn exchange(lst1: Vec<isize>, lst2: Vec<isize>) -> String {\n"
+  },
+  {
+    "name": "HumanEval_156_int_to_mini_roman",
+    "language": "rs",
+    "prompt": "fn int_to_mini_roman(number: isize) -> String {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_156_int_to_mini_roman.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = int_to_mini_roman;\n    assert_eq!(candidate(19), String::from(\"xix\"));\n    assert_eq!(candidate(152), String::from(\"clii\"));\n    assert_eq!(candidate(251), String::from(\"ccli\"));\n    assert_eq!(candidate(426), String::from(\"cdxxvi\"));\n    assert_eq!(candidate(500), String::from(\"d\"));\n    assert_eq!(candidate(1), String::from(\"i\"));\n    assert_eq!(candidate(4), String::from(\"iv\"));\n    assert_eq!(candidate(43), String::from(\"xliii\"));\n    assert_eq!(candidate(90), String::from(\"xc\"));\n    assert_eq!(candidate(94), String::from(\"xciv\"));\n    assert_eq!(candidate(532), String::from(\"dxxxii\"));\n    assert_eq!(candidate(900), String::from(\"cm\"));\n    assert_eq!(candidate(994), String::from(\"cmxciv\"));\n    assert_eq!(candidate(1000), String::from(\"m\"));\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nlibrary(sets)\nlibrary(stringi)\nsuppressPackageStartupMessages(library(R.utils))\nsuppressPackageStartupMessages(library(stringr))\nsuppressPackageStartupMessages(library(hash))\nint_to_mini_roman <- function(number) {\n  num <- c(1, 4, 5, 9, 10, 40, 50, 90, 100, 400, 500, 900, 1000)\n  sym <- c(\"I\", \"IV\", \"V\", \"IX\", \"X\", \"XL\", \"L\", \"XC\", \"C\", \"CD\", \"D\", \"CM\", \"M\")\n  i <- 13\n  res <- \"\"\n  while (number > 0) {\n    div <- floor(number / num[i])\n    number <- number %% num[i]\n    while (div > 0) {\n      res <- paste0(res, sym[i])\n      div <- div - 1\n    }\n    i <- i - 1\n  }\n  return(tolower(res))\n\n}\n\n### Rust version\n\nfn int_to_mini_roman(number: isize) -> String {\n"
+  },
+  {
+    "name": "HumanEval_138_is_equal_to_sum_even",
+    "language": "rs",
+    "prompt": "fn is_equal_to_sum_even(n: isize) -> bool {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_138_is_equal_to_sum_even.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = is_equal_to_sum_even;\n    assert_eq!(candidate(4), false);\n    assert_eq!(candidate(6), false);\n    assert_eq!(candidate(8), true);\n    assert_eq!(candidate(10), true);\n    assert_eq!(candidate(11), false);\n    assert_eq!(candidate(12), true);\n    assert_eq!(candidate(13), false);\n    assert_eq!(candidate(16), true);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nis_equal_to_sum_even <- function(n) {\n    n %% 2 == 0 & n >= 8\n\n}\n\n### Rust version\n\nfn is_equal_to_sum_even(n: isize) -> bool {\n"
+  },
+  {
+    "name": "HumanEval_79_decimal_to_binary",
+    "language": "rs",
+    "prompt": "fn decimal_to_binary(decimal: isize) -> String {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_79_decimal_to_binary.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = decimal_to_binary;\n    assert_eq!(candidate(0), String::from(\"db0db\"));\n    assert_eq!(candidate(32), String::from(\"db100000db\"));\n    assert_eq!(candidate(103), String::from(\"db1100111db\"));\n    assert_eq!(candidate(15), String::from(\"db1111db\"));\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nlibrary(sets)\nlibrary(stringi)\nsuppressPackageStartupMessages(library(R.utils))\nsuppressPackageStartupMessages(library(stringr))\nsuppressPackageStartupMessages(library(hash))\ndecimal_to_binary <- function(decimal) {\n    return(paste0(\"db\", as.character(intToBin(decimal)), \"db\"))\n\n}\n\n### Rust version\n\nfn decimal_to_binary(decimal: isize) -> String {\n"
+  },
+  {
+    "name": "HumanEval_33_sort_third",
+    "language": "rs",
+    "prompt": "fn sort_third(l: Vec<isize>) -> Vec<isize> {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_33_sort_third.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = sort_third;\n    assert_eq!(candidate(vec![5, 6, 3, 4, 8, 9, 2]), vec![2, 6, 3, 4, 8, 9, 5]);\n    assert_eq!(candidate(vec![5, 8, 3, 4, 6, 9, 2]), vec![2, 8, 3, 4, 6, 9, 5]);\n    assert_eq!(candidate(vec![5, 6, 9, 4, 8, 3, 2]), vec![2, 6, 9, 4, 8, 3, 5]);\n    assert_eq!(candidate(vec![5, 6, 3, 4, 8, 9, 2, 1]), vec![2, 6, 3, 4, 8, 9, 5, 1]);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nlibrary(sets)\nlibrary(stringi)\nsuppressPackageStartupMessages(library(R.utils))\nsuppressPackageStartupMessages(library(stringr))\nsuppressPackageStartupMessages(library(hash))\nsort_third <- function(l) {\n    l[seq(1, length(l), 3)] <- sort(l[seq(1, length(l), 3)])\n    return(l)\n\n}\n\n### Rust version\n\nfn sort_third(l: Vec<isize>) -> Vec<isize> {\n"
+  },
+  {
+    "name": "HumanEval_144_simplify",
+    "language": "rs",
+    "prompt": "fn simplify(x: String, n: String) -> bool {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_144_simplify.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = simplify;\n    assert_eq!(candidate(String::from(\"1/5\"), String::from(\"5/1\")), true);\n    assert_eq!(candidate(String::from(\"1/6\"), String::from(\"2/1\")), false);\n    assert_eq!(candidate(String::from(\"5/1\"), String::from(\"3/1\")), true);\n    assert_eq!(candidate(String::from(\"7/10\"), String::from(\"10/2\")), false);\n    assert_eq!(candidate(String::from(\"2/10\"), String::from(\"50/10\")), true);\n    assert_eq!(candidate(String::from(\"7/2\"), String::from(\"4/2\")), true);\n    assert_eq!(candidate(String::from(\"11/6\"), String::from(\"6/1\")), true);\n    assert_eq!(candidate(String::from(\"2/3\"), String::from(\"5/2\")), false);\n    assert_eq!(candidate(String::from(\"5/2\"), String::from(\"3/5\")), false);\n    assert_eq!(candidate(String::from(\"2/4\"), String::from(\"8/4\")), true);\n    assert_eq!(candidate(String::from(\"2/4\"), String::from(\"4/2\")), true);\n    assert_eq!(candidate(String::from(\"1/5\"), String::from(\"5/1\")), true);\n    assert_eq!(candidate(String::from(\"1/5\"), String::from(\"1/5\")), false);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nsimplify <- function(x, n) {\n    a <- strsplit(x, \"/\")[[1]][1]\n    b <- strsplit(x, \"/\")[[1]][2]\n    c <- strsplit(n, \"/\")[[1]][1]\n    d <- strsplit(n, \"/\")[[1]][2]\n    numerator <- as.integer(a) * as.integer(c)\n    denom <- as.integer(b) * as.integer(d)\n    if (numerator/denom == as.integer(numerator/denom)) {\n        return(TRUE)\n    }\n    return(FALSE)\n\n}\n\n### Rust version\n\nfn simplify(x: String, n: String) -> bool {\n"
+  },
+  {
+    "name": "HumanEval_161_solve",
+    "language": "rs",
+    "prompt": "fn solve(s: String) -> String {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_161_solve.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = solve;\n    assert_eq!(candidate(String::from(\"AsDf\")), String::from(\"aSdF\"));\n    assert_eq!(candidate(String::from(\"1234\")), String::from(\"4321\"));\n    assert_eq!(candidate(String::from(\"ab\")), String::from(\"AB\"));\n    assert_eq!(candidate(String::from(\"#a@C\")), String::from(\"#A@c\"));\n    assert_eq!(candidate(String::from(\"#AsdfW^45\")), String::from(\"#aSDFw^45\"));\n    assert_eq!(candidate(String::from(\"#6@2\")), String::from(\"2@6#\"));\n    assert_eq!(candidate(String::from(\"#$a^D\")), String::from(\"#$A^d\"));\n    assert_eq!(candidate(String::from(\"#ccc\")), String::from(\"#CCC\"));\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nlibrary(sets)\nlibrary(stringi)\nsuppressPackageStartupMessages(library(R.utils))\nsuppressPackageStartupMessages(library(stringr))\nsuppressPackageStartupMessages(library(hash))\nsolve <- function(s) {\n  flg <- 0\n  idx <- 1\n  new_str <- strsplit(s, \"\")[[1]]\n  for (i in new_str) {\n    if (grepl(\"[[:alpha:]]\", i)) {\n      new_str[idx] <- ifelse(grepl(\"[[:lower:]]\", i), toupper(i), tolower(i))\n      flg <- 1\n    }\n    idx <- idx + 1\n  }\n  s <- paste(new_str, collapse=\"\")\n  if (flg == 0) {\n    return (paste(rev(strsplit(s, \"\")[[1]]), collapse=\"\"))\n  }\n  return (s)\n\n}\n\n### Rust version\n\nfn solve(s: String) -> String {\n"
+  },
+  {
+    "name": "HumanEval_157_right_angle_triangle",
+    "language": "rs",
+    "prompt": "fn right_angle_triangle(a: isize, b: isize, c: isize) -> bool {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_157_right_angle_triangle.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = right_angle_triangle;\n    assert_eq!(candidate(3, 4, 5), true);\n    assert_eq!(candidate(1, 2, 3), false);\n    assert_eq!(candidate(10, 6, 8), true);\n    assert_eq!(candidate(2, 2, 2), false);\n    assert_eq!(candidate(7, 24, 25), true);\n    assert_eq!(candidate(10, 5, 7), false);\n    assert_eq!(candidate(5, 12, 13), true);\n    assert_eq!(candidate(15, 8, 17), true);\n    assert_eq!(candidate(48, 55, 73), true);\n    assert_eq!(candidate(1, 1, 1), false);\n    assert_eq!(candidate(2, 2, 10), false);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nright_angle_triangle <- function(a, b, c) {\n    a*a == b*b + c*c || b*b == a*a + c*c || c*c == a*a + b*b\n\n}\n\n### Rust version\n\nfn right_angle_triangle(a: isize, b: isize, c: isize) -> bool {\n"
+  },
+  {
+    "name": "HumanEval_151_double_the_difference",
+    "language": "rs",
+    "prompt": "fn double_the_difference(lst: Vec<f64>) -> isize {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_151_double_the_difference.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = double_the_difference;\n    assert_eq!(candidate(Vec::<f64>::new()), 0);\n    assert_eq!(candidate(vec![5.0, 4.0]), 25);\n    assert_eq!(candidate(vec![0.1, 0.2, 0.3]), 0);\n    assert_eq!(candidate(vec![-10.0, -20.0, -30.0]), 0);\n    assert_eq!(candidate(vec![-1.0, -2.0, 8.0]), 0);\n    assert_eq!(candidate(vec![0.2, 3.0, 5.0]), 34);\n    assert_eq!(candidate(vec![-9.0, -7.0, -5.0, -3.0, -1.0, 1.0, 3.0, 5.0, 7.0, 9.0]), 165);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nlibrary(sets)\nlibrary(stringi)\nsuppressPackageStartupMessages(library(R.utils))\nsuppressPackageStartupMessages(library(stringr))\nsuppressPackageStartupMessages(library(hash))\ndouble_the_difference <- function(lst) {\n    return(sum(lst[lst > 0 & lst %% 2 != 0 & !grepl(\"\\\\.\", lst)]^2))\n\n}\n\n### Rust version\n\nfn double_the_difference(lst: Vec<f64>) -> isize {\n"
+  },
+  {
+    "name": "HumanEval_3_below_zero",
+    "language": "rs",
+    "prompt": "fn below_zero(operations: Vec<isize>) -> bool {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_3_below_zero.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = below_zero;\n    assert_eq!(candidate(Vec::<isize>::new()), false);\n    assert_eq!(candidate(vec![1, 2, -3, 1, 2, -3]), false);\n    assert_eq!(candidate(vec![1, 2, -4, 5, 6]), true);\n    assert_eq!(candidate(vec![1, -1, 2, -2, 5, -5, 4, -4]), false);\n    assert_eq!(candidate(vec![1, -1, 2, -2, 5, -5, 4, -5]), true);\n    assert_eq!(candidate(vec![1, -2, 2, -2, 5, -5, 4, -4]), true);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nbelow_zero <- function(operations) {\n    balance <- 0\n    \n    for (op in operations) {\n        balance <- balance + op\n        if (balance < 0) {\n            return(TRUE)\n        }\n    }\n    \n    return(FALSE)\n\n}\n\n### Rust version\n\nfn below_zero(operations: Vec<isize>) -> bool {\n"
+  },
+  {
+    "name": "HumanEval_13_greatest_common_divisor",
+    "language": "rs",
+    "prompt": "fn greatest_common_divisor(a: isize, b: isize) -> isize {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_13_greatest_common_divisor.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = greatest_common_divisor;\n    assert_eq!(candidate(3, 7), 1);\n    assert_eq!(candidate(10, 15), 5);\n    assert_eq!(candidate(49, 14), 7);\n    assert_eq!(candidate(144, 60), 12);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\ngreatest_common_divisor <- function(a, b) {\n    while (b) {\n        temp <- b\n        b <- a %% b\n        a <- temp\n    }\n    return(a)\n\n}\n\n### Rust version\n\nfn greatest_common_divisor(a: isize, b: isize) -> isize {\n"
+  },
+  {
+    "name": "HumanEval_106_f",
+    "language": "rs",
+    "prompt": "fn f(n: isize) -> Vec<isize> {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_106_f.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = f;\n    assert_eq!(candidate(5), vec![1, 2, 6, 24, 15]);\n    assert_eq!(candidate(7), vec![1, 2, 6, 24, 15, 720, 28]);\n    assert_eq!(candidate(1), vec![1]);\n    assert_eq!(candidate(3), vec![1, 2, 6]);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nlibrary(sets)\nlibrary(stringi)\nsuppressPackageStartupMessages(library(R.utils))\nsuppressPackageStartupMessages(library(stringr))\nsuppressPackageStartupMessages(library(hash))\nf <- function(n) {\n    ret <- c()\n    for (i in 1:n) {\n        if (i %% 2 == 0) {\n            x <- prod(1:i)\n            ret <- c(ret, x)\n        } else {\n            x <- sum(1:i)\n            ret <- c(ret, x)\n        }\n    }\n    return (ret)\n\n}\n\n### Rust version\n\nfn f(n: isize) -> Vec<isize> {\n"
+  },
+  {
+    "name": "HumanEval_57_monotonic",
+    "language": "rs",
+    "prompt": "fn monotonic(l: Vec<isize>) -> bool {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_57_monotonic.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = monotonic;\n    assert_eq!(candidate(vec![1, 2, 4, 10]), true);\n    assert_eq!(candidate(vec![1, 2, 4, 20]), true);\n    assert_eq!(candidate(vec![1, 20, 4, 10]), false);\n    assert_eq!(candidate(vec![4, 1, 0, -10]), true);\n    assert_eq!(candidate(vec![4, 1, 1, 0]), true);\n    assert_eq!(candidate(vec![1, 2, 3, 2, 5, 60]), false);\n    assert_eq!(candidate(vec![1, 2, 3, 4, 5, 60]), true);\n    assert_eq!(candidate(vec![9, 9, 9, 9]), true);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nmonotonic <- function(l) {\n    if (identical(l, sort(l)) || identical(l, sort(l, decreasing = TRUE))) {\n        return(TRUE)\n    }\n    return(FALSE)\n\n}\n\n### Rust version\n\nfn monotonic(l: Vec<isize>) -> bool {\n"
+  },
+  {
+    "name": "HumanEval_105_by_length",
+    "language": "rs",
+    "prompt": "fn by_length(arr: Vec<isize>) -> Vec<String> {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_105_by_length.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = by_length;\n    assert_eq!(candidate(vec![2, 1, 1, 4, 5, 8, 2, 3]), vec![String::from(\"Eight\"), String::from(\"Five\"), String::from(\"Four\"), String::from(\"Three\"), String::from(\"Two\"), String::from(\"Two\"), String::from(\"One\"), String::from(\"One\")]);\n    assert_eq!(candidate(Vec::<isize>::new()), Vec::<String>::new());\n    assert_eq!(candidate(vec![1, -1, 55]), vec![String::from(\"One\")]);\n    assert_eq!(candidate(vec![1, -1, 3, 2]), vec![String::from(\"Three\"), String::from(\"Two\"), String::from(\"One\")]);\n    assert_eq!(candidate(vec![9, 4, 8]), vec![String::from(\"Nine\"), String::from(\"Eight\"), String::from(\"Four\")]);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nlibrary(sets)\nlibrary(stringi)\nsuppressPackageStartupMessages(library(R.utils))\nsuppressPackageStartupMessages(library(stringr))\nsuppressPackageStartupMessages(library(hash))\nby_length <- function(arr) {\n  dic <- c(\"One\", \"Two\", \"Three\", \"Four\", \"Five\", \"Six\", \"Seven\", \"Eight\", \"Nine\")\n  sorted_arr <- sort(arr, decreasing = TRUE)\n  new_arr <- c()\n  for (var in sorted_arr) {\n    if (var %in% 1:9) {\n      new_arr <- c(new_arr, dic[var])\n    }\n  }\n  return (new_arr)\n\n}\n\n### Rust version\n\nfn by_length(arr: Vec<isize>) -> Vec<String> {\n"
+  },
+  {
+    "name": "HumanEval_51_remove_vowels",
+    "language": "rs",
+    "prompt": "fn remove_vowels(text: String) -> String {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_51_remove_vowels.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = remove_vowels;\n    assert_eq!(candidate(String::from(\"\")), String::from(\"\"));\n    assert_eq!(candidate(String::from(\"abcdef\nghijklm\")), String::from(\"bcdf\nghjklm\"));\n    assert_eq!(candidate(String::from(\"fedcba\")), String::from(\"fdcb\"));\n    assert_eq!(candidate(String::from(\"eeeee\")), String::from(\"\"));\n    assert_eq!(candidate(String::from(\"acBAA\")), String::from(\"cB\"));\n    assert_eq!(candidate(String::from(\"EcBOO\")), String::from(\"cB\"));\n    assert_eq!(candidate(String::from(\"ybcd\")), String::from(\"ybcd\"));\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nlibrary(sets)\nlibrary(stringi)\nsuppressPackageStartupMessages(library(R.utils))\nsuppressPackageStartupMessages(library(stringr))\nsuppressPackageStartupMessages(library(hash))\nremove_vowels <- function(text) {\n  return(paste0(str_extract_all(text, \"[^aeiouAEIOU]\")[[1]], collapse = \"\"))\n\n}\n\n### Rust version\n\nfn remove_vowels(text: String) -> String {\n"
+  },
+  {
+    "name": "HumanEval_77_iscube",
+    "language": "rs",
+    "prompt": "fn iscube(a: isize) -> bool {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_77_iscube.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = iscube;\n    assert_eq!(candidate(1), true);\n    assert_eq!(candidate(2), false);\n    assert_eq!(candidate(-1), true);\n    assert_eq!(candidate(64), true);\n    assert_eq!(candidate(180), false);\n    assert_eq!(candidate(1000), true);\n    assert_eq!(candidate(0), true);\n    assert_eq!(candidate(1729), false);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\niscube <- function(a) {\n  a <- abs(a)\n  return (round(a ^ (1 / 3)) ^ 3 == a)\n\n}\n\n### Rust version\n\nfn iscube(a: isize) -> bool {\n"
+  },
+  {
+    "name": "HumanEval_4_mean_absolute_deviation",
+    "language": "rs",
+    "prompt": "fn mean_absolute_deviation(numbers: Vec<f64>) -> f64 {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_4_mean_absolute_deviation.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = mean_absolute_deviation;\n    assert_eq!(candidate(vec![1.0, 2.0]), 0.5);\n    assert_eq!(candidate(vec![1.0, 2.0, 3.0, 4.0]), 1.0);\n    assert_eq!(candidate(vec![1.0, 2.0, 3.0, 4.0, 5.0]), 1.2);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nlibrary(sets)\nlibrary(stringi)\nsuppressPackageStartupMessages(library(R.utils))\nsuppressPackageStartupMessages(library(stringr))\nsuppressPackageStartupMessages(library(hash))\nmean_absolute_deviation <- function(numbers) {\n    mean <- mean(numbers)\n    return (mean(abs(numbers - mean)))\n\n}\n\n### Rust version\n\nfn mean_absolute_deviation(numbers: Vec<f64>) -> f64 {\n"
+  },
+  {
+    "name": "HumanEval_56_correct_bracketing",
+    "language": "rs",
+    "prompt": "fn correct_bracketing(brackets: String) -> bool {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_56_correct_bracketing.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = correct_bracketing;\n    assert_eq!(candidate(String::from(\"<>\")), true);\n    assert_eq!(candidate(String::from(\"<<><>>\")), true);\n    assert_eq!(candidate(String::from(\"<><><<><>><>\")), true);\n    assert_eq!(candidate(String::from(\"<><><<<><><>><>><<><><<>>>\")), true);\n    assert_eq!(candidate(String::from(\"<<<><>>>>\")), false);\n    assert_eq!(candidate(String::from(\"><<>\")), false);\n    assert_eq!(candidate(String::from(\"<\")), false);\n    assert_eq!(candidate(String::from(\"<<<<\")), false);\n    assert_eq!(candidate(String::from(\">\")), false);\n    assert_eq!(candidate(String::from(\"<<>\")), false);\n    assert_eq!(candidate(String::from(\"<><><<><>><>><<>\")), false);\n    assert_eq!(candidate(String::from(\"<><><<><>><>>><>\")), false);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nlibrary(sets)\nlibrary(stringi)\nsuppressPackageStartupMessages(library(R.utils))\nsuppressPackageStartupMessages(library(stringr))\nsuppressPackageStartupMessages(library(hash))\ncorrect_bracketing <- function(brackets) {\n  depth <- 0\n  for (b in strsplit(brackets, \"\")[[1]]) {\n    if (b == \"<\") {\n      depth <- depth + 1\n    } else {\n      depth <- depth - 1\n    }\n    if (depth < 0) {\n      return(FALSE)\n    }\n  }\n  return(depth == 0)\n\n}\n\n### Rust version\n\nfn correct_bracketing(brackets: String) -> bool {\n"
+  },
+  {
+    "name": "HumanEval_21_rescale_to_unit",
+    "language": "rs",
+    "prompt": "fn rescale_to_unit(numbers: Vec<f64>) -> Vec<f64> {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_21_rescale_to_unit.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = rescale_to_unit;\n    assert_eq!(candidate(vec![2.0, 49.9]), vec![0.0, 1.0]);\n    assert_eq!(candidate(vec![100.0, 49.9]), vec![1.0, 0.0]);\n    assert_eq!(candidate(vec![1.0, 2.0, 3.0, 4.0, 5.0]), vec![0.0, 0.25, 0.5, 0.75, 1.0]);\n    assert_eq!(candidate(vec![2.0, 1.0, 5.0, 3.0, 4.0]), vec![0.25, 0.0, 1.0, 0.5, 0.75]);\n    assert_eq!(candidate(vec![12.0, 11.0, 15.0, 13.0, 14.0]), vec![0.25, 0.0, 1.0, 0.5, 0.75]);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nlibrary(sets)\nlibrary(stringi)\nsuppressPackageStartupMessages(library(stringr))\nsuppressPackageStartupMessages(library(hash))\nrescale_to_unit <- function(numbers) {\n  min_number <- min(numbers)\n  max_number <- max(numbers)\n  return ((numbers - min_number) / (max_number - min_number))\n\n}\n\n### Rust version\n\nfn rescale_to_unit(numbers: Vec<f64>) -> Vec<f64> {\n"
+  },
+  {
+    "name": "HumanEval_127_intersection",
+    "language": "rs",
+    "prompt": "fn intersection(interval1: (isize, isize), interval2: (isize, isize)) -> String {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_127_intersection.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = intersection;\n    assert_eq!(candidate((1, 2), (2, 3)), String::from(\"NO\"));\n    assert_eq!(candidate((-1, 1), (0, 4)), String::from(\"NO\"));\n    assert_eq!(candidate((-3, -1), (-5, 5)), String::from(\"YES\"));\n    assert_eq!(candidate((-2, 2), (-4, 0)), String::from(\"YES\"));\n    assert_eq!(candidate((-11, 2), (-1, -1)), String::from(\"NO\"));\n    assert_eq!(candidate((1, 2), (3, 5)), String::from(\"NO\"));\n    assert_eq!(candidate((1, 2), (1, 2)), String::from(\"NO\"));\n    assert_eq!(candidate((-2, -2), (-3, -2)), String::from(\"NO\"));\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nlibrary(sets)\nlibrary(stringi)\nsuppressPackageStartupMessages(library(R.utils))\nsuppressPackageStartupMessages(library(stringr))\nsuppressPackageStartupMessages(library(hash))\nintersection <- function(interval1, interval2) {\n  is_prime <- function(num) {\n    if (num == 1 || num == 0) {\n      return(FALSE)\n    }\n    if (num == 2) {\n      return(TRUE)\n    }\n    for (i in 2:(num-1)) {\n      if (num%%i == 0) {\n        return(FALSE)\n      }\n    }\n    return(TRUE)\n  }\n  l <- max(interval1[1], interval2[1])\n  r <- min(interval1[2], interval2[2])\n  length <- r - l\n  if (length > 0 && is_prime(length)) {\n    return(\"YES\")\n  }\n  return(\"NO\")\n\n}\n\n### Rust version\n\nfn intersection(interval1: (isize, isize), interval2: (isize, isize)) -> String {\n"
+  },
+  {
+    "name": "HumanEval_78_hex_key",
+    "language": "rs",
+    "prompt": "fn hex_key(num: String) -> isize {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_78_hex_key.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = hex_key;\n    assert_eq!(candidate(String::from(\"AB\")), 1);\n    assert_eq!(candidate(String::from(\"1077E\")), 2);\n    assert_eq!(candidate(String::from(\"ABED1A33\")), 4);\n    assert_eq!(candidate(String::from(\"2020\")), 2);\n    assert_eq!(candidate(String::from(\"123456789ABCDEF0\")), 6);\n    assert_eq!(candidate(String::from(\"112233445566778899AABBCCDDEEFF00\")), 12);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nhex_key <- function(num) {\n    primes <- c('2', '3', '5', '7', 'B', 'D')\n    total <- 0\n    for (i in 1:nchar(num)) {\n        if (substr(num, i, i) %in% primes) {\n            total <- total + 1\n        }\n    }\n    return(total)\n\n}\n\n### Rust version\n\nfn hex_key(num: String) -> isize {\n"
+  },
+  {
+    "name": "HumanEval_91_is_bored",
+    "language": "rs",
+    "prompt": "fn is_bored(S: String) -> isize {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_91_is_bored.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = is_bored;\n    assert_eq!(candidate(String::from(\"Hello world\")), 0);\n    assert_eq!(candidate(String::from(\"Is the sky blue?\")), 0);\n    assert_eq!(candidate(String::from(\"I love It !\")), 1);\n    assert_eq!(candidate(String::from(\"bIt\")), 0);\n    assert_eq!(candidate(String::from(\"I feel good today. I will be productive. will kill It\")), 2);\n    assert_eq!(candidate(String::from(\"You and I are going for a walk\")), 0);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nlibrary(sets)\nlibrary(stringi)\nsuppressPackageStartupMessages(library(R.utils))\nsuppressPackageStartupMessages(library(stringr))\nsuppressPackageStartupMessages(library(hash))\nis_bored <- function(S) {\n    sentences <- str_split(S, \"[.?!]\\\\s*\")[[1]]\n    sum(str_detect(sentences, \"^I\\\\s\"))\n\n}\n\n### Rust version\n\nfn is_bored(S: String) -> isize {\n"
+  },
+  {
+    "name": "HumanEval_18_how_many_times",
+    "language": "rs",
+    "prompt": "fn how_many_times(string: String, substring: String) -> isize {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_18_how_many_times.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = how_many_times;\n    assert_eq!(candidate(String::from(\"\"), String::from(\"x\")), 0);\n    assert_eq!(candidate(String::from(\"xyxyxyx\"), String::from(\"x\")), 4);\n    assert_eq!(candidate(String::from(\"cacacacac\"), String::from(\"cac\")), 4);\n    assert_eq!(candidate(String::from(\"john doe\"), String::from(\"john\")), 1);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nhow_many_times <- function(string, substring) {\n    times <- 0\n    \n    for (i in 1:(nchar(string) - nchar(substring) + 1)) {\n        if (substr(string, i, i + nchar(substring) - 1) == substring) {\n            times <- times + 1\n        }\n    }\n    \n    return(times)\n\n}\n\n### Rust version\n\nfn how_many_times(string: String, substring: String) -> isize {\n"
+  },
+  {
+    "name": "HumanEval_121_solution",
+    "language": "rs",
+    "prompt": "fn solution(lst: Vec<isize>) -> isize {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_121_solution.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = solution;\n    assert_eq!(candidate(vec![5, 8, 7, 1]), 12);\n    assert_eq!(candidate(vec![3, 3, 3, 3, 3]), 9);\n    assert_eq!(candidate(vec![30, 13, 24, 321]), 0);\n    assert_eq!(candidate(vec![5, 9]), 5);\n    assert_eq!(candidate(vec![2, 4, 8]), 0);\n    assert_eq!(candidate(vec![30, 13, 23, 32]), 23);\n    assert_eq!(candidate(vec![3, 13, 2, 9]), 3);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nlibrary(sets)\nlibrary(stringi)\nsuppressPackageStartupMessages(library(R.utils))\nsuppressPackageStartupMessages(library(stringr))\nsuppressPackageStartupMessages(library(hash))\nsolution <- function(lst) {\n  # Use the `sum()` function to sum the elements of a vector.\n  sum(lst[seq_along(lst) %% 2 == 1 & lst %% 2 == 1])\n\n}\n\n### Rust version\n\nfn solution(lst: Vec<isize>) -> isize {\n"
+  },
+  {
+    "name": "HumanEval_126_is_sorted",
+    "language": "rs",
+    "prompt": "fn is_sorted(lst: Vec<isize>) -> bool {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_126_is_sorted.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = is_sorted;\n    assert_eq!(candidate(vec![5]), true);\n    assert_eq!(candidate(vec![1, 2, 3, 4, 5]), true);\n    assert_eq!(candidate(vec![1, 3, 2, 4, 5]), false);\n    assert_eq!(candidate(vec![1, 2, 3, 4, 5, 6]), true);\n    assert_eq!(candidate(vec![1, 2, 3, 4, 5, 6, 7]), true);\n    assert_eq!(candidate(vec![1, 3, 2, 4, 5, 6, 7]), false);\n    assert_eq!(candidate(Vec::<isize>::new()), true);\n    assert_eq!(candidate(vec![1]), true);\n    assert_eq!(candidate(vec![3, 2, 1]), false);\n    assert_eq!(candidate(vec![1, 2, 2, 2, 3, 4]), false);\n    assert_eq!(candidate(vec![1, 2, 3, 3, 3, 4]), false);\n    assert_eq!(candidate(vec![1, 2, 2, 3, 3, 4]), true);\n    assert_eq!(candidate(vec![1, 2, 3, 4]), true);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nlibrary(sets)\nlibrary(stringi)\nsuppressPackageStartupMessages(library(R.utils))\nsuppressPackageStartupMessages(library(stringr))\nsuppressPackageStartupMessages(library(hash))\nis_sorted <- function(lst) {\n  count_digit <- as.list(table(lst))\n  if (any(count_digit > 2)) {\n    return(FALSE)\n  }\n  if (all(diff(lst) >= 0)) {\n    return(TRUE)\n  } else {\n    return(FALSE)\n  }\n}\n\n### Rust version\n\nfn is_sorted(lst: Vec<isize>) -> bool {\n"
+  },
+  {
+    "name": "HumanEval_69_search",
+    "language": "rs",
+    "prompt": "fn search(lst: Vec<isize>) -> isize {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_69_search.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = search;\n    assert_eq!(candidate(vec![5, 5, 5, 5, 1]), 1);\n    assert_eq!(candidate(vec![4, 1, 4, 1, 4, 4]), 4);\n    assert_eq!(candidate(vec![3, 3]), -1);\n    assert_eq!(candidate(vec![8, 8, 8, 8, 8, 8, 8, 8]), 8);\n    assert_eq!(candidate(vec![2, 3, 3, 2, 2]), 2);\n    assert_eq!(candidate(vec![2, 7, 8, 8, 4, 8, 7, 3, 9, 6, 5, 10, 4, 3, 6, 7, 1, 7, 4, 10, 8, 1]), 1);\n    assert_eq!(candidate(vec![3, 2, 8, 2]), 2);\n    assert_eq!(candidate(vec![6, 7, 1, 8, 8, 10, 5, 8, 5, 3, 10]), 1);\n    assert_eq!(candidate(vec![8, 8, 3, 6, 5, 6, 4]), -1);\n    assert_eq!(candidate(vec![6, 9, 6, 7, 1, 4, 7, 1, 8, 8, 9, 8, 10, 10, 8, 4, 10, 4, 10, 1, 2, 9, 5, 7, 9]), 1);\n    assert_eq!(candidate(vec![1, 9, 10, 1, 3]), 1);\n    assert_eq!(candidate(vec![6, 9, 7, 5, 8, 7, 5, 3, 7, 5, 10, 10, 3, 6, 10, 2, 8, 6, 5, 4, 9, 5, 3, 10]), 5);\n    assert_eq!(candidate(vec![1]), 1);\n    assert_eq!(candidate(vec![8, 8, 10, 6, 4, 3, 5, 8, 2, 4, 2, 8, 4, 6, 10, 4, 2, 1, 10, 2, 1, 1, 5]), 4);\n    assert_eq!(candidate(vec![2, 10, 4, 8, 2, 10, 5, 1, 2, 9, 5, 5, 6, 3, 8, 6, 4, 10]), 2);\n    assert_eq!(candidate(vec![1, 6, 10, 1, 6, 9, 10, 8, 6, 8, 7, 3]), 1);\n    assert_eq!(candidate(vec![9, 2, 4, 1, 5, 1, 5, 2, 5, 7, 7, 7, 3, 10, 1, 5, 4, 2, 8, 4, 1, 9, 10, 7, 10, 2, 8, 10, 9, 4]), 4);\n    assert_eq!(candidate(vec![2, 6, 4, 2, 8, 7, 5, 6, 4, 10, 4, 6, 3, 7, 8, 8, 3, 1, 4, 2, 2, 10, 7]), 4);\n    assert_eq!(candidate(vec![9, 8, 6, 10, 2, 6, 10, 2, 7, 8, 10, 3, 8, 2, 6, 2, 3, 1]), 2);\n    assert_eq!(candidate(vec![5, 5, 3, 9, 5, 6, 3, 2, 8, 5, 6, 10, 10, 6, 8, 4, 10, 7, 7, 10, 8]), -1);\n    assert_eq!(candidate(vec![10]), -1);\n    assert_eq!(candidate(vec![9, 7, 7, 2, 4, 7, 2, 10, 9, 7, 5, 7, 2]), 2);\n    assert_eq!(candidate(vec![5, 4, 10, 2, 1, 1, 10, 3, 6, 1, 8]), 1);\n    assert_eq!(candidate(vec![7, 9, 9, 9, 3, 4, 1, 5, 9, 1, 2, 1, 1, 10, 7, 5, 6, 7, 6, 7, 7, 6]), 1);\n    assert_eq!(candidate(vec![3, 10, 10, 9, 2]), -1);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nlibrary(sets)\nlibrary(stringi)\nsuppressPackageStartupMessages(library(R.utils))\nsuppressPackageStartupMessages(library(stringr))\nsuppressPackageStartupMessages(library(hash))\nsearch <- function(lst) {\n  frq <- rep(0, max(lst) + 1)\n  for (i in lst) {\n    frq[i] <- frq[i] + 1\n  }\n  ans <- -1\n  for (i in 1:length(frq)) {\n    if (frq[i] >= i) {\n      ans <- i\n    }\n  }\n  return(ans)\n\n}\n\n### Rust version\n\nfn search(lst: Vec<isize>) -> isize {\n"
+  },
+  {
+    "name": "HumanEval_68_pluck",
+    "language": "rs",
+    "prompt": "fn pluck(arr: Vec<isize>) -> Vec<isize> {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_68_pluck.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = pluck;\n    assert_eq!(candidate(vec![4, 2, 3]), vec![2, 1]);\n    assert_eq!(candidate(vec![1, 2, 3]), vec![2, 1]);\n    assert_eq!(candidate(Vec::<isize>::new()), Vec::<isize>::new());\n    assert_eq!(candidate(vec![5, 0, 3, 0, 4, 2]), vec![0, 1]);\n    assert_eq!(candidate(vec![1, 2, 3, 0, 5, 3]), vec![0, 3]);\n    assert_eq!(candidate(vec![5, 4, 8, 4, 8]), vec![4, 1]);\n    assert_eq!(candidate(vec![7, 6, 7, 1]), vec![6, 1]);\n    assert_eq!(candidate(vec![7, 9, 7, 1]), Vec::<isize>::new());\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nlibrary(sets)\nlibrary(stringi)\nsuppressPackageStartupMessages(library(R.utils))\nsuppressPackageStartupMessages(library(stringr))\nsuppressPackageStartupMessages(library(hash))\npluck <- function(arr) {\n    if (length(arr) == 0) {\n        return (c())\n    } else {\n        evens <- arr[arr %% 2 == 0]\n        if (length(evens) == 0) {\n            return (c())\n        } else {\n            return (c(min(evens), which(arr == min(evens))[1]-1))\n        }\n    }\n\n}\n\n### Rust version\n\nfn pluck(arr: Vec<isize>) -> Vec<isize> {\n"
+  },
+  {
+    "name": "HumanEval_10_make_palindrome",
+    "language": "rs",
+    "prompt": "fn make_palindrome(string: String) -> String {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_10_make_palindrome.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = make_palindrome;\n    assert_eq!(candidate(String::from(\"\")), String::from(\"\"));\n    assert_eq!(candidate(String::from(\"x\")), String::from(\"x\"));\n    assert_eq!(candidate(String::from(\"xyz\")), String::from(\"xyzyx\"));\n    assert_eq!(candidate(String::from(\"xyx\")), String::from(\"xyx\"));\n    assert_eq!(candidate(String::from(\"jerry\")), String::from(\"jerryrrej\"));\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nlibrary(sets)\nlibrary(stringi)\nsuppressPackageStartupMessages(library(R.utils))\nsuppressPackageStartupMessages(library(stringr))\nsuppressPackageStartupMessages(library(hash))\nmake_palindrome <- function(string) {\n  if (nchar(string) == 0) {\n    return ('')\n  }\n  beginning_of_suffix <- 0\n  while (substring(string, beginning_of_suffix + 1) != stri_reverse(substring(string, beginning_of_suffix + 1))) {\n    beginning_of_suffix <- beginning_of_suffix + 1\n  }\n  return (paste0(string, substring(string, 1, beginning_of_suffix) %>% stri_reverse()))\n\n}\n\n### Rust version\n\nfn make_palindrome(string: String) -> String {\n"
+  },
+  {
+    "name": "HumanEval_83_starts_one_ends",
+    "language": "rs",
+    "prompt": "fn starts_one_ends(n: isize) -> isize {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_83_starts_one_ends.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = starts_one_ends;\n    assert_eq!(candidate(1), 1);\n    assert_eq!(candidate(2), 18);\n    assert_eq!(candidate(3), 180);\n    assert_eq!(candidate(4), 1800);\n    assert_eq!(candidate(5), 18000);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nstarts_one_ends <- function(n) {\n    if (n == 1) return(1)\n    return(18 * (10 ^ (n - 2)))\n\n}\n\n### Rust version\n\nfn starts_one_ends(n: isize) -> isize {\n"
+  },
+  {
+    "name": "HumanEval_28_concatenate",
+    "language": "rs",
+    "prompt": "fn concatenate(strings: Vec<String>) -> String {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_28_concatenate.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = concatenate;\n    assert_eq!(candidate(Vec::<String>::new()), String::from(\"\"));\n    assert_eq!(candidate(vec![String::from(\"x\"), String::from(\"y\"), String::from(\"z\")]), String::from(\"xyz\"));\n    assert_eq!(candidate(vec![String::from(\"x\"), String::from(\"y\"), String::from(\"z\"), String::from(\"w\"), String::from(\"k\")]), String::from(\"xyzwk\"));\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nconcatenate <- function(strings) {\n    return(paste(strings, collapse = ''))\n\n}\n\n### Rust version\n\nfn concatenate(strings: Vec<String>) -> String {\n"
+  },
+  {
+    "name": "HumanEval_132_is_nested",
+    "language": "rs",
+    "prompt": "fn is_nested(string: String) -> bool {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_132_is_nested.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = is_nested;\n    assert_eq!(candidate(String::from(\"[[]]\")), true);\n    assert_eq!(candidate(String::from(\"[]]]]]]][[[[[]\")), false);\n    assert_eq!(candidate(String::from(\"[][]\")), false);\n    assert_eq!(candidate(String::from(\"[]\")), false);\n    assert_eq!(candidate(String::from(\"[[[[]]]]\")), true);\n    assert_eq!(candidate(String::from(\"[]]]]]]]]]]\")), false);\n    assert_eq!(candidate(String::from(\"[][][[]]\")), true);\n    assert_eq!(candidate(String::from(\"[[]\")), false);\n    assert_eq!(candidate(String::from(\"[]]\")), false);\n    assert_eq!(candidate(String::from(\"[[]][[\")), true);\n    assert_eq!(candidate(String::from(\"[[][]]\")), true);\n    assert_eq!(candidate(String::from(\"\")), false);\n    assert_eq!(candidate(String::from(\"[[[[[[[[\")), false);\n    assert_eq!(candidate(String::from(\"]]]]]]]]\")), false);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nlibrary(sets)\nlibrary(stringi)\nsuppressPackageStartupMessages(library(R.utils))\nsuppressPackageStartupMessages(library(stringr))\nsuppressPackageStartupMessages(library(hash))\nis_nested <- function(string) {\n    opening_bracket_index <- which(strsplit(string, \"\")[[1]] == \"[\")\n    closing_bracket_index <- which(strsplit(string, \"\")[[1]] == \"]\")\n    closing_bracket_index <- rev(closing_bracket_index)\n    cnt <- 0\n    i <- 1\n    l <- length(closing_bracket_index)\n    for (idx in opening_bracket_index) {\n        if (i <= l && idx < closing_bracket_index[i]) {\n            cnt <- cnt + 1\n            i <- i + 1\n        }\n    }\n    return(cnt >= 2)\n\n}\n\n### Rust version\n\nfn is_nested(string: String) -> bool {\n"
+  },
+  {
+    "name": "HumanEval_48_is_palindrome",
+    "language": "rs",
+    "prompt": "fn is_palindrome(text: String) -> bool {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_48_is_palindrome.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = is_palindrome;\n    assert_eq!(candidate(String::from(\"\")), true);\n    assert_eq!(candidate(String::from(\"aba\")), true);\n    assert_eq!(candidate(String::from(\"aaaaa\")), true);\n    assert_eq!(candidate(String::from(\"zbcd\")), false);\n    assert_eq!(candidate(String::from(\"xywyx\")), true);\n    assert_eq!(candidate(String::from(\"xywyz\")), false);\n    assert_eq!(candidate(String::from(\"xywzx\")), false);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nis_palindrome <- function(text) {\n    for (i in 1:nchar(text)) {\n        if (substr(text, i, i) != substr(text, nchar(text) - i + 1, nchar(text) - i + 1)) {\n            return(FALSE)\n        }\n    }\n    return(TRUE)\n\n}\n\n### Rust version\n\nfn is_palindrome(text: String) -> bool {\n"
+  },
+  {
+    "name": "HumanEval_108_count_nums",
+    "language": "rs",
+    "prompt": "fn count_nums(arr: Vec<isize>) -> isize {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_108_count_nums.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = count_nums;\n    assert_eq!(candidate(Vec::<isize>::new()), 0);\n    assert_eq!(candidate(vec![-1, -2, 0]), 0);\n    assert_eq!(candidate(vec![1, 1, 2, -2, 3, 4, 5]), 6);\n    assert_eq!(candidate(vec![1, 6, 9, -6, 0, 1, 5]), 5);\n    assert_eq!(candidate(vec![1, 100, 98, -7, 1, -1]), 4);\n    assert_eq!(candidate(vec![12, 23, 34, -45, -56, 0]), 5);\n    assert_eq!(candidate(vec![0, 1]), 1);\n    assert_eq!(candidate(vec![1]), 1);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nlibrary(sets)\nlibrary(stringi)\nsuppressPackageStartupMessages(library(R.utils))\nsuppressPackageStartupMessages(library(stringr))\nsuppressPackageStartupMessages(library(hash))\ncount_nums <- function(arr) {\n  digits_sum <- function(n) {\n    neg <- 1\n    if (n < 0) {n <- -1 * n; neg <- -1}\n    n <- as.integer(strsplit(as.character(n), \"\")[[1]])\n    n[1] <- n[1] * neg\n    return(sum(n))\n  }\n  return(length(Filter(function(x) x > 0, lapply(arr, digits_sum))))\n\n}\n\n### Rust version\n\nfn count_nums(arr: Vec<isize>) -> isize {\n"
+  },
+  {
+    "name": "HumanEval_25_factorize",
+    "language": "rs",
+    "prompt": "fn factorize(n: isize) -> Vec<isize> {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_25_factorize.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = factorize;\n    assert_eq!(candidate(2), vec![2]);\n    assert_eq!(candidate(4), vec![2, 2]);\n    assert_eq!(candidate(8), vec![2, 2, 2]);\n    assert_eq!(candidate(57), vec![3, 19]);\n    assert_eq!(candidate(3249), vec![3, 3, 19, 19]);\n    assert_eq!(candidate(185193), vec![3, 3, 3, 19, 19, 19]);\n    assert_eq!(candidate(20577), vec![3, 19, 19, 19]);\n    assert_eq!(candidate(18), vec![2, 3, 3]);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nlibrary(sets)\nlibrary(stringi)\nsuppressPackageStartupMessages(library(R.utils))\nsuppressPackageStartupMessages(library(stringr))\nsuppressPackageStartupMessages(library(hash))\nfactorize <- function(n) {\n  fact <- c()\n  i <- 2\n  while (i <= sqrt(n) + 1) {\n    if (n %% i == 0) {\n      fact <- c(fact, i)\n      n <- n %/% i\n    } else {\n      i <- i + 1\n    }\n  }\n  if (n > 1) {\n    fact <- c(fact, n)\n  }\n  return (fact)\n\n}\n\n### Rust version\n\nfn factorize(n: isize) -> Vec<isize> {\n"
+  },
+  {
+    "name": "HumanEval_59_largest_prime_factor",
+    "language": "rs",
+    "prompt": "fn largest_prime_factor(n: isize) -> isize {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_59_largest_prime_factor.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = largest_prime_factor;\n    assert_eq!(candidate(15), 5);\n    assert_eq!(candidate(27), 3);\n    assert_eq!(candidate(63), 7);\n    assert_eq!(candidate(330), 11);\n    assert_eq!(candidate(13195), 29);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nlargest_prime_factor <- function(n) {\n    is_prime <- function(k) {\n        if (k < 2) {\n            return(FALSE)\n        }\n        for (i in 2:(k - 1)) {\n            if (k %% i == 0) {\n                return(FALSE)\n            }\n        }\n        return(TRUE)\n    }\n    largest <- 1\n    for (j in 2:(n + 1)) {\n        if (n %% j == 0 && is_prime(j)) {\n            largest <- max(largest, j)\n        }\n    }\n    return(largest)\n\n}\n\n### Rust version\n\nfn largest_prime_factor(n: isize) -> isize {\n"
+  },
+  {
+    "name": "HumanEval_86_anti_shuffle",
+    "language": "rs",
+    "prompt": "fn anti_shuffle(s: String) -> String {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_86_anti_shuffle.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = anti_shuffle;\n    assert_eq!(candidate(String::from(\"Hi\")), String::from(\"Hi\"));\n    assert_eq!(candidate(String::from(\"hello\")), String::from(\"ehllo\"));\n    assert_eq!(candidate(String::from(\"number\")), String::from(\"bemnru\"));\n    assert_eq!(candidate(String::from(\"abcd\")), String::from(\"abcd\"));\n    assert_eq!(candidate(String::from(\"Hello World!!!\")), String::from(\"Hello !!!Wdlor\"));\n    assert_eq!(candidate(String::from(\"\")), String::from(\"\"));\n    assert_eq!(candidate(String::from(\"Hi. My name is Mister Robot. How are you?\")), String::from(\".Hi My aemn is Meirst .Rboot How aer ?ouy\"));\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nlibrary(sets)\nlibrary(stringi)\nsuppressPackageStartupMessages(library(R.utils))\nsuppressPackageStartupMessages(library(stringr))\nsuppressPackageStartupMessages(library(hash))\nanti_shuffle <- function(s) {\n  words <- str_split(s, \" \")[[1]]\n  sorted_words <- lapply(words, function(x) paste(sort(strsplit(x, \"\")[[1]]), collapse = \"\"))\n  return(paste(sorted_words, collapse = \" \"))\n\n}\n\n### Rust version\n\nfn anti_shuffle(s: String) -> String {\n"
+  },
+  {
+    "name": "HumanEval_84_solve",
+    "language": "rs",
+    "prompt": "fn solve(N: isize) -> String {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_84_solve.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = solve;\n    assert_eq!(candidate(1000), String::from(\"1\"));\n    assert_eq!(candidate(150), String::from(\"110\"));\n    assert_eq!(candidate(147), String::from(\"1100\"));\n    assert_eq!(candidate(333), String::from(\"1001\"));\n    assert_eq!(candidate(963), String::from(\"10010\"));\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nlibrary(sets)\nlibrary(stringi)\nsuppressPackageStartupMessages(library(R.utils))\nsuppressPackageStartupMessages(library(stringr))\nsuppressPackageStartupMessages(library(hash))\nsolve <- function(N) {\n  return(intToBin(sum(as.integer(strsplit(as.character(N), \"\")[[1]]))))\n\n}\n\n### Rust version\n\nfn solve(N: isize) -> String {\n"
+  },
+  {
+    "name": "HumanEval_89_encrypt",
+    "language": "rs",
+    "prompt": "fn encrypt(s: String) -> String {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_89_encrypt.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = encrypt;\n    assert_eq!(candidate(String::from(\"hi\")), String::from(\"lm\"));\n    assert_eq!(candidate(String::from(\"asdfghjkl\")), String::from(\"ewhjklnop\"));\n    assert_eq!(candidate(String::from(\"gf\")), String::from(\"kj\"));\n    assert_eq!(candidate(String::from(\"et\")), String::from(\"ix\"));\n    assert_eq!(candidate(String::from(\"faewfawefaewg\")), String::from(\"jeiajeaijeiak\"));\n    assert_eq!(candidate(String::from(\"hellomyfriend\")), String::from(\"lippsqcjvmirh\"));\n    assert_eq!(candidate(String::from(\"dxzdlmnilfuhmilufhlihufnmlimnufhlimnufhfucufh\")), String::from(\"hbdhpqrmpjylqmpyjlpmlyjrqpmqryjlpmqryjljygyjl\"));\n    assert_eq!(candidate(String::from(\"a\")), String::from(\"e\"));\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nlibrary(sets)\nlibrary(stringi)\nsuppressPackageStartupMessages(library(R.utils))\nsuppressPackageStartupMessages(library(stringr))\nsuppressPackageStartupMessages(library(hash))\nencrypt <- function(s) {\n    d <- 'abcdefghijklmnopqrstuvwxyz'\n    out <- ''\n    for (c in strsplit(s, \"\")[[1]]) {\n        if (c %in% strsplit(d, \"\")[[1]]) {\n            out <- paste(out, substr(d, (which(strsplit(d, \"\")[[1]] == c) + 4) %% 26, (which(strsplit(d, \"\")[[1]] == c) + 4) %% 26), sep = \"\")\n        } else {\n            out <- paste(out, c, sep = \"\")\n        }\n    }\n    return(out)\n\n}\n\n### Rust version\n\nfn encrypt(s: String) -> String {\n"
+  },
+  {
+    "name": "HumanEval_100_make_a_pile",
+    "language": "rs",
+    "prompt": "fn make_a_pile(n: isize) -> Vec<isize> {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_100_make_a_pile.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = make_a_pile;\n    assert_eq!(candidate(3), vec![3, 5, 7]);\n    assert_eq!(candidate(4), vec![4, 6, 8, 10]);\n    assert_eq!(candidate(5), vec![5, 7, 9, 11, 13]);\n    assert_eq!(candidate(6), vec![6, 8, 10, 12, 14, 16]);\n    assert_eq!(candidate(8), vec![8, 10, 12, 14, 16, 18, 20, 22]);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nlibrary(sets)\nlibrary(stringi)\nsuppressPackageStartupMessages(library(R.utils))\nsuppressPackageStartupMessages(library(stringr))\nsuppressPackageStartupMessages(library(hash))\nmake_a_pile <- function(n) {\n  return (n + 2*(0:(n-1)))\n\n}\n\n### Rust version\n\nfn make_a_pile(n: isize) -> Vec<isize> {\n"
+  },
+  {
+    "name": "HumanEval_31_is_prime",
+    "language": "rs",
+    "prompt": "fn is_prime(n: isize) -> bool {\n",
+    "doctests": "keep",
+    "original": "/Users/zilutang/Projects/code_translation/explain-then-translate/MultiPL-C2C/datasets/../datasets/originals/HumanEval_31_is_prime.py",
+    "prompt_terminology": "remove",
+    "source_program": "keep",
+    "target_signature": "keep",
+    "tests": "}\n\nfn main() {\n    let candidate = is_prime;\n    assert_eq!(candidate(6), false);\n    assert_eq!(candidate(101), true);\n    assert_eq!(candidate(11), true);\n    assert_eq!(candidate(13441), true);\n    assert_eq!(candidate(61), true);\n    assert_eq!(candidate(4), false);\n    assert_eq!(candidate(1), false);\n    assert_eq!(candidate(5), true);\n    assert_eq!(candidate(11), true);\n    assert_eq!(candidate(17), true);\n    assert_eq!(candidate(85), false);\n    assert_eq!(candidate(77), false);\n    assert_eq!(candidate(255379), false);\n}\n",
+    "stop_tokens": [
+      "\n}"
+    ],
+    "translation_prompt": "### R version\n\nis_prime <- function(n) {\n    if (n < 2) {\n        return(FALSE)\n    }\n    for (k in 2:(n - 1)) {\n        if (n %% k == 0) {\n            return(FALSE)\n        }\n    }\n    return(TRUE)\n\n}\n\n### Rust version\n\nfn is_prime(n: isize) -> bool {\n"
+  }
+]
