@@ -123,8 +123,8 @@ cd ../..
 python analysis/collect_completion_results.py --dir <OUTPUT_DIR>
 ```
 
-However, installing all 19 languages can be a little annoying, so we are working on building a container for 
-execution just the same way as MultiPL-E [tutorial]. This is coming soon.
+However, installing all 19 languages can be a little annoying, so we provide a container for 
+execution just the same way as MultiPL-E. See details in [tutorial](MultiPL-C2C/docs/tutorial.md)
 
 ## MultiPL-C2C
 
