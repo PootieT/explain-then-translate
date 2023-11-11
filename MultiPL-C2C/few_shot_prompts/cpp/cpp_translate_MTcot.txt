@@ -1,0 +1,90 @@
+You are an helpful AI assistant who understands all programming languages and can translate between them at ease. Can you translate this Python program to C++? We can think step by step on translating each sub-components of the programs.
+
+### Python version
+
+def even_odd_palindrome(n: int) -> Tuple[int, int]:
+    def is_palindrome(n):
+        return str(n) == str(n)[::-1]
+
+    even_palindrome_count = 0
+    odd_palindrome_count = 0
+
+    for i in range(1, n+1):
+        if i%2 == 1 and is_palindrome(i):
+                odd_palindrome_count += 1
+        elif i%2 == 0 and is_palindrome(i):
+            even_palindrome_count += 1
+    return (even_palindrome_count, odd_palindrome_count)
+
+### Step by step
+
+Let's think line by line on how we can translate the above function:
+
+Python: def even_odd_palindrome(n: int) -> Tuple[int, int]:
+C++: std::tuple<long, long> even_odd_palindrome(long n) {
+
+Python: def is_palindrome(n):
+            return str(n) == str(n)[::-1]
+C++: auto is_palindrome = [](long n) -> bool {
+        std::stringstream ss;
+        ss << n;
+        std::string s = ss.str();
+        std::reverse(s.begin(), s.end());
+        return s == ss.str();
+    };
+
+Python: even_palindrome_count = 0
+C++: long even_palindrome_count = 0;
+
+Python: odd_palindrome_count = 0
+C++: long odd_palindrome_count = 0;
+
+Python: for i in range(1, n+1):
+C++: for (long i = 1; i <= n; i++) {
+
+Python: if i%2 == 1 and is_palindrome(i):
+            odd_palindrome_count += 1
+C++: if (i%2 == 1 && is_palindrome(i)) {
+        odd_palindrome_count += 1;
+    }
+
+Python: elif i%2 == 0 and is_palindrome(i):
+            even_palindrome_count += 1
+C++: else if (i%2 == 0 && is_palindrome(i)) {
+        even_palindrome_count += 1;
+    }
+
+Python: return (even_palindrome_count, odd_palindrome_count)
+C++: return std::make_tuple(even_palindrome_count, odd_palindrome_count);
+
+### C++ version
+
+#include<assert.h>
+#include<bits/stdc++.h>
+#include<vector>
+#include<sstream>
+#include<regex>
+#include<map>
+#include<set>
+#include<unordered_map>
+#include<unordered_set>
+std::tuple<long, long> even_odd_palindrome(long n) {    
+    auto is_palindrome = [](long n) -> bool {
+        std::stringstream ss;
+        ss << n;
+        std::string s = ss.str();
+        std::reverse(s.begin(), s.end());
+        return s == ss.str();
+    };
+    long even_palindrome_count = 0;
+    long odd_palindrome_count = 0;
+    for (long i = 1; i <= n; i++) {
+        if (i%2 == 1 && is_palindrome(i)) {
+            odd_palindrome_count += 1;
+        } else if (i%2 == 0 && is_palindrome(i)) {
+            even_palindrome_count += 1;
+        }
+    }
+    return std::make_tuple(even_palindrome_count, odd_palindrome_count);
+}
+

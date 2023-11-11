@@ -1,0 +1,19 @@
+{
+  "name": "HumanEval_53_add",
+  "language": "scala",
+  "prompt": "import scala.math._\nimport scala.collection.mutable._\nobject Problem {\n    def add(x : Long, y : Long) : Long = {\n",
+  "doctests": "keep",
+  "original": "/Users/zilutang/Projects/code_translation/MultiPL-EX/datasets/../datasets/originals/HumanEval_53_add.py",
+  "prompt_terminology": "remove",
+  "source_program": "keep",
+  "target_signature": "keep",
+  "tests": "    }\n    def main(args: Array[String]) = {\n    assert(add((0l), (1l)) == (1l));\n    assert(add((1l), (0l)) == (1l));\n    assert(add((2l), (3l)) == (5l));\n    assert(add((5l), (7l)) == (12l));\n    assert(add((7l), (5l)) == (12l));\n    }\n\n}\n",
+  "stop_tokens": [
+    "\n    }\n"
+  ],
+  "translation_prompt": "You are a helpful and faithful compiler that transpiles Python code to Scala code. Please translate the following Python code to Scala?\n\n### Python version\n\ndef add(x: int, y: int) -> int:\n    return x + y\n\n### Scala version\n\nimport scala.math._\nimport scala.collection.mutable._\nobject Problem {\n    def add(x : Long, y : Long) : Long = {\n",
+  "completions": [
+    "        return x + y",
+    "        return x + zy"
+  ]
+}

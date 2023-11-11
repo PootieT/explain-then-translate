@@ -1,0 +1,20 @@
+You are a helpful and faithful compiler that transpiles Python code to C++ code. Please translate the following Python code to C++?
+
+### Python version
+
+from typing import List
+
+def plus_one(numbers: List[int]) -> str:
+    return " ".join([n + 1 for n in numbers])
+
+### C++ version
+
+#include<assert.h>
+#include<bits/stdc++.h>
+std::string plus_one(std::vector<long> lst) {
+    std::string res = "";
+    for (int i = 0; i < lst.size(); i++) {
+        res += std::to_string(lst[i] + 1) + " ";
+    }
+    return res;
+}

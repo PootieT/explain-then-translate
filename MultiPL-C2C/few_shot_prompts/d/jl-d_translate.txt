@@ -1,0 +1,182 @@
+You are a helpful and faithful compiler that transpiles Julia code to D code. Please translate the following Julia code to D?
+
+### Julia version
+
+function even_odd_palindrome(n::Int64)::Tuple{Int64, Int64} 
+    function is_palindrome(n)
+        return string(n) == reverse(string(n))
+    end
+
+    even_palindrome_count = 0
+    odd_palindrome_count = 0
+
+    for i in 1:n
+        if i%2 == 1 && is_palindrome(i)
+            odd_palindrome_count += 1
+        elseif i%2 == 0 && is_palindrome(i)
+            even_palindrome_count += 1
+        end
+    end
+    return (even_palindrome_count, odd_palindrome_count)
+end
+
+### D version
+
+import std.range;
+import std.typecons;
+import std.algorithm;
+import std.format;
+import std.conv;
+import std.math;
+import std.array;
+import std.string;
+Tuple!(long, long) even_odd_palindrome(long n) 
+{
+    bool is_palindrome(long n)
+    {
+        return to!string(n) == to!string(n).dup.reverse;
+    }
+
+    long even_palindrome_count = 0;
+    long odd_palindrome_count = 0;
+
+    foreach (i; 1 .. n+1)
+    {
+        if (i%2 == 1 && is_palindrome(i))
+        {
+            odd_palindrome_count += 1;
+        }
+        else if (i%2 == 0 && is_palindrome(i))
+        {
+            even_palindrome_count += 1;
+        }
+    }
+    return tuple(even_palindrome_count, odd_palindrome_count);
+}
+
+### Julia version
+
+function is_sorted(lst::Vector{Int64})::Bool 
+    count_digit = Dict([(i, 0) for i in lst])
+    for i in lst
+        count_digit[i]+=1
+    end
+    if any(count_digit[i] > 2 for i in lst)
+        return false
+    end
+    if all(lst[i-1] <= lst[i] for i in 2:length(lst))
+        return true
+    else
+        return false
+    end
+end
+
+### D version
+
+import std.range;
+import std.typecons;
+import std.algorithm;
+import std.format;
+import std.conv;
+import std.math;
+import std.array;
+import std.string;
+bool is_sorted(long[] lst) 
+{
+    long[long] count_digit;
+    foreach (i; lst)
+        count_digit[i] = 0;
+    foreach (i; lst)
+        count_digit[i]++;
+    if (any!(i => count_digit[i] > 2)(lst))
+        return false;
+    if (lst.isSorted)
+        return true;
+    else
+        return false;
+}
+
+### Julia version
+
+function separate_paren_groups(paren_string::String)::Vector{String} 
+    result = []
+    current_string = []
+    current_depth = 0
+
+    for c in paren_string
+        if c == '('
+            current_depth += 1
+            push!(current_string, c)
+        elseif c == ')'
+            current_depth -= 1
+            push!(current_string, c)
+
+            if current_depth == 0
+                push!(result, join(current_string))
+                current_string = []
+            end
+        end
+    end
+    return result
+end
+
+### D version
+
+import std.string;
+import std.conv;
+import std.array;
+import std.typecons;
+import std.algorithm;
+import std.range;
+import std.format;
+import std.math;
+string[] separate_paren_groups(string paren_string) 
+{
+    string[] result;
+    string current_string;
+    int current_depth = 0;
+
+    foreach (c; paren_string)
+    {
+        if (c == '(')
+        {
+            current_depth += 1;
+            current_string ~= c;
+        }
+        else if (c == ')')
+        {
+            current_depth -= 1;
+            current_string ~= c;
+
+            if (current_depth == 0)
+            {
+                result ~= current_string;
+                current_string = "";
+            }
+        }
+    }
+
+    return result;
+}
+
+### Julia version
+
+function sort_array(array::Vector{Int64})::Vector{Int64} 
+    return length(array) == 0 ? [] : sort(array, rev=(array[1]+array[end]) % 2 == 0)
+end
+
+### D version
+
+import std.string;
+import std.conv;
+import std.format;
+import std.algorithm;
+import std.typecons;
+import std.range;
+import std.math;
+import std.array;
+long[] sort_array(long[] array)
+{
+    return array.length == 0 ? [] : array.sort!((a, b) => (array[0] + array[$ - 1]) % 2 == 0? a>b : a<b)(numbers);
+}
+

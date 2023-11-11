@@ -1,0 +1,150 @@
+You are an helpful AI assistant who understands all programming languages and can translate between them at ease. Can you explain what this JavaScript program does with a couple of sentences? The goal with the explanation, is so that a reader can easily rewrite the program in Racket?
+
+### JavaScript version
+
+function even_odd_palindrome(n){
+    function is_palindrome(n){
+        return String(n) == String(n).split("").reverse().join("");
+    }
+    let even_palindrome_count = 0;
+    let odd_palindrome_count = 0;
+    for(let i = 1; i <= n; i++){
+        if(i%2 == 1 && is_palindrome(i)){
+            odd_palindrome_count++;
+        }else if(i%2 == 0 && is_palindrome(i)){
+            even_palindrome_count++;
+        }
+    }
+    return [even_palindrome_count, odd_palindrome_count];
+}
+
+### Explanation
+
+This JavaScript program counts the number of even and odd palindromic numbers from 1 to n. A number is a palindrome if it reads the same forwards and backwards. The function first defines a helper function `is_palindrome` that checks whether a given number is a palindrome. It then initializes two counters for even and odd palindromes and loops through all numbers from 1 to n. If a number is a palindrome and even, it increments the even palindrome counter, and if it is a palindrome and odd, it increments the odd palindrome counter. Finally, the function returns an array of the two counts.
+
+### Racket version
+
+#lang racket
+
+;;
+(define (even_odd_palindrome n)
+  (define (is_palindrome n)
+    (equal? (number->string n) (list->string (reverse (string->list (number->string n))))))
+
+  (define even_palindrome_count 0)
+  (define odd_palindrome_count 0)
+  (for ([i (in-range 1 (add1 n))])
+    (cond [(and (odd? i) (is_palindrome i)) (set! odd_palindrome_count (add1 odd_palindrome_count))]
+          [(and (even? i) (is_palindrome i)) (set! even_palindrome_count (add1 even_palindrome_count))]))
+  (list even_palindrome_count odd_palindrome_count))
+
+### JavaScript version
+
+function is_sorted(lst){
+  let count_digit = {}
+  for (let i of lst){
+    count_digit[i] = (count_digit[i] || 0) + 1
+  }
+  if (lst.some(i => count_digit[i] > 2)){
+    return false
+  }
+  if (lst.slice(1).every((x, i) => x >= lst[i])){
+    return true
+  }
+  else{
+    return false
+  }
+}
+
+### Explanation
+
+This function takes a list of numbers and checks if the list is sorted in non-descending order. If the list is sorted, the function returns true. If the list is not sorted or if the list contains a number that appears more than twice, the function returns false.
+
+The function first creates an empty object called `count_digit`. It then iterates through the list and counts the number of times each digit appears in the list. If a digit appears more than twice, the function returns false.
+
+If no digit appears more than twice, the function checks if the list is sorted in non-descending order. It does this by checking if every element in the list after the first element is greater than or equal to the previous element. If the list is sorted, the function returns true. If the list is not sorted, the function returns false.
+
+### Racket version
+
+#lang racket
+
+;;
+(define (is_sorted lst)
+  (define count-digit (make-hash))
+  (for-each (lambda (i) (hash-update! count-digit i add1 0)) lst)
+  (if (ormap (lambda (i) (> (hash-ref count-digit i 0) 2)) lst)
+      #f
+      (let loop ([i 1])
+        (if (< i (length lst))
+            (if (<= (list-ref lst (- i 1)) (list-ref lst i))
+                (loop (+ i 1))
+                #f)
+            #t))))
+
+### JavaScript version
+
+function separate_paren_groups(paren_string){
+  let result = [];
+  let current_string = [];
+  let current_depth = 0;
+
+  for(let c of paren_string){
+    if(c === '('){
+      current_depth += 1;
+      current_string.push(c);
+    } else if(c === ')'){
+      current_depth -= 1;
+      current_string.push(c);
+
+      if(current_depth === 0){
+        result.push(current_string.join(''));
+        current_string = [];
+      }
+    }
+  }
+
+  return result;
+}
+
+### Explanation
+
+This function takes a string of parentheses and returns an array of strings, where each string is a group of parentheses. A group of parentheses is defined as a string that starts with an opening parenthesis and ends with a closing parenthesis, and where the number of opening and closing parentheses is equal. The function works by iterating over the input string, keeping track of the current depth (i.e. how many opening parentheses have been encountered without a corresponding closing parenthesis), and adding each character to a current string. When a closing parenthesis is encountered and the current depth is 0 (i.e. all opening parentheses have been closed), the current string is added to the result array and a new current string is started. The function uses an array to keep track of the result, and a second array to keep track of the current string being built. The join() method is used to convert the current string array to a string before adding it to the result array.
+
+### Racket version
+
+#lang racket
+
+;; 
+(define (separate_paren_groups paren_string)
+  (define result '())
+  (define current_string '())
+  (define current_depth 0)
+
+  (for ([c (string->list paren_string)])
+    (cond [(char=? c #\() (set! current_depth (add1 current_depth))
+           (set! current_string (append current_string (list c)))]
+          [(char=? c #\)) (set! current_depth (sub1 current_depth))
+           (set! current_string (append current_string (list c)))
+           (cond [(= current_depth 0) (set! result (append result (list (list->string current_string))))
+                  (set! current_string '())])]))
+  result)
+
+### JavaScript version
+
+function sort_array(array){
+  return array.length == 0 ? [] : array.sort((a,b)=>(array[0]+array[array.length-1])%2==0 ? b-a : a-b);
+}
+
+### Explanation
+
+This function takes an array of numbers as input and returns a sorted array. If the input array is empty, the function returns an empty array. The sorting is done in ascending order, except when the sum of the first and last elements of the array is even, in which case the sorting is done in descending order.
+
+### Racket version
+
+#lang racket
+
+(define (sort_array array)
+  (if (null? array)
+      '()
+      (sort array (if (even? (+ (first array) (last array))) > <))))
+

@@ -1,0 +1,220 @@
+You are a helpful and faithful compiler that transpiles D code to C++ code. Please translate the following D code to C++?
+
+### D version
+
+import std.range;
+import std.typecons;
+import std.algorithm;
+import std.format;
+import std.conv;
+import std.math;
+import std.array;
+import std.string;
+Tuple!(long, long) even_odd_palindrome(long n) 
+{
+    bool is_palindrome(long n)
+    {
+        return to!string(n) == to!string(n).dup.reverse;
+    }
+
+    long even_palindrome_count = 0;
+    long odd_palindrome_count = 0;
+
+    foreach (i; 1 .. n+1)
+    {
+        if (i%2 == 1 && is_palindrome(i))
+        {
+            odd_palindrome_count += 1;
+        }
+        else if (i%2 == 0 && is_palindrome(i))
+        {
+            even_palindrome_count += 1;
+        }
+    }
+    return tuple(even_palindrome_count, odd_palindrome_count);
+}
+
+### C++ version
+
+#include<assert.h>
+#include<bits/stdc++.h>
+#include<vector>
+#include<sstream>
+#include<regex>
+#include<map>
+#include<set>
+std::tuple<long, long> even_odd_palindrome(long n) {
+    auto is_palindrome = [](long n) -> bool {
+        std::string s = std::to_string(n);
+        return std::equal(s.begin(), s.end(), s.rbegin());
+    };
+    long even_palindrome_count = 0;
+    long odd_palindrome_count = 0;
+    for(long i=1; i<=n; i++) {
+        if(i%2 == 1 && is_palindrome(i)) {
+            odd_palindrome_count++;
+        } else if(i%2 == 0 && is_palindrome(i)) {
+            even_palindrome_count++;
+        }
+    }
+    return std::make_tuple(even_palindrome_count, odd_palindrome_count);
+}
+
+### D version
+
+import std.range;
+import std.typecons;
+import std.algorithm;
+import std.format;
+import std.conv;
+import std.math;
+import std.array;
+import std.string;
+bool is_sorted(long[] lst) 
+{
+    long[long] count_digit;
+    foreach (i; lst)
+        count_digit[i] = 0;
+    foreach (i; lst)
+        count_digit[i]++;
+    if (any!(i => count_digit[i] > 2)(lst))
+        return false;
+    if (lst.isSorted)
+        return true;
+    else
+        return false;
+}
+
+### C++ version
+
+#include<assert.h>
+#include<bits/stdc++.h>
+#include<vector>
+#include<sstream>
+#include<regex>
+#include<map>
+#include<set>
+bool is_sorted(std::vector<long> lst) {
+    std::map<long, long> count_digit;
+    for (auto i: lst) {
+        count_digit[i]++;
+    }
+    for (auto i: lst) {
+        if (count_digit[i] > 2) {
+            return false;
+        }
+    }
+    for (int i = 1; i < lst.size(); i++) {
+        if (lst[i-1] > lst[i]) {
+            return false;
+        }
+    }
+    return true;
+}
+
+### D version
+
+import std.string;
+import std.conv;
+import std.array;
+import std.typecons;
+import std.algorithm;
+import std.range;
+import std.format;
+import std.math;
+string[] separate_paren_groups(string paren_string) 
+{
+    string[] result;
+    string current_string;
+    int current_depth = 0;
+
+    foreach (c; paren_string)
+    {
+        if (c == '(')
+        {
+            current_depth += 1;
+            current_string ~= c;
+        }
+        else if (c == ')')
+        {
+            current_depth -= 1;
+            current_string ~= c;
+
+            if (current_depth == 0)
+            {
+                result ~= current_string;
+                current_string = "";
+            }
+        }
+    }
+
+    return result;
+}
+
+### C++ version
+
+#include<assert.h>
+#include<bits/stdc++.h>
+#include<vector>
+#include<sstream>
+#include<regex>
+#include<map>
+#include<set>
+std::vector<std::string> separate_paren_groups(std::string paren_string) {
+    std::vector<std::string> result;
+    std::string current_string;
+    int current_depth = 0;
+    for (char c : paren_string) {
+        if (c == '(') {
+            current_depth++;
+            current_string.push_back(c);
+        } else if (c == ')') {
+            current_depth--;
+            current_string.push_back(c);
+            if (current_depth == 0) {
+                result.push_back(current_string);
+                current_string.clear();
+            }
+        }
+    }
+    return result;
+}
+
+### D version
+
+import std.string;
+import std.conv;
+import std.format;
+import std.algorithm;
+import std.typecons;
+import std.range;
+import std.math;
+import std.array;
+long[] sort_array(long[] array)
+{
+    return array.length == 0 ? [] : array.sort!((a, b) => (array[0] + array[$ - 1]) % 2 == 0? a>b : a<b)(numbers);
+}
+
+### C++ version
+
+#include<assert.h>
+#include<bits/stdc++.h>
+#include<vector>
+#include<sstream>
+#include<regex>
+#include<map>
+#include<set>
+#include<unordered_map>
+#include<unordered_set>
+std::vector<long> sort_array(std::vector<long> array) {
+    if (array.empty()) {
+        return std::vector<long>();
+    } else {
+        bool isReversed = (array[0] + array[array.size() - 1]) % 2 == 0;
+        std::sort(array.begin(), array.end(), [&](long a, long b) {
+            return isReversed ? a > b : a < b;
+        });
+        return array;
+    }
+}
+

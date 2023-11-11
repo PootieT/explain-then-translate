@@ -1,0 +1,19 @@
+{
+  "name": "HumanEval_53_add",
+  "language": "cpp",
+  "prompt": "#include<assert.h>\n#include<bits/stdc++.h>\n#include<vector>\n#include<sstream>\n#include<regex>\n#include<map>\n#include<set>\n#include<unordered_map>\n#include<unordered_set>\nlong add(long x, long y) {\n",
+  "doctests": "keep",
+  "original": "/Users/zilutang/Projects/code_translation/MultiPL-EX/datasets/../datasets/originals/HumanEval_53_add.py",
+  "prompt_terminology": "remove",
+  "source_program": "keep",
+  "target_signature": "keep",
+  "tests": "}\nint main() {\n    auto candidate = add;\n    assert(candidate((0), (1)) == (1));\n    assert(candidate((1), (0)) == (1));\n    assert(candidate((2), (3)) == (5));\n    assert(candidate((5), (7)) == (12));\n    assert(candidate((7), (5)) == (12));\n}\n",
+  "stop_tokens": [
+    "\n}"
+  ],
+  "translation_prompt": "You are a helpful and faithful compiler that transpiles Python code to C++ code. Please translate the following Python code to C++?\n\n### Python version\n\ndef add(x: int, y: int) -> int:\n    return x + y\n\n### C++ version\n\n#include<assert.h>\n#include<bits/stdc++.h>\n#include<vector>\n#include<sstream>\n#include<regex>\n#include<map>\n#include<set>\n#include<unordered_map>\n#include<unordered_set>\nlong add(long x, long y) {\n",
+  "completions": [
+    "    return x + y;",
+    "    return x + ;"
+  ]
+}

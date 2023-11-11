@@ -1,0 +1,230 @@
+You are an helpful AI assistant who understands all programming languages and can translate between them at ease. Can you explain what this Python program does line by line? The goal with the explanation, is so that a reader can easily rewrite the program in Lua?
+
+### Python version
+
+from typing import Tuple
+
+def even_odd_palindrome(n: int) -> Tuple[int, int]:
+    def is_palindrome(n):
+        return str(n) == str(n)[::-1]
+
+    even_palindrome_count = 0
+    odd_palindrome_count = 0
+
+    for i in range(1, n+1):
+        if i%2 == 1 and is_palindrome(i):
+                odd_palindrome_count += 1
+        elif i%2 == 0 and is_palindrome(i):
+            even_palindrome_count += 1
+    return (even_palindrome_count, odd_palindrome_count)
+
+### Explanation
+
+The code is an implementation of finding the number of even and odd palindrome numbers between 1 and `n` (inclusive). It takes an integer `n` as input and returns a tuple of two integers: even and odd palindrome number counts. A palindrome is a number that reads the same forwards and backwards.
+
+def is_palindrome(n):
+    return str(n) == str(n)[::-1]
+The function first defines a helper function `is_palindrome` that takes a number and returns `True` if it is a palindrome and `False` otherwise. This is done by converting the number to a string and checking if the string is equal to its reverse.
+
+even_palindrome_count = 0
+odd_palindrome_count = 0
+The counter variable `even_palindrome_count` and `odd_palindrome_count` are used to record the result.
+
+for i in range(1, n+1):
+The loops goes through all numbers between 1 and `n` (inclusive)
+
+if i%2 == 1 and is_palindrome(i):
+    odd_palindrome_count += 1
+elif i%2 == 0 and is_palindrome(i):
+    even_palindrome_count += 1
+Within the for-loop, the program checks if each number is a palindrome and even or odd. If the number is a palindrome and odd, it increments `odd_palindrome_count`. If the number is a palindrome and even, it increments `even_palindrome_count`.
+
+return (even_palindrome_count, odd_palindrome_count)
+Finally, the function returns a tuple of the two counters.
+
+### Lua version
+
+math = require('math')
+local function even_odd_palindrome(n)
+    local function is_palindrome(n)
+        return tostring(n) == string.reverse(tostring(n))
+    end
+
+    local even_palindrome_count = 0
+    local odd_palindrome_count = 0
+
+    for i=1, n do
+        if i%2 == 1 and is_palindrome(i) then
+            odd_palindrome_count = odd_palindrome_count + 1
+        elseif i%2 == 0 and is_palindrome(i) then
+            even_palindrome_count = even_palindrome_count + 1
+        end
+    end
+    return {even_palindrome_count, odd_palindrome_count}
+end
+
+### Python version
+
+from typing import List
+
+def is_sorted(lst: List[int]) -> bool:
+    count_digit = dict([(i, 0) for i in lst])
+    for i in lst:
+        count_digit[i]+=1
+    if any(count_digit[i] > 2 for i in lst):
+        return False
+    if all(lst[i-1] <= lst[i] for i in range(1, len(lst))):
+        return True
+    else:
+        return False
+
+### Explanation
+
+The code is an implementation of checking whether a list is sorted in non-descending order and has no more than two occurrences of any integer. takes in a list of integers and returns a boolean.
+
+count_digit = dict([(i, 0) for i in lst])
+for i in lst:
+    count_digit[i]+=1
+The function first creates a dictionary where the keys are the integers in the list and the values are the number of times that integer appears in the list.
+
+if any(count_digit[i] > 2 for i in lst):
+    return False
+It then checks if any integer appears more than twice in the list, and returns False if so.
+
+if all(lst[i-1] <= lst[i] for i in range(1, len(lst))):
+    return True
+else:
+    return False
+Finally, it checks if the list is sorted in non-descending order, and returns True if so, and False otherwise.
+
+### Lua version
+
+math = require('math')
+local function is_sorted(lst)
+    local count_digit = {}
+    for i = 1, #lst do
+        count_digit[lst[i]] = (count_digit[lst[i]] or 0) + 1
+    end
+    for _, v in pairs(count_digit) do
+        if v > 2 then
+            return false
+        end
+    end
+    for i = 2, #lst do
+        if lst[i-1] > lst[i] then
+            return false
+        end
+    end
+    return true
+end
+
+### Python version
+
+from typing import List
+
+
+def separate_paren_groups(paren_string: str) -> List[str]:
+    result = []
+    current_string = []
+    current_depth = 0
+
+    for c in paren_string:
+        if c == '(':
+            current_depth += 1
+            current_string.append(c)
+        elif c == ')':
+            current_depth -= 1
+            current_string.append(c)
+
+            if current_depth == 0:
+                result.append(''.join(current_string))
+                current_string.clear()
+
+    return result
+
+### Explanation
+
+The code is an implementation of a function `separate_paren_groups` which takes a string of parentheses and returns a list of strings containing the groups of parentheses.
+
+result = []
+current_string = []
+current_depth = 0
+The function initializes an empty list `result` to store the groups of parentheses. It also initializes an empty list `current_string` to store the current group of parentheses being processed. The variable `current_depth` is initialized to 0 to keep track of the depth of the current group of parentheses.
+
+for c in paren_string:
+The function iterates through each character `c` in the input string `paren_string`.
+
+if c == '(':
+    current_depth += 1
+    current_string.append(c)
+If the character is an opening parenthesis `'('`, the function increments the `current_depth` variable and appends the character to the `current_string` list.
+
+elif c == ')':
+    current_depth -= 1
+    current_string.append(c)
+If the character is a closing parenthesis `')'`, the function decrements the `current_depth` variable and appends the character to the `current_string` list.
+
+if current_depth == 0:
+    result.append(''.join(current_string))
+    current_string.clear()
+If the `current_depth` variable reaches 0, it means that the current group of parentheses has been fully processed, so the function joins the `current_string` list into a string and appends it to the `result` list. The `current_string` list is then cleared to start processing the next group of parentheses.
+
+return result
+The function returns the `result` list containing the groups of parentheses.
+
+### Lua version
+
+math = require('math')
+local function separate_paren_groups(paren_string)
+    local result = {}
+    local current_string = {}
+    local current_depth = 0
+
+    for i = 1, #paren_string do
+        local c = paren_string:sub(i, i)
+        if c == '(' then
+            current_depth = current_depth + 1
+            table.insert(current_string, c)
+        elseif c == ')' then
+            current_depth = current_depth - 1
+            table.insert(current_string, c)
+
+            if current_depth == 0 then
+                table.insert(result, table.concat(current_string))
+                current_string = {}
+            end
+        end
+    end
+
+    return result
+end
+
+### Python version
+
+from typing import List
+
+def sort_array(array: List[int]) -> List[int]:
+    return [] if len(array) == 0 else sorted(array, reverse= (array[0]+array[-1]) % 2 == 0)
+
+### Explanation
+
+The code is an implementation of sorting an array of integers. It takes a list of integers `array` as input and returns a sorted list of integers.
+
+return [] if len(array) == 0 else sorted(array, reverse= (array[0]+array[-1]) % 2 == 0)
+The function first checks if the input list is empty. If it is, it returns an empty list. Otherwise, it sorts the list using the `sorted` function. The `reverse` parameter is set to `True` if the sum of the first and last elements of the array is even (and the array will be sorted in descending order), otherwise, it is set to `False` (and the array will be sorted in ascending order).
+
+### Lua version
+
+math = require('math')
+local function sort_array(array)
+    if #array == 0 then
+        return {}
+    else
+        if (array[1] + array[#array]) % 2 == 0 then
+            table.sort(array, function(a, b) return a > b end)
+        else
+            table.sort(array)
+        end
+        return array
+    end
+end

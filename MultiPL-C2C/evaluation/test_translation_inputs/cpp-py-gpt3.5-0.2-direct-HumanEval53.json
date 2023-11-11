@@ -1,0 +1,22 @@
+{
+  "name": "HumanEval_53_add",
+  "language": "py",
+  "prompt": "def add(x: int, y: int) -> int:\n",
+  "doctests": "keep",
+  "original": "/Users/zilutang/Projects/code_translation/MultiPL-EX/datasets/../datasets/originals/HumanEval_53_add.py",
+  "prompt_terminology": "remove",
+  "source_program": "keep",
+  "target_signature": "keep",
+  "tests": "def check(candidate):\n    assert candidate(0, 1) == 1\n    assert candidate(1, 0) == 1\n    assert candidate(2, 3) == 5\n    assert candidate(5, 7) == 12\n    assert candidate(7, 5) == 12\n\ndef test_check():\n    check(add)\n\ntest_check()\n",
+  "stop_tokens": [
+    "\ndef",
+    "\n#",
+    "\nif",
+    "\nclass"
+  ],
+  "translation_prompt": "You are a helpful and faithful compiler that transpiles C++ code to Python code. Please translate the following C++ code to Python?\n\n### C++ version\n\n#include<assert.h>\n#include<bits/stdc++.h>\n#include<vector>\n#include<sstream>\n#include<regex>\n#include<map>\n#include<set>\nlong add(long x, long y) {\n    return x + y;\n}\n\n### Python version\n\ndef add(x: int, y: int) -> int:\n",
+  "completions": [
+    "    return x + y\n",
+    "    rexturn x + y\n\n"
+  ]
+}

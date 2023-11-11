@@ -1,0 +1,19 @@
+{
+  "name": "HumanEval_53_add",
+  "language": "rs",
+  "prompt": "fn add(x: isize, y: isize) -> isize {\n",
+  "doctests": "keep",
+  "original": "/Users/zilutang/Projects/code_translation/MultiPL-EX/datasets/../datasets/originals/HumanEval_53_add.py",
+  "prompt_terminology": "remove",
+  "source_program": "keep",
+  "target_signature": "keep",
+  "tests": "}\n\nfn main() {\n    let candidate = add;\n    assert_eq!(candidate(0, 1), 1);\n    assert_eq!(candidate(1, 0), 1);\n    assert_eq!(candidate(2, 3), 5);\n    assert_eq!(candidate(5, 7), 12);\n    assert_eq!(candidate(7, 5), 12);\n}\n",
+  "stop_tokens": [
+    "\n}"
+  ],
+  "translation_prompt": "You are a helpful and faithful compiler that transpiles Python code to Rust code. Please translate the following Python code to Rust?\n\n### Python version\n\ndef add(x: int, y: int) -> int:\n    return x + y\n\n### Rust version\n\nfn add(x: isize, y: isize) -> isize {\n",
+  "completions": [
+    "    x + y",
+    "    x + yyyy"
+  ]
+}

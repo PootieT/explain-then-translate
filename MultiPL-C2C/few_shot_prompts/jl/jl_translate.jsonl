@@ -1,0 +1,3 @@
+{"role": "system", "content": "You are a helpful and faithful compiler that transpiles Python code to Julia code."}
+{"role": "user", "content": "Translate the following Python code to Julia given the first parts of the Julia program? Complete the rest from where the Julia program left off. Keep the Julia signature exactly the same as the code provided.\n\n### Python version\n\nfrom typing import List\n\ndef plus_one(numbers: List[int]) -> str:\n\treturn \" \".join([n + 1 for n in numbers])\n\n### Julia version\n\nfunction plus_one(numbers::Vector{Int64})::String\n"}
+{"role": "assistant", "content": "    return join([string(n + 1) for n in numbers], \" \")\nend"}

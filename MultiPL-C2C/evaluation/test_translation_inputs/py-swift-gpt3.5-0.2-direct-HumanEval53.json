@@ -1,0 +1,19 @@
+{
+  "name": "HumanEval_53_add",
+  "language": "swift",
+  "prompt": "func add(x: Int, y: Int) -> Int {\n",
+  "doctests": "keep",
+  "original": "/Users/zilutang/Projects/code_translation/MultiPL-EX/datasets/../datasets/originals/HumanEval_53_add.py",
+  "prompt_terminology": "remove",
+  "source_program": "keep",
+  "target_signature": "keep",
+  "tests": "}\n\n\nfunc ==(left: [(Int, Int)], right: [(Int, Int)]) -> Bool {\n    if left.count != right.count {\n        return false\n    }\n    for (l, r) in zip(left, right) {\n        if l != r {\n            return false\n        }\n    }\n    return true\n}\n            \nassert(add(x: 0, y: 1) == 1)\nassert(add(x: 1, y: 0) == 1)\nassert(add(x: 2, y: 3) == 5)\nassert(add(x: 5, y: 7) == 12)\nassert(add(x: 7, y: 5) == 12)",
+  "stop_tokens": [
+    "\n}"
+  ],
+  "translation_prompt": "You are a helpful and faithful compiler that transpiles Python code to Swift code. Please translate the following Python code to Swift?\n\n### Python version\n\ndef add(x: int, y: int) -> int:\n    return x + y\n\n### Swift version\n\nimport Swift\nimport Foundation\nfunc add(x: Int, y: Int) -> Int {\n",
+  "completions": [
+    "    return x + y",
+    "    rexturn x + y"
+  ]
+}

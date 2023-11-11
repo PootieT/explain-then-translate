@@ -1,0 +1,254 @@
+You are an helpful AI assistant who understands all programming languages and can translate between them at ease. Can you explain what this Java program does with a couple of sentences? The goal with the explanation, is so that a reader can easily rewrite the program in C++?
+
+### Java version
+
+import java.util.*;
+import java.lang.reflect.*;
+import org.javatuples.*;
+import java.security.*;
+import java.math.*;
+import java.io.*;
+import java.util.stream.*;
+class Problem {
+    public static Pair<Long, Long> evenOddPalindrome(long n) {
+        long evenPalindromeCount = 0;
+        long oddPalindromeCount = 0;
+
+        for (long i = 1; i <= n; i++) {
+            if (i % 2 == 1 & & isPalindrome(i)) {
+                oddPalindromeCount++;
+            } else if (i % 2 == 0 & & isPalindrome(i)) {
+                evenPalindromeCount++;
+            }
+        }
+        return Pair.with(evenPalindromeCount, oddPalindromeCount);
+    }
+
+    private static boolean isPalindrome(long n) {
+        return Long.toString(n).equals(new StringBuilder(Long.toString(n)).reverse().toString());
+    }
+}
+
+### Explanation
+
+This Java program defines a function `evenOddPalindrome` that takes a long integer `n` as input and returns a pair of long integers. The function counts the number of even and odd palindromic numbers between 1 and `n` (inclusive), and returns the counts as a pair. A number is palindromic if it reads the same forwards and backwards (e.g. 121, 12321). The function uses the helper function `isPalindrome` to check whether a number is palindromic. The function returns the counts as a `Pair` object from the `org.javatuples` package.
+
+### C++ version
+
+#include<assert.h>
+#include<bits/stdc++.h>
+#include<vector>
+#include<sstream>
+#include<regex>
+#include<map>
+#include<set>
+std::tuple<long, long> even_odd_palindrome(long n) {
+    auto is_palindrome = [](long n) -> bool {
+        std::string s = std::to_string(n);
+        return std::equal(s.begin(), s.end(), s.rbegin());
+    };
+    long even_palindrome_count = 0;
+    long odd_palindrome_count = 0;
+    for(long i=1; i<=n; i++) {
+        if(i%2 == 1 && is_palindrome(i)) {
+            odd_palindrome_count++;
+        } else if(i%2 == 0 && is_palindrome(i)) {
+            even_palindrome_count++;
+        }
+    }
+    return std::make_tuple(even_palindrome_count, odd_palindrome_count);
+}
+
+### Java version
+
+import java.util.*;
+import java.lang.reflect.*;
+import org.javatuples.*;
+import java.security.*;
+import java.math.*;
+import java.io.*;
+import java.util.stream.*;
+class Problem {
+    public static boolean isSorted(ArrayList<Long> lst) {
+        HashMap<Long, Long> count_digit = new HashMap<Long, Long>();
+        for (long i : lst) {
+            if (count_digit.containsKey(i)) {
+                count_digit.put(i, count_digit.get(i) + 1);
+            } else {
+                count_digit.put(i, 1L);
+            }
+        }
+        for (long i : lst) {
+            if (count_digit.get(i) > 2) {
+                return false;
+            }
+        }
+        for (int i = 1; i < lst.size(); i++) {
+            if (lst.get(i - 1) > lst.get(i)) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+### Explanation
+
+This program defines a function `isSorted` that takes an ArrayList of Longs and returns a boolean indicating whether the list is sorted in non-descending order and contains at most two of each element. The function first creates a HashMap to count the frequency of each element in the list, then checks that no element appears more than twice. Finally, it checks that the list is sorted in non-descending order.
+
+### C++ version
+
+#include<assert.h>
+#include<bits/stdc++.h>
+#include<vector>
+#include<sstream>
+#include<regex>
+#include<map>
+#include<set>
+#include<unordered_map>
+#include<unordered_set>
+bool is_sorted(std::vector<long> lst) {
+    std::map<long, long> count_digit;
+    for (auto i: lst) {
+        count_digit[i]++;
+    }
+    for (auto i: lst) {
+        if (count_digit[i] > 2) {
+            return false;
+        }
+    }
+    for (int i = 1; i < lst.size(); i++) {
+        if (lst[i-1] > lst[i]) {
+            return false;
+        }
+    }
+    return true;
+}
+
+### Java version
+
+import java.util.*;
+import java.lang.reflect.*;
+import org.javatuples.*;
+import java.security.*;
+import java.math.*;
+import java.io.*;
+import java.util.stream.*;
+class Problem {
+    public static ArrayList<String> separateParenGroups(String paren_string) {
+        ArrayList<String> result = new ArrayList<String>();
+        ArrayList<Character> current_string = new ArrayList<Character>();
+        int current_depth = 0;
+
+        for (int i = 0; i < paren_string.length(); i++) {
+            char c = paren_string.charAt(i);
+            if (c == '(') {
+                current_depth += 1;
+                current_string.add(c);
+            } else if (c == ')') {
+                current_depth -= 1;
+                current_string.add(c);
+
+                if (current_depth == 0) {
+                    StringBuilder sb = new StringBuilder(current_string.size());
+                    for (Character ch : current_string) {
+                        sb.append(ch);
+                    }
+                    result.add(sb.toString());
+                    current_string.clear();
+                }
+            }
+        }
+
+        return result;
+    }
+}
+
+### Explanation
+
+This Java program defines a function called `separateParenGroups` that takes a string as input and returns an ArrayList of strings. The function separates the input string into groups of characters that are enclosed in parentheses. Each group is returned as a separate string in the ArrayList.
+
+The function works by iterating over each character in the input string. If the character is an opening parenthesis, the function increments a counter that keeps track of the current depth of nested parentheses. The character is added to a list of characters that make up the current group. If the character is a closing parenthesis, the function decrements the counter and adds the character to the list of characters. If the counter reaches zero, the current group is complete and is added to the result ArrayList. The function then clears the list of characters and continues iterating over the input string.
+
+### C++ version
+
+#include<assert.h>
+#include<bits/stdc++.h>
+#include<vector>
+#include<sstream>
+#include<regex>
+#include<map>
+#include<set>
+#include<unordered_map>
+#include<unordered_set>
+std::vector<std::string> separate_paren_groups(std::string paren_string) {
+    std::vector<std::string> result;
+    std::string current_string;
+    int current_depth = 0;
+    for (char c : paren_string) {
+        if (c == '(') {
+            current_depth++;
+            current_string.push_back(c);
+        } else if (c == ')') {
+            current_depth--;
+            current_string.push_back(c);
+            if (current_depth == 0) {
+                result.push_back(current_string);
+                current_string.clear();
+            }
+        }
+    }
+    return result;
+}
+
+### Java version
+
+import java.util.*;
+import java.lang.reflect.*;
+import org.javatuples.*;
+import java.security.*;
+import java.math.*;
+import java.io.*;
+import java.util.stream.*;
+class Problem {
+    public static ArrayList<Long> sortArray(ArrayList<Long> array) {
+        if (array.size() == 0) {
+            return new ArrayList<Long>();
+        } else {
+            boolean reverse = (array.get(0) + array.get(array.size() - 1)) % 2 == 0;
+            Collections.sort(array);
+            if (reverse) {
+                Collections.reverse(array);
+            }
+            return array;
+        }
+    }
+}
+
+### Explanation
+
+This Java program defines a function `sortArray` that takes an array of long integers and returns a sorted version of that array. If the input array is empty, the function returns an empty array. Otherwise, the function sorts the input array in ascending order and then reverses it if the sum of the first and last elements of the input array is even. The function returns the sorted array.
+
+### C++ version
+
+#include<assert.h>
+#include<bits/stdc++.h>
+#include<vector>
+#include<sstream>
+#include<regex>
+#include<map>
+#include<set>
+#include<unordered_map>
+#include<unordered_set>
+std::vector<long> sort_array(std::vector<long> array) {
+    if (array.empty()) {
+        return std::vector<long>();
+    } else {
+        bool isReversed = (array[0] + array[array.size() - 1]) % 2 == 0;
+        std::sort(array.begin(), array.end(), [&](long a, long b) {
+            return isReversed ? a > b : a < b;
+        });
+        return array;
+    }
+}
+

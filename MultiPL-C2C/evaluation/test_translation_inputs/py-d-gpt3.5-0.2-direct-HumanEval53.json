@@ -1,0 +1,22 @@
+{
+  "name": "HumanEval_53_add",
+  "language": "d",
+  "prompt": "import std.algorithm;\nimport std.array;\nimport std.conv;\nimport std.format;\nimport std.math;\nimport std.range;\nimport std.string;\nimport std.typecons;\nlong add(long x, long y) \n",
+  "doctests": "keep",
+  "original": "../datasets/originals/HumanEval_53_add.py",
+  "prompt_terminology": "remove",
+  "source_program": "keep",
+  "target_signature": "keep",
+  "tests": "}\nunittest\n{\n    alias candidate = add;\n\n    assert(candidate(0L, 1L) == 1L);\n    assert(candidate(1L, 0L) == 1L);\n    assert(candidate(2L, 3L) == 5L);\n    assert(candidate(5L, 7L) == 12L);\n    assert(candidate(7L, 5L) == 12L);\n}\nvoid main(){}",
+  "stop_tokens": [
+    "\nvoid",
+    "\nbool",
+    "\nint",
+    "\n}"
+  ],
+  "translation_prompt": "You are a helpful and faithful compiler that transpiles Python code to D code. Please translate the following Python code to D?\n\n### Python version\n\ndef add(x: int, y: int) -> int:\n    return x + y\n\n### D version\n\nimport std.algorithm;\nimport std.array;\nimport std.conv;\nimport std.format;\nimport std.math;\nimport std.range;\nimport std.string;\nimport std.typecons;\nlong add(long x, long y) \n",
+  "completions": [
+    "{\n    return x + y;",
+    "{\n\treturn x + ;"
+  ]
+}

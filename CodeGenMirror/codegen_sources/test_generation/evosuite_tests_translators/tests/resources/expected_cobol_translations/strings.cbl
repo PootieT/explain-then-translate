@@ -1,0 +1,26 @@
+IDENTIFICATION DIVISION.
+PROGRAM-ID. CLASS_27c05c7602b81c3bcf7-TEST.
+
+ENVIRONMENT DIVISION.
+
+DATA DIVISION.
+WORKING-STORAGE SECTION.
+    01 loopIdx PIC S9(9).
+    01 string0 PIC X(100).
+
+
+
+
+PROCEDURE DIVISION.
+Begin.
+    PERFORM test1.
+    STOP RUN.
+
+test1.
+    CALL "f_filled" USING BY CONTENT "", "",
+        BY REFERENCE string0 END-CALL.
+    IF (string0 NOT = SPACE AND LOW-VALUE) THEN
+        DISPLAY 'failure'
+        EXIT PARAGRAPH
+    END-IF.
+    DISPLAY 'success'.

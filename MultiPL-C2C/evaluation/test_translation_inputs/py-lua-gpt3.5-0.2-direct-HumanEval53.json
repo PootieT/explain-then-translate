@@ -1,0 +1,21 @@
+{
+  "name": "HumanEval_53_add",
+  "language": "lua",
+  "prompt": "math = require('math')\nlocal function add(x, y)\n",
+  "doctests": "keep",
+  "original": "/Users/zilutang/Projects/code_translation/MultiPL-EX/datasets/../datasets/originals/HumanEval_53_add.py",
+  "prompt_terminology": "remove",
+  "source_program": "keep",
+  "target_signature": "keep",
+  "tests": "end\n\nlu = require('luaunit')\n\nfunction test_humaneval()\nlocal candidate = add\n    lu.assertEquals(candidate(0, 1), 1)\n    lu.assertEquals(candidate(1, 0), 1)\n    lu.assertEquals(candidate(2, 3), 5)\n    lu.assertEquals(candidate(5, 7), 12)\n    lu.assertEquals(candidate(7, 5), 12)\nend\n\nos.exit(lu.LuaUnit.run())",
+  "stop_tokens": [
+    "\n--",
+    "\n#",
+    "\nend"
+  ],
+  "translation_prompt": "You are a helpful and faithful compiler that transpiles Python code to Lua code. Please translate the following Python code to Lua?\n\n### Python version\n\ndef add(x: int, y: int) -> int:\n    return x + y\n\n### Lua version\n\nmath = require('math')\nlocal function add(x, y)\n",
+  "completions": [
+    "  return x + y",
+    "    return x + "
+  ]
+}

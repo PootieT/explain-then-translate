@@ -1,0 +1,3 @@
+{"role": "system", "content": "You are a helpful and faithful compiler that transpiles Python code to Lua code."}
+{"role": "user", "content": "Translate the following Python code to Lua given the first parts of the Lua program? Complete the rest from where the Lua program left off. Keep the Lua signature exactly the same as the code provided.\n\n### Python version\n\nfrom typing import List\n\ndef plus_one(numbers: List[int]) -> str:\n\treturn \" \".join([n + 1 for n in numbers])\n\n### Lua version\n\nmath = require('math')\n\nlocal function plus_one(numbers)\n"}
+{"role": "assistant", "content": "    local result = {}\n    for i, n in ipairs(numbers) do\n    result[i] = n + 1\n    end\n    return table.concat(result, \" \")\nend"}

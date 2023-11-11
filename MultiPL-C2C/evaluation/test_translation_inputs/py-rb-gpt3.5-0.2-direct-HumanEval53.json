@@ -1,0 +1,22 @@
+{
+  "name": "HumanEval_53_add",
+  "language": "rb",
+  "prompt": "def add(x, y)\n",
+  "doctests": "keep",
+  "original": "/Users/zilutang/Projects/code_translation/MultiPL-EX/datasets/../datasets/originals/HumanEval_53_add.py",
+  "prompt_terminology": "remove",
+  "source_program": "keep",
+  "target_signature": "keep",
+  "tests": "require 'test/unit'\nclass TestHumanEval < Test::Unit::TestCase\n  def test_add\n    candidate = method(:add)\n    assert_equal(1, candidate.call(0, 1))\n    assert_equal(1, candidate.call(1, 0))\n    assert_equal(5, candidate.call(2, 3))\n    assert_equal(12, candidate.call(5, 7))\n    assert_equal(12, candidate.call(7, 5))\n  end\nend\n",
+  "stop_tokens": [
+    "\nclass",
+    "\ndef",
+    "\n#",
+    "\nputs"
+  ],
+  "translation_prompt": "You are a helpful and faithful compiler that transpiles Python code to Ruby code. Please translate the following Python code to Ruby?\n\n### Python version\n\ndef add(x: int, y: int) -> int:\n    return x + y\n\n### Ruby version\n\ndef add(x, y)\n",
+  "completions": [
+    "  x + y\nend",
+    "  x + y\nendian"
+  ]
+}

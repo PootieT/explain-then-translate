@@ -1,0 +1,163 @@
+You are a helpful and faithful compiler that transpiles Python code to Bash code. Please translate the following Python code to Bash?
+
+### Python version
+
+from typing import Tuple
+
+def even_odd_palindrome(n: int) -> Tuple[int, int]:
+    def is_palindrome(n):
+        return str(n) == str(n)[::-1]
+
+    even_palindrome_count = 0
+    odd_palindrome_count = 0
+
+    for i in range(1, n+1):
+        if i%2 == 1 and is_palindrome(i):
+                odd_palindrome_count += 1
+        elif i%2 == 0 and is_palindrome(i):
+            even_palindrome_count += 1
+    return (even_palindrome_count, odd_palindrome_count)
+
+### Bash version
+
+#!/bin/bash
+#
+#
+# $1 is an integer
+even_odd_palindrome() {
+    n=$1
+    is_palindrome() {
+        if [[ $1 == $(echo $1 | rev) ]]; then
+            return 0
+        else
+            return 1
+        fi
+    }
+    even_palindrome_count=0
+    odd_palindrome_count=0
+    for (( i=1; i<=$n; i++ )); do
+        if [[ $((i%2)) -eq 1 ]] && is_palindrome $i; then
+            ((odd_palindrome_count++))
+        elif [[ $((i%2)) -eq 0 ]] && is_palindrome $i; then
+            ((even_palindrome_count++))
+        fi
+    done
+    echo "$even_palindrome_count $odd_palindrome_count"
+}
+
+### Python version
+
+from typing import List
+
+def is_sorted(lst: List[int]) -> bool:
+    count_digit = dict([(i, 0) for i in lst])
+    for i in lst:
+        count_digit[i]+=1
+    if any(count_digit[i] > 2 for i in lst):
+        return False
+    if all(lst[i-1] <= lst[i] for i in range(1, len(lst))):
+        return True
+    else:
+        return False
+
+### Bash version
+
+#!/bin/bash
+#
+#
+# $1 is a space-separated list
+is_sorted() {
+    lst=($1)
+    declare -A count_digit
+    for i in "${lst[@]}"; do
+        ((count_digit[$i]++))
+    done
+    for i in "${lst[@]}"; do
+        if [[ ${count_digit[$i]} -gt 2 ]]; then
+            echo "false"
+            return
+        fi
+    done
+    for (( i=1; i<${#lst[@]}; i++ )); do
+        if [[ ${lst[i-1]} -gt ${lst[i]} ]]; then
+            echo "false"
+            return
+        fi
+    done
+    echo "true"
+}
+
+### Python version
+
+from typing import List
+
+
+def separate_paren_groups(paren_string: str) -> List[str]:
+    result = []
+    current_string = []
+    current_depth = 0
+
+    for c in paren_string:
+        if c == '(':
+            current_depth += 1
+            current_string.append(c)
+        elif c == ')':
+            current_depth -= 1
+            current_string.append(c)
+
+            if current_depth == 0:
+                result.append(''.join(current_string))
+                current_string.clear()
+
+    return result
+
+
+### Bash version
+
+#!/bin/bash
+#
+#
+# $1 is a string
+separate_paren_groups() {
+    result=()
+    current_string=""
+    current_depth=0
+
+    for (( i=0; i<${#1}; i++ )); do
+        c=${1:i:1}
+        if [[ $c == '(' ]]; then
+            (( current_depth++ ))
+            current_string+=$c
+        elif [[ $c == ')' ]]; then
+            (( current_depth-- ))
+            current_string+=$c
+
+            if [[ $current_depth == 0 ]]; then
+                result+=("$current_string")
+                current_string=""
+            fi
+        fi
+    done
+
+    echo "${result[@]}"
+}
+
+### Python version
+
+from typing import List
+
+def sort_array(array: List[int]) -> List[int]:
+    return [] if len(array) == 0 else sorted(array, reverse= (array[0]+array[-1]) % 2 == 0)
+
+### Bash version
+
+#!/bin/bash
+#
+#
+# $1 is a space-separated list
+sort_array() {
+    local arr=($1)
+    local sorted_arr=($(echo "${arr[@]}" | tr ' ' '\n' | sort -n))
+    local sorted_by_ones=($(echo "${sorted_arr[@]}" | tr ' ' '\n' | awk '{print $1 " " $0}' | sort -n -k2 | awk '{print $1}'))
+    echo "${sorted_by_ones[@]}"
+}

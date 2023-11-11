@@ -1,0 +1,21 @@
+{
+  "name": "HumanEval_53_add",
+  "language": "sh",
+  "prompt": "#!/bin/bash\n# \n#\n# $1 is an integer\n# $2 is an integer\nadd() {\n",
+  "doctests": "keep",
+  "original": "../datasets/originals/HumanEval_53_add.py",
+  "prompt_terminology": "remove",
+  "source_program": "keep",
+  "target_signature": "keep",
+  "tests": "\ncandidate() {\n    add \"$@\"\n}\n\nset -e\nrun_test() {\n    [[ $(candidate \"0\" \"1\") = \"1\" ]]\n    [[ $(candidate \"1\" \"0\") = \"1\" ]]\n    [[ $(candidate \"2\" \"3\") = \"5\" ]]\n    [[ $(candidate \"5\" \"7\") = \"12\" ]]\n    [[ $(candidate \"7\" \"5\") = \"12\" ]]\n}\n\nrun_test",
+  "stop_tokens": [
+    "\n#",
+    "\nAnswer",
+    "\necho\n```"
+  ],
+  "translation_prompt": "You are a helpful and faithful compiler that transpiles Python code to Bash code. Please translate the following Python code to Bash?\n\n### Python version\n\ndef add(x: int, y: int) -> int:\n    return x + y\n\n### Bash version\n\n#!/bin/bash\n# \n#\n# $1 is an integer\n# $2 is an integer\nadd() {\n",
+  "completions": [
+    "    echo $(( $1 + $2 ))\n}",
+    "    excho $(( $1 + $2 ))\n}"
+  ]
+}

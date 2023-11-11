@@ -1,0 +1,27 @@
+You are an helpful AI assistant who understands all programming languages and can translate between them at ease. Can you rewrite this Python program in Java so the Java program does exactly the same thing as the given Python program?
+
+### Python version
+
+from typing import List
+
+def plus_one(numbers: List[int]) -> str:
+    return " ".join([n + 1 for n in numbers])
+
+### Java version
+
+import java.util.*;
+import java.lang.reflect.*;
+import org.javatuples.*;
+import java.security.*;
+import java.math.*;
+import java.io.*;
+import java.util.stream.*;
+class Problem {
+    public static String plusOne(ArrayList<Long> numbers) {
+        List<Integer> incrementedNumbers = numbers.stream()
+            .map(n -> n + 1)
+            .collect(Collectors.toList());
+        return String.join(" ", incrementedNumbers.stream()
+            .map(Object::toString)
+            .toArray(String[]::new));
+    }

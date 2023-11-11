@@ -1,0 +1,305 @@
+You are an helpful AI assistant who understands all programming languages and can translate between them at ease. Can you explain what this Julia program does line by line? If a line is too long or too complicated, simplify it and explain what individual parts of the line mean first before explaining the whole line. The goal with the explanation, is so that a reader can easily rewrite the program in D?
+
+### Julia version
+
+function even_odd_palindrome(n::Int64)::Tuple{Int64, Int64} 
+    function is_palindrome(n)
+        return string(n) == reverse(string(n))
+    end
+
+    even_palindrome_count = 0
+    odd_palindrome_count = 0
+
+    for i in 1:n
+        if i%2 == 1 && is_palindrome(i)
+            odd_palindrome_count += 1
+        elseif i%2 == 0 && is_palindrome(i)
+            even_palindrome_count += 1
+        end
+    end
+    return (even_palindrome_count, odd_palindrome_count)
+end
+
+### Explanation
+
+The code is an implementation of a function called `even_odd_palindrome` that takes an integer `n` as an argument and returns a tuple of two integers. The function counts the number of even and odd palindromic numbers between 1 and `n` (inclusive).
+
+function is_palindrome(n)
+    return string(n) == reverse(string(n))
+end
+The function defines an inner function called `is_palindrome` that takes an integer and returns a boolean indicating whether the integer is a palindrome. Let's break it down step by step:
+string(n)
+The function converts the integer to a string,
+reverse(string(n))
+reverses the string,
+string(n) == reverse(string(n))
+and compares the original string to the reversed string. If they are equal, the function returns `true`, otherwise it returns `false`.
+Hence, the helper function`is_palindrome` takes a number and returns `true` if it is a palindrome and `false` otherwise.
+
+even_palindrome_count = 0
+odd_palindrome_count = 0
+The function initializes two counters, `even_palindrome_count` and `odd_palindrome_count`, to zero.
+
+for i in 1:n
+    if i%2 == 1 && is_palindrome(i)
+        odd_palindrome_count += 1
+    elseif i%2 == 0 && is_palindrome(i)
+        even_palindrome_count += 1
+    end
+end
+The function then loops through the integers from 1 to `n`. Let's break it down step by step:
+i%2 == 1
+For each integer, it checks whether it is odd.
+is_palindrome(i)
+The program checks if the integer is a palindrome with previously defined helper function `is_palindrome`.
+if i%2 == 1 && is_palindrome(i)
+    odd_palindrome_count += 1
+If the integer is odd and a palindrome, it increments the `odd_palindrome_count` counter. By the same logic, If the integer is even and a palindrome, it increments the `even_palindrome_count` counter.
+Hence, the loop checks if each number is a palindrome and even/odd and increment respective counters.
+
+return (even_palindrome_count, odd_palindrome_count)
+Finally, the function returns a tuple of the two counters, `(even_palindrome_count, odd_palindrome_count)`.
+
+### D version
+
+import std.range;
+import std.typecons;
+import std.algorithm;
+import std.format;
+import std.conv;
+import std.math;
+import std.array;
+import std.string;
+Tuple!(long, long) even_odd_palindrome(long n) 
+{
+    bool is_palindrome(long n)
+    {
+        return to!string(n) == to!string(n).dup.reverse;
+    }
+
+    long even_palindrome_count = 0;
+    long odd_palindrome_count = 0;
+
+    foreach (i; 1 .. n+1)
+    {
+        if (i%2 == 1 && is_palindrome(i))
+        {
+            odd_palindrome_count += 1;
+        }
+        else if (i%2 == 0 && is_palindrome(i))
+        {
+            even_palindrome_count += 1;
+        }
+    }
+    return tuple(even_palindrome_count, odd_palindrome_count);
+}
+
+### Julia version
+
+function is_sorted(lst::Vector{Int64})::Bool 
+    count_digit = Dict([(i, 0) for i in lst])
+    for i in lst
+        count_digit[i]+=1
+    end
+    if any(count_digit[i] > 2 for i in lst)
+        return false
+    end
+    if all(lst[i-1] <= lst[i] for i in 2:length(lst))
+        return true
+    else
+        return false
+    end
+end
+
+### Explanation
+
+The code is an implementation of a function that checks if a given list of integers is sorted and has at most two occurrences of each integer. The function takes a single argument, `lst`, which is a vector of 64-bit integers.
+
+count_digit = Dict([(i, 0) for i in lst])
+The function starts by creating a dictionary `count_digit` that maps each integer in `lst` to the number of times it occurs in the list. The dictionary is initialized with a comprehension that creates a key-value pair for each integer in `lst`, where the key is the integer and the value is 0.
+
+for i in lst
+    count_digit[i]+=1
+end
+The function then iterates over each integer in `lst` and increments the corresponding value in `count_digit` by 1.
+
+if any(count_digit[i] > 2 for i in lst)
+    return false
+end
+If any integer in `lst` occurs more than twice, the function returns `false`.
+
+if all(lst[i-1] <= lst[i] for i in 2:length(lst))
+    return true
+else
+    return false
+end
+Let's break it down step by step:
+lst[i-1] <= lst[i]
+Within the list comprehension, this checks whether the integer at index `i` is greater or equal to the previous integer at index `i-1`.
+if all(lst[i-1] <= lst[i] for i in range(1, len(lst))):
+The whole expression then checks if all integers in `lst` are in non-decreasing order (i.e., the list is sorted)
+    return true
+else
+    return false
+end
+If so, the function returns `true`. Otherwise, it returns `false`.
+Hence, the if-else statements returns 'true' if `lst` is sorted in non-descending order, and `false` otherwise.
+
+### D version
+
+import std.range;
+import std.typecons;
+import std.algorithm;
+import std.format;
+import std.conv;
+import std.math;
+import std.array;
+import std.string;
+bool is_sorted(long[] lst) 
+{
+    long[long] count_digit;
+    foreach (i; lst)
+        count_digit[i] = 0;
+    foreach (i; lst)
+        count_digit[i]++;
+    if (any!(i => count_digit[i] > 2)(lst))
+        return false;
+    if (lst.isSorted)
+        return true;
+    else
+        return false;
+}
+
+### Julia version
+
+function separate_paren_groups(paren_string::String)::Vector{String} 
+    result = []
+    current_string = []
+    current_depth = 0
+
+    for c in paren_string
+        if c == '('
+            current_depth += 1
+            push!(current_string, c)
+        elseif c == ')'
+            current_depth -= 1
+            push!(current_string, c)
+
+            if current_depth == 0
+                push!(result, join(current_string))
+                current_string = []
+            end
+        end
+    end
+    return result
+end
+
+### Explanation
+
+The code is an implementation of an algorithm to separate a string into groups of parentheses. The function takes a string as input and returns a vector of strings, where each string is a group of parentheses.
+
+result = []
+current_string = []
+current_depth = 0
+Three variables are initialized: `result`, `current_string`, and `current_depth`. `result` is an empty vector that will hold the final result. `current_string` is an empty vector that will hold the current group of parentheses. `current_depth` is an integer that keeps track of the current depth of the parentheses.
+
+for c in paren_string
+The function iterates over each character `c` in the input string `paren_string`.
+
+if c == '('
+    current_depth += 1
+    push!(current_string, c)
+If the current character is an opening parenthesis, the current depth is incremented and the character is added to the current group of parentheses.
+
+elseif c == ')'
+    current_depth -= 1
+    push!(current_string, c)
+If the current character is a closing parenthesis, the current depth is decremented and the character is added to the current group of parentheses.
+
+if current_depth == 0
+    push!(result, join(current_string))
+    current_string = []
+end
+Let's break it down step by step:
+join(current_string)
+`current_string` is joined from a vector into a string
+Hence, if the current depth is zero, it means that the current group of parentheses is complete, so the group is added to the result vector and the current group of parentheses is reset.
+
+return result
+Finally, the function returns the result vector.
+
+### D version
+
+import std.string;
+import std.conv;
+import std.array;
+import std.typecons;
+import std.algorithm;
+import std.range;
+import std.format;
+import std.math;
+string[] separate_paren_groups(string paren_string) 
+{
+    string[] result;
+    string current_string;
+    int current_depth = 0;
+
+    foreach (c; paren_string)
+    {
+        if (c == '(')
+        {
+            current_depth += 1;
+            current_string ~= c;
+        }
+        else if (c == ')')
+        {
+            current_depth -= 1;
+            current_string ~= c;
+
+            if (current_depth == 0)
+            {
+                result ~= current_string;
+                current_string = "";
+            }
+        }
+    }
+
+    return result;
+}
+
+### Julia version
+
+function sort_array(array::Vector{Int64})::Vector{Int64} 
+    return length(array) == 0 ? [] : sort(array, rev=(array[1]+array[end]) % 2 == 0)
+end
+
+### Explanation
+
+The code is an implementation of a function called `sort_array` that takes an array of integers as input and returns a sorted array of integers.
+
+return length(array) == 0 ? [] : sort(array, rev=(array[1]+array[end]) % 2 == 0)
+This return statement contains an inline if-else statement. Let's break it down step by step:
+length(array) == 0 ? []
+The function returns an empty array `[]` if the length of the input array is zero.
+sort(array, rev=(array[1]+array[end]) % 2 == 0)
+Otherwise, it sorts the input array using the `sort` function. The `rev` keyword argument is used to specify whether the array should be sorted in reverse order. Let's break it down step by step:
+(array[1]+array[end]) % 2 == 0
+This expression checks if the sum of the first and last elements of the array is even. The result is set as the argument for the `rev` argument.
+Hence, the else statement sorts the input array. If the sum of the first and last elements of the input array is even, it is sorted with `rev=true` (descending order), otherwise, it is sorted with `rev=false` (ascending order).
+Hence, the entire inline if-else statement (and the return statement) returns an empty array if the length of the input array is zero. Otherwise, if the sum of the first and last element of the array is even, the array is sorted with `rev` parameter set to `true`. If the sum of the first and last element of the array is odd, the `rev` parameter is set to `false`.
+
+### D version
+
+import std.string;
+import std.conv;
+import std.format;
+import std.algorithm;
+import std.typecons;
+import std.range;
+import std.math;
+import std.array;
+long[] sort_array(long[] array)
+{
+    return array.length == 0 ? [] : array.sort!((a, b) => (array[0] + array[$ - 1]) % 2 == 0? a>b : a<b)(numbers);
+}
+

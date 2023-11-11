@@ -1,0 +1,47 @@
+You are an helpful AI assistant who understands all programming languages and can translate between them at ease. Can you summarize this Python program in a few sentences such that a reader can easily rewrite the program in C++?
+
+### Python version
+
+def even_odd_palindrome(n: int) -> Tuple[int, int]:
+    def is_palindrome(n):
+        return str(n) == str(n)[::-1]
+
+    even_palindrome_count = 0
+    odd_palindrome_count = 0
+
+    for i in range(1, n+1):
+        if i%2 == 1 and is_palindrome(i):
+                odd_palindrome_count += 1
+        elif i%2 == 0 and is_palindrome(i):
+            even_palindrome_count += 1
+    return (even_palindrome_count, odd_palindrome_count)
+
+### Summary
+
+This function takes an integer `n` and returns a tuple of two integers. The first integer is the number of even palindromes between 1 and `n`, and the second integer is the number of odd palindromes between 1 and `n`. A palindrome is a number that reads the same forwards and backwards. The function first defines a helper function `is_palindrome` that checks whether a given number is a palindrome. It then initializes two counters, `even_palindrome_count` and `odd_palindrome_count`, to zero. It then iterates over the range of integers from 1 to `n`, checking whether each integer is a palindrome and whether it is even or odd. If it is a palindrome and even, it increments `even_palindrome_count`; if it is a palindrome and odd, it increments `odd_palindrome_count`. Finally, it returns the tuple `(even_palindrome_count, odd_palindrome_count)`.
+
+### C++ version
+
+#include<assert.h>
+#include<bits/stdc++.h>
+#include<vector>
+#include<sstream>
+#include<regex>
+#include<map>
+#include<set>
+std::tuple<long, long> even_odd_palindrome(long n) {
+    auto is_palindrome = [](long n) -> bool {
+        std::string s = std::to_string(n);
+        return std::equal(s.begin(), s.end(), s.rbegin());
+    };
+    long even_palindrome_count = 0;
+    long odd_palindrome_count = 0;
+    for (long i = 1; i <= n; i++) {
+        if (i % 2 == 1 && is_palindrome(i)) {
+            odd_palindrome_count++;
+        } else if (i % 2 == 0 && is_palindrome(i)) {
+            even_palindrome_count++;
+        }
+    }
+    return std::make_tuple(even_palindrome_count, odd_palindrome_count);
+}

@@ -1,0 +1,22 @@
+{
+  "name": "HumanEval_53_add",
+  "language": "rkt",
+  "prompt": "#lang racket\n\n;; \n(define (add x y)\n",
+  "doctests": "keep",
+  "original": "/Users/zilutang/Projects/code_translation/MultiPL-EX/datasets/../datasets/originals/HumanEval_53_add.py",
+  "prompt_terminology": "remove",
+  "source_program": "keep",
+  "target_signature": "keep",
+  "tests": "(require rackunit)\n\n(define (test-humaneval) \n\n  (let (( candidate add))\n    (check-within (candidate 0 1) 1 0.001)\n    (check-within (candidate 1 0) 1 0.001)\n    (check-within (candidate 2 3) 5 0.001)\n    (check-within (candidate 5 7) 12 0.001)\n    (check-within (candidate 7 5) 12 0.001)\n))\n\n(test-humaneval)",
+  "stop_tokens": [
+    "\n(define ",
+    "\n#|",
+    "\n;",
+    "\n("
+  ],
+  "translation_prompt": "You are a helpful and faithful compiler that transpiles Python code to Racket code. Please translate the following Python code to Racket?\n\n### Python version\n\ndef add(x: int, y: int) -> int:\n    return x + y\n\n### Racket version\n\n#lang racket\n\n;; \n(define (add x y)\n",
+  "completions": [
+    "  (+ x y))\n",
+    "  (+ x yyy))\n"
+  ]
+}

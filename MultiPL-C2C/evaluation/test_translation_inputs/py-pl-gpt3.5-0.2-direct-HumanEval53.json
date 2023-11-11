@@ -1,0 +1,21 @@
+{
+  "name": "HumanEval_53_add",
+  "language": "pl",
+  "prompt": "sub add {\n    my($x, $y) = @_;\n",
+  "doctests": "keep",
+  "original": "/Users/zilutang/Projects/code_translation/MultiPL-EX/datasets/../datasets/originals/HumanEval_53_add.py",
+  "prompt_terminology": "remove",
+  "source_program": "keep",
+  "target_signature": "keep",
+  "tests": "}\nuse Test::Deep;\n\n\nsub testhumaneval {\n    my $candidate = \\&add;\n        if(eq_deeply($candidate->(0, 1),1) || $candidate->(0, 1)==1) {\n        print \"ok!\" }else{\n        exit 1;\n        }\n        if(eq_deeply($candidate->(1, 0),1) || $candidate->(1, 0)==1) {\n        print \"ok!\" }else{\n        exit 1;\n        }\n        if(eq_deeply($candidate->(2, 3),5) || $candidate->(2, 3)==5) {\n        print \"ok!\" }else{\n        exit 1;\n        }\n        if(eq_deeply($candidate->(5, 7),12) || $candidate->(5, 7)==12) {\n        print \"ok!\" }else{\n        exit 1;\n        }\n        if(eq_deeply($candidate->(7, 5),12) || $candidate->(7, 5)==12) {\n        print \"ok!\" }else{\n        exit 1;\n        }\n}\n\ntesthumaneval();",
+  "stop_tokens": [
+    "\nsub",
+    "\n#",
+    "\n}"
+  ],
+  "translation_prompt": "You are a helpful and faithful compiler that transpiles Python code to Perl code. Please translate the following Python code to Perl?\n\n### Python version\n\ndef add(x: int, y: int) -> int:\n    return x + y\n\n### Perl version\n\nsub add {\n    my($x, $y) = @_;\n",
+  "completions": [
+    "    return $x + $y;",
+    "    $x + ;\n"
+  ]
+}

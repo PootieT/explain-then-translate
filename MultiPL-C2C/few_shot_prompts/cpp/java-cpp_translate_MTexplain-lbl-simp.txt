@@ -1,0 +1,394 @@
+You are an helpful AI assistant who understands all programming languages and can translate between them at ease. Can you explain what this Java program does line by line? If a line is too long or too complicated, simplify it and explain what individual parts of the line mean first before explaining the whole line. The goal with the explanation, is so that a reader can easily rewrite the program in C++?
+
+### Java version
+
+import java.util.*;
+import java.lang.reflect.*;
+import org.javatuples.*;
+import java.security.*;
+import java.math.*;
+import java.io.*;
+import java.util.stream.*;
+class Problem {
+    public static Pair<Long, Long> evenOddPalindrome(long n) {
+        long evenPalindromeCount = 0;
+        long oddPalindromeCount = 0;
+
+        for (long i = 1; i <= n; i++) {
+            if (i % 2 == 1 & & isPalindrome(i)) {
+                oddPalindromeCount++;
+            } else if (i % 2 == 0 & & isPalindrome(i)) {
+                evenPalindromeCount++;
+            }
+        }
+        return Pair.with(evenPalindromeCount, oddPalindromeCount);
+    }
+
+    private static boolean isPalindrome(long n) {
+        return Long.toString(n).equals(new StringBuilder(Long.toString(n)).reverse().toString());
+    }
+}
+
+### Explanation
+
+The code is an implementation of a function that takes a long integer n and returns a pair of long integers. The first element of the pair is the number of even palindromes between 1 and n (inclusive), and the second element is the number of odd palindromes between 1 and n (inclusive).
+
+long evenPalindromeCount = 0;
+long oddPalindromeCount = 0;
+The function initializes two long variables, `evenPalindromeCount` and `oddPalindromeCount`, to 0.
+
+for (long i = 1; i <= n; i++) {
+It then loops through all integers from 1 to n (inclusive).
+
+if (i % 2 == 1 && isPalindrome(i)) {
+    oddPalindromeCount++;
+} else if (i % 2 == 0 && isPalindrome(i)) {
+    evenPalindromeCount++;
+}
+Let's break it down step by step:
+i % 2 == 1:
+It checks if the integer is odd.
+isPalindrome(i)
+It checks if the integer is palindrome using the helper function defined at the end.
+if (i % 2 == 1 && isPalindrome(i)) {
+    oddPalindromeCount++;
+If the integer is odd and a palindrome, `oddPalindromeCount` is incremented, and by the same logic `evenPalindromeCount` is incremented.
+Hence, for each integer, it checks if each integer is a palindrome and whether it is even or odd. If the integer is odd and a palindrome, `oddPalindromeCount` is incremented. If the integer is even and a palindrome, `evenPalindromeCount` is incremented.
+
+return Pair.with(evenPalindromeCount, oddPalindromeCount);
+Finally, it returns the pair of even and odd palindrome counts.
+
+private static boolean isPalindrome(long n) {
+    return Long.toString(n).equals(new StringBuilder(Long.toString(n)).reverse().toString());
+}
+The function `isPalindrome` is a helper function that checks if a given long integer is a palindrome. Let's break it down step by step:
+Long.toString(n)
+The function converts the long integer to a string
+new StringBuilder(Long.toString(n)).reverse().toString()
+It reverses the stringbuilder object, and converts it back to string with all characters reversed.
+Long.toString(n).equals(new StringBuilder(Long.toString(n)).reverse().toString())
+It then compares the original string to the reversed string. If they are equal, the function returns true.
+Hence, the function checks if the original long integer is a palindrome by comparing them as strings (forward and backward).
+
+### C++ version
+
+#include<assert.h>
+#include<bits/stdc++.h>
+#include<vector>
+#include<sstream>
+#include<regex>
+#include<map>
+#include<set>
+std::tuple<long, long> even_odd_palindrome(long n) {
+    auto is_palindrome = [](long n) -> bool {
+        std::string s = std::to_string(n);
+        return std::equal(s.begin(), s.end(), s.rbegin());
+    };
+    long even_palindrome_count = 0;
+    long odd_palindrome_count = 0;
+    for(long i=1; i<=n; i++) {
+        if(i%2 == 1 && is_palindrome(i)) {
+            odd_palindrome_count++;
+        } else if(i%2 == 0 && is_palindrome(i)) {
+            even_palindrome_count++;
+        }
+    }
+    return std::make_tuple(even_palindrome_count, odd_palindrome_count);
+}
+
+### Java version
+
+import java.util.*;
+import java.lang.reflect.*;
+import org.javatuples.*;
+import java.security.*;
+import java.math.*;
+import java.io.*;
+import java.util.stream.*;
+class Problem {
+    public static boolean isSorted(ArrayList<Long> lst) {
+        HashMap<Long, Long> count_digit = new HashMap<Long, Long>();
+        for (long i : lst) {
+            if (count_digit.containsKey(i)) {
+                count_digit.put(i, count_digit.get(i) + 1);
+            } else {
+                count_digit.put(i, 1L);
+            }
+        }
+        for (long i : lst) {
+            if (count_digit.get(i) > 2) {
+                return false;
+            }
+        }
+        for (int i = 1; i < lst.size(); i++) {
+            if (lst.get(i - 1) > lst.get(i)) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+### Explanation
+
+The code is an implementation of a function that checks if an array of long integers is sorted in ascending order and has no repeated elements. The function is called `isSorted` and takes an `ArrayList<Long>` as input.
+
+HashMap<Long, Long> count_digit = new HashMap<Long, Long>();
+The function first creates a `HashMap<Long, Long>` called `count_digit` to count the number of times each element appears in the input list.
+
+for (long i : lst) {
+    if (count_digit.containsKey(i)) {
+        count_digit.put(i, count_digit.get(i) + 1);
+    } else {
+        count_digit.put(i, 1L);
+    }
+}
+It then iterates over the input list and updates the count in `count_digit` for each element. Let's break it down step by step:
+if (count_digit.containsKey(i)) {
+This if statement checks if the long integer is in the hash map.
+count_digit.put(i, count_digit.get(i) + 1);
+If so, the function increment the count by 1.
+} else {
+    count_digit.put(i, 1L);
+Otherwise, the function initializes a new key for the long integer with the value `1L`.
+Hence, the loop keeps track of the number of occurrences for each long integer in `count_digit`.
+
+for (long i : lst) {
+    if (count_digit.get(i) > 2) {
+        return false;
+    }
+}
+After that, it checks if any element appears more than twice in the input list. If so, it returns `false` because the list is not sorted.
+
+for (int i = 1; i < lst.size(); i++) {
+    if (lst.get(i - 1) > lst.get(i)) {
+        return false;
+    }
+}
+Let's break it down step by step:
+for (int i = 1; i < lst.size(); i++) {
+It iterates through `lst` starting from the 2nd element.
+if (lst.get(i - 1) > lst.get(i)) {
+    return false;
+If at any index, the integer at `i` is smaller than the integer at `i-1`, this function returns `false`.
+Hence, the for loop checks if the input list is sorted in non-descending order. If not, it returns `false`.
+
+return true;
+Finally, if the input list is sorted and has no repeated elements, it returns `true`.
+
+### C++ version
+
+#include<assert.h>
+#include<bits/stdc++.h>
+#include<vector>
+#include<sstream>
+#include<regex>
+#include<map>
+#include<set>
+bool is_sorted(std::vector<long> lst) {
+    std::map<long, long> count_digit;
+    for (auto i: lst) {
+        count_digit[i]++;
+    }
+    for (auto i: lst) {
+        if (count_digit[i] > 2) {
+            return false;
+        }
+    }
+    for (int i = 1; i < lst.size(); i++) {
+        if (lst[i-1] > lst[i]) {
+            return false;
+        }
+    }
+    return true;
+}
+
+### Java version
+
+import java.util.*;
+import java.lang.reflect.*;
+import org.javatuples.*;
+import java.security.*;
+import java.math.*;
+import java.io.*;
+import java.util.stream.*;
+class Problem {
+    public static ArrayList<String> separateParenGroups(String paren_string) {
+        ArrayList<String> result = new ArrayList<String>();
+        ArrayList<Character> current_string = new ArrayList<Character>();
+        int current_depth = 0;
+
+        for (int i = 0; i < paren_string.length(); i++) {
+            char c = paren_string.charAt(i);
+            if (c == '(') {
+                current_depth += 1;
+                current_string.add(c);
+            } else if (c == ')') {
+                current_depth -= 1;
+                current_string.add(c);
+
+                if (current_depth == 0) {
+                    StringBuilder sb = new StringBuilder(current_string.size());
+                    for (Character ch : current_string) {
+                        sb.append(ch);
+                    }
+                    result.add(sb.toString());
+                    current_string.clear();
+                }
+            }
+        }
+
+        return result;
+    }
+}
+
+### Explanation
+
+The code is an implementation of a function called `separateParenGroups` that takes a string of parentheses and returns an ArrayList of strings, where each string is a group of parentheses that are at the same depth.
+
+ArrayList<String> result = new ArrayList<String>();
+ArrayList<Character> current_string = new ArrayList<Character>();
+int current_depth = 0;
+The function starts by creating an empty ArrayList called `result` which will be used to store the groups of parentheses. It also creates an empty ArrayList called `current_string` which will be used to build the current group of parentheses. Finally, it initializes a variable called `current_depth` to 0 which will be used to keep track of the depth of the current group of parentheses.
+
+for (int i = 0; i < paren_string.length(); i++) {
+    char c = paren_string.charAt(i);
+The function then loops through each character in the input string.
+
+if (c == '(') {
+    current_depth += 1;
+    current_string.add(c);
+If the character is an opening parenthesis, it increments the `current_depth` variable and adds the character to the `current_string` ArrayList.
+
+} else if (c == ')') {
+    current_depth -= 1;
+    current_string.add(c);
+If the character is a closing parenthesis, it decrements the `current_depth` variable and adds the character to the `current_string` ArrayList.
+
+if (current_depth == 0) {
+    StringBuilder sb = new StringBuilder(current_string.size());
+    for (Character ch : current_string) {
+        sb.append(ch);
+    }
+    result.add(sb.toString());
+    current_string.clear();
+}
+Let's break it down step by step:
+StringBuilder sb = new StringBuilder(current_string.size());
+The function creates a new string from the `current_string` ArrayList.
+for (Character ch : current_string) {
+    sb.append(ch);
+}
+It appends all of the characters from the ArrayList to the new StringBuilder.
+result.add(sb.toString());
+The StringBuilder is converted to string and added to `result` ArrayList.
+current_string.clear();
+Finally, the `current_string` ArrayList is cleared so that it can be used to build the next group of parentheses.
+Hence, if the `current_depth` variable is 0 after decrementing, it means that the current group of parentheses has ended, add the current group of parentheses to `result` and clears `current_string`.
+
+return result;
+The function then returns the `result` ArrayList, which contains all the groups of parentheses.
+
+### C++ version
+
+#include<assert.h>
+#include<bits/stdc++.h>
+#include<vector>
+#include<sstream>
+#include<regex>
+#include<map>
+#include<set>
+std::vector<std::string> separate_paren_groups(std::string paren_string) {
+    std::vector<std::string> result;
+    std::string current_string;
+    int current_depth = 0;
+    for (char c : paren_string) {
+        if (c == '(') {
+            current_depth++;
+            current_string.push_back(c);
+        } else if (c == ')') {
+            current_depth--;
+            current_string.push_back(c);
+            if (current_depth == 0) {
+                result.push_back(current_string);
+                current_string.clear();
+            }
+        }
+    }
+    return result;
+}
+
+### Java version
+
+import java.util.*;
+import java.lang.reflect.*;
+import org.javatuples.*;
+import java.security.*;
+import java.math.*;
+import java.io.*;
+import java.util.stream.*;
+class Problem {
+    public static ArrayList<Long> sortArray(ArrayList<Long> array) {
+        if (array.size() == 0) {
+            return new ArrayList<Long>();
+        } else {
+            boolean reverse = (array.get(0) + array.get(array.size() - 1)) % 2 == 0;
+            Collections.sort(array);
+            if (reverse) {
+                Collections.reverse(array);
+            }
+            return array;
+        }
+    }
+}
+
+### Explanation
+
+The code is an implementation of a function that sorts an array of long integers. The function takes an ArrayList of long integers as input and returns a sorted ArrayList of long integers.
+
+if (array.size() == 0) {
+    return new ArrayList<Long>();
+The function first checks if the input ArrayList is empty. If it is, it returns an empty ArrayList.
+
+boolean reverse = (array.get(0) + array.get(array.size() - 1)) % 2 == 0;
+Let's break it down step by step:
+array.get(0)
+It retrieves the value of the first element in `array`.
+array.get(array.size() - 1)
+It retrieves the value of the last element in `array`.
+Hence, the function checks and store the boolean value `reverse` if the sum of the first and last elements of the input array is even.
+
+Collections.sort(array);
+It proceeds to sort the ArrayList using the built-in `Collections.sort()` method.
+
+if (reverse) {
+    Collections.reverse(array);
+}
+If the sum of the first and last elements of the input array is even, the function reverses the order of the sorted ArrayList using the built-in `Collections.reverse()` method.
+
+return array;
+Finally, the function returns the sorted ArrayList.
+
+### C++ version
+
+#include<assert.h>
+#include<bits/stdc++.h>
+#include<vector>
+#include<sstream>
+#include<regex>
+#include<map>
+#include<set>
+#include<unordered_map>
+#include<unordered_set>
+std::vector<long> sort_array(std::vector<long> array) {
+    if (array.empty()) {
+        return std::vector<long>();
+    } else {
+        bool isReversed = (array[0] + array[array.size() - 1]) % 2 == 0;
+        std::sort(array.begin(), array.end(), [&](long a, long b) {
+            return isReversed ? a > b : a < b;
+        });
+        return array;
+    }
+}
+

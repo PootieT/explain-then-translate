@@ -1,0 +1,21 @@
+{
+  "name": "HumanEval_53_add",
+  "language": "jl",
+  "prompt": "function add(x::Int64, y::Int64)::Int64 \n",
+  "doctests": "keep",
+  "original": "/Users/zilutang/Projects/code_translation/MultiPL-EX/datasets/../datasets/originals/HumanEval_53_add.py",
+  "prompt_terminology": "remove",
+  "source_program": "keep",
+  "target_signature": "keep",
+  "tests": "end\n\nusing Test\n\n@testset begin\n\ncandidate = add;\n\t@test(candidate(0, 1) == 1)\n\t@test(candidate(1, 0) == 1)\n\t@test(candidate(2, 3) == 5)\n\t@test(candidate(5, 7) == 12)\n\t@test(candidate(7, 5) == 12)\nend\n",
+  "stop_tokens": [
+    "\n\n",
+    "\n#",
+    "\nend"
+  ],
+  "translation_prompt": "You are a helpful and faithful compiler that transpiles Python code to Julia code. Please translate the following Python code to Julia?\n\n### Python version\n\ndef add(x: int, y: int) -> int:\n    return x + y\n\n### Julia version\n\nfunction add(x::Int64, y::Int64)::Int64 \n",
+  "completions": [
+    "    return x + y",
+    "    return x + "
+  ]
+}

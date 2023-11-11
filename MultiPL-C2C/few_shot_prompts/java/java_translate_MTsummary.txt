@@ -1,0 +1,203 @@
+You are an helpful AI assistant who understands all programming languages and can translate between them at ease. Can you summarize this Python program in a few sentences such that a reader can easily rewrite the program in Java?
+
+### Python version
+
+def even_odd_palindrome(n: int) -> Tuple[int, int]:
+    def is_palindrome(n):
+        return str(n) == str(n)[::-1]
+
+    even_palindrome_count = 0
+    odd_palindrome_count = 0
+
+    for i in range(1, n+1):
+        if i%2 == 1 and is_palindrome(i):
+                odd_palindrome_count += 1
+        elif i%2 == 0 and is_palindrome(i):
+            even_palindrome_count += 1
+    return (even_palindrome_count, odd_palindrome_count)
+
+### Summary
+
+This program takes an integer `n` as input and returns a tuple of two integers. The first integer is the count of even palindromic numbers between 1 and `n`, and the second integer is the count of odd palindromic numbers between 1 and `n`. A number is considered palindromic if it reads the same forwards and backwards. The program achieves this by defining a nested function `is_palindrome` that checks whether a given number is palindromic, and then iterating over the range of numbers from 1 to `n`, incrementing the appropriate count variable if the number is both palindromic and even/odd. To rewrite this program in Java, you would need to define a method that takes an integer as input and returns an array of two integers, and then implement the same logic using Java syntax. You would also need to define a separate method to check whether a given number is palindromic.
+
+### Java version
+
+import java.util.*;
+import java.lang.reflect.*;
+import org.javatuples.*;
+import java.security.*;
+import java.math.*;
+import java.io.*;
+import java.util.stream.*;
+class Problem {
+    public static Pair<Long, Long> evenOddPalindrome(long n) {
+        long evenPalindromeCount = 0;
+        long oddPalindromeCount = 0;
+
+        for (long i = 1; i <= n; i++) {
+            if (i % 2 == 1 & & isPalindrome(i)) {
+                oddPalindromeCount++;
+            } else if (i % 2 == 0 & & isPalindrome(i)) {
+                evenPalindromeCount++;
+            }
+        }
+        return Pair.with(evenPalindromeCount, oddPalindromeCount);
+    }
+
+    private static boolean isPalindrome(long n) {
+        return Long.toString(n).equals(new StringBuilder(Long.toString(n)).reverse().toString());
+    }
+}
+
+### Python version
+
+from typing import List
+
+def is_sorted(lst: List[int]) -> bool:
+    count_digit = dict([(i, 0) for i in lst])
+    for i in lst:
+        count_digit[i]+=1
+    if any(count_digit[i] > 2 for i in lst):
+        return False
+    if all(lst[i-1] <= lst[i] for i in range(1, len(lst))):
+        return True
+    else:
+        return False
+
+### Summary
+
+The function `is_sorted` takes a list of integers and returns True if the list is sorted and contains no more than two occurrences of any integer. The function first counts the number of occurrences of each integer in the list, and returns False if any integer occurs more than twice. Then, the function checks if the list is sorted by checking if each element is greater than or equal to the previous element. If the list is sorted and contains no more than two occurrences of any integer, the function returns True. Otherwise, the function returns False.
+
+### Java version
+
+import java.util.*;
+import java.lang.reflect.*;
+import org.javatuples.*;
+import java.security.*;
+import java.math.*;
+import java.io.*;
+import java.util.stream.*;
+class Problem {
+    public static boolean isSorted(ArrayList<Long> lst) {
+        HashMap<Long, Long> count_digit = new HashMap<Long, Long>();
+        for (long i : lst) {
+            if (count_digit.containsKey(i)) {
+                count_digit.put(i, count_digit.get(i) + 1);
+            } else {
+                count_digit.put(i, 1L);
+            }
+        }
+        for (long i : lst) {
+            if (count_digit.get(i) > 2) {
+                return false;
+            }
+        }
+        for (int i = 1; i < lst.size(); i++) {
+            if (lst.get(i - 1) > lst.get(i)) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+### Python version
+
+from typing import List
+
+
+def separate_paren_groups(paren_string: str) -> List[str]:
+    result = []
+    current_string = []
+    current_depth = 0
+
+    for c in paren_string:
+        if c == '(':
+            current_depth += 1
+            current_string.append(c)
+        elif c == ')':
+            current_depth -= 1
+            current_string.append(c)
+
+            if current_depth == 0:
+                result.append(''.join(current_string))
+                current_string.clear()
+
+    return result
+
+### Summary
+
+This program takes a string of parentheses and returns a list of strings, where each string is a group of parentheses that are properly nested. The function iterates through the input string character by character, keeping track of the current depth of nesting. When it encounters an opening parenthesis, it increments the depth and adds the character to a buffer. When it encounters a closing parenthesis, it decrements the depth and adds the character to the buffer. If the depth reaches zero, it means that the buffer contains a complete group of nested parentheses, so it is added to the result list and the buffer is cleared. The resulting list of strings is returned.
+
+### Java version
+
+import java.util.*;
+import java.lang.reflect.*;
+import org.javatuples.*;
+import java.security.*;
+import java.math.*;
+import java.io.*;
+import java.util.stream.*;
+class Problem {
+    public static ArrayList<String> separateParenGroups(String paren_string) {
+        ArrayList<String> result = new ArrayList<String>();
+        ArrayList<Character> current_string = new ArrayList<Character>();
+        int current_depth = 0;
+
+        for (int i = 0; i < paren_string.length(); i++) {
+            char c = paren_string.charAt(i);
+            if (c == '(') {
+                current_depth += 1;
+                current_string.add(c);
+            } else if (c == ')') {
+                current_depth -= 1;
+                current_string.add(c);
+
+                if (current_depth == 0) {
+                    StringBuilder sb = new StringBuilder(current_string.size());
+                    for (Character ch : current_string) {
+                        sb.append(ch);
+                    }
+                    result.add(sb.toString());
+                    current_string.clear();
+                }
+            }
+        }
+
+        return result;
+    }
+}
+
+### Python version
+
+from typing import List
+
+def sum_squares(lst: List[float]) -> int:
+    import math
+    squared = 0
+    for i in lst:
+        squared += math.ceil(i)**2
+    return squared
+
+### Summary
+
+This program takes in a list of floats and returns the sum of the squares of the ceiling of each float in the list.
+
+### Java version
+
+import java.util.*;
+import java.lang.reflect.*;
+import org.javatuples.*;
+import java.security.*;
+import java.math.*;
+import java.io.*;
+import java.util.stream.*;
+class Problem {
+    public static long sumSquares(ArrayList<Float> lst) {
+        long squared = 0;
+        for (float i : lst) {
+            squared += (long)Math.ceil(i) * (long)Math.ceil(i);
+        }
+        return squared;
+    }
+}

@@ -1,0 +1,3 @@
+{"role": "system", "content": "You are a helpful and faithful compiler that transpiles Python code to R code."}
+{"role": "user", "content": "Translate the following Python code to R given the first parts of the R program? Complete the rest from where the R program left off. Keep the R signature exactly the same as the code provided.\n\n### Python version\n\nfrom typing import List\n\ndef plus_one(numbers: List[int]) -> str:\n\treturn \" \".join([n + 1 for n in numbers])\n\n### R version\n\nplus_one <- function(numbers) {\n"}
+{"role": "assistant", "content": "    result <- paste0(as.character(numbers + 1), collapse=\" \")\n    return(result)\n}"}

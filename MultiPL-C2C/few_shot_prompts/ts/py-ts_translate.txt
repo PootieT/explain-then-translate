@@ -1,0 +1,135 @@
+You are a helpful and faithful compiler that transpiles Python code to TypeScript code. Please translate the following Python code to TypeScript?
+
+### Python version
+
+from typing import Tuple
+
+def even_odd_palindrome(n: int) -> Tuple[int, int]:
+    def is_palindrome(n):
+        return str(n) == str(n)[::-1]
+
+    even_palindrome_count = 0
+    odd_palindrome_count = 0
+
+    for i in range(1, n+1):
+        if i%2 == 1 and is_palindrome(i):
+                odd_palindrome_count += 1
+        elif i%2 == 0 and is_palindrome(i):
+            even_palindrome_count += 1
+    return (even_palindrome_count, odd_palindrome_count)
+
+### TypeScript version
+
+function even_odd_palindrome(n: number): [number, number] {
+    function is_palindrome(n: number): boolean {
+        return String(n) === String(n).split("").reverse().join("");
+    }
+
+    let even_palindrome_count = 0;
+    let odd_palindrome_count = 0;
+
+    for (let i = 1; i <= n; i++) {
+        if (i % 2 === 1 && is_palindrome(i)) {
+            odd_palindrome_count += 1;
+        } else if (i % 2 === 0 && is_palindrome(i)) {
+            even_palindrome_count += 1;
+        }
+    }
+
+    return [even_palindrome_count, odd_palindrome_count];
+}
+
+### Python version
+
+from typing import List
+
+def is_sorted(lst: List[int]) -> bool:
+    count_digit = dict([(i, 0) for i in lst])
+    for i in lst:
+        count_digit[i]+=1
+    if any(count_digit[i] > 2 for i in lst):
+        return False
+    if all(lst[i-1] <= lst[i] for i in range(1, len(lst))):
+        return True
+    else:
+        return False
+
+### TypeScript version
+
+function is_sorted(lst: number[]): boolean {
+  const count_digit = lst.reduce((acc, cur) => {
+    acc[cur] = (acc[cur] || 0) + 1;
+    return acc;
+  }, {});
+  if (lst.some((i) => count_digit[i] > 2)) {
+    return false;
+  }
+  if (lst.slice(1).every((i, idx) => lst[idx] <= i)) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+### Python version
+
+from typing import List
+
+
+def separate_paren_groups(paren_string: str) -> List[str]:
+    result = []
+    current_string = []
+    current_depth = 0
+
+    for c in paren_string:
+        if c == '(':
+            current_depth += 1
+            current_string.append(c)
+        elif c == ')':
+            current_depth -= 1
+            current_string.append(c)
+
+            if current_depth == 0:
+                result.append(''.join(current_string))
+                current_string.clear()
+
+    return result
+
+### TypeScript version
+
+function separate_paren_groups(paren_string: string): string[] {
+  const result: string[] = [];
+  const current_string: string[] = [];
+  let current_depth = 0;
+
+  for (const c of paren_string) {
+    if (c === '(') {
+      current_depth += 1;
+      current_string.push(c);
+    } else if (c === ')') {
+      current_depth -= 1;
+      current_string.push(c);
+
+      if (current_depth === 0) {
+        result.push(current_string.join(''));
+        current_string.length = 0;
+      }
+    }
+  }
+
+  return result;
+}
+
+### Python version
+
+from typing import List
+
+def sort_array(array: List[int]) -> List[int]:
+    return [] if len(array) == 0 else sorted(array, reverse= (array[0]+array[-1]) % 2 == 0)
+
+### TypeScript version
+
+function sort_array(array: number[]): number[] {
+  return array.length === 0 ? [] : array.sort((a, b) => (array[0] + array[array.length - 1]) % 2 === 0 ? b - a : a - b);
+}
+

@@ -1,0 +1,128 @@
+You are a helpful and faithful compiler that transpiles Python code to Ruby code. Please translate the following Python code to Ruby?
+
+### Python version
+
+from typing import Tuple
+
+def even_odd_palindrome(n: int) -> Tuple[int, int]:
+    def is_palindrome(n):
+        return str(n) == str(n)[::-1]
+
+    even_palindrome_count = 0
+    odd_palindrome_count = 0
+
+    for i in range(1, n+1):
+        if i%2 == 1 and is_palindrome(i):
+                odd_palindrome_count += 1
+        elif i%2 == 0 and is_palindrome(i):
+            even_palindrome_count += 1
+    return (even_palindrome_count, odd_palindrome_count)
+
+### Ruby version
+
+def even_odd_palindrome(n)
+  def is_palindrome(n)
+    n.to_s == n.to_s.reverse
+  end
+
+  even_palindrome_count = 0
+  odd_palindrome_count = 0
+
+  (1..n).each do |i|
+    if i.odd? && is_palindrome(i)
+      odd_palindrome_count += 1
+    elsif i.even? && is_palindrome(i)
+      even_palindrome_count += 1
+    end
+  end
+
+  [even_palindrome_count, odd_palindrome_count]
+end
+
+### Python version
+
+from typing import List
+
+def is_sorted(lst: List[int]) -> bool:
+    count_digit = dict([(i, 0) for i in lst])
+    for i in lst:
+        count_digit[i]+=1
+    if any(count_digit[i] > 2 for i in lst):
+        return False
+    if all(lst[i-1] <= lst[i] for i in range(1, len(lst))):
+        return True
+    else:
+        return False
+
+### Ruby version
+
+def is_sorted(lst)
+  count_digit = Hash[lst.map { |i| [i, 0] }]
+  lst.each { |i| count_digit[i] += 1 }
+  return false if lst.any? { |i| count_digit[i] > 2 }
+  return true if (1...lst.length).all? { |i| lst[i-1] <= lst[i] }
+  false
+end
+
+### Python version
+
+from typing import List
+
+
+def separate_paren_groups(paren_string: str) -> List[str]:
+    result = []
+    current_string = []
+    current_depth = 0
+
+    for c in paren_string:
+        if c == '(':
+            current_depth += 1
+            current_string.append(c)
+        elif c == ')':
+            current_depth -= 1
+            current_string.append(c)
+
+            if current_depth == 0:
+                result.append(''.join(current_string))
+                current_string.clear()
+
+    return result
+
+### Ruby version
+
+def separate_paren_groups(paren_string)
+  result = []
+  current_string = []
+  current_depth = 0
+
+  paren_string.each_char do |c|
+    if c == '('
+      current_depth += 1
+      current_string << c
+    elsif c == ')'
+      current_depth -= 1
+      current_string << c
+
+      if current_depth == 0
+        result << current_string.join
+        current_string.clear
+      end
+    end
+  end
+
+  result
+end
+
+### Python version
+
+from typing import List
+
+def sort_array(array: List[int]) -> List[int]:
+    return [] if len(array) == 0 else sorted(array, reverse= (array[0]+array[-1]) % 2 == 0)
+
+### Ruby version
+
+def sort_array(array)
+  array.length == 0 ? [] : array.sort_by { |x| (array[0] + array[-1]) % 2 == 0 ? -x : x }
+end
+

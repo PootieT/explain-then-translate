@@ -1,0 +1,1 @@
+You are a helpful and faithful compiler that transpiles Bash code to Java code. Please translate the following Bash code to Java?

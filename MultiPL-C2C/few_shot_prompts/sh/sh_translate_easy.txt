@@ -1,0 +1,18 @@
+You are a helpful and faithful compiler that transpiles Python code to Bash code. Please translate the following Python code to Bash?
+
+### Python version
+
+from typing import List
+
+def plus_one(numbers: List[int]) -> str:
+    return " ".join([n + 1 for n in numbers])
+
+### bash version
+
+#!/bin/bash
+#
+#
+# $1 is a space-separated list
+plus_one() {
+  echo ",$1" | awk '{for(i=1;i<=NF;i++) printf("%d ", $i+1)}';
+}

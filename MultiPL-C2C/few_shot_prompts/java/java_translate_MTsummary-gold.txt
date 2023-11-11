@@ -1,0 +1,206 @@
+You are an helpful AI assistant who understands all programming languages and can translate between them at ease. Can you summarize this Python program in a few sentences such that a reader can easily rewrite the program in Java?
+
+### Python version
+
+def even_odd_palindrome(n: int) -> Tuple[int, int]:
+    def is_palindrome(n):
+        return str(n) == str(n)[::-1]
+
+    even_palindrome_count = 0
+    odd_palindrome_count = 0
+
+    for i in range(1, n+1):
+        if i%2 == 1 and is_palindrome(i):
+                odd_palindrome_count += 1
+        elif i%2 == 0 and is_palindrome(i):
+            even_palindrome_count += 1
+    return (even_palindrome_count, odd_palindrome_count)
+
+### Summary
+
+Given a positive integer n, return a tuple that has the number of even and odd integer palindromes that fall within the range(1, n), inclusive.
+Note:
+    1. 1 <= n <= 10^3
+    2. returned tuple has the number of even and odd integer palindromes respectively.
+
+### Java version
+
+import java.util.*;
+import java.lang.reflect.*;
+import org.javatuples.*;
+import java.security.*;
+import java.math.*;
+import java.io.*;
+import java.util.stream.*;
+class Problem {
+    public static Pair<Long, Long> evenOddPalindrome(long n) {
+        long evenPalindromeCount = 0;
+        long oddPalindromeCount = 0;
+
+        for (long i = 1; i <= n; i++) {
+            if (i % 2 == 1 & & isPalindrome(i)) {
+                oddPalindromeCount++;
+            } else if (i % 2 == 0 & & isPalindrome(i)) {
+                evenPalindromeCount++;
+            }
+        }
+        return Pair.with(evenPalindromeCount, oddPalindromeCount);
+    }
+
+    private static boolean isPalindrome(long n) {
+        return Long.toString(n).equals(new StringBuilder(Long.toString(n)).reverse().toString());
+    }
+}
+
+### Python version
+
+from typing import List
+
+def is_sorted(lst: List[int]) -> bool:
+    count_digit = dict([(i, 0) for i in lst])
+    for i in lst:
+        count_digit[i]+=1
+    if any(count_digit[i] > 2 for i in lst):
+        return False
+    if all(lst[i-1] <= lst[i] for i in range(1, len(lst))):
+        return True
+    else:
+        return False
+
+### Summary
+
+Given a list of numbers, return whether or not they are sorted in ascending order. If list has more than 1 duplicate of the same number, return False. Assume no negative numbers and only integers.
+
+### Java version
+
+import java.util.*;
+import java.lang.reflect.*;
+import org.javatuples.*;
+import java.security.*;
+import java.math.*;
+import java.io.*;
+import java.util.stream.*;
+class Problem {
+    public static boolean isSorted(ArrayList<Long> lst) {
+        HashMap<Long, Long> count_digit = new HashMap<Long, Long>();
+        for (long i : lst) {
+            if (count_digit.containsKey(i)) {
+                count_digit.put(i, count_digit.get(i) + 1);
+            } else {
+                count_digit.put(i, 1L);
+            }
+        }
+        for (long i : lst) {
+            if (count_digit.get(i) > 2) {
+                return false;
+            }
+        }
+        for (int i = 1; i < lst.size(); i++) {
+            if (lst.get(i - 1) > lst.get(i)) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+### Python version
+
+from typing import List
+
+
+def separate_paren_groups(paren_string: str) -> List[str]:
+    result = []
+    current_string = []
+    current_depth = 0
+
+    for c in paren_string:
+        if c == '(':
+            current_depth += 1
+            current_string.append(c)
+        elif c == ')':
+            current_depth -= 1
+            current_string.append(c)
+
+            if current_depth == 0:
+                result.append(''.join(current_string))
+                current_string.clear()
+
+    return result
+
+### Summary
+
+Input to this function is a string containing multiple groups of nested parentheses. Your goal is to separate those group into separate strings and return the list of those. Separate groups are balanced (each open brace is properly closed) and not nested within each other. Ignore any spaces in the input string.
+
+### Java version
+
+import java.util.*;
+import java.lang.reflect.*;
+import org.javatuples.*;
+import java.security.*;
+import java.math.*;
+import java.io.*;
+import java.util.stream.*;
+class Problem {
+    public static ArrayList<String> separateParenGroups(String paren_string) {
+        ArrayList<String> result = new ArrayList<String>();
+        ArrayList<Character> current_string = new ArrayList<Character>();
+        int current_depth = 0;
+
+        for (int i = 0; i < paren_string.length(); i++) {
+            char c = paren_string.charAt(i);
+            if (c == '(') {
+                current_depth += 1;
+                current_string.add(c);
+            } else if (c == ')') {
+                current_depth -= 1;
+                current_string.add(c);
+
+                if (current_depth == 0) {
+                    StringBuilder sb = new StringBuilder(current_string.size());
+                    for (Character ch : current_string) {
+                        sb.append(ch);
+                    }
+                    result.add(sb.toString());
+                    current_string.clear();
+                }
+            }
+        }
+
+        return result;
+    }
+}
+
+### Python version
+
+from typing import List
+
+def sum_squares(lst: List[float]) -> int:
+    import math
+    squared = 0
+    for i in lst:
+        squared += math.ceil(i)**2
+    return squared
+
+### Summary
+
+You need to return the sum of squared numbers in the given list, round each element in the list to the upper int(Ceiling) first.
+
+### Java version
+
+import java.util.*;
+import java.lang.reflect.*;
+import org.javatuples.*;
+import java.security.*;
+import java.math.*;
+import java.io.*;
+import java.util.stream.*;
+class Problem {
+    public static long sumSquares(ArrayList<Float> lst) {
+        long squared = 0;
+        for (float i : lst) {
+            squared += (long)Math.ceil(i) * (long)Math.ceil(i);
+        }
+        return squared;
+    }
+}

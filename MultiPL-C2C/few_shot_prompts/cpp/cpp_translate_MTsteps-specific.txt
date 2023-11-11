@@ -1,0 +1,53 @@
+You are an helpful AI assistant who understands all programming languages and can translate between them at ease. Can you summarize this Python program into a few steps such that a reader can easily rewrite the program in C++?
+
+### Python version
+
+def even_odd_palindrome(n: int) -> Tuple[int, int]:
+    def is_palindrome(n):
+        return str(n) == str(n)[::-1]
+
+    even_palindrome_count = 0
+    odd_palindrome_count = 0
+
+    for i in range(1, n+1):
+        if i%2 == 1 and is_palindrome(i):
+                odd_palindrome_count += 1
+        elif i%2 == 0 and is_palindrome(i):
+            even_palindrome_count += 1
+    return (even_palindrome_count, odd_palindrome_count)
+
+### C++ steps
+
+1. Define the function signature
+2. Define the nested lambda expression is_palindrome that checks if an input integer is a palindrome
+3. Define the variables even_palindrome_count and odd_palindrome_count
+4. Loop through all integers from 1 to n. If the integer is odd and a palindrome, increment odd_palindrome_count. If it is even and a palindrome, increment even_palindrome_count
+5. Return a tuple of even_palindrome_count and odd_palindrome_count
+
+### C++ version
+
+#include<assert.h>
+#include<bits/stdc++.h>
+#include<vector>
+#include<sstream>
+#include<regex>
+#include<map>
+#include<set>
+#include<unordered_set>
+#include<unordered_map>
+std::tuple<long, long> even_odd_palindrome(long n) {
+    auto is_palindrome = [](long n) -> bool {
+        std::string s = std::to_string(n);
+        return s == std::string(s.rbegin(), s.rend());
+    };
+    long even_palindrome_count = 0;
+    long odd_palindrome_count = 0;
+    for (long i = 1; i <= n; i++) {
+        if (i % 2 == 1 && is_palindrome(i)) {
+            odd_palindrome_count++;
+        } else if (i % 2 == 0 && is_palindrome(i)) {
+            even_palindrome_count++;
+        }
+    }
+    return std::make_tuple(even_palindrome_count, odd_palindrome_count);
+}

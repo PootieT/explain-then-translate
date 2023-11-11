@@ -1,0 +1,192 @@
+You are an helpful AI assistant who understands all programming languages and can translate between them at ease. Can you explain what this Python program does with a couple of sentences? The goal with the explanation, is so that a reader can easily rewrite the program in C++?
+
+### Python version
+
+from typing import Tuple
+
+def even_odd_palindrome(n: int) -> Tuple[int, int]:
+    def is_palindrome(n):
+        return str(n) == str(n)[::-1]
+
+    even_palindrome_count = 0
+    odd_palindrome_count = 0
+
+    for i in range(1, n+1):
+        if i%2 == 1 and is_palindrome(i):
+                odd_palindrome_count += 1
+        elif i%2 == 0 and is_palindrome(i):
+            even_palindrome_count += 1
+    return (even_palindrome_count, odd_palindrome_count)
+
+### Explanation
+
+This function takes an integer `n` as input and returns a tuple of two integers. The first integer is the number of even palindromes between 1 and `n`, and the second integer is the number of odd palindromes between 1 and `n`. A palindrome is a number that reads the same forwards and backwards.
+
+The function first defines a helper function `is_palindrome` that takes a number and returns `True` if it is a palindrome and `False` otherwise. This is done by converting the number to a string and checking if the string is equal to its reverse.
+
+The function then initializes two counters, `even_palindrome_count` and `odd_palindrome_count`, to 0. It then loops through all numbers between 1 and `n` (inclusive) and checks if each number is a palindrome and even or odd. If the number is a palindrome and odd, it increments `odd_palindrome_count`. If the number is a palindrome and even, it increments `even_palindrome_count`.
+
+Finally, the function returns a tuple of the two counters.
+
+### C++ version
+
+#include<assert.h>
+#include<bits/stdc++.h>
+#include<vector>
+#include<sstream>
+#include<regex>
+#include<map>
+#include<set>
+std::tuple<long, long> even_odd_palindrome(long n) {
+    auto is_palindrome = [](long n) -> bool {
+        std::string s = std::to_string(n);
+        return std::equal(s.begin(), s.end(), s.rbegin());
+    };
+    long even_palindrome_count = 0;
+    long odd_palindrome_count = 0;
+    for(long i=1; i<=n; i++) {
+        if(i%2 == 1 && is_palindrome(i)) {
+            odd_palindrome_count++;
+        } else if(i%2 == 0 && is_palindrome(i)) {
+            even_palindrome_count++;
+        }
+    }
+    return std::make_tuple(even_palindrome_count, odd_palindrome_count);
+}
+
+### Python version
+
+from typing import List
+
+def is_sorted(lst: List[int]) -> bool:
+    count_digit = dict([(i, 0) for i in lst])
+    for i in lst:
+        count_digit[i]+=1
+    if any(count_digit[i] > 2 for i in lst):
+        return False
+    if all(lst[i-1] <= lst[i] for i in range(1, len(lst))):
+        return True
+    else:
+        return False
+
+### Explanation
+
+This function takes in a list of integers and returns a boolean indicating whether the list is sorted in non-descending order and has no more than two occurrences of any integer. The function first creates a dictionary where the keys are the integers in the list and the values are the number of times that integer appears in the list. It then checks if any integer appears more than twice in the list, and returns False if so. Finally, it checks if the list is sorted in non-descending order, and returns True if so, and False otherwise.
+
+### C++ version
+
+#include<assert.h>
+#include<bits/stdc++.h>
+#include<vector>
+#include<sstream>
+#include<regex>
+#include<map>
+#include<set>
+bool is_sorted(std::vector<long> lst) {
+    std::map<long, long> count_digit;
+    for (auto i: lst) {
+        count_digit[i]++;
+    }
+    for (auto i: lst) {
+        if (count_digit[i] > 2) {
+            return false;
+        }
+    }
+    for (int i = 1; i < lst.size(); i++) {
+        if (lst[i-1] > lst[i]) {
+            return false;
+        }
+    }
+    return true;
+}
+
+### Python version
+
+from typing import List
+
+
+def separate_paren_groups(paren_string: str) -> List[str]:
+    result = []
+    current_string = []
+    current_depth = 0
+
+    for c in paren_string:
+        if c == '(':
+            current_depth += 1
+            current_string.append(c)
+        elif c == ')':
+            current_depth -= 1
+            current_string.append(c)
+
+            if current_depth == 0:
+                result.append(''.join(current_string))
+                current_string.clear()
+
+    return result
+
+### Explanation
+
+This function takes a string of parentheses and returns a list of strings, where each string is a group of parentheses. A group is defined as a set of parentheses that are balanced, meaning that each opening parenthesis has a corresponding closing parenthesis. The function works by iterating over each character in the input string, and keeping track of the current depth of nested parentheses. When an opening parenthesis is encountered, the depth is incremented and the character is added to the current string. When a closing parenthesis is encountered, the depth is decremented and the character is added to the current string. If the depth reaches 0, it means that a complete group has been found, so the current string is added to the result list and cleared for the next group. The function returns the list of groups.
+
+### C++ version
+
+#include<assert.h>
+#include<bits/stdc++.h>
+#include<vector>
+#include<sstream>
+#include<regex>
+#include<map>
+#include<set>
+std::vector<std::string> separate_paren_groups(std::string paren_string) {
+    std::vector<std::string> result;
+    std::string current_string;
+    int current_depth = 0;
+    for (char c : paren_string) {
+        if (c == '(') {
+            current_depth++;
+            current_string.push_back(c);
+        } else if (c == ')') {
+            current_depth--;
+            current_string.push_back(c);
+            if (current_depth == 0) {
+                result.push_back(current_string);
+                current_string.clear();
+            }
+        }
+    }
+    return result;
+}
+
+### Python version
+
+from typing import List
+
+def sort_array(array: List[int]) -> List[int]:
+    return [] if len(array) == 0 else sorted(array, reverse= (array[0]+array[-1]) % 2 == 0)
+
+### Explanation
+
+This function takes a list of integers `array` as input and returns a sorted list of integers. The function first checks if the input list is empty. If it is, it returns an empty list. Otherwise, it sorts the list using the `sorted` function. The `reverse` parameter is set to `True` if the sum of the first and last elements of the array is even (and the array will be sorted in descending order), otherwise, it is set to `False` (and the array will be sorted in ascending order).
+
+### C++ version
+
+#include<assert.h>
+#include<bits/stdc++.h>
+#include<vector>
+#include<sstream>
+#include<regex>
+#include<map>
+#include<set>
+#include<unordered_map>
+#include<unordered_set>
+std::vector<long> sort_array(std::vector<long> array) {
+    if (array.empty()) {
+        return std::vector<long>();
+    } else {
+        bool isReversed = (array[0] + array[array.size() - 1]) % 2 == 0;
+        std::sort(array.begin(), array.end(), [&](long a, long b) {
+            return isReversed ? a > b : a < b;
+        });
+        return array;
+    }
+}

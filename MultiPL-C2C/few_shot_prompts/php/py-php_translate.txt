@@ -1,0 +1,156 @@
+You are a helpful and faithful compiler that transpiles Python code to PHP code. Please translate the following Python code to PHP?
+
+### Python version
+
+from typing import Tuple
+
+def even_odd_palindrome(n: int) -> Tuple[int, int]:
+    def is_palindrome(n):
+        return str(n) == str(n)[::-1]
+
+    even_palindrome_count = 0
+    odd_palindrome_count = 0
+
+    for i in range(1, n+1):
+        if i%2 == 1 and is_palindrome(i):
+                odd_palindrome_count += 1
+        elif i%2 == 0 and is_palindrome(i):
+            even_palindrome_count += 1
+    return (even_palindrome_count, odd_palindrome_count)
+
+### PHP version
+
+<?php
+function even_odd_palindrome($n) {
+    $is_palindrome=function($n) {
+        return strval($n) === strrev(strval($n));
+    };
+
+    $even_palindrome_count = 0;
+    $odd_palindrome_count = 0;
+
+    for ($i = 1; $i <= $n; $i++) {
+        if ($i % 2 === 1 && $is_palindrome($i)) {
+            $odd_palindrome_count += 1;
+        } elseif ($i % 2 === 0 && $is_palindrome($i)) {
+            $even_palindrome_count += 1;
+        }
+    }
+
+    return [$even_palindrome_count, $odd_palindrome_count];
+}
+?>
+
+### Python version
+
+from typing import List
+
+def is_sorted(lst: List[int]) -> bool:
+    count_digit = dict([(i, 0) for i in lst])
+    for i in lst:
+        count_digit[i]+=1
+    if any(count_digit[i] > 2 for i in lst):
+        return False
+    if all(lst[i-1] <= lst[i] for i in range(1, len(lst))):
+        return True
+    else:
+        return False
+
+### PHP version
+
+<?php
+function is_sorted($lst) {
+    $count_digit = array_fill_keys($lst, 0);
+    foreach ($lst as $i) {
+        $count_digit[$i]++;
+    }
+    if (in_array(true, array_map(function($i) use ($count_digit) {
+        return $count_digit[$i] > 2;
+    }, $lst))) {
+        return false;
+    }
+    for ($i = 1; $i < count($lst); $i++) {
+        if ($lst[$i - 1] > $lst[$i]) {
+            return false;
+        }
+    }
+    return true;
+}
+?>
+
+### Python version
+
+from typing import List
+
+
+def separate_paren_groups(paren_string: str) -> List[str]:
+    result = []
+    current_string = []
+    current_depth = 0
+
+    for c in paren_string:
+        if c == '(':
+            current_depth += 1
+            current_string.append(c)
+        elif c == ')':
+            current_depth -= 1
+            current_string.append(c)
+
+            if current_depth == 0:
+                result.append(''.join(current_string))
+                current_string.clear()
+
+    return result
+
+### PHP version
+
+<?php
+function separate_paren_groups($paren_string) {
+    $result = [];
+    $current_string = [];
+    $current_depth = 0;
+
+    for ($i = 0; $i < strlen($paren_string); $i++) {
+        $c = $paren_string[$i];
+        if ($c == '(') {
+            $current_depth += 1;
+            array_push($current_string, $c);
+        } elseif ($c == ')') {
+            $current_depth -= 1;
+            array_push($current_string, $c);
+
+            if ($current_depth == 0) {
+                array_push($result, implode($current_string));
+                $current_string = [];
+            }
+        }
+    }
+
+    return $result;
+}
+?>
+
+### Python version
+
+from typing import List
+
+def sort_array(array: List[int]) -> List[int]:
+    return [] if len(array) == 0 else sorted(array, reverse= (array[0]+array[-1]) % 2 == 0)
+
+### PHP version
+
+<?php
+function sort_array($array) {
+    if (count($array) == 0) {
+        return [];
+    } else {
+        if (($array[0]+$array[count($array)-1]) % 2 == 0) {
+            rsort($array);
+        } else {
+            sort($array);
+        }
+        return $array;
+    }
+}
+?>
+

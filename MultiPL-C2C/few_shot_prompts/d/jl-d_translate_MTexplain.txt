@@ -1,0 +1,198 @@
+You are an helpful AI assistant who understands all programming languages and can translate between them at ease. Can you explain what this Julia program does with a couple of sentences? The goal with the explanation, is so that a reader can easily rewrite the program in D?
+
+### Julia version
+
+function even_odd_palindrome(n::Int64)::Tuple{Int64, Int64} 
+    function is_palindrome(n)
+        return string(n) == reverse(string(n))
+    end
+
+    even_palindrome_count = 0
+    odd_palindrome_count = 0
+
+    for i in 1:n
+        if i%2 == 1 && is_palindrome(i)
+            odd_palindrome_count += 1
+        elseif i%2 == 0 && is_palindrome(i)
+            even_palindrome_count += 1
+        end
+    end
+    return (even_palindrome_count, odd_palindrome_count)
+end
+
+### Explanation
+
+This program defines a function `even_odd_palindrome` that takes an integer `n` as input and returns a tuple of two integers. The function first defines a nested function `is_palindrome` that checks whether a given integer is a palindrome (i.e. reads the same forwards and backwards). The function then initializes two counters for even and odd palindromes, and loops over all integers from 1 to `n`. For each integer, the function checks whether it is even or odd and whether it is a palindrome, and increments the corresponding counter if it is. Finally, the function returns the tuple of the two counters.
+
+### D version
+
+import std.range;
+import std.typecons;
+import std.algorithm;
+import std.format;
+import std.conv;
+import std.math;
+import std.array;
+import std.string;
+Tuple!(long, long) even_odd_palindrome(long n) 
+{
+    bool is_palindrome(long n)
+    {
+        return to!string(n) == to!string(n).dup.reverse;
+    }
+
+    long even_palindrome_count = 0;
+    long odd_palindrome_count = 0;
+
+    foreach (i; 1 .. n+1)
+    {
+        if (i%2 == 1 && is_palindrome(i))
+        {
+            odd_palindrome_count += 1;
+        }
+        else if (i%2 == 0 && is_palindrome(i))
+        {
+            even_palindrome_count += 1;
+        }
+    }
+    return tuple(even_palindrome_count, odd_palindrome_count);
+}
+
+### Julia version
+
+function is_sorted(lst::Vector{Int64})::Bool 
+    count_digit = Dict([(i, 0) for i in lst])
+    for i in lst
+        count_digit[i]+=1
+    end
+    if any(count_digit[i] > 2 for i in lst)
+        return false
+    end
+    if all(lst[i-1] <= lst[i] for i in 2:length(lst))
+        return true
+    else
+        return false
+    end
+end
+
+### Explanation
+
+This function takes in a list of integers and returns a boolean indicating whether the list is sorted and has no more than two of the same digit. The function first creates a dictionary to count the number of times each digit appears in the list. It then checks if any digit appears more than twice, and if so, returns false. If not, it checks if the list is sorted in non-descending order, and if so, returns true. Otherwise, it returns false.
+
+### D version
+
+import std.range;
+import std.typecons;
+import std.algorithm;
+import std.format;
+import std.conv;
+import std.math;
+import std.array;
+import std.string;
+bool is_sorted(long[] lst) 
+{
+    long[long] count_digit;
+    foreach (i; lst)
+        count_digit[i] = 0;
+    foreach (i; lst)
+        count_digit[i]++;
+    if (any!(i => count_digit[i] > 2)(lst))
+        return false;
+    if (lst.isSorted)
+        return true;
+    else
+        return false;
+}
+
+### Julia version
+
+function separate_paren_groups(paren_string::String)::Vector{String} 
+    result = []
+    current_string = []
+    current_depth = 0
+
+    for c in paren_string
+        if c == '('
+            current_depth += 1
+            push!(current_string, c)
+        elseif c == ')'
+            current_depth -= 1
+            push!(current_string, c)
+
+            if current_depth == 0
+                push!(result, join(current_string))
+                current_string = []
+            end
+        end
+    end
+    return result
+end
+
+### Explanation
+
+This Julia program defines a function called `separate_paren_groups` which takes a string as input and returns a vector of strings. The function iterates over each character in the input string and keeps track of the current depth of nested parentheses. Whenever an opening parenthesis is encountered, the depth is incremented and the character is added to a current string. Whenever a closing parenthesis is encountered, the depth is decremented and the character is added to the current string. If the depth reaches zero, the current string is added to the result vector and a new current string is started. The resulting vector contains all the groups of characters enclosed in matching parentheses in the input string.
+
+### D version
+
+import std.string;
+import std.conv;
+import std.array;
+import std.typecons;
+import std.algorithm;
+import std.range;
+import std.format;
+import std.math;
+string[] separate_paren_groups(string paren_string) 
+{
+    string[] result;
+    string current_string;
+    int current_depth = 0;
+
+    foreach (c; paren_string)
+    {
+        if (c == '(')
+        {
+            current_depth += 1;
+            current_string ~= c;
+        }
+        else if (c == ')')
+        {
+            current_depth -= 1;
+            current_string ~= c;
+
+            if (current_depth == 0)
+            {
+                result ~= current_string;
+                current_string = "";
+            }
+        }
+    }
+
+    return result;
+}
+
+### Julia version
+
+function sort_array(array::Vector{Int64})::Vector{Int64} 
+    return length(array) == 0 ? [] : sort(array, rev=(array[1]+array[end]) % 2 == 0)
+end
+
+### Explanation
+
+This is a function that takes an array of integers and returns a sorted array of integers. If the input array is empty, it returns an empty array. The sorting is done in ascending order. If the sum of the first and last element of the array is even, the sorting is done in descending order.
+
+### D version
+
+import std.string;
+import std.conv;
+import std.format;
+import std.algorithm;
+import std.typecons;
+import std.range;
+import std.math;
+import std.array;
+long[] sort_array(long[] array)
+{
+    return array.length == 0 ? [] : array.sort!((a, b) => (array[0] + array[$ - 1]) % 2 == 0? a>b : a<b)(numbers);
+}
+

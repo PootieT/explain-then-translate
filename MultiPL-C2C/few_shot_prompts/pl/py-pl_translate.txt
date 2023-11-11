@@ -1,0 +1,145 @@
+You are a helpful and faithful compiler that transpiles Python code to Perl code. Please translate the following Python code to Perl?
+
+### Python version
+
+from typing import Tuple
+
+def even_odd_palindrome(n: int) -> Tuple[int, int]:
+    def is_palindrome(n):
+        return str(n) == str(n)[::-1]
+
+    even_palindrome_count = 0
+    odd_palindrome_count = 0
+
+    for i in range(1, n+1):
+        if i%2 == 1 and is_palindrome(i):
+                odd_palindrome_count += 1
+        elif i%2 == 0 and is_palindrome(i):
+            even_palindrome_count += 1
+    return (even_palindrome_count, odd_palindrome_count)
+
+### Perl version
+
+sub even_odd_palindrome {
+    my($n) = @_;
+    sub is_palindrome {
+        my($n) = @_;
+        return $n eq reverse $n;
+    }
+    my $even_palindrome_count = 0;
+    my $odd_palindrome_count = 0;
+    for my $i (1..$n) {
+        if ($i % 2 == 1 && is_palindrome($i)) {
+            $odd_palindrome_count += 1;
+        } elsif ($i % 2 == 0 && is_palindrome($i)) {
+            $even_palindrome_count += 1;
+        }
+    }
+    my @output = ($even_palindrome_count, $odd_palindrome_count);
+    return \@output
+}
+
+### Python version
+
+from typing import List
+
+def is_sorted(lst: List[int]) -> bool:
+    count_digit = dict([(i, 0) for i in lst])
+    for i in lst:
+        count_digit[i]+=1
+    if any(count_digit[i] > 2 for i in lst):
+        return False
+    if all(lst[i-1] <= lst[i] for i in range(1, len(lst))):
+        return True
+    else:
+        return False
+
+### Perl version
+
+sub is_sorted {
+    my ($lst) = @_;
+
+    my %count_digit;
+    foreach my $i (@$lst) {
+        $count_digit{$i}++;
+    }
+
+    if (grep { $count_digit{$_} > 2 } @$lst) {
+        return 0;
+    }
+
+    for my $i (1 .. @$lst - 1) {
+        if ($lst->[$i - 1] > $lst->[$i]) {
+            return 0;
+        }
+    }
+
+    return 1;
+}
+
+### Python version
+
+from typing import List
+
+
+def separate_paren_groups(paren_string: str) -> List[str]:
+    result = []
+    current_string = []
+    current_depth = 0
+
+    for c in paren_string:
+        if c == '(':
+            current_depth += 1
+            current_string.append(c)
+        elif c == ')':
+            current_depth -= 1
+            current_string.append(c)
+
+            if current_depth == 0:
+                result.append(''.join(current_string))
+                current_string.clear()
+
+    return result
+
+### Perl version
+
+sub separate_paren_groups {
+    my($paren_string) = @_;
+    my @result;
+    my @current_string;
+    my $current_depth = 0;
+
+    for my $c (split //, $paren_string) {
+        if ($c eq '(') {
+            $current_depth += 1;
+            push @current_string, $c;
+        } elsif ($c eq ')') {
+            $current_depth -= 1;
+            push @current_string, $c;
+
+            if ($current_depth == 0) {
+                push @result, join('', @current_string);
+                @current_string = ();
+            }
+        }
+    }
+
+    return \@result;
+}
+
+### Python version
+
+from typing import List
+
+def sort_array(array: List[int]) -> List[int]:
+    return [] if len(array) == 0 else sorted(array, reverse= (array[0]+array[-1]) % 2 == 0)
+
+### Perl version
+
+sub sort_array {
+    my($array) = @_;
+    return [] if scalar @$array == 0;
+    my $sum = $array->[0] + $array->[-1];
+    return [ sort { $sum % 2 == 0 ? $b <=> $a : $a <=> $b } @$array ];
+}
+

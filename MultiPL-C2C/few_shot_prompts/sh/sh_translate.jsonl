@@ -1,0 +1,3 @@
+{"role": "system", "content": "You are a helpful and faithful compiler that transpiles Python code to Bash code."}
+{"role": "user", "content": "Translate the following python code to bash given the first parts of the bash program? Complete the rest from where the bash program left off. Keep the bash signature exactly the same as the code provided.\n\n### python version\n\nfrom typing import List\ndef plus_one(numbers: List[int]) -> str:\n\treturn ' '.join([n + 1 for n in numbers])\n\n### bash version\n\n#!/bin/bash\n# \n#\n# $1 is a space-separated list\nplus_one() {"}
+{"role": "assistant", "content": "  echo \",$1\" | awk '{for(i=1;i<=NF;i++) printf(\"%d \", $i+1)}';"}

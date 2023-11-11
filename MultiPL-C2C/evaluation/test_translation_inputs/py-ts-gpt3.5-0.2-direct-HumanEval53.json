@@ -1,0 +1,22 @@
+{
+  "name": "HumanEval_53_add",
+  "language": "ts",
+  "prompt": "function add(x: number, y: number): number {\n",
+  "doctests": "keep",
+  "original": "/Users/zilutang/Projects/code_translation/MultiPL-EX/datasets/../datasets/originals/HumanEval_53_add.py",
+  "prompt_terminology": "remove",
+  "source_program": "keep",
+  "target_signature": "keep",
+  "tests": "}\n\ndeclare var require: any;\nconst assert = require('node:assert');\n\n\nfunction test() {\n  let candidate = add;\n  assert.deepEqual(candidate(0, 1),1);\n  assert.deepEqual(candidate(1, 0),1);\n  assert.deepEqual(candidate(2, 3),5);\n  assert.deepEqual(candidate(5, 7),12);\n  assert.deepEqual(candidate(7, 5),12);\n}\n\ntest();",
+  "stop_tokens": [
+    "\n}",
+    "\n/*",
+    "\n//",
+    "\nclass"
+  ],
+  "translation_prompt": "You are a helpful and faithful compiler that transpiles Python code to TypeScript code. Please translate the following Python code to TypeScript?\n\n### Python version\n\ndef add(x: int, y: int) -> int:\n    return x + y\n\n### TypeScript version\n\nfunction add(x: number, y: number): number {\n",
+  "completions": [
+    "    return x + y;",
+    "    rexturn x + y;"
+  ]
+}

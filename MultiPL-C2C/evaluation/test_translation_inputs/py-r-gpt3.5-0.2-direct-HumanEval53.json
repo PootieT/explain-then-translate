@@ -1,0 +1,19 @@
+{
+  "name": "HumanEval_53_add",
+  "language": "r",
+  "prompt": "library(sets)\nlibrary(stringi)\nsuppressPackageStartupMessages(library(R.utils))\nsuppressPackageStartupMessages(library(stringr))\nsuppressPackageStartupMessages(library(hash))\nadd <- function(x, y) {\n",
+  "doctests": "keep",
+  "original": "/Users/zilutang/Projects/code_translation/MultiPL-EX/datasets/../datasets/originals/HumanEval_53_add.py",
+  "prompt_terminology": "remove",
+  "source_program": "keep",
+  "target_signature": "keep",
+  "tests": "\n}\ntest_humaneval <- function() {\ncandidate <- add\n    if(!(candidate(0, 1) == 1)){quit('no', 1)}\n    if(!(candidate(1, 0) == 1)){quit('no', 1)}\n    if(!(candidate(2, 3) == 5)){quit('no', 1)}\n    if(!(candidate(5, 7) == 12)){quit('no', 1)}\n    if(!(candidate(7, 5) == 12)){quit('no', 1)}\n}\ntest_humaneval()",
+  "stop_tokens": [
+    "\n}"
+  ],
+  "translation_prompt": "You are a helpful and faithful compiler that transpiles Python code to R code. Please translate the following Python code to R?\n\n### Python version\n\ndef add(x: int, y: int) -> int:\n    return x + y\n\n### R version\n\nlibrary(sets)\nlibrary(stringi)\nsuppressPackageStartupMessages(library(R.utils))\nsuppressPackageStartupMessages(library(stringr))\nsuppressPackageStartupMessages(library(hash))\nadd <- function(x, y) {\n",
+  "completions": [
+    "\n  x + y",
+    "\n  rexturn(x + y)"
+  ]
+}

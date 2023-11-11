@@ -1,0 +1,22 @@
+{
+  "name": "HumanEval_53_add",
+  "language": "cs",
+  "prompt": "using System;\nusing System.Numerics;\nusing System.Diagnostics;\nusing System.Collections.Generic;\nusing System.Linq;\nusing System.Text;\nusing System.Security.Cryptography;\nusing System.Text.RegularExpressions;\nusing System.Data;\nclass Problem {\n    public static long Add(long x, long y) {\n",
+  "doctests": "keep",
+  "original": "/Users/zilutang/Projects/code_translation/MultiPL-EX/datasets/../datasets/originals/HumanEval_53_add.py",
+  "prompt_terminology": "remove",
+  "source_program": "keep",
+  "target_signature": "keep",
+  "tests": "    public static void Main(string[] args) {\n    Debug.Assert(Add((0L), (1L)) == (1L));\n    Debug.Assert(Add((1L), (0L)) == (1L));\n    Debug.Assert(Add((2L), (3L)) == (5L));\n    Debug.Assert(Add((5L), (7L)) == (12L));\n    Debug.Assert(Add((7L), (5L)) == (12L));\n    }\n\n}\n",
+  "stop_tokens": [
+    "public static void Main",
+    "static void Main",
+    "\n#",
+    "\n}"
+  ],
+  "translation_prompt": "You are a helpful and faithful compiler that transpiles Python code to C# code. Please translate the following Python code to C#?\n\n### Python version\n\ndef add(x: int, y: int) -> int:\n    return x + y\n\n### C# version\n\nusing System;\nusing System.Numerics;\nusing System.Diagnostics;\nusing System.Collections.Generic;\nusing System.Linq;\nusing System.Text;\nusing System.Security.Cryptography;\nusing System.Text.RegularExpressions;\nusing System.Data;\nclass Problem {\n    public static long Add(long x, long y) {\n",
+  "completions": [
+    "        return x + y;\n    }",
+    "        return x + ;\n    }"
+  ]
+}

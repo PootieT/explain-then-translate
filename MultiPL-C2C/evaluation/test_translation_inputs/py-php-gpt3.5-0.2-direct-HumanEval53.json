@@ -1,0 +1,22 @@
+{
+  "name": "HumanEval_53_add",
+  "language": "php",
+  "prompt": "<?php\nfunction add($x, $y) {\n",
+  "doctests": "keep",
+  "original": "/Users/zilutang/Projects/code_translation/MultiPL-EX/datasets/../datasets/originals/HumanEval_53_add.py",
+  "prompt_terminology": "remove",
+  "source_program": "keep",
+  "target_signature": "keep",
+  "tests": "}\nfunction candidate(...$args) {\n    return add(...$args);\n}\n\nfunction test(): void {\n    if (candidate(0, 1) !== 1) { throw new Exception(\"Test failed!\"); }\n    if (candidate(1, 0) !== 1) { throw new Exception(\"Test failed!\"); }\n    if (candidate(2, 3) !== 5) { throw new Exception(\"Test failed!\"); }\n    if (candidate(5, 7) !== 12) { throw new Exception(\"Test failed!\"); }\n    if (candidate(7, 5) !== 12) { throw new Exception(\"Test failed!\"); }\n}\n\ntest();",
+  "stop_tokens": [
+    "\n}",
+    "\n?>",
+    "\n//",
+    "\n#"
+  ],
+  "translation_prompt": "You are a helpful and faithful compiler that transpiles Python code to PHP code. Please translate the following Python code to PHP?\n\n### Python version\n\ndef add(x: int, y: int) -> int:\n    return x + y\n\n### PHP version\n\n<?php\nfunction add($x, $y) {\n",
+  "completions": [
+    "    return $x + $y;",
+    "    // TODO"
+  ]
+}

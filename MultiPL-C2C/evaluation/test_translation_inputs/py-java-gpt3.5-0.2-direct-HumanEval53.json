@@ -1,0 +1,21 @@
+{
+  "name": "HumanEval_53_add",
+  "language": "java",
+  "prompt": "import java.util.*;\nimport java.lang.reflect.*;\nimport org.javatuples.*;\nimport java.security.*;\nimport java.math.*;\nimport java.io.*;\nimport java.util.stream.*;\nclass Problem {\n    public static long add(long x, long y) {\n",
+  "doctests": "keep",
+  "original": "../datasets/originals/HumanEval_53_add.py",
+  "prompt_terminology": "remove",
+  "source_program": "keep",
+  "target_signature": "keep",
+  "tests": "    public static void main(String[] args) {\n    assert(add((0l), (1l)) == (1l));\n    assert(add((1l), (0l)) == (1l));\n    assert(add((2l), (3l)) == (5l));\n    assert(add((5l), (7l)) == (12l));\n    assert(add((7l), (5l)) == (12l));\n    }\n\n}\n",
+  "stop_tokens": [
+    "public static void main",
+    "###",
+    "\n}"
+  ],
+  "translation_prompt": "You are a helpful and faithful compiler that transpiles Python code to Java code. Please translate the following Python code to Java?\n\n### Python version\n\ndef add(x: int, y: int) -> int:\n    return x + y\n\n### Java version\n\nimport java.util.*;\nimport java.lang.reflect.*;\nimport org.javatuples.*;\nimport java.security.*;\nimport java.math.*;\nimport java.io.*;\nimport java.util.stream.*;\nclass Problem {\n    public static long add(long x, long y) {\n",
+  "completions": [
+    "        // Your code here\n        return x + y;\n    }",
+    "        return x + y\n    }"
+  ]
+}

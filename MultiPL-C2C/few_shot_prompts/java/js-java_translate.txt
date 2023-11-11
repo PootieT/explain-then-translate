@@ -1,0 +1,181 @@
+You are a helpful and faithful compiler that transpiles JavaScript code to Java code. Please translate the following JavaScript code to Java?
+
+### JavaScript version
+
+function even_odd_palindrome(n){
+    function is_palindrome(n){
+        return String(n) == String(n).split("").reverse().join("");
+    }
+    let even_palindrome_count = 0;
+    let odd_palindrome_count = 0;
+    for(let i = 1; i <= n; i++){
+        if(i%2 == 1 && is_palindrome(i)){
+            odd_palindrome_count++;
+        }else if(i%2 == 0 && is_palindrome(i)){
+            even_palindrome_count++;
+        }
+    }
+    return [even_palindrome_count, odd_palindrome_count];
+}
+
+### Java version
+
+import java.util.*;
+import java.lang.reflect.*;
+import org.javatuples.*;
+import java.security.*;
+import java.math.*;
+import java.io.*;
+import java.util.stream.*;
+class Problem {
+    public static Pair<Long, Long> evenOddPalindrome(long n) {
+        long evenPalindromeCount = 0;
+        long oddPalindromeCount = 0;
+        for (long i = 1; i <= n; i++) {
+            if (i % 2 == 1 && isPalindrome(i)) {
+                oddPalindromeCount++;
+            } else if (i % 2 == 0 && isPalindrome(i)) {
+                evenPalindromeCount++;
+            }
+        }
+        return new Pair<>(evenPalindromeCount, oddPalindromeCount);
+    }
+
+    private static boolean isPalindrome(long n) {
+        return Long.toString(n).equals(new StringBuilder(Long.toString(n)).reverse().toString());
+    }
+
+    
+}
+
+### JavaScript version
+
+function is_sorted(lst){
+  let count_digit = {}
+  for (let i of lst){
+    count_digit[i] = (count_digit[i] || 0) + 1
+  }
+  if (lst.some(i => count_digit[i] > 2)){
+    return false
+  }
+  if (lst.slice(1).every((x, i) => x >= lst[i])){
+    return true
+  }
+  else{
+    return false
+  }
+}
+
+### Java version
+
+import java.util.*;
+import java.lang.reflect.*;
+import org.javatuples.*;
+import java.security.*;
+import java.math.*;
+import java.io.*;
+import java.util.stream.*;
+class Problem {
+    public static boolean isSorted(ArrayList<Long> lst) {
+        Map<Long, Long> countDigit = new HashMap<>();
+        for (long i : lst) {
+            countDigit.put(i, countDigit.getOrDefault(i, 0L) + 1);
+        }
+        if (countDigit.values().stream().anyMatch(i -> i > 2)) {
+            return false;
+        }
+        for (int i = 1; i < lst.size(); i++) {
+            if (lst.get(i - 1) > lst.get(i)) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+### JavaScript version
+
+function separate_paren_groups(paren_string){
+  let result = [];
+  let current_string = [];
+  let current_depth = 0;
+
+  for(let c of paren_string){
+    if(c === '('){
+      current_depth += 1;
+      current_string.push(c);
+    } else if(c === ')'){
+      current_depth -= 1;
+      current_string.push(c);
+
+      if(current_depth === 0){
+        result.push(current_string.join(''));
+        current_string = [];
+      }
+    }
+  }
+
+  return result;
+}
+
+### Java version
+
+import java.util.*;
+import java.lang.reflect.*;
+import org.javatuples.*;
+import java.security.*;
+import java.math.*;
+import java.io.*;
+import java.util.stream.*;
+class Problem {
+    public static ArrayList<String> separateParenGroups(String paren_string) {
+        ArrayList<String> result = new ArrayList<>();
+        StringBuilder currentString = new StringBuilder();
+        int currentDepth = 0;
+
+        for (char c : paren_string.toCharArray()) {
+            if (c == '(') {
+                currentDepth++;
+                currentString.append(c);
+            } else if (c == ')') {
+                currentDepth--;
+                currentString.append(c);
+
+                if (currentDepth == 0) {
+                    result.add(currentString.toString());
+                    currentString.setLength(0);
+                }
+            }
+        }
+        return result;
+    }
+}
+
+### JavaScript version
+
+function sort_array(array){
+  return array.length == 0 ? [] : array.sort((a,b)=>(array[0]+array[array.length-1])%2==0 ? b-a : a-b);
+}
+
+### Java version
+
+import java.util.*;
+import java.lang.reflect.*;
+import org.javatuples.*;
+import java.security.*;
+import java.math.*;
+import java.io.*;
+import java.util.stream.*;
+class Problem {
+    public static ArrayList<Long> sortArray(ArrayList<Long> array) {
+        if (array.size() == 0) {
+            return new ArrayList<Long>();
+        }
+        Collections.sort(array);
+        if ((array.get(0) + array.get(array.size() - 1)) % 2 == 0) {
+            Collections.reverse(array);
+        }
+        return array;
+    }
+}
+

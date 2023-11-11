@@ -1,0 +1,136 @@
+You are a helpful and faithful compiler that transpiles Julia code to JavaScript code. Please translate the following Julia code to JavaScript?
+
+### Julia version
+
+function even_odd_palindrome(n::Int64)::Tuple{Int64, Int64} 
+    function is_palindrome(n)
+        return string(n) == reverse(string(n))
+    end
+
+    even_palindrome_count = 0
+    odd_palindrome_count = 0
+
+    for i in 1:n
+        if i%2 == 1 && is_palindrome(i)
+            odd_palindrome_count += 1
+        elseif i%2 == 0 && is_palindrome(i)
+            even_palindrome_count += 1
+        end
+    end
+    return (even_palindrome_count, odd_palindrome_count)
+end
+
+### JavaScript version
+
+function even_odd_palindrome(n){
+    function is_palindrome(n){
+        return String(n) == String(n).split("").reverse().join("");
+    }
+    let even_palindrome_count = 0;
+    let odd_palindrome_count = 0;
+    for(let i = 1; i <= n; i++){
+        if(i%2 == 1 && is_palindrome(i)){
+            odd_palindrome_count++;
+        }else if(i%2 == 0 && is_palindrome(i)){
+            even_palindrome_count++;
+        }
+    }
+    return [even_palindrome_count, odd_palindrome_count];
+}
+
+### Julia version
+
+function is_sorted(lst::Vector{Int64})::Bool 
+    count_digit = Dict([(i, 0) for i in lst])
+    for i in lst
+        count_digit[i]+=1
+    end
+    if any(count_digit[i] > 2 for i in lst)
+        return false
+    end
+    if all(lst[i-1] <= lst[i] for i in 2:length(lst))
+        return true
+    else
+        return false
+    end
+end
+
+### JavaScript version
+
+function is_sorted(lst){
+  let count_digit = {}
+  for (let i of lst){
+    count_digit[i] = (count_digit[i] || 0) + 1
+  }
+  if (lst.some(i => count_digit[i] > 2)){
+    return false
+  }
+  if (lst.slice(1).every((x, i) => x >= lst[i])){
+    return true
+  }
+  else{
+    return false
+  }
+}
+
+### Julia version
+
+function separate_paren_groups(paren_string::String)::Vector{String} 
+    result = []
+    current_string = []
+    current_depth = 0
+
+    for c in paren_string
+        if c == '('
+            current_depth += 1
+            push!(current_string, c)
+        elseif c == ')'
+            current_depth -= 1
+            push!(current_string, c)
+
+            if current_depth == 0
+                push!(result, join(current_string))
+                current_string = []
+            end
+        end
+    end
+    return result
+end
+
+### JavaScript version
+
+function separate_paren_groups(paren_string){
+  let result = [];
+  let current_string = [];
+  let current_depth = 0;
+
+  for(let c of paren_string){
+    if(c === '('){
+      current_depth += 1;
+      current_string.push(c);
+    } else if(c === ')'){
+      current_depth -= 1;
+      current_string.push(c);
+
+      if(current_depth === 0){
+        result.push(current_string.join(''));
+        current_string = [];
+      }
+    }
+  }
+
+  return result;
+}
+
+### Julia version
+
+function sort_array(array::Vector{Int64})::Vector{Int64} 
+    return length(array) == 0 ? [] : sort(array, rev=(array[1]+array[end]) % 2 == 0)
+end
+
+### JavaScript version
+
+function sort_array(array){
+  return array.length == 0 ? [] : array.sort((a,b)=>(array[0]+array[array.length-1])%2==0 ? b-a : a-b);
+}
+

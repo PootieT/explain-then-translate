@@ -1,0 +1,27 @@
+IDENTIFICATION DIVISION.
+PROGRAM-ID. CLASS_4819651a89a417bce7b-TEST.
+
+ENVIRONMENT DIVISION.
+
+DATA DIVISION.
+WORKING-STORAGE SECTION.
+    01 loopIdx PIC S9(9).
+    01 double1 USAGE COMP-2.
+    01 double0 USAGE COMP-2.
+
+
+
+
+PROCEDURE DIVISION.
+Begin.
+    PERFORM test0.
+    STOP RUN.
+
+test0.
+    MOVE 3051.0 TO double0.
+    CALL "f_filled" USING double0, double1 END-CALL.
+    IF NOT FUNCTION ABS(3051.0 -  double1) <=  1.0E-4 THEN
+        DISPLAY 'failure'
+        EXIT PARAGRAPH
+    END-IF.
+    DISPLAY 'success'.

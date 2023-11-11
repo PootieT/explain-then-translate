@@ -1,0 +1,133 @@
+You are a helpful and faithful compiler that transpiles Python code to Racket code. Please translate the following Python code to Racket?
+
+### Python version
+
+from typing import Tuple
+
+def even_odd_palindrome(n: int) -> Tuple[int, int]:
+    def is_palindrome(n):
+        return str(n) == str(n)[::-1]
+
+    even_palindrome_count = 0
+    odd_palindrome_count = 0
+
+    for i in range(1, n+1):
+        if i%2 == 1 and is_palindrome(i):
+                odd_palindrome_count += 1
+        elif i%2 == 0 and is_palindrome(i):
+            even_palindrome_count += 1
+    return (even_palindrome_count, odd_palindrome_count)
+
+### Racket version
+
+#lang racket
+
+;;
+(define (even_odd_palindrome n)
+  (define (is_palindrome n)
+    (equal? (number->string n) (list->string (reverse (string->list (number->string n))))))
+
+  (define even_palindrome_count 0)
+  (define odd_palindrome_count 0)
+  (for ([i (in-range 1 (add1 n))])
+    (cond [(and (odd? i) (is_palindrome i)) (set! odd_palindrome_count (add1 odd_palindrome_count))]
+          [(and (even? i) (is_palindrome i)) (set! even_palindrome_count (add1 even_palindrome_count))]))
+  (list even_palindrome_count odd_palindrome_count))
+
+### Python version
+
+from typing import List
+
+def is_sorted(lst: List[int]) -> bool:
+    count_digit = dict([(i, 0) for i in lst])
+    for i in lst:
+        count_digit[i]+=1
+    if any(count_digit[i] > 2 for i in lst):
+        return False
+    if all(lst[i-1] <= lst[i] for i in range(1, len(lst))):
+        return True
+    else:
+        return False
+
+### Racket version
+
+#lang racket
+
+;;
+(define (is_sorted lst)
+  (define count-digit (make-hash))
+  (for-each (lambda (i) (hash-update! count-digit i add1 0)) lst)
+  (if (ormap (lambda (i) (> (hash-ref count-digit i 0) 2)) lst)
+      #f
+      (let loop ([i 1])
+        (if (< i (length lst))
+            (if (<= (list-ref lst (- i 1)) (list-ref lst i))
+                (loop (+ i 1))
+                #f)
+            #t))))
+
+### Python version
+
+from typing import List
+
+
+def separate_paren_groups(paren_string: str) -> List[str]:
+    result = []
+    current_string = []
+    current_depth = 0
+
+    for c in paren_string:
+        if c == '(':
+            current_depth += 1
+            current_string.append(c)
+        elif c == ')':
+            current_depth -= 1
+            current_string.append(c)
+
+            if current_depth == 0:
+                result.append(''.join(current_string))
+                current_string.clear()
+
+    return result
+
+### Racket version
+
+#lang racket
+
+;;
+(define (separate_paren_groups paren_string)
+  (define result '())
+  (define current_string '())
+  (define current_depth 0)
+
+  (for ([c (string->list paren_string)])
+    (cond [(char=? c #\()
+           (set! current_depth (+ current_depth 1))
+           (set! current_string (append current_string (list c)))]
+          [(char=? c #\))
+           (set! current_depth (- current_depth 1))
+           (set! current_string (append current_string (list c)))
+           (when (= current_depth 0)
+             (set! result (append result (list (list->string current_string))))
+             (set! current_string '()))]))
+
+  result)
+
+### Python version
+
+from typing import List
+
+def sort_array(array: List[int]) -> List[int]:
+    return [] if len(array) == 0 else sorted(array, reverse= (array[0]+array[-1]) % 2 == 0)
+
+### Racket version
+
+#lang racket
+
+;;
+(define (sort_array array)
+  (if (zero? (length array))
+      '()
+      (if (even? (+ (first array) (last array)))
+          (sort array >)
+          (sort array <))))

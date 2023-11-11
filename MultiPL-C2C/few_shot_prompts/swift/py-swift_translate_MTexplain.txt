@@ -1,0 +1,157 @@
+You are an helpful AI assistant who understands all programming languages and can translate between them at ease. Can you explain what this Python program does with a couple of sentences? The goal with the explanation, is so that a reader can easily rewrite the program in Swift?
+
+### Python version
+
+from typing import Tuple
+
+def even_odd_palindrome(n: int) -> Tuple[int, int]:
+    def is_palindrome(n):
+        return str(n) == str(n)[::-1]
+
+    even_palindrome_count = 0
+    odd_palindrome_count = 0
+
+    for i in range(1, n+1):
+        if i%2 == 1 and is_palindrome(i):
+                odd_palindrome_count += 1
+        elif i%2 == 0 and is_palindrome(i):
+            even_palindrome_count += 1
+    return (even_palindrome_count, odd_palindrome_count)
+
+### Explanation
+
+This function takes an integer `n` as input and returns a tuple of two integers. The first integer is the number of even palindromes between 1 and `n`, and the second integer is the number of odd palindromes between 1 and `n`. A palindrome is a number that reads the same forwards and backwards.
+
+The function first defines a helper function `is_palindrome` that takes a number and returns `True` if it is a palindrome and `False` otherwise. This is done by converting the number to a string and checking if the string is equal to its reverse.
+
+The function then initializes two counters, `even_palindrome_count` and `odd_palindrome_count`, to 0. It then loops through all numbers between 1 and `n` (inclusive) and checks if each number is a palindrome and even or odd. If the number is a palindrome and odd, it increments `odd_palindrome_count`. If the number is a palindrome and even, it increments `even_palindrome_count`.
+
+Finally, the function returns a tuple of the two counters.
+
+### Swift version
+
+func even_odd_palindrome(n: Int) -> (Int, Int) {
+    func is_palindrome(_ n: Int) -> Bool {
+        return String(n) == String(String(n).reversed())
+    }
+
+    var even_palindrome_count = 0
+    var odd_palindrome_count = 0
+
+    for i in 1...n {
+        if i%2 == 1 && is_palindrome(i) {
+            odd_palindrome_count += 1
+        } else if i%2 == 0 && is_palindrome(i) {
+            even_palindrome_count += 1
+        }
+    }
+
+    return (even_palindrome_count, odd_palindrome_count)
+}
+
+### Python version
+
+from typing import List
+
+def is_sorted(lst: List[int]) -> bool:
+    count_digit = dict([(i, 0) for i in lst])
+    for i in lst:
+        count_digit[i]+=1
+    if any(count_digit[i] > 2 for i in lst):
+        return False
+    if all(lst[i-1] <= lst[i] for i in range(1, len(lst))):
+        return True
+    else:
+        return False
+
+### Explanation
+
+This function takes in a list of integers and returns a boolean indicating whether the list is sorted in non-descending order and has no more than two occurrences of any integer. The function first creates a dictionary where the keys are the integers in the list and the values are the number of times that integer appears in the list. It then checks if any integer appears more than twice in the list, and returns False if so. Finally, it checks if the list is sorted in non-descending order, and returns True if so, and False otherwise.
+
+### Swift version
+
+func is_sorted(lst: [Int]) -> Bool {
+    var count_digit = [Int: Int]()
+    for i in lst {
+        count_digit[i, default: 0] += 1
+    }
+    if lst.contains(where: { count_digit[$0]! > 2 }) {
+        return false
+    }
+    if lst.indices.dropFirst().allSatisfy({ lst[$0-1] <= lst[$0] }) {
+        return true
+    } else {
+        return false
+    }
+}
+
+### Python version
+
+from typing import List
+
+
+def separate_paren_groups(paren_string: str) -> List[str]:
+    result = []
+    current_string = []
+    current_depth = 0
+
+    for c in paren_string:
+        if c == '(':
+            current_depth += 1
+            current_string.append(c)
+        elif c == ')':
+            current_depth -= 1
+            current_string.append(c)
+
+            if current_depth == 0:
+                result.append(''.join(current_string))
+                current_string.clear()
+
+    return result
+
+### Explanation
+
+This function takes a string of parentheses and returns a list of strings, where each string is a group of parentheses. A group is defined as a set of parentheses that are balanced, meaning that each opening parenthesis has a corresponding closing parenthesis. The function works by iterating over each character in the input string, and keeping track of the current depth of nested parentheses. When an opening parenthesis is encountered, the depth is incremented and the character is added to the current string. When a closing parenthesis is encountered, the depth is decremented and the character is added to the current string. If the depth reaches 0, it means that a complete group has been found, so the current string is added to the result list and cleared for the next group. The function returns the list of groups.
+
+### Swift version
+
+func separate_paren_groups(paren_string: String) -> [String] {
+    var result: [String] = []
+    var currentString: [Character] = []
+    var currentDepth = 0
+
+    for c in paren_string {
+        if c == "(" {
+            currentDepth += 1
+            currentString.append(c)
+        } else if c == ")" {
+            currentDepth -= 1
+            currentString.append(c)
+
+            if currentDepth == 0 {
+                result.append(String(currentString))
+                currentString.removeAll()
+            }
+        }
+    }
+
+    return result
+}
+
+### Python version
+
+from typing import List
+
+def sort_array(array: List[int]) -> List[int]:
+    return [] if len(array) == 0 else sorted(array, reverse= (array[0]+array[-1]) % 2 == 0)
+
+### Explanation
+
+This function takes a list of integers `array` as input and returns a sorted list of integers. The function first checks if the input list is empty. If it is, it returns an empty list. Otherwise, it sorts the list using the `sorted` function. The `reverse` parameter is set to `True` if the sum of the first and last elements of the array is even (and the array will be sorted in descending order), otherwise, it is set to `False` (and the array will be sorted in ascending order).
+
+### Swift version
+
+func sort_array(array: [Int]) -> [Int] {
+    return array.isEmpty ? [] : array.sorted(by: { (array[0] + array[array.count-1]) % 2 == 0 ? $0 > $1 : $0 < $1 })
+}
+
