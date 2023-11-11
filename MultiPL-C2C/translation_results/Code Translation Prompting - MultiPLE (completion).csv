@@ -1,0 +1,585 @@
+exp,,,,Error types,,,,,,pass rate by program length (short -> long),,,,,,,
+Python - Java 158 programs,Pass@1(n=20),Pass@5(n=20),Pass@10(n=20),type_error,undeclared_error,other_syntax_error,assertion_error,runtime_error,unhelpful,pass (1st qt),pass (2nd qt),pass (3rd qt),pass (4th qt),Pass,src_lang,tgt_lang,shots
+baseline (0 shot),0.76,0.814,0.831,0.006,0.057,0.025,0.146,0.013,0,0.8,0.85,0.763,0.615,0.649,py,java,0
+baseline (0 shot) (alt prompt),0.649,0.737,0.777,0.032,0.057,0.152,0.114,0.006,,0.65,0.75,0.605,0.55,0.649,py,java,0
+summary -> translation,,,,0.006,0.019,0.013,0.101,0.06,,0.875,0.923,0.821,0.8,0.854,py,java,0
+baseline (1 shot),0.821,0.867,0.884,0.006,0.006,0.013,0.139,0.019,0,0.875,0.9,0.711,0.775,0.821,py,java,1
+align (1 shot),,,,0,0.038,0.051,0.101,0.013,0,0.875,0.872,0.774,0.7,0.797,py,java,
+"w/ NL + test (src-yes, tgt-reworded)",,,,0,0.051,0.019,0.127,0.032,,0.85,0.872,0.667,0.7,0.772,py,java,
+w/ inline comments (4 shot comments),,,,0.019,0.082,0.019,0.089,0.032,,0.775,0.769,0.795,0.7,0.759,py,java,
+inline comments -> translation,,,,0.019,0.051,0.038,0.114,0.019,0,0.875,0.821,0.744,0.6,0.759,py,java,
+steps -> translation,,,,0.013,0.038,0.025,0.108,0.019,,0.825,0.872,0.744,0.75,0.797,py,java,
+steps (specific) -> translation,,,,0.006,0.025,0.025,0.114,0.006,,0.925,0.872,0.795,0.7,0.823,py,java,
+steps-nl -> translation,,,,0.013,0.025,0.044,0.12,0,0,0.85,0.897,0.718,0.725,0.797,py,java,
+steps-w-code -> translation,,,,0.044,0.019,0.044,0.133,0.006,0,0.825,0.821,0.718,0.65,0.753,py,java,
+latex (algorithmic) -> translation,,,,0.013,0.032,0.006,0.127,0.019,,0.875,0.872,0.718,0.75,0.804,py,java,
+latex (algorithm) -> translation,,,,0.006,0.038,0.006,0.089,0,,0.9,0.923,0.769,0.85,0.861,py,java,
+steps -> latex -> translation,,,,0.006,0.032,0.025,0.127,0.013,0,0.825,0.923,0.744,0.7,0.797,py,java,
+gold summary -> translation,,,,0.013,0.006,0.026,0.123,0.019,,0.8,0.872,0.73,0.846,0.813,py,java,0
+explain -> translation,0.829,0.875,0.886,0.006,0.032,0.019,0.114,0.013,0,0.875,0.897,0.718,0.775,0.829,py,java,0
+explain -> translation (java),0.829,0.875,0.886,,,,,,,,,,,,py,java,0
+explain (0 shot) -> translation (coder-reviewer),0.854,0.876,0.883,0.006,0.018,0.007,0.112,0.3,0,0.931,0.904,,,,py,java,0
+explain (trial 2) -> translation,0.834,0.867,,,,,,,,,,,,,py,java,
+explain (trial 3) -> translation,0.808,0.842,,,,,,,,,,,,,py,java,
+explain (trial 4) -> translation,0.814,0.842,,,,,,,,,,,,,py,java,
+explain (1shot) -> translation,0.825,0.859,0.868,0.013,0,0,0.14,0.019,0,,,,,0.825,py,java,
+summary -> steps -> translation,,,,0.025,0.013,0.025,0.108,0.032,0,0.875,0.897,0.718,0.7,0.797,py,java,
+summary (python) -> summary (C++) -> translation,,,,,,,,,,,,,,,py,java,
+summary -> latex -> translation,,,,,,,,,,,,,,,py,java,
+summary -> steps -> latex -> translation,,,,,,,,,,,,,,,py,java,
+summary LLM -> translation ,,,,0.006,0.013,0.006,0.177,0.006,0.032,,,,,0.759,py,java,
+rewrite -> translation,,,,0.019,0.032,0.006,0.146,0.013,,0.8,0.846,0.744,0.75,0.785,py,java,
+c++ -> translation,,,,0.063,0.07,0.025,0.139,0.013,,0.75,0.769,0.641,0.6,0.69,py,java,0
+c++ (specific) -> translation,,,,0.013,0.07,0.038,0.127,0.019,,0.775,0.825,0.711,0.615,0.732,py,java,0
+bash (specific) -> translation,,,,0,0.032,0.038,0.095,0.025,,0.875,0.872,0.744,0.75,0.81,py,java,0
+r (specific) -> translation,,,,0.032,0.057,0.025,0.152,0.032,,0.675,0.795,0.667,0.675,0.703,py,java,0
+Bash -> latex (specific) -> translation,,,,0.019,0.019,0.032,0.101,0.019,,0.85,0.846,0.769,0.775,0.81,py,java,0
+cot -> translation,,,,0.032,0.019,0.095,0.108,0.013,0,0.825,0.795,0.641,0.675,0.734,py,java,
+cot reasoning -> translation,,,,0,0.038,0.044,0.114,0.013,0.032,0.775,0.821,0.718,0.725,0.759,py,java,
+baseline (4 shot) (old),0.852,0.877,0.882,0.019,0.013,0.006,0.122,0,0,0.925,0.872,0.816,0.744,0.84,py,java,
+summary -> translation (4 shot),,,,0.013,0.013,0.006,0.129,0.006,0,0.9,0.921,0.711,0.795,0.832,py,java,
+gold summary -> translation (4 shot),,,,0.013,0.013,0,0.148,0,0,0.9,0.868,0.737,0.795,0.826,py,java,
+"explain -> translation (4 shot,old)",0.847,0.877,0.885,0.013,0.019,0.019,0.135,0.013,0,0.9,0.795,0.789,0.718,0.801,py,java,
+summary (p(z|y) -> translation (4 shot),,,,0,0.006,0.006,0.142,0.006,0,0.925,0.842,0.737,0.846,0.839,py,java,
+"summary (p(z|x, y) -> translation (4 shot)",,,,0.006,0.013,0,0.226,0,0,0.825,0.816,0.579,0.795,0.755,py,java,
+summary xy summary + difference -> translation (4 shot),,,,0.019,0.013,0.006,0.155,0.006,0,,,,,0.8,py,java,
+summary xy succinct -> translation (4 shot),,,,0,0.032,0.006,0.181,0.006,0,0.85,0.816,0.711,0.718,0.774,py,java,
+summary xy generic -> translation (4 shot),,,,0,0.019,0.013,0.115,0.006,0,0.9,0.897,0.763,0.821,0.846,py,java,
+explain (4 shot) -> translation (0 shot),,,,0.006,0.032,0.032,0.108,0.006,0,0.85,0.875,0.789,0.75,0.816,py,java,
+retrieval (1shot) -> translation,,,,0.019,0.044,0.013,0.114,0.032,0,0.875,0.875,0.711,0.65,0.778,py,java,
+retrieval (1shot) + summary -> translation,,,,0.019,0.013,0.006,0.133,0.013,0,0.875,0.85,0.763,0.775,0.816,py,java,
+summary retrieval (1shot)  + summary-> translation,,,,,,,,,,,,,,,py,java,
+debug (from baseline (0 shot)) -> translate,,,,,,,,,,,,,,0.804,py,java,
+simplify -> translate,,,,,,,,,,,,,,,py,java,
+baseline (4 shot),0.85,0.88,0.886,0.013,0.019,0,0.11,0,0,0.95,0.892,0.795,0.789,0.85,py,java,4
+explain (4 shot) -> translation,0.832,0.857,0.864,0,0.013,0.006,0.13,0.013,0,0.925,0.892,0.769,0.763,0.832,py,java,4
+explain (0 shot) -> translation (4 shot),0.816,0.845,0.852,0.006,0.019,0.019,0.135,0,0,0.9,0.897,0.763,0.718,0.821,py,java,4
+explain (0 shot) -> translation (4 shot) (coder-reviewer),0.85,0.867,0.875,,,,,,,,,,,,py,java,4
+explain (20 exp ensemble) -> translation,0.829,0.892,0.911,,,,,,,,,,,0.829,py,java,0
+explain-lbl -> translation,0.825,0.866,0.878,0.006,0.019,0.013,0.133,0.006,0,0.85,0.9,0.789,0.75,0.825,py,java,0
+explain-lbl -> translation (1 shot) ,0.847,0.876,0.885,0.013,0.006,0.013,0.096,0.006,0,0.9,0.925,0.789,0.846,0.847,py,java,1
+"explain-lbl -> translation (4 shot, old) ",0.848,0.871,0.884,0,0.006,0.006,0.117,0.013,0,0.95,0.892,0.795,0.7899,0.848,py,java,4
+explain-lbl -> translation (4 shot),0.853,0.877,0.881,0.006,0.006,0.006,0.11,0.006,0,0.925,0.919,0.821,0.789,0.853,py,java,4
+explain-lbl -> translation (4 shot) (20 exp ensemble) ,0.851,0.885,0.896,,,,,,,,,,,0.851,py,java,4
+explain-lbl-simp -> translation (have not removed java code),0.846,0.877,0.886,0,0.025,0.013,0.108,0.019,0,0.9,0.9,0.789,0.75,0.846,py,java,0
+explain-lbl-simp -> translation,0.84,0.87,0.879,0.009,0.036,0.009,0.092,0.014,0,0.887,0.922,0.853,0.696,,py,java,0
+explain-lbl-simp -> translation (1 shot),0.832,0.867,0.877,0.032,0.013,0.006,0.108,0,0,0.875,0.9,0.737,0.846,0.832,py,java,1
+explain-lbl-simp -> translation (4 shot) (no heuristic),0.865,0.888,0.896,0.019,0.013,0.013,0.091,0.006,0,0.9,0.892,0.795,0.842,0.865,py,java,4
+explain-lbl-simp -> translation (4 shot) (longest) ,0.869,0.886,0.892,0.013,0.013,0.013,0.071,0.019,0,0.925,0.919,0.821,0.816,0.869,py,java,4
+explain-lbl-simp -> translation (4 shot) (code frag),0.878,0.899,0.909,0.013,0.006,0.006,0.078,0.006,0,0.9,0.946,0.846,0.868,0.878,py,java,4
+explain-lbl-simp -> translation (4 shot) (coder-reviewer),0.873,0.901,0.911,0.013,0.007,0.01,0.087,0.011,0,0.914,0.908,0.827,0.842,0.873,py,java,4
+explain-lbl-simp -> translation (4 shot) (20 exp ensemble) ,0.857,0.9,0.912,,,,,,,,,,,0.859,py,java,4
+"func -> src, tgt -> translate",,,,0.051,0.038,0.07,0.114,0.013,0,0.8,0.8,0.658,0.6,0.715,py,,
+func3,,,,0.38,0.051,0.051,0.158,0.025,0,0.725,0.8,0.658,0.525,0.677,py,,
+add func to explain,,,,,,,,,,,,,,,py,,
+explain -> translate component -> translation,,,,0.013,0.032,0.032,0.114,0.019,0,0.85,0.875,0.737,0.7,0.791,py,,
+explain -> translate component -> translation (1shot),,,,0.032,0.038,0.025,0.115,0,0,0.9,0.775,0.763,0.718,0.79,py,,
+,,,,,,,,,,,,,,,,,
+Python - C++ 161 programs,,,,,,,,,,,,,,,,,
+baseline (0 shot),0.766,0.816,0.835,0.002,0.021,0.053,0.15,0.009,0,0.807,0.834,0.713,0.708,0.766,py,cpp,0
+explain -> translation,0.807,0.839,0.85,0,0.012,0.031,0.124,0.006,0,0.881,0.897,0.775,0.75,0.807,py,cpp,0
+explain -> translation (java),0.821,0.863,0.873,0.001,0.007,0.028,0.136,0.008,0,0.848,0.916,0.759,0.76,0.821,py,cpp,0
+explain-lbl -> translation ,0.803,0.856,0.878,0.001,0.019,0.033,0.14,0.005,0,0.855,0.905,0.758,0.693,0.803,py,cpp,0
+explain-lbl-simp -> translation ,0.791,0.823,0.837,0.006,0.032,0.024,0.137,0.011,0,0.873,0.869,0.79,0.629,0.791,py,cpp,0
+baseline (1 shot),0.801,0.856,0.87,0,0.006,0.025,0.137,0.012,0,0.902,0.85,0.825,0.7,0.801,py,cpp,
+explain -> translation (1 shot),,,,0.006,0.006,0.012,0.149,0.019,0,0.878,0.9,0.725,0.725,0.807,py,cpp,
+explain-lbl -> translation (1 shot),,,,,,,,,,,,,,,py,cpp,
+explain-lbl-simp -> translation (1 shot),,,,,,,,,,,,,,,py,cpp,
+baseline (4 shot),0.843,0.88,0.884,0,0.016,0.031,0.101,0.009,0,0.891,0.915,0.792,0.771,0.843,py,cpp,4
+explain -> translation (4 shot),0.79,0.819,0.827,,,,,,,,,,,0.79,py,cpp,4
+explain -> translation (4 shot) (java),0.778,0.802,0.812,0,0.013,0.014,0.179,0.015,0,0.876,0.862,0.692,0.601,0.778,py,cpp,4
+explain (0 shot) -> translation (4 shot),0.805,0.837,0.843,,,,,,,,,,,0.805,py,cpp,4
+explain (0 shot) -> translation (4 shot) (coder-reviewer),0.808,0.836,0.848,,,,,,,,,,,,py,cpp,4
+latex -> translation,,,,0,0.043,0.025,0.186,0,0,0.833,0.846,0.7,0.575,0.739,py,cpp,
+latex (from java) -> translation,,,,0.006,0.043,0.025,0.174,0,0,0.833,0.872,0.725,0.575,0.752,py,cpp,
+latex -> translation (1 shot),,,,0,0.012,0.019,0.174,0.012,0,0.81,0.923,0.65,0.75,0.783,py,cpp,
+steps (specific) -> translation,,,,0,0.045,0.032,0.162,0.013,0,0.85,0.865,0.711,0.564,0.747,py,cpp,
+steps (specific) -> translation (1 shot),,,,0,0.019,0.025,0.13,0.031,0,0.881,0.846,0.675,0.775,0.795,py,cpp,
+steps-nl -> translation,,,,,,,,,,,,,,,py,cpp,
+steps-w-code -> translation,,,,,,,,,,,,,,,py,cpp,
+cot -> translation,,,,0.006,0.118,0.043,0.124,0.006,0,0.833,0.821,0.625,0.525,0.702,py,cpp,
+cot -> translation (1 shot),,,,0,0.013,0.044,0.108,0.013,0,0.9,0.875,0.763,0.75,0.823,py,cpp,
+summary -> translation,,,,0,0.012,0.025,0.143,0.006,0,0.881,0.923,0.75,0.7,0.814,py,cpp,
+summary -> translation (1 shot),,,,0,0.019,0.019,0.143,0.006,0,0.878,0.9,0.7,0.775,0.814,py,cpp,
+explain-lbl -> translation (not from java),,,,0,0.012,0.037,0.137,0,0,0.878,,,,0.814,py,cpp,
+explain-lbl -> translation (4 shot),0.824,0.85,0.853,0,0.011,0.026,0.129,0.01,0,0.854,0.873,0.771,0.797,0.824,py,cpp,4
+explain-lbl-simp -> translation (4 shot) (code frag),0.846,0.873,0.876,0,0.011,0.017,0.117,0.01,0,0.884,0.918,0.768,0.813,0.846,py,cpp,4
+explain-lbl-simp -> translation (4 shot) (no heuristic),0.839,0.874,0.881,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+Python - Bash 158 programs (allow multi),,,,,,,,,,,,,,,,,
+baseline (0 shot),0.515,0.648,0.703,0,0.006,0.127,0.247,0,0.146,0.55,0.487,0.436,0.425,0.513,py,sh,0
+explain -> translation,0.532,0.658,0.701,0,0.006,0.222,0.297,0,0,0.55,0.538,0.385,0.425,0.532,py,sh,0
+explain -> translation (java),0.554,0.685,0.719,0,0.016,0.189,0.287,0,0.002,0.621,0.485,0.424,0.495,0.554,py,sh,0
+explain-lbl -> translation ,0.568,0.668,0.726,0,0.032,0.19,0.259,0.006,0,0.575,0.513,0.462,0.5,0.568,py,sh,0
+explain-lbl-simp -> translation ,0.564,0.652,0.679,,,,,,,,,,,0.564,py,sh,0
+baseline (1 shot) ,0.606,0.722,0.753,0,0.019,0.185,0.261,0,0,0.575,0.538,0.487,0.538,0.606,py,sh,
+explain-lbl -> translation (1 shot),,,,,,,,,,,,,,,py,sh,
+explain-lbl-simp -> translation (1 shot),,,,,,,,,,,,,,,py,sh,
+baseline (4 shot),0.748,0.825,0.838,0,0.13,0.168,0.123,0,0,0.825,0.737,0.553,0.667,0.748,py,sh,4
+explain -> translation (4 shot),0.729,0.793,0.811,,,,,,,,,,,,py,sh,4
+explain -> translation (4 shot) (java),0.731,0.801,0.823,,,,,,,,,,,0.731,py,sh,4
+explain (0 shot) -> translation (4 shot),0.738,0.815,0.84,,,,,,,,,,,,py,sh,4
+explain (0 shot) -> translation (4 shot) (coder-reviewer),0.731,0.79,0.81,,,,,,,,,,,,py,sh,4
+latex -> translation,,,,0,0.013,0.222,0.266,0,0,,,,,0.544,py,sh,4
+latex -> translation (allow multi function),,,,0,0.006,0.297,0.222,0.006,0,,,,,0.557,py,sh,4
+latex -> translation (manual parse),,,,0,0.006,0.203,0.228,0.006,0.025,0.7,0.513,0.359,0.55,0.595,py,sh,4
+steps (specific) -> translation,,,,0,0.019,0.177,0.278,0.006,0.025,0.625,0.513,0.359,0.475,0.532,py,sh,4
+steps (specific) -> translation (allow multi),,,,0,0.019,0.222,0.234,0,0.051,,,,,0.513,py,sh,4
+steps-w-code -> translation (allow multi),,,,,,,,,,,,,,,py,sh,4
+cot -> translation (allow multi),,,,,,,,,,,,,,,py,sh,4
+summary -> translation,,,,0,0.013,0.184,0.272,0,0.07,0.525,0.513,0.359,0.45,0.506,py,sh,
+summary -> translation (allow multi),,,,0,0.006,0.171,0.31,0,0.057,0.525,0.513,,,0.5,py,sh,
+explain-lbl -> translation (4 shot),0.719,807,0.829,,,,,,,,,,,0.719,py,sh,4
+explain-lbl-simp -> translation (4 shot) (code frag),0.723,0.814,0.841,,,,,,,,,,,0.723,py,sh,4
+explain-lbl-simp -> translation (4 shot) (no heuristic),0.725,0.813,0.84,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+Python - R 158 programs,,,,,,,,,,,,,,,,,
+baseline (0 shot),0.404,0.495,0.519,0.032,0.028,0.224,0,0.313,0,0.426,0.412,0.5,0.273,0.404,py,r,0
+explain -> translation,0.475,0.551,0.569,0.025,0.031,0.447,0.006,0,0,0.512,0.5,0.55,0.4,0.475,py,r,0
+explain -> translation (java),0.469,0.551,0.574,0.025,0.036,0.179,0.285,0.009,0,0.507,0.515,0.464,0.376,0.469,py,r,0
+"func -> src, tgt -> translate (func2)",,,,0.006,0.031,0.584,0,0,0,0.488,0.275,0.475,0.275,0.379,py,r,1
+explain -> translate component -> translation,,,,,,,,,,,,,,0.41,py,r,1
+explain-lbl -> translation ,0.48,0.569,0.592,0.025,0.026,0.151,0.316,0.004,0,0.522,0.505,0.453,0.431,0.48,py,r,0
+explain-lbl-simp -> translation ,0.455,0.529,0.558,0.025,0.034,0.167,0.318,0.001,0,0.467,0.483,0.434,0.435,0.455,py,r,0
+baseline (1 shot),0.528,0.584,0.608,0.032,0.013,0.134,0.293,0,0,0.575,0.538,0.59,0.41,0.528,py,r,
+explain-lbl -> translation (1 shot),,,,,,,,,,,,,,,py,r,4
+explain-lbl-simp -> translation (1 shot),,,,,,,,,,,,,,,py,r,4
+baseline (4 shot),0.564,0.631,0.651,0.012,0.009,0.112,0.3,0.002,0,0.603,0.568,0.568,0.518,0.564,py,r,4
+explain -> translation (4 shot),0.591,0.644,0.659,,,,,,,,,,,,py,r,4
+explain -> translation (4 shot) (java),0.556,0.597,0.611,0.013,0.007,0.11,0.301,0.013,0,0.562,0.6,0.546,0.517,0.556,py,r,4
+explain (0 shot) -> translation (4 shot),0.575,0.632,0.642,,,,,,,,,,,,py,r,4
+explain (0 shot) -> translation (4 shot) (coder-reviewer),0.573,0.624,0.648,,,,,,,,,,,,py,r,4
+latex -> translation,,,,0.019,0.019,0.23,0.242,0.037,0,0.524,0.462,0.425,0.4,0.453,py,r,4
+steps (specific) -> translation,,,,0.037,0.043,0.155,0.248,0.025,0,0.595,0.487,0.525,0.35,0.497,py,r,4
+steps-w-code -> translation,,,,,,,,,,,,,,,py,r,4
+cot -> translation,,,,0,0.012,0.18,0.304,0.019,0,0.5,0.487,0.425,0.375,0.484,py,r,4
+summary -> translation,,,,0.043,0.031,0.174,0.261,0.019,0,0.524,0.487,0.475,0.4,0.472,py,r,4
+explain-lbl -> translation (4 shot),0.569,0.622,0.646,0.015,0.006,0.117,0.288,0.005,0,0.538,0.599,0.595,0.546,0.569,py,r,4
+explain-lbl-simp -> translation (4 shot) (code frag),0.57,0.618,0.634,0.013,0.01,0.114,0.292,0.001,0,0.515,0.626,0.601,0.54,0.57,py,r,4
+explain-lbl-simp -> translation (4 shot) (no heuristic),0.57,0.621,0.64,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+Python - Julia 159 programs,,,,,,,,,,,,,,,,,
+baseline (0 shot),0.616,0.673,0.696,0.063,0.05,0.208,0.126,0,0.013,0.7,0.65,0.462,0.35,0.616,py,jl,0
+explain -> translation,0.712,0.748,0.761,0.031,0.044,0.101,0.094,0,0,0.825,0.8,0.744,0.55,0.712,py,jl,0
+explain -> translation (java),0.705,0.742,0.758,,,,,,,,,,,0.705,py,jl,0
+explain-lbl -> translation ,0.692,0.734,0.753,0.025,0.057,0.113,0.132,0,0,0.725,0.75,0.718,0.5,0.692,py,jl,0
+explain-lbl-simp -> translation ,0.689,0.724,0.738,0.025,0.069,0.107,0.113,0,0,0.7,0.75,0.744,0.55,0.689,py,jl,0
+baseline (1 shot),0.665,0.71,0.728,0.013,0.057,0.184,0.082,0,0,0.775,0.7,0.667,0.513,0.665,py,jl,
+explain-lbl -> translation (1 shot),,,,,,,,,,,,,,,py,jl,
+explain-lbl-simp -> translation (1 shot),,,,,,,,,,,,,,,py,jl,
+baseline (4 shot),0.653,0.696,0.713,0.026,0.057,0.128,0.135,0,0,0.775,0.744,0.667,0.421,0.653,py,jl,4
+explain -> translation (4 shot),0.692,0.732,0.748,,,,,,,,,,,,py,jl,4
+explain -> translation (4 shot) (java),0.694,0.735,0.745,,,,,,,,,,,0.694,py,jl,4
+explain (0 shot) -> translation (4 shot),0.683,0.721,0.735,,,,,,,,,,,0.683,py,jl,4
+explain (0 shot) -> translation (4 shot) (coder-reviewer),0.729,0.762,0.771,,,,,,,,,,,,py,jl,4
+latex -> translation,,,,0.013,0.063,0.126,0.101,0,0,0.75,0.829,0.605,0.6,0.698,py,jl,4
+steps (specific) -> translation,,,,0,0.031,0.138,0.113,0,0,0.85,0.78,0.658,0.575,0.717,py,jl,4
+steps-w-code -> translation,,,,,,,,,,,,,,,py,jl,4
+cot -> translation,,,,0.006,0.057,0.195,0.113,0,0,0.75,0.756,0.474,0.525,0.629,py,jl,4
+summary -> translation,,,,0.031,0.038,0.119,0.094,0,0,0.775,0.829,0.658,0.6,0.717,py,jl,4
+explain-lbl -> translation (4 shot),0.721,0.764,0.779,0.026,0.058,0.084,0.11,0,0,0.825,0.821,0.692,0.541,0.721,py,jl,4
+explain-lbl-simp -> translation (4 shot) (code frag),0.716,0.759,0.773,0.032,0.071,0.077,0.09,0,0,0.775,0.821,0.744,0.568,0.716,py,jl,4
+explain-lbl-simp -> translation (4 shot) (no heuristic),0.711,0.755,0.77,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+Python - Lua 161 programs,,,,,,,,,,,,,,,,,
+baseline (0 shot),0.562,0.645,0.668,0,0.118,0.062,0.242,0,0,0.683,0.625,0.525,0.475,0.562,py,lua,0
+explain -> translation,0.593,0.648,0.673,0,0.099,0.025,0.23,0,0,0.78,0.775,0.475,0.55,0.646,py,lua,0
+explain -> translation (java),0.6,0.673,0.702,,,,,,,,,,,0.6,py,lua,0
+explain-lbl -> translation ,0.615,0.684,0.716,0.006,0.112,0.037,0.224,0,0,0.735,0.675,0.5,0.575,0.615,py,lua,0
+explain-lbl-simp -> translation ,0.595,0.664,0.68,0.006,0.093,0.025,0.255,0,0,0.78,0.65,0.55,0.5,0.595,py,lua,0
+explain -> translation (no code),0.592,0.645,0.67,,,,,,,,,,,,py,lua,0
+explain-lbl -> translation (no code),0.615,0.684,0.716,,,,,,,,,,,,py,lua,0
+explain-lbl-simp -> translation (no code),0.595,0.664,0.68,,,,,,,,,,,,py,lua,0
+baseline (1 shot),0.638,0.704,0.734,0.013,0.087,0.037,0.219,0,0,0.8,0.65,0.575,0.55,0.638,py,lua,
+explain-lbl -> translation (1 shot),,,,,,,,,,,,,,,py,lua,
+explain-lbl-simp -> translation (1 shot),,,,,,,,,,,,,,,py,lua,
+baseline (4 shot),0.677,0.726,0.737,0,0.096,0.032,0.197,0,0,0.825,0.769,0.59,0.513,0.677,py,lua,4
+explain -> translation (4 shot),0.686,0.718,0.735,,,,,,,,,,,,py,lua,4
+explain -> translation (4 shot) (java),0.679,0.739,0.751,,,,,,,,,,,0.679,py,lua,4
+latex -> translation,,,,0,0.149,0.043,0.236,0,0,0.643,0.641,0.425,0.575,0.571,py,lua,4
+steps (specific) -> translation,,,,0.012,0.143,0.037,0.23,0,0,0.643,0.641,0.425,0.6,0.578,py,lua,4
+steps-w-code -> translation,,,,,,,,,,,,,,,py,lua,4
+cot -> translation,,,,0.012,0.068,0.099,0.267,0,0,0.667,0.615,0.425,0.5,0.553,py,lua,4
+summary -> translation,,,,0,0.099,0.019,0.261,0,0,0.714,0.692,0.475,0.6,0.621,py,lua,4
+explain (0 shot) -> translation (4 shot),0.688,0.72,0.734,0.006,0.07,0.032,0.223,0,0,0.75,0.769,0.564,0.59,0.688,py,lua,4
+explain (0 shot) -> translation (4 shot) (coder-reviewer),0.679,0.719,0.738,,,,,,,,,,,,py,lua,4
+explain-lbl -> translation (4 shot),0.686,0.718,0.735,0.006,0.102,0.051,0.178,0,0,0.8,0.744,0.564,0.538,0.686,py,lua,4
+explain-lbl-simp -> translation (4 shot) (code frag),0.694,0.738,0.753,0,0.108,0.032,0.178,0,0,0.825,0.692,0.538,0.667,0.694,py,lua,4
+explain-lbl-simp -> translation (4 shot) (no heuristic),0.694,0.731,0.74,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+Python - Racket 161 programs,,,,,,,,,,,,,,,,,
+baseline (0 shot),0.313,0.42,0.453,0,0.174,0.292,0.211,0.012,0,0.512,0.325,0.225,0.175,0.313,py,rkt,0
+explain -> translation,0.395,0.5,0.538,0,0.18,0.161,0.193,0.043,0,0.659,0.475,0.275,0.275,0.422,py,rkt,0
+explain -> translation (java),0.413,0.54,0.583,,,,,,,,,,,0.413,py,rkt,0
+explain -> translation (20 exp ensemble),0.411,0.571,0.635,0,,,,,,,,,,0.411,py,rkt,0
+explain -> translation (coder-reviewer),0.407,0.511,0.547,0,0.155,0.149,0.251,0.038,0,0.621,0.509,0.295,0.2,0.407,py,rkt,0
+explain-lbl -> translation ,0.39,0.485,0.522,0,0.174,0.186,0.23,0.025,0,0.634,0.45,0.275,0.175,0.39,py,rkt,0
+explain-lbl-simp -> translation ,0.361,0.456,0.493,0,0.174,0.161,0.242,0.043,0,0.61,0.45,0.2,0.25,0.361,py,rkt,0
+baseline (1 shot),0.417,0.522,0.56,0,0.169,0.106,0.287,0.05,0,0.625,0.525,0.2,0.2,0.417,py,rkt,
+explain-lbl -> translation (1 shot),,,,,,,,,,,,,,,py,rkt,
+explain-lbl-simp -> translation (1 shot),,,,,,,,,,,,,,,py,rkt,4
+baseline (4 shot),0.45,0.549,0.597,0,0.172,0.153,0.229,0.025,0,0.575,0.667,0.282,0.154,0.432,py,rkt,4
+explain -> translation (4 shot),0.452,0.545,0.576,0,0.153,0.166,0.185,0.045,0,0.675,0.615,0.225,0.175,0.452,py,rkt,4
+explain -> translation (4 shot) (java),0.447,0.548,0.576,,,,,,,,,,,0.447,py,rkt,4
+latex -> translation,,,,0,0.199,0.236,0.199,0.025,0,0.524,0.41,0.225,0.2,0.342,py,rkt,4
+steps (specific) -> translation,,,,0,0.224,0.267,0.193,0.025,2,0.476,0.333,0.125,0.225,0.292,py,rkt,4
+summary -> translation,,,,0,0.149,0.137,0.28,0.05,0,0.595,0.385,0.25,0.3,0.385,py,rkt,4
+rewrite -> translation ,,,,0,0.18,0.174,0.23,0.043,0,0.585,,,,0.373,py,rkt,4
+explain (0 shot) -> translation (4 shot),0.47,0.569,0.608,0,0.134,0.146,0.223,0.038,0,0.65,0.59,0.282,0.308,0.47,py,rkt,4
+explain (0 shot) -> translation (4 shot) (coder-reviewer),0.462,0.593,0.625,,,,,,,,,,,,py,rkt,4
+explain-lbl -> translation (4 shot),0.456,0.571,0.614,0,0.134,0.076,0.274,0.038,0,0.65,0.615,0.333,0.308,0.456,py,rkt,4
+explain-lbl-simp -> translation (4 shot) (code frag),0.463,0.581,0.642,0,0.153,0.083,0.242,0.051,0,0.625,0.667,0.256,0.333,0.463,py,rkt,4
+explain-lbl-simp -> translation (4 shot) (no heuristic),0.453,0.571,0.616,0,0.149,0.095,0.26,0.097,0,0.638,0.585,0.25,0.335,0.453,py,rkt,4
+,,,,,,,,,,,,,,,,,
+Python - D (155),,,,,,,,,,,,,,,,,
+baseline (0 shot),0.42,0.472,0.491,0.224,0.128,0.192,0.038,0.013,0,0.513,0.45,0.395,0.256,0.42,py,d,0
+explain -> translation,0.427,0.495,0.522,0.199,0.179,0.115,0.058,0.006,0,0.615,0.525,0.342,0.282,0.427,py,d,0
+explain -> translation (java),0.444,0.498,0.515,,,,,,,,,,,0.444,py,d,0
+explain-lbl -> translation ,0.444,0.5,0.517,0.244,0.122,0.167,0.038,0,0,0.59,0.45,0.342,0.333,0.444,py,d,0
+explain-lbl-simp -> translation ,0.43,0.484,0.504,0.256,0.122,0.16,0.045,0,0,,,,,0.43,py,d,0
+baseline (1 shot),0.431,0.456,0.469,0.206,0.103,0.2,0.039,0.006,0,0.564,0.5,0.432,0.282,0.431,py,d,
+explain-lbl -> translation (1 shot),,,,,,,,,,,,,,,py,d,
+explain-lbl-simp -> translation (1 shot),,,,,,,,,,,,,,,py,d,
+baseline (4 shot),0.456,0.509,0.525,0.248,0.085,0.203,0.033,0,0,0.538,0.513,0.351,0.316,0.456,py,d,4
+explain -> translation (4 shot),0.487,0.541,0.555,,,,,,,,,,,,py,d,4
+explain -> translation (4 shot) (java),0.459,0.513,0.529,,,,,,,,,,,0.459,py,d,4
+explain (0 shot) -> translation (4 shot),0.485,0.537,0.551,0.184,0.079,0.164,0.072,0,0,0.615,0.595,0.41,0.378,0.485,py,d,4
+explain (0 shot) -> translation (4 shot) (coder-reviewer),0.507,0.546,0.549,,,,,,,,,,,,py,d,4
+latex -> translation,,,,0.218,0.167,0.147,0.051,0.013,0,0.59,0.475,0.368,0.179,0.404,py,d,4
+steps (specific) -> translation,,,,0.186,0.16,0.115,0.071,0.013,0,0.59,0.525,0.421,0.282,0.455,py,d,4
+summary -> translation,,,,0.218,0.147,0.147,0.038,0.013,0,0.59,0.5,0.368,0.282,0.436,py,d,4
+cot-func -> translation,,,,0.218,0.128,0.218,0.019,0,0,0.513,0.45,0.421,0.282,0.417,py,d,4
+cot-func -> translation (1 shot),,,,0.192,0.122,0.218,0.058,0,0,0.462,0.475,0.395,0.308,0.41,py,d,4
+cot-func -> translation 4 shot),,,,0.195,0.11,0.175,0.078,0.006,0,0.462,0.41,0.432,0.436,0.435,py,d,4
+func2,,,,,,,,,,,,,,0.363,py,d,4
+explain-lbl -> translation (4 shot),0.462,0.529,0.55,0.197,0.105,0.164,0.053,0.007,0,0.538,0.541,0.41,0.405,0.462,py,d,4
+explain-lbl-simp -> translation (4 shot) (code frag),0.44,0.492,0.507,0.197,0.099,0.204,0.053,0.013,0,,,,,0.44,py,d,4
+explain-lbl-simp -> translation (4 shot) (no heuristic),0.451,0.5,0.517,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+Python - swift (161),,,,,,,,,,,,,,,,,
+baseline (0 shot),0.644,0.721,0.752,0.037,0.081,0.143,0.05,0,0,0.829,0.75,0.625,0.55,0.644,py,swift,0
+explain -> translation,0.703,0.758,0.775,0.012,0.068,0.106,0.081,0,0,0.878,0.8,0.6,0.65,0.733,py,swift,0
+explain -> translation (java),0.705,0.765,0.783,,,,,,,,,,,0.705,py,swift,0
+explain-lbl -> translation ,0.751,0.799,0.806,0.006,0.056,0.13,0.062,0,0,,,,,0.751,py,swift,0
+explain-lbl-simp -> translation ,0.748,0.803,0.817,0.006,0.031,0.149,0.062,0,0,,,,,0.748,py,swift,0
+baseline (1 shot),0.707,0.779,0.797,0.019,0.037,0.144,0.069,0,0,0.85,0.775,0.675,0.625,0.707,py,swift,
+explain-lbl -> translation (1 shot),,,,,,,,,,,,,,,py,swift,
+explain-lbl-simp -> translation (1 shot),,,,,,,,,,,,,,,py,swift,
+baseline (4 shot),0.727,0.778,0.796,0.013,0.038,0.14,0.083,0,0,0.9,0.744,0.667,0.59,0.727,py,swift,4
+explain -> translation (4 shot),0.687,0.753,0.774,,,,,,,,,,,,py,swift,4
+explain -> translation (4 shot) (java),0.671,0.749,0.784,,,,,,,,,,,0.671,py,swift,4
+explain (0 shot) -> translation (4 shot),0.7,0.772,0.791,,,,,,,,,,,,py,swift,4
+explain (0 shot) -> translation (4 shot) (coder-reviewer),0.713,0.774,0.801,,,,,,,,,,,,py,swift,4
+summary -> translation,,,,0.019,0.037,0.13,0.05,0,0,0.854,0.8,0.725,0.675,0.764,py,swift,
+explain-lbl -> translation (4 shot),0.701,0.759,0.779,0.013,0.032,0.127,0.134,0,0,,,,,0.701,py,swift,4
+explain-lbl-simp -> translation (4 shot) (code frag),0.719,0.767,0.784,0.006,0.038,0.121,0.102,0,0,,,,,0.719,py,swift,4
+explain-lbl-simp -> translation (4 shot) (no heuristic),0.709,0.779,0.799,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+Python - Scala (160),,,,,,,,,,,,,,,,,
+baseline (0 shot),0.637,0.729,0.753,0.144,0.05,0.031,0.106,0.013,0,0.85,0.75,0.5,0.525,0.637,py,scala,0
+explain -> translation,0.746,0.803,0.818,0.05,0.037,0.006,0.125,0.019,0,0.95,0.825,0.625,0.65,0.762,py,scala,0
+explain -> translation (java),0.747,0.794,0.808,,,,,,,,,,,0.747,py,scala,0
+explain-lbl -> translation ,0.745,0.793,0.806,0.062,0.037,0.025,0.119,0.0019,0,0.9,0.8,0.575,0.675,0.745,py,scala,0
+explain-lbl-simp -> translation ,0.738,0.777,0.789,,,,,,,,,,,0.738,py,scala,0
+baseline (1 shot),0.737,0.798,0.815,0.082,0.019,0.025,0.113,0.019,0,0.95,0.825,0.513,0.675,0.737,py,scala,
+explain-lbl -> translation (1 shot),,,,,,,,,,,,,,,py,scala,
+explain-lbl-simp -> translation (1 shot),,,,,,,,,,,,,,,py,scala,
+baseline (4 shot),0.767,0.803,0.812,0.045,0.038,0.013,0.122,0.006,0,0.95,0.795,0.641,0.711,0.767,py,scala,4
+explain -> translation (4 shot),0.757,0.813,0.83,,,,,,,,,,,,py,scala,4
+explain -> translation (4 shot) (java),0.737,0.788,0.805,,,,,,,,,,,0.737,py,scala,4
+explain (0 shot) -> translation (4 shot),0.758,0.813,0.83,,,,,,,,,,,,py,scala,4
+explain (0 shot) -> translation (4 shot) (coder-reviewer),0.761,0.81,0.826,,,,,,,,,,,,py,scala,4
+explain-lbl -> translation (4 shot),0.739,0.785,0.799,,,,,,,,,,,0.739,py,scala,4
+explain-lbl-simp -> translation (4 shot) (code frag),0.777,0.812,0.823,0.045,0.026,0.006,0.122,0.006,0,0.925,0.821,0.641,0.789,0.777,py,scala,4
+explain-lbl-simp -> translation (4 shot) (no heuristic),0.755,0.803,0.821,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+Python - Perl (161),,,,,,,,,,,,,,,,,
+baseline (0 shot),0.583,0.653,0.672,0,0.181,0.059,0.177,0,0,0.682,0.605,0.537,0.502,0.583,py,pl,0
+explain -> translation,0.669,0.736,0.751,0,0.106,0.012,0.248,0,0,0.756,0.7,0.5,0.575,0.669,py,pl,0
+explain -> translation (java),0.682,0.733,0.744,0,0.085,0.015,0.218,0.001,0,0.787,0.725,0.557,0.655,0.682,py,pl,0
+explain-lbl -> translation ,0.653,0.715,0.734,0,0.111,0.013,0.223,0,0,0.771,0.701,0.55,0.589,0.653,py,pl,0
+explain-lbl-simp -> translation ,0.629,0.688,0.714,0,0.103,0.014,0.255,0.002,0,0.752,0.681,0.536,0.532,0.629,py,pl,0
+baseline (1 shot) ,,,,,,,,,,,,,,0.701,py,pl,
+explain-lbl -> translation (1 shot),,,,,,,,,,,,,,,py,pl,
+explain-lbl-simp -> translation (1 shot),,,,,,,,,,,,,,,py,pl,
+baseline (4 shot),0.698,0.769,0.789,0,0.154,0.02,0.128,0,0,0.765,0.713,0.623,0.689,0.698,py,pl,4
+explain -> translation (4 shot),0.731,0.789,0.805,,,,,,,,,,,,py,pl,4
+explain -> translation (4 shot) (java),0.732,0.784,0.798,0,0.119,0.004,0.146,0,0,0.904,0.813,0.587,0.619,0.732,py,pl,4
+explain (0 shot) -> translation (4 shot),0.731,0.783,0.801,0,0.102,0.006,0.14,0,0,0.875,0.846,0.615,0.667,0.752,py,pl,4
+explain (0 shot) -> translation (4 shot) (coder-reviewer),0.716,0.758,0.774,,,,,,,,,,,,py,pl,4
+explain-lbl -> translation (4 shot),0.72,0.784,0.799,0,0.131,0.008,0.141,0,0,0.939,0.756,0.577,0.604,0.72,py,pl,4
+explain-lbl-simp -> translation (4 shot) (code frag),0.701,0.776,0.799,0,0.151,0.011,0.137,0,0,0.914,0.749,0.586,0.55,0.701,py,pl,4
+explain-lbl-simp -> translation (4 shot) (no heuristic),0.709,0.78,0.803,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+Python - Rust (156),,,,,,,,,,,,,,,,,
+baseline (0 shot),0.706,0.794,0.822,0.034,0.077,0.125,0.042,0.015,0.001,0.805,0.809,0.525,0.679,0.706,py,rs,0
+explain -> translation,0.75,0.809,0.828,0.021,0.071,0.083,0.064,0.021,0,0.828,0.828,0.596,0.701,0.75,py,rs,0
+explain -> translation (java),0.748,0.801,0.813,0.021,0.071,0.083,0.064,0.021,0,0.828,0.828,0.596,0.701,0.748,py,rs,0
+explain-lbl -> translation ,0.76,0.82,0.834,0.019,0.064,0.063,0.076,0.018,0,0.868,0.802,0.629,0.736,0.76,py,rs,0
+explain-lbl-simp -> translation ,0.762,0.811,0.827,0.021,0.06,0.076,0.065,0.017,0,0.853,0.793,0.632,0.765,0.762,py,rs,0
+baseline (1 shot) ,0.739,0.802,0.831,0.026,0.071,0.097,0.077,0.013,0,0.718,0.85,0.568,0.718,0.739,py,rs,
+explain-lbl -> translation (1 shot),,,,,,,,,,,,,,,py,rs,
+explain-lbl-simp -> translation (1 shot),,,,,,,,,,,,,,,py,rs,
+baseline (4 shot),0.764,0.826,0.847,0.028,0.028,0.064,0.103,0.013,0,0.809,0.869,0.642,0.741,0.764,py,rs,4
+explain -> translation (4 shot),0.764,0.83,0.857,,,,,,,,,,,,py,rs,4
+explain -> translation (4 shot) (java),0.73,0.797,0.824,0.02,0.056,0.072,0.109,0.013,0,0.815,0.819,0.612,0.677,0.73,py,rs,4
+explain (0 shot) -> translation (4 shot),0.768,0.83,0.854,0.013,0.039,0.066,0.092,0.013,0,0.846,0.865,0.615,0.784,0.776,py,rs,4
+explain (0 shot) -> translation (4 shot) (coder-reviewer),0.745,0.795,0.814,,,,,,,,,,,,py,rs,4
+explain-lbl -> translation (4 shot),0.749,0.797,0.817,0.023,0.053,0.059,0.103,0.013,0,0.828,0.82,0.623,0.727,0.749,py,rs,4
+explain-lbl-simp -> translation (4 shot) (code frag),0.787,0.831,0.845,0.021,0.052,0.065,0.06,0.014,0,0.887,0.897,0.629,0.738,0.787,py,rs,4
+explain-lbl-simp -> translation (4 shot) (no heuristic),0.763,0.824,0.839,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+Python - Go,,,,,,,,,,,,,,,,,
+baseline (0 shot),0.424,0.482,0.506,0,0.357,0.106,0.101,0,0.012,0.557,0.472,0.424,0.238,0.424,py,go,0
+explain -> translation,0.45,0.493,0.517,0,0.396,0.032,0.117,0,0.006,0.525,0.526,0.486,0.256,0.45,py,go,0
+explain -> translation (java),0.457,0.506,0.525,0,0.345,0.043,0.135,0,0.019,0.523,0.541,0.446,0.319,0.457,py,go,0
+explain-lbl -> translation ,0.456,0.492,0.506,0,0.379,0.034,0.131,0,0,0.588,0.479,0.407,0.345,0.456,py,go,0
+explain-lbl-simp -> translation ,0.458,0.484,0.491,0,0.394,0.045,0.101,0,0.001,0.586,0.499,0.438,0.308,0.458,py,go,0
+baseline (1 shot) ,0.484,0.533,0.557,0,0.366,0.052,0.098,0,0,0.65,0.526,0.459,0.378,0.484,py,go,
+explain-lbl -> translation (1 shot),,,,,,,,,,,,,,,py,go,
+explain-lbl-simp -> translation (1 shot),,,,,,,,,,,,,,,py,go,
+baseline (4 shot),0.524,0.559,0.569,0,0.328,0.063,0.081,0,0,0.633,0.629,0.474,0.37,0.524,py,go,4
+explain -> translation (4 shot),0.527,0.564,0.573,,,,,,,,,,,,py,go,4
+explain -> translation (4 shot) (java),0.514,0.556,0.565,0,0.352,0.048,0.086,0,0,0.611,0.593,0.478,0.374,0.514,py,go,4
+explain (0 shot) -> translation (4 shot),0.527,0.567,0.581,0,0.333,0.06,0.107,0,0,0.632,0.541,0.486,0.342,0.5,py,go,4
+explain (0 shot) -> translation (4 shot) (coder-reviewer),0.522,0.552,0.558,,,,,,,,,,,,py,go,4
+explain-lbl -> translation (4 shot),0.508,0.553,0.57,0,0.342,0.038,0.112,0,0,0.616,0.557,0.501,0.359,0.508,py,go,4
+explain-lbl-simp -> translation (4 shot) (code frag),0.516,0.554,0.561,0,0.353,0.032,0.099,0,0,0.65,0.561,0.488,0.367,0.516,py,go,4
+explain-lbl-simp -> translation (4 shot) (no heuristic),0.506,0.544,0.557,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+Python - C#,,,,,,,,,,,,,,,,,
+baseline (0 shot),0.792,0.841,0.854,0.022,0.001,0.043,0.1,0.042,0,0.869,0.825,0.729,0.744,0.792,py,cs,0
+explain -> translation,0.852,0.877,0.889,0.006,0,0.025,0.089,0.019,0,0.925,0.975,0.789,0.75,0.852,py,cs,0
+explain -> translation (java),0.836,0.866,0.875,0.011,0,0.04,0.098,0.016,0,0.921,0.925,0.758,0.735,0.836,py,cs,0
+explain-lbl -> translation ,0.838,0.865,0.874,0.004,0.003,0.024,0.111,0.019,0,0.929,0.889,0.758,0.771,0.838,py,cs,0
+explain-lbl-simp -> translation ,0.827,0.846,0.859,0.006,0.005,0.032,0.103,0.028,0,0.925,0.896,0.77,0.715,0.821,py,cs,0
+baseline (1 shot) ,0.835,0.878,0.889,0.006,0,0.019,0.102,0.019,0,0.925,0.95,0.763,0.769,0.835,py,cs,
+explain-lbl -> translation (1 shot),,,,,,,,,,,,,,,py,cs,
+explain-lbl-simp -> translation (1 shot),,,,,,,,,,,,,,,py,cs,
+baseline (4 shot),0.857,0.875,0.881,0.018,0,0.021,0.08,0.023,0,0.941,0.923,0.768,0.796,0.857,py,cs,4
+explain -> translation (4 shot),0.829,0.842,0.844,,,,,,,,,,,,py,cs,4
+explain -> translation (4 shot) (java),0.833,0.85,0.854,0.028,0.004,0.023,0.085,0.028,0,0.95,0.891,0.736,0.754,0.833,py,cs,4
+explain (0 shot) -> translation (4 shot),0.837,0.854,0.856,0.032,0,0.019,0.097,0.019,0,0.925,0.892,0.795,0.711,0.831,py,cs,4
+explain (0 shot) -> translation (4 shot) (coder-reviewer),0.851,0.873,0.881,,,,,,,,,,,,py,cs,4
+explain-lbl -> translation (4 shot),0.847,0.858,0.86,0.02,0.003,0.023,0.094,0.013,0,0.944,0.919,0.763,0.763,0.847,py,cs,4
+explain-lbl-simp -> translation (4 shot) (code frag),0.853,0.873,0.88,0.017,0,0.027,0.086,0.018,0,0.946,0.936,0.735,0.795,0.853,py,cs,4
+explain-lbl-simp -> translation (4 shot) (no heuristic),0.843,0.862,0.87,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+Python - Ruby,,,,,,,,,,,,,,,,,
+baseline (0 shot),0.783,0.825,0.837,0,0.029,0.066,0.086,0.037,0,0.907,0.781,0.706,0.734,0.783,py,rb,0
+explain -> translation,0.784,0.831,0.853,0,0.025,0.068,0.106,0.031,0,0.878,0.825,65,0.725,0.784,py,rb,0
+explain -> translation (java),0.783,0.81,0.818,0,0.013,0.076,0.104,0.024,0,0.878,0.857,0.659,0.735,0.783,py,rb,0
+explain-lbl -> translation ,0.8,0.83,0.838,0,0.017,0.051,0.116,0.016,0,0.879,0.801,0.7,0.816,0.8,py,rb,0
+explain-lbl-simp -> translation ,0.827,0.849,0.854,0,0.01,0.031,0.113,0.019,0,0.874,0.847,0.731,0.855,0.827,py,rb,0
+baseline (1 shot) ,0.842,0.877,0.884,0,0.031,0.013,0.075,0.025,0,0.9,0.9,0.7,0.925,0.842,py,rb,
+explain-lbl -> translation (1 shot),,,,,,,,,,,,,,,py,rb,
+explain-lbl-simp -> translation (1 shot),,,,,,,,,,,,,,,py,rb,
+baseline (4 shot),0.829,0.851,0.86,0,0.018,0.016,0.115,0.022,0,0.899,0.913,0.742,0.762,0.829,py,rb,4
+explain -> translation (4 shot),0.796,0.834,0.844,,,,,,,,,,,,py,rb,4
+explain -> translation (4 shot) (java),0.804,0.84,0.851,0,0.018,0.011,0.141,0.025,0,0.887,0.922,0.704,0.703,0.804,py,rb,4
+explain (0 shot) -> translation (4 shot),0.797,0.832,0.844,,,,,,,,,,,0.803,py,rb,4
+explain (0 shot) -> translation (4 shot) (coder-reviewer),0.814,0.856,0.866,,,,,,,,,,,,py,rb,4
+explain-lbl -> translation (4 shot),0.801,0.842,0.857,0,0.029,0.019,0.118,0.032,0,0.885,0.913,0.697,0.706,0.801,py,rb,4
+explain-lbl-simp -> translation (4 shot) (code frag),0.806,0.837,0.849,0,0.02,0.026,0.123,0.025,0,0.918,0.903,0.71,0.691,0.806,py,rb,4
+explain-lbl-simp -> translation (4 shot) (no heuristic),0.807,0.851,0.863,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+Python - PHP,,,,,,,,,,,,,,,,,
+baseline (0 shot),0.684,0.737,0.758,0,0.056,0.05,0.181,0,0.029,0.699,0.734,0.742,0.563,0.684,py,php,0
+explain -> translation,0.764,0.782,0.787,0,0.075,0,0.143,0,0,0.78,0.825,0.825,0.65,0.764,py,php,0
+explain -> translation (java),0.77,0.792,0.8,0,0.073,0,0.139,0,0.004,0.771,0.864,0.802,0.641,0.77,py,php,0
+explain-lbl -> translation ,0.775,0.791,0.794,0,0.081,0.007,0.137,0,0,0.782,0.82,0.794,0.705,0.775,py,php,0
+explain-lbl-simp -> translation ,0.776,0.785,0.787,0,0.08,0.007,0.137,0,0,0.796,0.815,0.82,0.674,0.776,py,php,0
+baseline (1 shot) ,0.785,0.823,0.838,0,0.019,0.019,0.2,0,0,0.675,0.775,0.8,0.8,0.785,py,php,
+explain-lbl -> translation (1 shot),,,,,,,,,,,,,,,py,php,
+explain-lbl-simp -> translation (1 shot),,,,,,,,,,,,,,,py,php,
+baseline (4 shot),0.797,0.83,0.84,0,0.025,0.055,0.157,0,0,0.705,0.812,0.815,0.859,0.797,py,php,4
+explain -> translation (4 shot),0.782,0.814,0.83,,,,,,,,,,,0.782,py,php,4
+explain -> translation (4 shot) (java),0.764,0.782,0.787,,,,,,,,,,,0.764,py,php,4
+explain (0 shot) -> translation (4 shot),0.784,0.826,0.844,0,0.022,0.017,0.145,0,0,0.79,0.846,0.828,0.823,0.817,py,php,4
+explain (0 shot) -> translation (4 shot) (coder-reviewer),0.786,0.82,0.832,,,,,,,,,,,,py,php,4
+explain-lbl -> translation (4 shot),0.815,0.837,0.846,0,0.046,0.018,0.12,0,0,0.825,0.845,0.832,0.759,0.815,py,php,4
+explain-lbl-simp -> translation (4 shot) (code frag),0.815,0.835,0.845,0,0.058,0.013,0.114,0,0,0.828,0.872,0.833,0.727,0.815,py,php,4
+explain-lbl-simp -> translation (4 shot) (no heuristic),0.82,0.847,0.852,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+Python - TypeScript,,,,,,,,,,,,,,,,,
+baseline (0 shot),0.789,0.83,0.844,0.021,0,0.065,0.122,0,0.003,0.856,0.85,0.723,0.725,0.789,py,ts,0
+explain -> translation,0.837,0.88,0.893,0.006,0,0.031,0.138,0,0,0.85,0.85,0.718,0.875,0.837,py,ts,0
+explain -> translation (java),0.851,0.878,0.887,0.009,0,0.021,0.119,0,0,0.825,0.9,0.772,0.906,0.851,py,ts,0
+explain-lbl -> translation ,0.847,0.877,0.883,0.011,0,0.017,0.125,0,0,0.83,0.915,0.777,0.866,0.847,py,ts,0
+explain-lbl-simp -> translation ,0.852,0.875,0.883,0.014,0,0.019,0.117,0,0,0.839,0.899,0.785,0.884,0.852,py,ts,0
+baseline (1 shot) ,0.84,0.871,0.876,0.013,0,0.025,0.133,0,0,0.85,0.875,0.744,0.846,0.84,py,ts,
+explain-lbl -> translation (1 shot),,,,,,,,,,,,,,,py,ts,
+explain-lbl-simp -> translation (1 shot),,,,,,,,,,,,,,,py,ts,
+baseline (4 shot),0.865,0.897,0.909,0,0,0.13,0.123,0,0,0.85,0.897,0.821,0.892,0.865,py,ts,4
+explain -> translation (4 shot),0.874,0.897,0.901,,,,,,,,,,,0.874,py,ts,4
+explain -> translation (4 shot) (java),0.865,0.885,0.889,0.002,0,0.009,0.124,0,0,0.866,0.908,0.786,0.903,0.865,py,ts,4
+explain (0 shot) -> translation (4 shot),0.857,0.885,0.894,0.006,0,0.006,0.103,0,0,0.9,1,0.769,0.865,0.884,py,ts,4
+explain (0 shot) -> translation (4 shot) (coder-reviewer),0.883,0.895,0.901,,,,,,,,,,,,py,ts,4
+explain-lbl -> translation (4 shot),0.871,0.899,0.906,0.004,0,0.011,0.114,0,0,0.852,0.962,0.781,0.892,0.871,py,ts,4
+explain-lbl-simp -> translation (4 shot) (code frag),0.885,0.913,0.921,0.006,0,0.015,0.094,0,0,0.889,0.951,0.765,0.938,0.885,py,ts,4
+explain-lbl-simp -> translation (4 shot) (no heuristic),0.883,0.913,0.922,0.006,0,0.014,0.097,0,0,0.889,0.947,0.777,0.909,0.883,py,ts,4
+,,,,,,,,,,,,,,,,,
+Python - JavaScript (157),,,,,,,,,,,,,,,,,
+baseline (0 shot),0.855,0.893,0.903,0,0,0.006,0.106,0,0.006,0.902,0.925,0.825,0.875,0.855,py,js,0
+explain -> translation,0.857,0.885,0.896,0,0,0.031,0.106,0,0,0.854,0.9,0.775,0.925,0.857,py,js,0
+explain -> translation (java),0.848,0.882,0.891,0,0,0.036,0.116,0,0,0.851,0.878,0.77,0.891,0.848,py,js,0
+explain-lbl -> translation ,0.843,0.876,0.886,0,0,0.025,0.133,0,0,0.832,0.896,0.779,0.864,0.843,py,js,0
+explain-lbl-simp -> translation ,0.832,0.864,0.877,0,0,0.031,0.137,0,0,0.78,0.9,0.775,0.875,0.832,py,js,0
+baseline (1 shot) ,0.862,0.899,0.91,0,0,0.019,0.106,0,0,0.825,0.95,0.85,0.875,0.862,py,js,
+explain-lbl -> translation (1 shot),,,,,,,,,,,,,,,py,js,
+explain-lbl-simp -> translation (1 shot),,,,,,,,,,,,,,,py,js,
+baseline (4 shot),0.866,0.907,0.92,0,0,0.019,0.14,0,0,0.825,0.821,0.821,0.897,0.866,py,js,4
+explain -> translation (4 shot),0.851,0.867,0.875,,,,,,,,,,,0.851,py,js,4
+explain -> translation (4 shot) (java),0.873,0.899,0.903,0,0,0.019,0.105,0,0,0.852,0.927,0.79,0.922,0.873,py,js,4
+explain (0 shot) -> translation (4 shot),0.861,0.875,0.88,0,0,0.025,0.134,0,0,0.85,0.949,0.718,0.846,0.861,py,js,4
+explain (0 shot) -> translation (4 shot) (coder-reviewer),0.889,0.897,0.898,,,,,,,,,,,0.889,py,js,4
+explain-lbl -> translation (4 shot),0.876,0.886,0.89,0,0,0.019,0.105,0,0,0.828,0.977,0.768,0.94,0.876,py,js,4
+explain-lbl-simp -> translation (4 shot) (code frag),0.879,0.894,0.898,0,0,0.02,0.102,0,0,0.859,0.949,0.765,0.941,0.879,py,js,4
+explain-lbl-simp -> translation (4 shot) (no heuristic),0.878,0.892,0.897,,,,,,,,,,,0.878,,,
+,,,,,,,,,,,,,,,,,
+Lua - Python (144),,,,,,,,,,,,,,,,,
+baseline (0 shot),0.895,0.927,0.94,0,0,0.042,0.063,0,0,0.925,0.829,0.912,0.912,0.895,lua,py,0
+explain -> translation,0.859,0.885,0.892,0,0,0.049,0.076,0,0,0.925,0.781,0.816,0.971,0.859,lua,py,0
+explain-lbl -> translation ,0.865,0.92,0.898,0,0,0.049,0.083,0,0,0.925,0.781,0.816,0.941,0.865,lua,py,0
+explain-lbl-simp -> translation ,0.84,0.85,0.853,0,0,0.035,0.111,0,0,0.9,0.812,0.789,0.912,0.84,lua,py,0
+baseline (1 shot) ,,,,,,,,,,,,,,,lua,py,
+explain-lbl -> translation (1 shot),,,,,,,,,,,,,,,lua,py,
+explain-lbl-simp -> translation (1 shot),,,,,,,,,,,,,,,lua,py,
+baseline (4 shot),0.885,0.919,0.927,0,0,0.043,0.057,0,0,0.925,0.833,0.914,0.914,0.885,lua,py,4
+explain -> translation (4 shot),,,,0,0,0.021,0.064,0,0,0.975,0.867,0.857,0.943,,lua,py,4
+explain (0 shot) -> translation (4 shot),0.893,0.907,0.912,0,0,0.021,0.093,0,0,0.925,0.9,0.829,0.886,0.893,lua,py,4
+explain-lbl -> translation (4 shot),0.884,0.915,0.924,0,0,0.64,0.057,0,0,0.9,0.833,0.857,0.914,0.884,lua,py,4
+explain-lbl-simp -> translation (4 shot),0.832,0.894,0.905,0,0,0.1,0.064,0,0,0.875,0.8,0.771,0.886,0.832,lua,py,4
+,,,,,,,,,,,,,,,,,
+Racket - Java (136),,,,,,,,,,,,,,,,,
+baseline (0 shot),0.659,0.733,0.758,0.044,0.147,0.037,0.096,0.015,0,0.829,0.765,0.588,0.455,0.659,rkt,java,0
+explain -> translation,0.771,0.824,0.838,0.029,0.029,0.037,0.132,0.015,0,0.886,0.824,0.824,0.485,0.771,rkt,java,0
+explain-lbl -> translation ,0.744,0.814,0.839,0.022,0.044,0.044,0.154,0,0,0.886,0.794,0.706,0.545,0.744,rkt,java,0
+explain-lbl-simp -> translation ,0.717,0.788,0.819,0.007,0.044,0.044,0.191,0.007,0,0.886,0.765,0.676,0.485,0.717,rkt,java,0
+baseline (1 shot) ,0.796,0.867,0.887,0.007,0.007,0.007,0.148,0.007,0,0.943,0.853,0.906,0.588,0.796,rkt,java,4
+explain-lbl -> translation (1 shot),,,,,,,,,,,,,,,rkt,java,4
+explain-lbl-simp -> translation (1 shot),,,,,,,,,,,,,,,rkt,java,4
+baseline (4 shot),0.864,0.905,0.921,0.008,0,0,0.129,0,0,0.909,0.909,0.909,0.727,0.864,rkt,java,4
+explain (0 shot) -> translation (4 shot),0.842,0.877,0.887,0.008,0,0.015,0.129,0.008,0,0.879,0.909,0.939,0.636,0.842,rkt,java,4
+explain-lbl -> translation (4 shot),0.808,0.842,0.851,0.015,0,0.023,0.159,0,0,,,,,0.808,rkt,java,4
+explain-lbl-simp -> translation (4 shot),0.794,0.821,0.831,0.008,0,0.023,0.197,0,0,0.879,0.848,0.788,0.576,0.794,rkt,java,4
+,,,,,,,,,,,,,,,,,
+Julia - JavaScript (138),,,,,,,,,,,,,,,,,
+baseline (0 shot),0.831,0.873,0.882,0,0,0.043,0.116,0,0,0.886,0.914,0.788,0.771,0.831,jl,js,0
+explain -> translation,0.835,0.868,0.884,0,0,0.043,0.116,0,0,0.829,0.943,0.848,0.743,0.835,jl,js,0
+explain-lbl -> translation ,0.82,0.848,0.861,0,0,0.036,0.13,0,0,0.859,0.971,0.788,0.714,0.82,jl,js,0
+explain-lbl-simp -> translation ,0.804,0.836,0.849,0,0,0.051,0.152,0,0,0.857,0.914,0.788,0.629,0.804,jl,js,0
+baseline (4 shot),0.874,0.915,0.927,0,0,0.007,0.119,0,0,0.914,0.969,0.879,0.735,0.874,jl,js,4
+explain (0 shot) -> translation (4 shot),0.9,0.92,0.922,0,0,0,0.097,0,0,0.914,0.969,0.939,0.794,0.9,jl,js,4
+explain-lbl -> translation (4 shot),0.871,0.904,0.909,0,0,0.007,0.112,0,0,0.857,1,0.909,0.765,0.871,jl,js,4
+explain-lbl-simp -> translation (4 shot),0.883,0.909,0.914,0,0,0.007,0.104,0,0,0.914,0.938,0.97,0.735,0.883,jl,js,4
+,,,,,,,,,,,,,,,,,
+D - C++ (116),,,,,,,,,,,,,,,,,
+baseline (0 shot),0.884,0.917,0.922,0,0.043,0.017,0.052,0,0,0.833,1,0.931,0.793,0.884,d,cpp,0
+explain -> translation,0.814,0.842,0.853,0,0.052,0.043,0.078,0.009,0,0.833,0.893,0.862,0.69,0.814,d,cpp,0
+explain-lbl -> translation ,0.805,0.853,0.865,0,0.043,0.035,0.113,0.009,0,0.8,0.893,0.862,0.655,0.805,d,cpp,0
+explain-lbl-simp -> translation ,0.85,0.897,0.914,0,0.043,0.017,0.078,0.009,0,0.867,0.929,0.897,0.724,0.85,d,cpp,0
+baseline (4 shot),0.884,0.918,0.929,0,0.019,0.009,0.087,0,0,0.833,0.967,0.962,0.793,0.884,d,cpp,4
+explain (0 shot) -> translation (4 shot),0.863,0.889,0.892,0,0.009,0,0.98,0.009,0,0.929,0.897,0.926,0.786,0.863,d,cpp,4
+explain-lbl -> translation (4 shot),0.817,0.853,0.862,0,0.018,0.009,0.17,0,0,0.857,0.828,0.852,679,0.817,d,cpp,4
+explain-lbl-simp -> translation (4 shot),0.855,0.883,0.892,0,0.009,0,0.116,0.009,0,0.893,0.897,0.889,0.786,0.855,d,cpp,4
+,,,,,,,,,,,,,,,,,
+Lua - Racket (145),,,,,,,,,,,,,,,,,
+baseline (0 shot),0.296,0.425,0.484,0,0.069,0.476,0.145,0.028,0,0.541,0.361,0.111,0.111,0.296,lua,rkt,0
+explain -> translation,0.452,0.594,0.64,0,0.09,0.179,0.276,0.034,0,0.649,0.583,0.25,0.194,0.452,lua,rkt,0
+explain-lbl -> translation ,0.38,0.508,0.556,0,0.11,0.255,0.234,0.034,0,0.649,0.389,0.278,0.139,0.38,lua,rkt,0
+explain-lbl-simp -> translation ,0.377,0.492,0.535,0,0.145,0.2,0.248,0.028,0,0.622,0.417,0.278,0.194,0.377,lua,rkt,0
+baseline (4 shot),0.492,0.612,0.654,0,0.076,0.16,0.215,0.021,0,0.833,0.639,0.333,0.306,0.492,lua,rkt,4
+explain (0 shot) -> translation (4 shot),0.49,0.613,0.668,0,0.057,0.1,0.293,0.029,0,0.806,0.588,0.457,0.229,0.49,lua,rkt,4
+explain-lbl -> translation (4 shot),0.5,0.63,0.678,0,0.085,0.135,0.248,0.028,0,0.778,0.571,0.486,0.171,0.5,lua,rkt,4
+explain-lbl-simp -> translation (4 shot),0.487,0.613,0.65,0,0.106,0.156,0.227,0.028,0,0.778,0.6,0.371,0.171,0.487,lua,rkt,4
+,,,,,,,,,,,,,,,,,
+Racket - Julia (137),,,,,,,,,,,,,,,,,
+baseline (0 shot),0.633,0.714,0.727,0.022,0.066,0.146,0.109,0,0.029,0.743,0.706,0.571,0.485,0.633,rkt,jl,0
+explain -> translation,0.643,0.698,0.715,0.015,0.058,0.153,0.153,0,0,0.771,0.765,0.486,0.455,0.643,rkt,jl,0
+explain-lbl -> translation ,0.677,0.745,0.762,0.022,0.058,0.117,0.139,0,0,0.771,0.794,0.629,0.455,0.677,rkt,jl,0
+explain-lbl-simp -> translation ,0.621,0.702,0.727,0.015,0.058,0.124,0.168,0,0,0.829,0.794,0.514,0.394,0.621,rkt,jl,0
+baseline (4 shot),0.717,0.768,0.791,0.015,0.023,0.09,0.15,0,0,0.943,0.758,0.625,0.545,0.717,rkt,jl,4
+explain (0 shot) -> translation (4 shot),0.704,0.769,0.79,0.008,0.038,0.068,0.165,0,0,0.8,0.818,0.75,0.515,0.704,rkt,jl,4
+explain-lbl -> translation (4 shot),0.73,0.785,0.796,0.015,0.023,0.075,0.158,0,0,0.829,0.848,0.719,0.515,0.73,rkt,jl,4
+explain-lbl-simp -> translation (4 shot),0.705,0.743,0.756,0.015,0.03,0.068,0.165,0,0,0.743,0.848,0.75,0.545,0.705,rkt,jl,4
+,,,,,,,,,,,,,,,,,
+D - Lua (116),,,,,,,,,,,,,,,,,
+baseline (0 shot),0.684,0.75,0.771,0.009,0.078,0.043,0.207,0,0,0.9,0.607,0.655,0.483,0.684,d,lua,0
+explain -> translation,0.694,0.737,0.75,0,0.078,0.034,0.216,0,0,0.833,0.679,0.655,0.517,0.694,d,lua,0
+explain-lbl -> translation ,0.668,0.705,0.724,0,0.052,0.06,0.233,0,0,0.767,0.714,0.655,0.483,0.668,d,lua,0
+explain-lbl-simp -> translation ,0.699,0.748,0.765,0,0.037,0.019,0.243,0,0,0.852,0.759,0.792,0.407,0.699,d,lua,0
+baseline (4 shot),0.717,0.755,0.768,0,0.064,0.018,0.193,0,0,0.821,0.714,0.808,0.556,0.717,d,lua,4
+explain (0 shot) -> translation (4 shot),0.703,0.723,0.732,0.018,0.046,0.009,0.22,0,0,0.786,0.679,0.769,0.593,0.703,d,lua,4
+explain-lbl -> translation (4 shot),0.725,0.75,0.763,0.009,0.047,0.019,0.208,0,0,0.815,0.704,0.76,0.593,0.725,d,lua,4
+explain-lbl-simp -> translation (4 shot),0.735,0.758,0.759,0.011,0.045,0.01,0.199,0,0,0.784,0.724,0.776,0.659,0.735,d,lua,4
+,,,,,,,,,,,,,,,,,
+"Julia - D (137) (starting from here, @1 is correct for errr breakdown and quantile",,,,,,,,,,,,,,,,,
+baseline (0 shot),0.416,0.464,0.481,0.215,0.109,0.173,0.072,0.014,0,0.534,0.497,0.36,0.269,0.416,jl,d,0
+explain -> translation,0.434,0.479,0.497,0.191,0.113,0.182,0.071,0.008,0,0.53,0.522,0.41,0.272,0.434,jl,d,0
+explain-lbl -> translation ,0.436,0.486,0.506,0.195,0.118,0.169,0.074,0.008,0,0.533,0.519,0.403,0.285,0.436,jl,d,0
+explain-lbl-simp -> translation ,0.414,0.469,0.492,0.197,0.123,0.2,0.058,0.007,0,0.531,0.506,0.378,0.238,0.414,jl,d,0
+baseline (4 shot),0.438,0.491,0.508,0.192,0.072,0.192,0.096,0.011,0,0.5,0.453,0.454,0.344,0.438,jl,d,4
+explain (0 shot) -> translation (4 shot),0.442,0.509,0.526,0.198,0.074,0.171,0.089,0.024,0,0.538,0.51,0.472,0.244,0.442,jl,d,4
+explain-lbl -> translation (4 shot),0.438,0.488,0.507,0.205,0.077,0.169,0.086,0.025,0,0.525,0.497,0.477,0.248,0.438,jl,d,4
+explain-lbl-simp -> translation (4 shot),0.398,0.447,0.462,0.203,0.082,0.208,0.089,0.021,0,0.472,0.463,0.439,0.217,0.398,jl,d,4
+,,,,,,,,,,,,,,,,,
+JavaScript - Java (152),,,,,,,,,,,,,,,,,
+baseline (0 shot),0.77,0.815,0.829,0.053,0.064,0.028,0.077,0.008,0,0.818,0.766,0.832,0.644,0.77,js,java,0
+explain -> translation,0.773,0.806,0.818,0.009,0.032,0.06,0.119,0.007,0,0.871,0.778,0.816,0.626,0.773,js,java,0
+explain-lbl -> translation ,0.825,0.851,0.857,0.009,0.04,0.033,0.086,0.007,0,0.864,0.812,0.871,0.751,0.825,js,java,0
+explain-lbl-simp -> translation ,0.835,0.872,0.886,0.008,0.042,0.017,0.089,0.009,0,0.866,0.832,0.889,0.753,0.835,js,java,0
+baseline (4 shot),0.915,0.933,0.938,0.014,0.007,0.002,0.062,0,0,0.999,0.892,0.876,0.893,0.915,js,java,4
+explain (0 shot) -> translation (4 shot),0.9,0.915,0.917,,,,,,,,,,,0.9,js,java,4
+explain-lbl -> translation (4 shot),0.893,0.921,0.932,0.016,0.012,0.001,0.077,0.001,0,0.974,0.873,0.866,0.858,0.893,js,java,4
+explain-lbl-simp -> translation (4 shot),0.867,0.882,0.891,,,,,,,,,,,0.867,js,java,4
+,,,,,,,,,,,,,,,,,
+C++ - Python (149),,,,,,,,,,,,,,,,,
+baseline (0 shot),0.923,0.956,0.965,,,,,,,,,,,,cpp,py,0
+explain -> translation,0.902,0.92,0.923,,,,,,,,,,,,cpp,py,0
+explain-lbl -> translation ,0.905,0.919,0.924,,,,,,,,,,,,cpp,py,0
+explain-lbl-simp -> translation ,0.913,0.923,0.925,,,,,,,,,,,,cpp,py,0
+baseline (4 shot),0.939,0.956,0.961,,,,,,,,,,,,cpp,py,4
+explain (0 shot) -> translation (4 shot),0.899,0.927,0.937,,,,,,,,,,,,cpp,py,4
+explain-lbl -> translation (4 shot),0.894,0.911,0.914,,,,,,,,,,,,cpp,py,4
+explain-lbl-simp -> translation (4 shot),0.892,0.905,0.908,,,,,,,,,,,,cpp,py,4
+,,,,,,,,,,,,,,,,,
+Java - C++ (155),,,,,,,,,,,,,,,,,
+baseline (0 shot),0.77,0.802,0.812,,,,,,,,,,,,java,cpp,0
+explain -> translation,0.798,0.841,0.855,,,,,,,,,,,,java,cpp,0
+explain-lbl -> translation ,0.83,0.86,0.867,,,,,,,,,,,,java,cpp,0
+explain-lbl-simp -> translation ,0.798,0.843,0.856,,,,,,,,,,,,java,cpp,0
+baseline (4 shot),0.823,0.866,0.878,,,,,,,,,,,,java,cpp,4
+explain (0 shot) -> translation (4 shot),0.811,0.845,0.856,,,,,,,,,,,,java,cpp,4
+explain-lbl -> translation (4 shot),0.784,0.841,0.863,,,,,,,,,,,,java,cpp,4
+explain-lbl-simp -> translation (4 shot),0.787,0.833,0.847,,,,,,,,,,,,java,cpp,4
+,,,,,,,,,,,,,,,,,
+Javascript - Racket (154),,,,,,,,,,,,,,,,,
+baseline (0 shot),0.302,0.375,0.407,,,,,,,,,,,,js,rkt,0
+explain -> translation,0.419,0.508,0.548,,,,,,,,,,,,js,rkt,0
+explain-lbl -> translation ,0.415,0.537,0.579,,,,,,,,,,,,js,rkt,0
+explain-lbl-simp -> translation ,0.379,0.458,0.483,,,,,,,,,,,,js,rkt,0
+baseline (4 shot),0.447,0.572,0.618,,,,,,,,,,,,js,rkt,4
+explain (0 shot) -> translation (4 shot),0.518,0.633,0.67,,,,,,,,,,,,js,rkt,4
+explain-lbl -> translation (4 shot),0.498,0.651,0.697,,,,,,,,,,,,js,rkt,4
+explain-lbl-simp -> translation (4 shot),0.463,0.601,0.655,,,,,,,,,,,,js,rkt,4
+,,,,,,,,,,,,,,,,,
+C++ - Lua (150),,,,,,,,,,,,,,,,,
+baseline (0 shot),0.692,0.737,0.75,,,,,,,,,,,,cpp,lua,0
+explain -> translation,0.719,0.774,0.791,,,,,,,,,,,,cpp,lua,0
+explain-lbl -> translation ,0.725,0.763,0.779,,,,,,,,,,,,cpp,lua,0
+explain-lbl-simp -> translation ,0.75,0.79,0.799,,,,,,,,,,,,cpp,lua,0
+baseline (4 shot),0.792,0.842,0.851,,,,,,,,,,,,cpp,lua,4
+explain (0 shot) -> translation (4 shot),0.772,0.79,0.799,,,,,,,,,,,,cpp,lua,4
+explain-lbl -> translation (4 shot),0.751,0.775,0.781,,,,,,,,,,,,cpp,lua,4
+explain-lbl-simp -> translation (4 shot),0.749,0.786,0.794,,,,,,,,,,,,cpp,lua,4
+,,,,,,,,,,,,,,,,,
+Java - Julia (154),,,,,,,,,,,,,,,,,
+baseline (0 shot),0.602,0.683,0.714,,,,,,,,,,,,java,jl,0
+explain -> translation,0.754,0.81,0.824,,,,,,,,,,,,java,jl,0
+explain-lbl -> translation ,0.688,0.738,0.756,,,,,,,,,,,,java,jl,0
+explain-lbl-simp -> translation ,0.722,0.763,0.775,,,,,,,,,,,,java,jl,0
+baseline (4 shot),0.727,0.787,0.805,,,,,,,,,,,,java,jl,4
+explain (0 shot) -> translation (4 shot),0.729,0.795,0.808,,,,,,,,,,,,java,jl,4
+explain-lbl -> translation (4 shot),0.724,0.803,0.825,,,,,,,,,,,,java,jl,4
+explain-lbl-simp -> translation (4 shot),0.71,0.792,0.813,,,,,,,,,,,,java,jl,4

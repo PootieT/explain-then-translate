@@ -1,0 +1,11 @@
+Model,Metric,lang_js,lang_cpp,lang_jv,lang_ts,lang_php,lang_rb,lang_cs,lang_go,lang_pl,lang_r,lang_rs,lang_sc,lang_sw,lang_sh,lang_lua,lang_rkt,lang_jl,lang_d
+ChatGPT,Absolute Improvement,-0.7,5.5,8,6.3,9.2,4.4,4.6,3.4,9.9,7.6,5.6,11,10.7,5.5,5.3,10,8.9,2.4
+ChatGPT,Relative Improvement,-0.8,7.2,10.5,8,13.5,5.6,5.8,8,17,18.8,7.9,17.3,16.6,10.7,9.4,31.9,14.4,5.7
+CodeGen2-1B,Absolute Improvement,10.8,2.3,2.5,6.5,1.3,5.9,1.9,4.8,0.9,0.3,4.2,3.2,3.9,-0.9,2.5,0.1,0.9,1.7
+CodeGen2-1B,Relative Improvement,234.8,24.5,47.2,92.9,9.7,200,29.7,137.1,25,50,89.4,123.1,111.4,-15.8,92.6,0,37.5,27.4
+CodeGen2-1B with ChatGPT,Absolute Improvement,14.7,6.1,0.8,6.2,3.1,4.9,5.6,8.6,0.6,0,5.6,4.6,6.9,2.2,2.2,0.3,2.1,2.3
+CodeGen2-1B with ChatGPT,Relative Improvement,319.6,64.9,15.1,88.6,23.1,170,87.5,245.7,16.7,0,119.1,176.9,197.1,38.6,81.5,0,87.5,37.1
+CodeGen2-16B,Absolute Improvement,-3.3,-1.5,2.3,-1.1,2.6,4.4,1.1,-2,2.6,2.5,3.3,2,6.8,0.2,4.1,0.5,2.9,4.1
+CodeGen2-16B,Relative Improvement,-6.8,-3.6,4.8,-2.5,6.8,51.2,2.4,-6.2,14.1,23.1,11.1,6.8,33.2,1.6,20.3,45.5,13.2,35
+Llama2CodeInstruct-34B,Absolute Improvement,5.9,2.3,2.3,11.8,7,13.8,-2.9,-1.2,9.4,3.6,4.8,3.3,4,1,4.8,4.3,11.9,1.7
+Llama2CodeInstruct-34B,Relative Improvement,9.2,4.1,3.8,21.1,13.4,24.9,-4.3,-3.5,24.9,15.5,11.4,7.2,13,3.4,16.8,18.1,25.1,6.4
