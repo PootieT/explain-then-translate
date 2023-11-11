@@ -1,12 +1,13 @@
 # explain-then-translate
 Official repo for EMNLP 2023 paper "Explain-then-Translate: An Analysis on Improving Program Translation with Self-generated Explanations"
+Our code translation dataset `MultiPL-C2C` is also released here for benefiting future research in this direction.
 
 - Open Review [link](https://openreview.net/forum?id=uyUO80sbm0)
 
 ## What is the take-away?
 We propose 2-stage Chain-of-Thought (CoT) like prompting technique for program translation: we ask models to explain the source programs first before translating.
 
-![prompt example](https://github.com/PootieT/explain-then-translate/blob/main/docs/prompt_main.png?raw=true)
+<img src="https://github.com/PootieT/explain-then-translate/blob/main/docs/prompt_main.png" width="350">
 
 We tested across 3 type of explanations of different level of abstraction, across 18 Python-to-X directions, and 18 X-to-X directions. 
 This simple technique improves translation performance across 4 models of different sizes we tested (GPT-3.5, Llama2CodeInstruct-34B, CodeGen2-16B, and CodeGen2-1B).
@@ -124,6 +125,16 @@ python analysis/collect_completion_results.py --dir <OUTPUT_DIR>
 
 However, installing all 19 languages can be a little annoying, so we are working on building a container for 
 execution just the same way as MultiPL-E [tutorial]. This is coming soon.
+
+## MultiPL-C2C
+
+The gold programs from our dataset in languages other than Python are sampled from GPT-3.5. Because it is sampled, not every problem has a gold solution in each language. Therefore, if during the your sampling you are able to obtain more completion results, feel free to send PR requests and we will update our `datasets/humaneval_multi` directory.
+
+To facilitate aggregating gold solutions from completion folders, you can run
+```shell
+
+```
+It collects the shortest passing completion for each problem for each target langauge.
 
 ## To cite our work:
 
