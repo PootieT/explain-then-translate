@@ -131,7 +131,4 @@ dmypy.json
 dump/
 *.jar
 *.csv
-tmp/
 datasets/originals-comments-inline
-
-translation_prompts
