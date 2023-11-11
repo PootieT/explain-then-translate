@@ -28,15 +28,21 @@ conda create python=3.10 --name code310
 Install the following dependencies
 ```shell
 pip3 install aiohttp numpy tqdm pytest datasets torch transformers
+./CodeGenMirror/install_env.sh
 ```
-TODO: add dependencies from CodeGenMirror, etc
+The second line installs dependencies from CodGen repo, which are used for post-processing
+Python, Java, and C++ completions. If translation is not generating in those directions, 
+the second line of installation is not needed.
 
 ## How to generate prompts:
 
 All translation prompts should be available in `translation_prompts` directory. To generate these prompt files, we ran:
 
 ```shell
-python3 dataset_builder/all_prepare_translation_prompts.py
+cd dataset_builder
+python3 all_prepare_translation_prompts.py --trail py_x
+python3 all_prepare_translation_prompts.py --trail x_x
+cd ..
 ```
 This script generates translation prompts for all language directions, few-shot cases, explanation types by invoking
 
@@ -49,11 +55,14 @@ python3 prepare_prompts_json.py --lang humaneval_to_<TGT_LANG>.py \
         --multiturn_prompt explain \
         --output ./translation_prompts
 ```
-For some files, it would require you to sample some generation first. For example, all `Python-to-X` directions uses cached explanation, so generate one direction, sample an explanation from each program, then you can generate the rest of `Python-to-X` directions.
+For some files, it would require you to sample some generation first. For example, all `Python-to-X` directions uses 
+cached explanation, so generate one direction, sample an explanation from each program, then you can generate the rest 
+of `Python-to-X` directions.
 
 If you want to customize your prompts, we recommend digging into `python3 prepare_prompts_json.py`.
 
-As an example, if you want to use a different intermediate prompt (e.g. `chain of thought` instead of `explain`), simply run:
+As an example, if you want to use a different intermediate prompt (e.g. `chain of thought` instead of `explain`), 
+simply run:
 ```shell
 python3 prepare_prompts_json.py --lang humaneval_to_<TGT_LANG>.py \
         --prompt-terminology remove \
@@ -62,6 +71,13 @@ python3 prepare_prompts_json.py --lang humaneval_to_<TGT_LANG>.py \
         --shot 0 \
         --multiturn_prompt CoT \
         --output ./translation_prompts
+```
+
+To generate all 19*19 translation direction files, you can run
+```shell
+cd dataset_builder
+python3 all_prepare_translation_prompts.py --trail all
+cd ..
 ```
 
 ## How to sample programs:
@@ -91,7 +107,9 @@ python inference/__main__.py \
 ```
 checkout `inference/codegen21b.py` file to understand how to extend to new models.
 
-We prioritize translation precision, so we use a low temperature to optimize **pass@1** (n=20). For **pass@10** or **pass@100** you need much larger n. See bottom section of MultiPL-E [tutorial](https://nuprl.github.io/MultiPL-E/tutorial.html)
+We prioritize translation precision, so we use a low temperature to optimize **pass@1** (n=20). 
+For **pass@10** or **pass@100** you need much larger n. See bottom section of MultiPL-E 
+[tutorial](https://nuprl.github.io/MultiPL-E/tutorial.html)
 
 ## How to evaluate:
 
@@ -104,7 +122,8 @@ cd ../..
 python analysis/collect_completion_results.py --dir <OUTPUT_DIR>
 ```
 
-However, installing all 19 languages can be a little annoying, so we are working on building a container for execution just the same way as MultiPL-E [tutorial]. This is coming soon.
+However, installing all 19 languages can be a little annoying, so we are working on building a container for 
+execution just the same way as MultiPL-E [tutorial]. This is coming soon.
 
 ## To cite our work:
 
