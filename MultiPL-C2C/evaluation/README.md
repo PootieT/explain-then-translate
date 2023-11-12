@@ -10,7 +10,7 @@ This directory contains code to evaluate all languages supported by MultiPL-E (a
 - The evaluation script avoids re-running completions with results that are already
   generated.
 
-## Usagegit lfs install
+## Usage
 
 The `build` command builds the container:
 
@@ -25,7 +25,7 @@ Use the `--volume` option to create directory mappings.
 docker run --rm --network none \
     --volume ${INPUT_DIR}:/inputs:ro \
     --volume ${OUTPUT_DIR}:/outputs:rw \
-    multipl-e-evaluation \
+    multipl-c2c-evaluation \
         --dir $inputs \
         --output-dir $outputs
 ```

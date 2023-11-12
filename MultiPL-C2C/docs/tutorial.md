@@ -92,8 +92,8 @@ When you first run evaluation, you need to pull and tag the [evaluation containe
 
 
 ```bash
-podman pull docker.io/pootiet/multipl-c2c-evaluation
-podman tag docker.io/pootiet/multipl-c2c-evaluation multipl-c2c-eval
+podman pull docker.io/pootiet/multipl-c2c-evaluation:1.0.0
+podman tag pootiet/multipl-c2c-evaluation:1.0.0 multipl-c2c-eval
 ```
 
 The following command will run evaluation:
