@@ -37,7 +37,15 @@ the second line of installation is not needed.
 
 ## How to generate prompts:
 
-All translation prompts should be available in `translation_prompts` directory. To generate these prompt files, we ran:
+If your are just interested in evaluating language model's performance on code translation,
+you may skip this section as all prompts are generated in `MultiPL-C2C/translation_prompts` already. 
+Within the folder `translation_prompts_chatgpt` contains the prompts we used in our experiment.
+To further control reproducibility, we included `translation_prompts_chatgpt_with_explanation` to 
+include all intermediate step (explanations) as part of the prompt. If you want to evaluate 
+other language models with a clean set of templates, use `all`, which contains prompts for 19*19 
+translation directions.
+
+To generate these prompt files, we ran:
 
 ```shell
 cd dataset_builder
@@ -126,15 +134,23 @@ python analysis/collect_completion_results.py --dir <OUTPUT_DIR>
 However, installing all 19 languages can be a little annoying, so we provide a container for 
 execution just the same way as MultiPL-E. See details in [tutorial](MultiPL-C2C/docs/tutorial.md)
 
+In `experiments` directory, we include example bash scripts to run batches of experiments sampling 
+and evaluating translations.
+
 ## MultiPL-C2C
 
-The gold programs from our dataset in languages other than Python are sampled from GPT-3.5. Because it is sampled, not every problem has a gold solution in each language. Therefore, if during the your sampling you are able to obtain more completion results, feel free to send PR requests and we will update our `datasets/humaneval_multi` directory.
+The gold programs from our dataset in languages other than Python are sampled from GPT-3.5. 
+Because it is sampled, not every problem has a gold solution in each language. 
+Therefore, if during your sampling you are able to obtain more completion results, feel free to send 
+PR requests and we will update our `datasets/humaneval_multi` directory.
 
-To facilitate aggregating gold solutions from completion folders, you can run
-```shell
+To facilitate aggregating gold solutions from completion folders, checkout 
+`MultiPL-C2C/dataset_builder/collect_gold_translations.py`
 
-```
 It collects the shortest passing completion for each problem for each target langauge.
+
+The same script can also be used to collect unverified (`datasets/humaneval_multi_all`) and wrong programs
+(`datasets/humaneval_multi_wrong`).
 
 ## To cite our work:
 
