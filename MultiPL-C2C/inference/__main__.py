@@ -15,13 +15,16 @@ from inference.chatgpt_utils import cleanup_completion_simple
 from inference.openai_multimodel_multikey import prompt_incomplete, get_incomplete_translation_prompt, \
     get_intermediate_stops, fill_translation_prompt
 
-DATASET_REVISION = "bf4f3c31a1e0a164b7886c9eb04f82534edf4ce9"
+# DATASET_REVISION = "bf4f3c31a1e0a164b7886c9eb04f82534edf4ce9"
 
 
 def from_remote_dataset(args):
+    name = f"{args.root_dataset}-{args.src_lang}-{args.lang}-{args.exp}"
+    if args.variation:
+        name += f"-{args.variation}"
     problems = datasets.load_dataset(
-        "nuprl/MultiPL-E", f"{args.root_dataset}-{args.lang}",
-        revision=DATASET_REVISION
+        "zilu-peter-tang/MultiPL-C2C", name,
+        # revision=DATASET_REVISION
     )
     problems = problems["test"]
     start_index = args.input_start_index if args.input_start_index is not None else 0
@@ -75,11 +78,20 @@ def main():
     )
     # Only required when use local is not passed
     args.add_argument(
+        "--src-lang", type=str, required="--use-local" not in sys.argv, default="py", help="Source language for completions"
+    )
+    args.add_argument(
         "--lang", type=str, required="--use-local" not in sys.argv, help="Target language for completions"
+    )
+    args.add_argument(
+        "--exp", type=str, required="--use-local" not in sys.argv, help="One of [direct, exp, exp-lbl, exp-lbl-d], "
+                                                                        "different prompting strategies."
     )
     args.add_argument(
         "--root-dataset", type=str, required="--use-local" not in sys.argv, help="either mbpp or humaneval"
     )
+    args.add_argument("--variation", type=str, required="--use-local" not in sys.argv, default="",
+                      help="whether to use gpt3.5 (partially cached) or gpt3.5exp (fully cached)")
     args.add_argument(
         "--model-name",
         type=str,
@@ -105,13 +117,16 @@ def main():
 
     if args.output_dir is None:
         args.output_dir = (
-            f"{args.root_dataset}-{args.lang}-{model.name}-{args.temperature}-reworded"
+            f"{args.src_lang}-{args.lang}/{args.root_dataset}-{args.src_lang}-{args.lang}-{args.exp}-{args.variation}"
+            f"-{args.temperature}-completion"
         ) if not args.use_local else (
-            f"{args.dataset.split('/')[-1].split('.')[0]}-{model.name}-{args.temperature}-reworded"
+            f"{args.dataset.split('/')[-1].split('.')[0]}-{args.temperature}-completion"
         )
 
     if args.output_dir_prefix is not None:
         args.output_dir = f"{args.output_dir_prefix}/{args.output_dir}"
+    else:
+        args.output_dir = f"{model.name}/{args.output_dir}"
 
     exp_dir = Path(args.output_dir)
     if not exp_dir.exists():
@@ -146,7 +161,7 @@ def main():
             intermediate_stops = get_intermediate_stops(incomplete_prompt, problem)
             intermediate_completion = model.completions(
                 prompt=incomplete_prompt,
-                max_tokens=750,  # 512 normally
+                max_tokens=750,  # 512 normally, longer for explanation
                 temperature=args.temperature,
                 n=1,
                 top_p=0.95,
@@ -159,20 +174,12 @@ def main():
                 range(len(completions), args.completion_limit, args.batch_size),
                 unit="completions",
         ):
-            # new_completions = model.completions(
-            #     prompt=problem["translation_prompt"],
-            #     max_tokens=512,  # 512 normally
-            #     temperature=args.temperature,
-            #     n=args.batch_size,
-            #     top_p=0.95,
-            #     stop=problem["stop_tokens"],
-            # )
             new_completions, bs = [], args.batch_size
             while len(new_completions) < args.batch_size:
                 try:
                     raw_completions = model.completions(
                         prompt=problem["translation_prompt"],
-                        max_tokens=512,  # 512 normally
+                        max_tokens=512,
                         temperature=args.temperature,
                         n=bs,
                         top_p=0.95,

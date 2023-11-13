@@ -2,6 +2,8 @@
 
 ROOT=PATH/TO/REPO
 export PYTHONPATH="${PYTHONPATH}:${ROOT}/MultiPL-C2C:${ROOT}/CodeGenMirror:${ROOT}/CodeGenMirror/codegen_sources/test_generation"
+MODEL=codegen21b
+
 LANGS=(js)  # js cpp java ts php rb cs go pl r rs scala swift sh lua rkt jl d
 SRC=py
 for lang in "${LANGS[@]}"
@@ -25,19 +27,20 @@ do
   )
   for EXP_NAME in "${EXP_NAMES[@]}"
   do
-    OUTPUT_DIR="dump/${EXP_NAME}"
+    OUTPUT_DIR="${EXP_NAME}"
     NUM_GENERATIONS=20
 
     echo "======== experiment ${EXP_NAME}, num-generation:${NUM_GENERATIONS} ========="
+    mkdir -p "dump_${MODEL}/${OUTPUT_DIR}"
     python inference/__main__.py \
-      --model-name codegen21b \
-      --output-dir $OUTPUT_DIR \
-      --output-dir-prefix local_codegen21b \
-      --use-local \
-      --dataset translation_prompts/$EXP_NAME.json \
-      --temperature 0.2 \
-      --completion-limit $NUM_GENERATIONS \
-      --batch-size 1
+    --model-name $MODEL \
+    --output-dir $OUTPUT_DIR \
+    --output-dir-prefix dump_$MODEL \
+    --use-local \
+    --dataset translation_prompts_$MODEL/$EXP_NAME.json \
+    --temperature 0.2 \
+    --completion-limit $NUM_GENERATIONS \
+    --batch-size 20
 
     ## local eval
 #    cd evaluation/src

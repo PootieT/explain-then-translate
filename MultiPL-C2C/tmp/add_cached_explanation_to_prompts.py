@@ -31,7 +31,7 @@ def main():
             tgt_path = f"{TGT_ROOT}/{pair}/{exp}"
             os.makedirs(f"{TGT_ROOT}/{pair}", exist_ok=True)
             with open(tgt_path, "w") as f:
-                json.dump(prompts_modified, f)
+                json.dump(prompts_modified, f, indent=2)
 
 
 if __name__ == "__main__":
